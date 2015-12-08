@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <script src="../layday/laydate.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+	<div class="m20" style="margin: 0 auto;width: 60%;">
+		<h3 class="text-danger" style="border-bottom: #005580 dotted 1px;width: 90%;">修改活动</h3>
+		<label class="col-md-2 control-label">活动图片</label>
+		<div class="pleft50">
+			<img class="img img-rounded" src="../img/activity.jpg" height="200px" width="400px" />
+			<button type="button" class="btn btn-danger" id="changePic">更改图片</button>
+		</div>
+		
+		<form class="form-horizontal m20" action="commentMng.html" method="">
+			<div class="form-group hidden" id="updateActivityPic">
+				<div class="col-md-6 col-md-offset-2">
+					<input type="file" class="form-control" name="" id="uploadPic" placeholder="新图片">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label">活动名称</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="" id="" value="蓝桥杯金融大赛">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">地址</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="" id="" value="www.lanqiao.org">
+				</div>
+			</div>
+			<!--保存-->
+			<div class="form-group">
+				<div class="col-md-1 col-md-offset-2">
+					<button type="submit" class="btn btn-primary btn-block">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>	
+</body>
+</html>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+			window.location.href="commentMng.html";
+		 });
+		$('#addHonor').click(function(){
+			var honorForm = $('#honor').html();
+			$('#honor').append(honorForm);
+		});
+		$('#changePic').click(function(){
+			$('#updateActivityPic').removeClass("hidden");
+		});
+		$("#uploadPic").blur(function(){
+			var fileName = $("#uploadPic").val();
+			if(fileName.length != 0){
+				if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(fileName)){ 
+					alert("图片类型必须是.gif,jpeg,jpg,png中的一种") 
+				}
+			}
+		});
+
+    });
+</script>

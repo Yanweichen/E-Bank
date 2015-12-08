@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+		<link rel="stylesheet" type="text/css" href="../Css/style.css" />
+		<script type="text/javascript" src="../Js/jquery.js"></script>
+		<script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+		<script type="text/javascript" src="../Js/bootstrap.js"></script>
+		<script type="text/javascript" src="../Js/ckform.js"></script>
+		<script type="text/javascript" src="../Js/common.js"></script>
+		<script src="../Js/layday/laydate.js"></script>
+		<style type="text/css">
+			body {
+				padding-bottom: 40px;
+			}
+			.sidebar-nav {
+				padding: 9px 0;
+			}
+			@media (max-width: 980px) {
+				/* Enable use of floated navbar text */
+				
+				.navbar-text.pull-right {
+					float: none;
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		
+		
+		<input  type="file" value="请选择文件" onchange="checkPicSize(this,1)" />
+		
+		
+		
+		
+		<form class="form-horizontal m20" action="" method="">
+			<!--高校-->
+			<div class="form-group">
+				<label class="control-label col-md-1">条件</label>
+				<div class="col-md-6">
+					<label class="control-label">分类</label>
+					<select name="">
+						<option id="">IT</option>
+						<option id="">创业</option>
+					</select>
+					<select name="">
+						<option id="">JAVA</option>
+						<option id="">PHP</option>
+					</select>
+					<label class="control-label pleft10">时间</label>
+					<select name="">
+						<option id="">一周内</option>
+						<option id="">一周内</option>
+					</select>
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="control-label col-md-1">关键字</label>
+				<div class="col-md-3">
+					<input id="" name="" type="text" class="form-control" placeholder="ID/大学/姓名/手机号/专业">
+				</div>
+				<div class="col-md-1">
+					<button type="submit" class="btn btn-primary">查询</button>
+				</div>
+			</div>
+		</form>
+		
+		
+		
+		<form class="form-horizontal m20" action="" method="">
+			<!--高校-->
+			<div class="form-group">
+				<label class="control-label col-md-1">地区</label>
+				<div class="col-md-6">
+					<label class="control-label">省</label>
+					<select name="">
+						<option id="">北京市</option>
+						<option id="">湖北省</option>
+					</select>
+					<label class="control-label pleft10">市</label>
+					<select name="">
+						<option id="">孝感</option>
+						<option id="">武汉</option>
+					</select>
+					<label class="control-label pleft10">时间</label>
+					<select name="">
+						<option id="">一周内</option>
+						<option id="">一周内</option>
+					</select>
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="control-label col-md-1">关键字</label>
+				<div class="col-md-3">
+					<input id="" name="" type="text" class="form-control" placeholder="ID/大学/姓名/手机号/专业">
+				</div>
+				<div class="col-md-1">
+					<button type="submit" class="btn btn-primary">查询</button>
+				</div>
+			</div>
+		</form>
+
+		<form class="form-horizontal m20" action="" method="">
+			<!--高校-->
+			<div class="form-group">
+				<label class="control-label col-md-1">条件</label>
+				<div class="col-md-6">
+					<input onclick="laydate({istime: true, format: 'YYYY-MM-DD '})" type="text" id="" name="entrance_time">
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="control-label col-md-1">条件</label>
+				<div class="col-md-6">
+					<p class="form-control-static">条件</p>
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="control-label col-md-1">SELECT</label>
+				<div class="col-md-6">
+					<label class="control-label"></label>
+					<select class="">
+						<option>112</option>
+						<option>12131</option>
+						<option>1312312</option>
+						<option>13123</option>
+					</select>
+				</div>
+			</div>	
+			
+			<div class="form-group">
+				<label class="control-label col-md-1">条件</label>
+				<div class="col-md-6">
+					<label class="control-label">省</label>
+					<select name="">
+						<option id="">北京市</option>
+						<option id="">湖北省</option>
+					</select>
+					<label class="control-label pleft10">市</label>
+					<select name="">
+						<option id="">孝感</option>
+						<option id="">武汉</option>
+					</select>
+					<label class="control-label pleft10">时间</label>
+					<select name="">
+						<option id="">一周内</option>
+						<option id="">一周内</option>
+					</select>
+				</div>
+			</div>	
+			<div class="form-group">
+				<label class="control-label col-md-1">关键字</label>
+				<div class="col-md-3">
+					<input id="" name="" type="text" class="form-control" placeholder="ID/大学/姓名/手机号/专业">
+				</div>
+				<div class="col-md-1">
+					<button type="submit" class="btn btn-primary">查询</button>
+				</div>
+			</div>
+		</form>
+		
+       
+
+</html>
+<script>
+	$(function() {
+		$('#addnew').click(function() {
+			window.location.href = "add.html";
+		});
+		$("#refreshPage").click(function() {
+			window.location.reload();
+		});
+	});
+
+	function del(id) {
+		if (confirm("确定要删除吗？")) {
+			var url = "?c=Dynamic&m=del&id="+id;
+			$.get(url, {} , function(data) {
+				if(data==1){
+					alert("删除成功");
+					location.reload() 
+				}else{
+					alert("删除失败");
+				}
+			});
+		}
+	}	
+		
+	function getcity() {
+		var val = $("#city").find("option:selected").attr("c_id");
+		var html = '';
+		if(val){
+			var cname = $("#city").find("option:selected").attr("c_name");
+			var address =  "?c=Operate&m=city";
+			$.get(address,{id:val},function(data) {
+				if(data.error) {
+					alert(data.msg);	
+				} else {
+					var list = data;
+					html += '<option c_id="' + val + '" value="' + $("#city").val() + '">全部</option>';
+					if(list) {
+						for(i=0;i<list.length;i++) {
+							html += '<option c_id="' + list[i].cid + '" value="' + list[i].id + '">' + list[i].city + '</option>';
+						}
+					} else{
+						html += '<option c_id="' + val + '" value="' + $("#city").val() + '">' + cname + '</option>';
+					}
+					$('#citys').html(html);
+				}
+			},'json');
+		}else{
+			html += '<option>全部</option>';
+			$('#citys').html(html);
+		}
+	}
+	
+	function getinfo() {
+		var id = $('#j_id').val();
+		if(isNaN(id)) {
+			alert('请输入数字ID');
+			$('#job_id').val('');
+			$('#job_name').html('');
+			return false;
+		}
+		var address = "?c=Operate&m=getinfo";
+		$.get(address,{id:id, op:1},function(data) {
+				if(data==null) {
+					$('#job_name').html('');
+				} else {
+					$('#job_name').html(data.enterprise+' 丨 '+data.job_name);
+				}
+				var option = '<option value="1" num="'+data.view_num+'">更改浏览数量</option><option value="2" num="'+data.delivery_num+'">更改投递数量</option><option value="3" num="'+data.collection_num+'">更改收藏数量</option>'
+				$('#event').html(option);
+				$('#addEvent').show();
+				$('#submit').show();
+				$("#view_num").html(data.view_num);
+				$("#delivery_num").html(data.delivery_num);
+				$("#collection_num").html(data.collection_num);
+			},'json');
+	}
+
+	function changeTdNum(obj){
+		var txt = obj.parentElement.parentElement;
+		var tt = txt. children ;
+		var event = obj.value;
+		var num;
+		if(event == 1){
+			num = $("#view_num").html();
+		}else if(event == 2){
+			num = $("#delivery_num").html();
+		}else if(event == 3){
+			num = $("#collection_num").html();
+		}
+		tt[1].innerHTML=num;
+	}
+	var eventNumber = 1;
+	function addEventFunc(){
+		alert("ss")
+		eventNumber++;
+		var view_num = $("#view_num").html();
+		var context  = "<tr><td><select id='event"+eventNumber+"' onclick='changeTdNum(this);'>"+
+		"<option value=''>请选择操作</option><option value='1'>更改浏览数量</option><option value='2'>更改投递数量</option><option value='3'>更改收藏数量</option>"+
+		"</select></td><td>"+view_num+"</td><td>"+
+		"<select><option selected value='请选择更新数量'>请选择更新数量</option><option value='500'>500</option><option value='1000'>1000</option>"+
+		"<option value='1500'>1500</option><option value='2500'>2500</option></select></td><td>"+
+		"<input onclick='laydate({istime: true, format: \"YYYY-MM-DD hh:mm:ss\"})' type='text' id='' name=''>"+
+		"</td></tr>";
+		$("#eventBody").append(context);
+	}
+	
+</script>

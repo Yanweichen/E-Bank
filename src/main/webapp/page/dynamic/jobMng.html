@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+		<link rel="stylesheet" type="text/css" href="../Css/style.css" />
+		<script type="text/javascript" src="../Js/jquery.js"></script>
+		<script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+		<script type="text/javascript" src="../Js/bootstrap.js"></script>
+		<script type="text/javascript" src="../Js/ckform.js"></script>
+		<script type="text/javascript" src="../Js/common.js"></script>
+		<script src="../layday/laydate.js"></script>
+		
+		<style type="text/css">
+			body {
+				padding-bottom: 40px;
+			}
+			.sidebar-nav {
+				padding: 9px 0;
+			}
+			@media (max-width: 980px) {
+				/* Enable use of floated navbar text */
+				
+				.navbar-text.pull-right {
+					float: none;
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<form class="form-horizontal m20" action="" method="">
+			<!--地区-->
+			<div class="form-group">
+				<label class="col-md-1 control-label">地区</label>
+				<div class="col-md-5">
+					<label class="control-label">省</label>
+					<select name="">
+						<option id="">全部</option>
+						<option id="">北京市</option>
+						<option id="">湖北省</option>
+					</select>
+					<label class="control-label pleft10">市</label>
+					<select name="">
+						<option id="">全部</option>
+						<option id="">朝阳区</option>
+						<option id="">孝感市</option>
+					</select>
+				</div>
+			</div>
+			<!--企业名称/职位-->
+			<div class="form-group">
+				<label class="col-md-1 control-label">企业名称</label>
+				<div class="col-md-2">
+					<input type="text" class="form-control" id="" placeholder="请输入企业名称">
+				</div>
+				<label class="col-md-1 control-label">职位</label>
+				<div class="col-md-2">
+					<input type="text" class="form-control" id="" placeholder="请输入职位名称或ID">
+				</div>
+				<div class="col-md-1">
+					<button type="submit" class="btn btn-primary">查询</button>
+				</div>
+			</div>
+		</form>
+		<div class="definewidth">
+			<a class="btn btn-danger pull-right mleft10" role="button" data-toggle="modal" data-target="#pushMpdal">推送</a>
+			<a class="btn btn-danger pull-right" href="#" role="link" >特色职位</a>
+			<br />
+			<br />
+			<table id="data-table" class="table table-hover table-condensed table-bordered table-striped">
+				<thead class="tab-head ">
+					<tr>
+						<th>职位ID</th>
+						<th>职位名称</th>
+						<th>评论人</th>
+						<th>评论时间</th>
+						<th>评论内容</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody class="text-center ">
+					<tr>
+						<td>12345</td>
+						<td>客服</td>
+						<td>某某</td>
+						<td>2015-08-15 12：00</td>
+						<td>昨天去了，还不错</td>
+						<td>
+							<a href="#" data-toggle="modal" data-target="#pushJobMpdal">查看</a>&nbsp;&nbsp;
+							<a href="#">删除</a>
+						</td>
+					</tr>
+					<tr>
+						<td>12345</td>
+						<td>客服</td>
+						<td>某某</td>
+						<td>2015-08-15 12：00</td>
+						<td>挺靠谱的</td>
+						<td>
+							<a href="#" data-toggle="modal" data-target="#pushJobMpdal">查看</a>&nbsp;&nbsp;
+							<a href="#">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="inline pull-right page">
+				10122 条记录 1/507 页
+				<a href='#'>下一页</a>
+				<span class='current'>1</span>
+				<a href='#'>2</a>
+				<a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a>
+				<a href='#'>4</a>
+				<a href='#'>5</a>
+				<a href='#'>下5页</a>
+				<a href='#'>最后一页</a>
+			</div>
+		</div>
+
+		<!--推送-->
+		<div class="modal fade" id="pushMpdal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+						<h4 class="text-center">推送</h4>
+					</div>
+					<div class="modal-body">
+						<form action="" method="" class="form-horizontal">
+							<p id="errorMsg" class="text-center"></p>
+							<!--职位id-->
+							<div class="form-group">
+								<label class="col-md-4 control-label">职位id</label>
+								<div class="col-md-2">
+									<input type="number" name="" id="" class="form-control" placeholder="ID">
+								</div>
+								<div class="col-md-4">
+									<span class="text-danger">北京九天云海有限责任公司 电话销售</span>
+								</div>
+							</div>
+							<!--起始时间-->
+							<div class="form-group">
+								<label class="col-md-4 control-label">起始时间</label>
+								<div class="col-md-6">
+									<input onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" type="text" id="" name="" placeholder="起始时间">
+								</div>
+							</div>
+							<!--结束时间-->
+							<div class="form-group">
+								<label class="col-md-4 control-label">结束时间</label>
+								<div class="col-md-6">
+									<input onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" type="text" id="" name="" placeholder="结束时间">
+								</div>
+							</div>
+							<!--推送/置顶-->
+							<div class="form-group" id="university">
+								<label class="col-md-4 control-label">推送/置顶</label>
+								<div class="col-md-6">
+									<select name="">
+										<option id="">推送</option>
+										<option id="">置顶</option>
+									</select>
+								</div>
+							</div>
+							<!-- 提交按钮-->
+							<div class="form-group">
+								<div class="col-md-offset-5 col-md-6">
+									<button type="submit" class="btn btn-primary" onclick="">推送</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script>
+	$(function() {
+		$('#addnew').click(function() {
+			window.location.href = "add.html";
+		});
+	});
+
+	function del(id) {
+		if (confirm("确定要删除吗？")) {
+			var url = "index.html";
+			window.location.href = url;
+		}
+	}
+</script>

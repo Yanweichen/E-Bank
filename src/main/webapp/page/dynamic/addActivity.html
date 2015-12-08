@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <script src="../layday/laydate.js"></script>
+    
+    
+    
+	<!--<script src="../Js/jquery.ui.widget.js"></script>
+	<script src="../Js/jquery.iframe-transport.js"></script>
+	<script src="../Js/jquery.fileupload.js"></script>
+    -->
+    
+    
+    
+    
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+	<div class="m20" style="margin: 0 auto;width: 60%;">
+		<h3 class="text-danger" style="border-bottom: #005580 dotted 1px;width: 90%;">添加活动</h3>
+		
+		<form class="form-horizontal m20" action="commentMng.html" method="">
+		
+			<div class="form-group">
+				<label class="col-md-2 control-label">活动名称</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="" id="" >
+				</div>
+			</div>
+			<div id="picDiv">
+				<div class="form-group">
+					<label class="col-md-2 control-label">活动图片</label>
+					<div class="col-md-4">
+						<input type="file" name="files" id="fileupload_input"  class="form-control"/>
+					</div>
+					<label class="col-md-1 control-label">
+						<a href="#" role="button" id="addPic" >+添加</a>
+					</label>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label">地址</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="" id="" value="www.lanqiao.org">
+				</div>
+			</div>
+			<!--保存-->
+			<div class="form-group">
+				<div class="col-md-1 col-md-offset-2">
+					<button type="submit" class="btn btn-primary btn-block">保存</button>
+				</div>
+			</div>
+		</form>
+	</div>	
+</body>
+</html>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+			window.location.href="commentMng.html";
+		 });
+		$('#addHonor').click(function(){
+			var honorForm = $('#honor').html();
+			$('#honor').append(honorForm);
+		});
+		$('#changePic').click(function(){
+			$('#updateActivityPic').removeClass("hidden");
+		});
+		$("input[type=file]").blur(function(){
+			var fileName = $(this).val();
+			if(fileName.length != 0){
+				if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(fileName)){ 
+					alert("图片类型必须是.gif,jpeg,jpg,png中的一种") 
+				}
+				$(this).val("");
+			}
+		});
+		
+		$("#addPic").click(function(){
+			var fileNum = $("input[type=file]").length;
+			if(fileNum>3){
+				alert("最多上传4张图片");
+			}else{
+				var uploadInput = "<div class='form-group'><div class='col-md-4 col-lg-offset-2'><input onblur='picCheck(this)' type='file' name='files' id='fileupload_input'  class='form-control'/>"+
+					"</div><label class='col-md-1 control-label'></div>";
+				$("#picDiv").append(uploadInput);
+			}
+		})
+    });
+    
+    function picCheck(obj){
+    	var fileName = obj.value
+		if(fileName.length != 0){
+			if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(fileName)){ 
+				alert("图片类型必须是.gif,jpeg,jpg,png中的一种") 
+			}
+			obj.value = "";
+		}
+    }
+    
+</script>

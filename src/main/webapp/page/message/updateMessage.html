@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <script src="../layday/laydate.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+	<div class="m20" style="margin: 0 auto;width: 60%;">
+		<form class="form-horizontal m20" action="commentMng.html" method="">
+			<div class="form-group">
+				<label class="col-md-2 control-label">职位ID</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" name="" id="" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">职位名称</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" name="" id="" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">评论人</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" name="" id="" >
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">评论时间</label>
+				<div class="col-md-5">
+					<input onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" type="text" id="" name="">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">评论内容</label>
+				<div class="col-md-5">
+					<textarea class="form-control col-md-5" rows="3"></textarea>
+				</div>
+			</div>
+			<!--保存-->
+			<div class="form-group">
+				<div class="col-md-1 col-md-offset-2">
+					<button type="submit" class="btn btn-primary btn-block">保存修改</button>
+				</div>
+			</div>
+		</form>
+	</div>	
+</body>
+</html>
+<script>
+    $(function () {       
+		$('#backid').click(function(){
+			window.location.href="commentMng.html";
+		 });
+		$('#addHonor').click(function(){
+			var honorForm = "<div class='form-group'><label class='col-md-2 control-label'>时间</label><div class='col-md-3'>"
+						+"<input onclick='laydate({istime: true, format: \"YYYY-MM-DD \"})'"
+						+"type='text' id='' name=''>"
+						+"</div></div><div class='form-group'><label class='col-md-2 control-label'>奖项</label>"
+						+"<div class='col-md-6'><textarea name='' id='' class='form-control' rows='2'></textarea></div></div>";
+			$('#honor').append(honorForm);
+		});
+		$("#studentPic").blur(function(){
+			var fileName = $("#studentPic").val();
+			if(fileName.length != 0){
+				if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(fileName)){ 
+					alert("图片类型必须是.gif,jpeg,jpg,png中的一种") 
+				}
+			}
+		});
+    });

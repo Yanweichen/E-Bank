@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+		<link rel="stylesheet" type="text/css" href="../Css/style.css" />
+		<script type="text/javascript" src="../Js/jquery.js"></script>
+		<script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+		<script type="text/javascript" src="../Js/bootstrap.js"></script>
+		<script type="text/javascript" src="../Js/ckform.js"></script>
+		<script type="text/javascript" src="../Js/common.js"></script>
+
+		<style type="text/css">
+			body {
+				padding-bottom: 40px;
+			}
+			.sidebar-nav {
+				padding: 9px 0;
+			}
+			@media (max-width: 980px) {
+				/* Enable use of floated navbar text */
+				
+				.navbar-text.pull-right {
+					float: none;
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row m40">
+				<h4 style="border-bottom: #005580 dotted 1px;">HR资料</h4>
+				<div class="col-md-2">
+					<img class="img img-rounded center-block" src="../img/defaultHead.jpg" class="pull-right" height="80px" width="80px" />
+				</div>
+				<div class="col-md-5 text16">
+					<span>北京某某某某某有限公司</span><span class="pleft25">ID:12345</span>
+					<br/>
+					<span>张小优</span><span class="pleft25">HR总监</span><span class="pleft25">13812345678</span>
+					<br/>
+				</div>
+				<div class="col-md-4">
+					<span>审核通过</span>
+					<a href="" class="btn btn-danger">审核不通过</a>
+					<button class="btn btn-primary">审核</button>
+					<br/>
+					<br/>
+					<button class="btn btn-primary" id="postSiteMessage" data-toggle="modal" data-target="#siteMessage">站内信</button>
+					
+					
+				</div>
+				<div class="col-md-12 m10 text16">
+					<span>注册时间：2015-08-04-10：00</span>
+					<span class="pleft50">APP端最后登录时间：2015-08-04-10：00</span>
+					<span class="pleft50">企业端最后登录时间：2015-08-04-10：00</span>
+				</div>
+			</div>
+			
+			
+			<div class="row m40">
+				<h4 style="border-bottom: #005580 dotted 1px;">企业资料</h4>
+				<div class="col-md-2">
+					<img class="img img-rounded center-block" src="../img/icon_baidu.png" class="pull-right" height="150px" width="150px" />
+				</div>
+				<div class="col-md-8 text16 m20">
+					<span>北京百度网讯科技有限公司</span><span class="pleft25">I所属行业：互联网</span><span class="pleft25">公司性质：私营</span>
+					<br/>
+					<span>公司规模：1000~2000人</span><span class="pleft25">地址：北京市海淀区上地十街10号 百度大厦</span>
+					<br/>
+					<span>企业简介：百度（Nasdaq：BIDU）是全球最大的中文搜索引擎、最大的中文网站。2000年1月由李彦宏创立于北京中关村 ，致力于向人们提供“
+					简单，可依赖”的信息获取方式。“百度”二字源于中国宋朝词人辛弃疾的 《青玉案·元夕》词句“众里寻他千百度”，象征着百度对中文信息检索技术的执著追求</span>
+				</div>
+				<div class="col-md-2">
+					申请认证中&nbsp;未申请认证
+					<button class="btn btn-danger">通过认证</button>
+				</div>
+				<div class="col-md-8 col-md-offset-2">
+					<img class="img img-responsive text-center" src="../img/baidu.PNG" />
+				</div>
+			</div>
+			<div class="row m40">
+				<h4 style="border-bottom: #005580 dotted 1px;">发布职位</h4>
+				<div class="col-md-12  m10">
+					<table class="table table-hover table-condensed table-bordered table-striped">
+						<thead class="tab-head ">
+							<tr>
+								<th>职位名称</th>
+								<th>ID</th>
+								<th>标签</th>
+								<th>最低学历</th>
+								<th>薪资水平</th>
+								<th>工作地点</th>
+								<th>申请人数</th>
+								<th>查看人数</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr>
+								<td>客服专员</td>
+								<td>001</td>
+								<td>兼职</td>
+								<td>本科</td>
+								<td>2K~5K</td>
+								<td>北京</td>
+								<td>10</td>
+								<td>20</td>
+								<td>
+									<a href="#">站内信</a>&nbsp;&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td>客服专员</td>
+								<td>001</td>
+								<td>兼职</td>
+								<td>本科</td>
+								<td>2K~5K</td>
+								<td>北京</td>
+								<td>10</td>
+								<td>20</td>
+								<td>
+									<a href="#">站内信</a>&nbsp;&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td>客服专员</td>
+								<td>001</td>
+								<td>兼职</td>
+								<td>本科</td>
+								<td>2K~5K</td>
+								<td>北京</td>
+								<td>10</td>
+								<td>20</td>
+								<td>
+									<a href="#">站内信</a>&nbsp;&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td>客服专员</td>
+								<td>001</td>
+								<td>兼职</td>
+								<td>本科</td>
+								<td>2K~5K</td>
+								<td>北京</td>
+								<td>10</td>
+								<td>20</td>
+								<td>
+									<a href="#">站内信</a>&nbsp;&nbsp;
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		<!--站内信-->
+		<div class="modal fade" id="siteMessage">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+						<h4 class="text-center">站内信</h4>
+					</div>
+					<div class="modal-body">
+						<form action="" method="" class="form-horizontal"> 
+						    <div class="form-group">
+						      <label for="" class="col-sm-3 control-label">内容:</label>
+						      <div class="col-sm-8">
+						        	<textarea class="form-control" rows="3"></textarea>
+						      </div>
+						    </div>
+						    <div class="form-group">
+						      <div class="col-sm-offset-3 col-sm-4">
+						        <button type="submit" class="btn btn-danger">发送</button>
+						      </div>
+						    </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+	</body>
+
+</html>
+<script>
+	
+
+	$(function() {
+		$('#addnew').click(function() {
+			window.location.href = "add.html";
+		});
+	});
+
+	function del(id) {
+		if (confirm("确定要删除吗？")) {
+			var url = "index.html";
+			window.location.href = url;
+		}
+	}
+</script>

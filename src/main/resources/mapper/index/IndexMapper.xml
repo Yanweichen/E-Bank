@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.index.IndexDAO" >
+  <resultMap id="BaseResultMap" type="com.bank.model.index.IndexModel" >
+    <id column="index_id" property="index_id" jdbcType="INTEGER" />
+    <result column="index_type" property="index_type" jdbcType="VARCHAR" />
+    <result column="index_title" property="index_title" jdbcType="VARCHAR" />
+    <result column="index_content" property="index_content" jdbcType="VARCHAR" />
+    <result column="index_uptime" property="index_uptime" jdbcType="TIMESTAMP" />
+    <result column="admin_name" property="upfrom" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    index_id,index_type,index_title,index_content,index_uptime,admin_name
+  </sql>
+  <!-- 首页分页 -->
+  <select id="selectByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT  
+    <include refid="Base_Column_List" />
+	FROM index_entry ent,index_type typ,admin ad 
+	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` 
+	ORDER BY index_uptime DESC 
+	LIMIT 0,#{num,jdbcType=INTEGER};
+  </select>
+</mapper>
