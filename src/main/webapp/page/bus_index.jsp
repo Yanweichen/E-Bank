@@ -5,7 +5,7 @@
 	// 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 		<title>我的银行</title>
@@ -19,7 +19,7 @@
 <body>
 <div class="header">
 			<div class="dl-title">
-				<!--<img src="/chinapost/Public/assets/img/top.png">-->
+				<!--  <img src="page/assets/img/top.png">-->
 			</div>
 
 			<div class="dl-log">欢迎您，<span class="dl-log-user">root</span><a href="/chinapost/index.php?m=Public&a=logout" title="退出系统" class="dl-log-quit">[退出]</a>
@@ -53,31 +53,37 @@
 		<script type="text/javascript" src="page/assets/js/common/main-min.js"></script>
 		<script type="text/javascript" src="page/assets/js/config-min.js"></script>
 		<script>
+		BUI.use('common/page');
 			BUI.use('common/main', function() {
 				var config = [{
 					id: '1',
+					homePage:'user_chart',
 					menu: [{
 						text: '我的账户',
 						items: [{
+							id: 'user_chart',
+							text: '资金流向',
+							href: 'page/chart/user_chart.jsp'
+						},{
 							id: '12',
 							text: '账户列表',
-							href: 'dynamic/activityMng.html'
+							href: 'page/dynamic/activityMng.html'
 						}, {
 							id: '3',
 							text: '账户查询',
-							href: 'message/sysInfo.html'
+							href: 'page/message/sysInfo.html'
 						}, {
 							id: '4',
 							text: '申请账户',
-							href: 'dynamic/jobMng.html'
+							href: 'page/dynamic/jobMng.html'
 						}, {
 							id: '6',
 							text: '挂失账户',
-							href: 'dynamic/commentMng.html'
+							href: 'page/dynamic/commentMng.html'
 						}, {
 							id: '8',
 							text: '注销账户',
-							href: 'dynamic/dynamicMng.html'
+							href: 'page/dynamic/dynamicMng.html'
 						}]
 					}]
 				}, {
@@ -88,19 +94,19 @@
 						items: [{
 							id: '9',
 							text: '注册账户转账',
-							href: 'enterprise/index.html'
+							href: 'page/enterprise/index.html'
 						},{
 							id: '9',
 							text: '境内跨行转账',
-							href: 'enterprise/index.html'
+							href: 'page/enterprise/index.html'
 						},{
 							id: '9',
 							text: '转账汇款查询',
-							href: 'enterprise/index.html'
+							href: 'page/enterprise/index.html'
 						},{
 							id: '9',
 							text: '缴费',
-							href: 'enterprise/index.html'
+							href: 'page/enterprise/index.html'
 						}]
 					}]
 				}, {
@@ -111,11 +117,11 @@
 						items: [{
 							id: '16',
 							text: '定期存款',
-							href: 'student/index.html'
+							href: 'page/student/index.html'
 						},{
 							id: '16',
 							text: '贷款',
-							href: 'student/index.html'
+							href: 'page/student/index.html'
 						}]
 					}]
 				}, {
@@ -126,11 +132,11 @@
 						items: [{
 							id: '18',
 							text: '查看个人信息',
-							href: 'course/index.html'
+							href: 'page/course/index.html'
 						}, {
 							id: '19',
 							text: '修改个人信息',
-							href: 'course/addCourse.html'
+							href: 'page/course/addCourse.html'
 						}]
 					}]
 				}, {
@@ -141,22 +147,11 @@
 						items: [{
 							id: '21',
 							text: '学生管理',
-							href: 'virtualstudent/index.html'
+							href: 'page/virtualstudent/index.html'
 						}, {
 							id: '23',
 							text: '学生注册',
-							href: 'virtualstudent/studentRegister.html'
-						}]
-					}]
-				}, {
-					id: '29',
-					homePage: '31',
-					menu: [{
-						text: '虚拟企业管理',
-						items: [{
-							id: '31',
-							text: '职位列表',
-							href: 'virtualenterprise/jobList.html'
+							href: 'page/virtualstudent/studentRegister.html'
 						}]
 					}]
 				}];

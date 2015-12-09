@@ -59,4 +59,5 @@
           </bean>
       </mvc:message-converters>
   </mvc:annotation-driven>
+  <mvc:resources location="/page" mapping="/page/assets/**"/>
 </beans>
