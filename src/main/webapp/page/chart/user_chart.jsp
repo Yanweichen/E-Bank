@@ -13,18 +13,58 @@
 <meta charset="utf-8">
 <title>饼图</title>
 <style type="text/css">
-#Container{
-    width:1800px;
-    margin:0 auto;/*设置整个容器在浏览器中水平居中*/
-}
  .top{
  	overflow : auto;
- 	margin: 30px
+ 	margin: 30px;
+ 	margin-bottom: 20px;
  }
+ .tophight{
+ 	height: 200px;
+ 	margin:30px;
+ 	padding: 30px;
+ 	
+ }
+ .tophight{
+ 	height: 200px;
+ }
+ .height{
+ 	margin: 30px;
+ 	margin-left: 0px;
+ 	margin-bottom: 20px;
+ }
+ .h_one{
+ 	font-size: 30px;
+ }
+ .h_two{
+ 	font-size: 20px;
+ }
+ .h_thr{
+ 	font-size: 15px;
+ 	margin: 20px;
+ 	margin-top:30px;
+ 	margin-left: 0px;
+ }
+ .bottm_thr{
+ 	color: #666;
+ 	letter-spacing: 10px;
+ 	margin-top:80px;
+ 	text-align:center;
+ 	display: block;
+ }
+ .bignum{
+ 	font-size: 3rem;
+ 	margin-top:70px;
+ 	text-align:center;
+ }
+ .daihuankuan{
+ 	letter-spacing: 5px;
+ }
+ 
+ 
  .hello{
  	float: left;
- 	height: 363px;
- 	width: 500px;
+ 	height: 310px;
+ 	width: 900px;
  	margin-right: 30px;
  }
  .linechart{
@@ -32,9 +72,24 @@
  	margin-left: 60px
  }
  .cen{
- 	float: left;
  	margin: 30px;
- 	margin-top:10px;
+ 	margin-top: 10px;
+ }
+ .notice{
+ 	float: left;
+ 	height: 330px;
+ 	width: 1613px;
+ 	margin: 30px;
+ 	margin-top:0px;
+ }
+ .piechart{
+    float:right;
+ }
+ .panleinline{
+ 	display: inline-block;
+ }
+ .bg{
+ 	background: red;
  }
 </style>
 </head>
@@ -46,49 +101,87 @@
 	<!-- 图表所需JS -->
 	<script src="../assets/js/acharts.js"></script>
 	<!-- JS import end -->
-	<div id="Container">
 	<div class="top">
-		<div class="hello">
-			<div class="panel">
-				<div class="panel-header">
-					<h3>欢迎登陆</h3>
-				</div>
-				<div class="panel-body">
-					<div class="hello"></div>
+		<div class="row-fluid show-grid">
+			<div class="span12 span-first">
+					<div class="well tophight">
+						<h1 class="h_one height">你好:</h1>
+						<h3 class="h_two height">Root,欢迎登陆！您是本行XXX级用户</h3>
+						<h3 class="h_thr">今天是2015年12月10日,星期四</h3>
+						<h3 class="h_thr">上次登录时间2015年12月10日19:19:44,今日是第X次登陆</h3>
+					</div>
+			</div>
+			<div class="span4">
+				<div class="well tophight">
+					<h1 class="bignum">45500</h1>
+					<h2 class="bottm_thr">余额</h2>
 				</div>
 			</div>
-		</div>
-		<div class="linechart">
-			<div class="panel">
-				<div class="panel-header">
-					<h3>周内收支</h3>
+			<div class="span4">
+				<div class="well tophight">
+					<h1 class="bignum">4.5%</h1>
+					<h2 class="bottm_thr">利率</h2>
 				</div>
-				<div class="panel-body">
-					<div id="line"></div>
+			</div>
+			<div class="span4">
+				<div class="well tophight">
+					<h1 class="bignum ">0</h1>
+					<h2 class="bottm_thr daihuankuan">待还款</h2>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="cen">
-		<div class="panel">
+		<div class="panel panleinline">
 			<div class="panel-header">
-				<h3>资金占比</h3>
+				<h3>周内收支</h3>
 			</div>
 			<div class="panel-body">
-				<div id="pie"></div>
+				<div id="line"></div>
+			</div>
+		</div>
+		<div class="piechart"> 
+			<div class="panel panleinline">
+				<div class="panel-header">
+					<h3>资金占比</h3>
+				</div>
+				<div class="panel-body">
+					<div id="pie"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="notice">
+		<div class="panel panleinline">
+			<div class="panel-header">
+				<h3>公告</h3>
+			</div>
+			<div class="panel-body">
+				<div class="notice"></div>
 			</div>
 		</div>
 	</div>
-
-
-</div>
-		<script type="text/javascript">
+	<script type="text/javascript">
+		var screenwidth = window.screen.height;
+		var piew,pieh,linw,linh;
+		if (screenwidth > 768) {
+			piew = 550;
+			pieh = 400;
+			linw = 1050;
+			linh = 400;
+		}else{
+			piew = 350;
+			pieh = 300;
+			linw = 700;
+			linh = 300;
+		}
 			//饼图
 			var piechart = new AChart({
 				id : 'pie',
 				theme : AChart.Theme.SmoothBase,
-				width : 500,
-				height : 400,
+				width : piew,
+				height : pieh,
 				title : {
 					text:'本周资金占比',
 					stroke : '#999',
@@ -162,12 +255,11 @@
 			});
 			piechart.render();
 			//折线图
-			var multiple = 350;
 			var linechart = new AChart({
 				theme : AChart.Theme.SmoothBase,
 				id : 'line',
-				width : 1.9*multiple,
-				height : 1*multiple,
+				width : linw,
+				height : linh,
 				title : {
 					text : '本周收入支出',
 					stroke : '#999',
@@ -210,10 +302,10 @@
 				},
 				series : [ {
 					name : '支出',
-					data : [ 1000, 1500, 1800, 2000, 9000, 6000, 3000 ]
+					data : [ 1000, 1500, 800, 2000, 9000, 6000, 3000 ]
 				}, {
 					name : '收入',
-					data : [ 6000, 2000, 1600, 5000, 3000, 1000, 800 ]
+					data : [ 6000, 2000, 2600, 5000, 3000, 1000, 800 ]
 				} ]
 			});
 
