@@ -8,8 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="../assets/css/dpl-min.css" rel="stylesheet">
-<link href="../assets/css/bui-min.css" rel="stylesheet">
+<base href=" <%=basePath%>">
+<link href="page/assets/css/dpl-min.css" rel="stylesheet">
+<link href="page/assets/css/bui-min.css" rel="stylesheet">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>饼图</title>
@@ -120,10 +121,10 @@
 <body>
 	<!-- JS import start -->
 	<!-- 通用JS -->
-	<script src="../assets/js/jquery-1.8.1.min.js"></script>
-	<script src="../assets/js/bui-min.js"></script>
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/bui-min.js"></script>
 	<!-- 图表所需JS -->
-	<script src="../assets/js/acharts.js"></script>
+	<script src="page/assets/js/acharts.js"></script>
 	<!-- JS import end -->
 	<div class="top">
 		<div class="row-fluid show-grid">
