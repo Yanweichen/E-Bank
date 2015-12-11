@@ -11,86 +11,110 @@
 <link href="../assets/css/dpl-min.css" rel="stylesheet">
 <link href="../assets/css/bui-min.css" rel="stylesheet">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>饼图</title>
 <style type="text/css">
- .top{
- 	overflow : auto;
- 	margin: 30px;
- 	margin-bottom: 20px;
- }
- .tophight{
- 	height: 200px;
- 	margin:30px;
- 	padding: 30px;
- 	
- }
- .tophight{
- 	height: 200px;
- }
- .height{
- 	margin: 30px;
- 	margin-left: 0px;
- 	margin-bottom: 20px;
- }
- .h_one{
- 	font-size: 30px;
- }
- .h_two{
- 	font-size: 20px;
- }
- .h_thr{
- 	font-size: 15px;
- 	margin: 20px;
- 	margin-top:30px;
- 	margin-left: 0px;
- }
- .bottm_thr{
- 	color: #666;
- 	letter-spacing: 10px;
- 	margin-top:80px;
- 	text-align:center;
- 	display: block;
- }
- .bignum{
- 	font-size: 3rem;
- 	margin-top:70px;
- 	text-align:center;
- }
- .daihuankuan{
- 	letter-spacing: 5px;
- }
- 
- 
- .hello{
- 	float: left;
- 	height: 310px;
- 	width: 900px;
- 	margin-right: 30px;
- }
- .linechart{
- 	float :left;
- 	margin-left: 60px
- }
- .cen{
- 	margin: 30px;
- 	margin-top: 10px;
- }
- .notice{
- 	float: left;
- 	height: 330px;
- 	width: 1613px;
- 	margin: 30px;
- 	margin-top:0px;
- }
- .piechart{
-    float:right;
- }
- .panleinline{
- 	display: inline-block;
- }
- .bg{
- 	background: red;
- }
+.top {
+	overflow: auto;
+	margin: 30px;
+	margin-bottom: 20px;
+}
+
+.tophight {
+	height: 200px;
+}
+
+.height {
+	margin: 30px;
+	margin-left: 0px;
+	margin-bottom: 20px;
+}
+
+.h_one {
+	font-size: 30px;
+}
+
+.h_two {
+	font-size: 20px;
+}
+
+.h_thr {
+	font-size: 15px;
+	margin: 20px;
+	margin-top: 30px;
+	margin-left: 0px;
+}
+
+.bottm_thr {
+	color: #666;
+	letter-spacing: 10px;
+	margin-top: 80px;
+	text-align: center;
+	display: block;
+}
+
+@media ( max-width :1366px) {
+	.bignum {
+		font-size: 20px;
+		margin-top: 70px;
+		text-align: center;
+	}
+}
+
+@media ( min-width :1366px) {
+	.bignum {
+		font-size: 50px;
+		margin-top: 70px;
+		text-align: center;
+	}
+}
+
+.daihuankuan {
+	letter-spacing: 5px;
+}
+
+.hello {
+	float: left;
+	height: 310px;
+	width: 900px;
+	margin-right: 30px;
+}
+
+.linechart {
+	float: left;
+	margin-left: 60px
+}
+
+.cen {
+	margin: 30px;
+	margin-top: 10px;
+}
+
+.notice {
+	float: left;
+	height: 330px;
+	width: 1613px;
+	margin: 30px;
+	margin-top: 0px;
+}
+
+
+@media ( min-width :1000px) {
+	.piechart {
+	float: right;
+}
+}
+@media ( max-width :1000px) {
+	.piechart {
+		float: left;
+		margin-top: 30px;
+	}
+}
+
+.panleinline {
+	display: inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -151,16 +175,6 @@
 			</div>
 		</div>
 		
-	</div>
-	<div class="notice">
-		<div class="panel panleinline">
-			<div class="panel-header">
-				<h3>公告</h3>
-			</div>
-			<div class="panel-body">
-				<div class="notice"></div>
-			</div>
-		</div>
 	</div>
 	<script type="text/javascript">
 		var screenwidth = window.screen.height;
