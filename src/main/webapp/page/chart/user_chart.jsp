@@ -9,16 +9,14 @@
 <html>
 <head>
 <base href=" <%=basePath%>">
-<link href="page/assets/css/dpl-min.css" rel="stylesheet">
-<link href="page/assets/css/bui-min.css" rel="stylesheet">
+
+<link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>饼图</title>
 <style type="text/css">
 .top {
-	overflow: auto;
 	margin: 30px;
-	margin-bottom: 20px;
 }
 
 .tophight {
@@ -100,82 +98,107 @@
 }
 
 
-@media ( min-width :1000px) {
-	.piechart {
+.piechart {
 	float: right;
-}
-}
-@media ( max-width :1000px) {
-	.piechart {
-		float: left;
-		margin-top: 30px;
-	}
 }
 
 .panleinline {
 	display: inline-block;
 }
-
+.yuanjiao {
+	border-radius: 15px;
+}
+.yuanjiaoup{
+	border-radius: 15px 15px 0px 0px;
+}
+.yuanjiaodown{
+	border-radius: 0px 15px 15px 15px;
+}
+.wordspace2{
+	letter-spacing: 2px;
+}
+.wordspace3{
+	letter-spacing: 3px;
+}
+.wordspace4{
+	letter-spacing: 4px;
+}
 </style>
 </head>
-<body>
+<body style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- JS import start -->
 	<!-- 通用JS -->
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bui-min.js"></script>
 	<!-- 图表所需JS -->
 	<script src="page/assets/js/acharts.js"></script>
+	<!-- bootstrap -->
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/bootstrap.min.js"></script>
 	<!-- JS import end -->
+	
 	<div class="top">
-		<div class="row-fluid show-grid">
-			<div class="span12 span-first">
-					<div class="well tophight">
-						<h1 class="h_one height">你好:</h1>
-						<h3 class="h_two height">Root,欢迎登陆！您是本行XXX级用户</h3>
-						<h3 class="h_thr">今天是2015年12月10日,星期四</h3>
-						<h3 class="h_thr">上次登录时间2015年12月10日19:19:44,今日是第X次登陆</h3>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="well tophight yuanjiaodown">
+					<h2 class="wordspace4">你好:</h2>
+					<h4 class="wordspace2">Root,欢迎登陆！您是本行XXX级用户</h4>
+					<p >今天是2015年12月10日,星期四</p>
+					<p >上次登录时间2015年12月10日19:19:44,今日是第X次登陆</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="panel panel-info tophight yuanjiao">
+					<div class="panel-heading yuanjiaoup">
+						<h4 class="text-center wordspace3">余额</h4>
 					</div>
-			</div>
-			<div class="span4">
-				<div class="well tophight">
-					<h1 class="bignum">45500</h1>
-					<h2 class="bottm_thr">余额</h2>
+					<div class="panel-body">
+						<h1 class="text-center">45500</h1>
+					</div>
 				</div>
 			</div>
-			<div class="span4">
-				<div class="well tophight">
-					<h1 class="bignum">4.5%</h1>
-					<h2 class="bottm_thr">利率</h2>
+			<div class="col-sm-2">
+				<div class="panel panel-success tophight yuanjiao">
+					<div class="panel-heading yuanjiaoup">
+						<h4 class="text-center wordspace3">利率</h4>
+					</div>
+					<div class="panel-body">
+						<h1 class="text-center">4.5%</h1>
+					</div>
 				</div>
 			</div>
-			<div class="span4">
-				<div class="well tophight">
-					<h1 class="bignum ">0</h1>
-					<h2 class="bottm_thr daihuankuan">待还款</h2>
+			<div class="col-sm-2">
+				<div class="panel panel-warning tophight yuanjiao">
+					<div class="panel-heading yuanjiaoup">
+						<h4 class="text-center wordspace3">待还款</h4>
+					</div>
+					<div class="panel-body">
+						<h1 class="text-center">0</h1>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div class="cen">
-		<div class="panel panleinline">
-			<div class="panel-header">
-				<h3>周内收支</h3>
-			</div>
-			<div class="panel-body">
-				<div id="line"></div>
-			</div>
-		</div>
-		<div class="piechart"> 
-			<div class="panel panleinline">
-				<div class="panel-header">
-					<h3>资金占比</h3>
-				</div>
-				<div class="panel-body">
-					<div id="pie"></div>
+		<div class="row">
+			<div class="col-sm-8">
+				<div class="panel panel-primary yuanjiao">
+					<div class="panel-heading yuanjiaoup">周内收支</div>
+					<div class="panel-body">
+						<div id="line" style="margin:0px; margin-top: 20px" align="center"></div>
+					</div>
 				</div>
 			</div>
+			<div class="col-sm-4">
+				<div class="panel panel-primary yuanjiao">
+					<div class="panel-heading yuanjiaoup">资金占比</div>
+					<div class="panel-body" style="padding-top: 35px">
+						<div id="pie" align="center"></div>
+					</div>
+				</div>
+			</div>
 		</div>
-		
 	</div>
 	<script type="text/javascript">
 		var screenwidth = window.screen.height;
@@ -186,9 +209,9 @@
 			linw = 1050;
 			linh = 400;
 		}else{
-			piew = 350;
+			piew = 320;
 			pieh = 300;
-			linw = 700;
+			linw = 650;
 			linh = 300;
 		}
 			//饼图
