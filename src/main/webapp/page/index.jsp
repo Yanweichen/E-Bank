@@ -91,7 +91,7 @@ a:HOVER {
 	<!-- 头部导航 -->
 	<jsp:include page="head_foot/head.html"></jsp:include>
 	<!-- 头部 -->
-	<div class="container">
+	<div class="container" id="section-4">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="thumbnail yuanjiao">

@@ -19,7 +19,7 @@ label{
 	letter-spacing: 3px;
 }
 .btncolor{
-	color:white;
+	color:#CCC;
 	background-color: #3f316d;
 }	
 </style>
@@ -31,7 +31,7 @@ label{
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4">
-				<form id="regform">
+				<form id="regform" action="user/regfirst.action" method="post">
 					<div class="form-group">
 						<label for="user_name">姓名</label> 
 						<input type="text" class="form-control" id="exampleInputName2"
@@ -70,64 +70,121 @@ label{
 			</div>		
 		</div>
 	</div>
-	
+
+
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+						<p>注册失败！</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
-	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
-	<!-- <script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> -->
+	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript" src="page/assets/js/jquery.validate-1.13.1.js"></script>
 	<script type="text/javascript" src="page/assets/js/additional-methods.js"></script>
 	<script type="text/javascript">
-	$.validator.setDefaults({
-        debug: true
-    });
+	$(document).ready(function() {
+	    $('#regform').bootstrapValidator({
+	        message: 'This value is not valid',
+	        submitButtons: 'button[type="submit"]',
+	        feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {
+	            user_name: {
+	                validators: {
+	                    notEmpty: {
+	                        message: '用户名不能为空'
+	                    },
+	                }
+	            },
+	            user_idcard: {
+	            	trigger:"blur",
+	                validators: {
+	                    notEmpty: {
+	                        message: '身份证信息不能为空'
+	                    },
+	                    remote: {
+                            url: 'user/verifyIdCard.action',
+                            type: "post",
+                            async: false,
+                            data:
+                            {
+                            	user_idcard: function(validator)
+                                {
+                                    return $('#regform :input[name="user_idcard"]').val();
 
-    validator = $("#regform").validate({
-        rules: {
-            user_name: {
-                required: true,
-                postcode : "中国"
-            },
-            user_idcard: {
-                required: true,
-                minlength: 2,
-                maxlength: 16
-            },
-            "confirm-password": {
-                equalTo: "#password"
-            }
-        },
-        messages: {
-        	user_name: {
-                required: "必须填写用户名",
-                minlength: "用户名最小为2位",
-                maxlength: "用户名最大为10位",
-                rangelength: "用户名应该在2-10位",
-                remote: "用户名不存在"
-            },
-            user_idcard: {
-                required: "必须填写密码",
-                minlength: "密码最小为2位",
-                maxlength: "密码最大为16位"
-            },
-            "confirm-password": {
-                equalTo: "两次输入的密码不一致"
-            }
-        },
-        submitHandler: function (form) {
-            console.log($(form).serialize());
-        }
-    });
+                                }
+                            },
+                        },
+	                }
+	            },
+	            user_phone: {
+	            	threshold:10,
+	                validators: {
+	                    notEmpty: {
+	                        message: '手机号码不能为空'
+	                    },
+	                    regexp: {
+	                        regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+	                        message: '非法的手机号码'
+	                    }
+	                }
+	            },
 
-    $.validator.addMethod("postcode", function(value, element, params){
-        var postcode = /^[0-9]{6}$/;
-        return this.optional(element) || (postcode.test(value));
-    }, $.validator.format("请填写正确的{0}邮编！"));
+	        }
+	    }).on('success.form.bv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
 
-    $("#check").click(function () {
-        alert($("#demoForm").valid() ? "填写正确！" : "填写错误！");
-    });
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+				if (result.error==200) {
+	                $("#isSuc").modal(); 
+				}
+					
+            }, 'json');
+        });
+	});
+	
+	//模态框居中
+		function centerModals() {
+			$('.modal').each(
+					function(i) {
+						var $clone = $(this).clone().css('display', 'block')
+								.appendTo('body');
+						var top = Math.round(($clone.height() - $clone.find(
+								'.modal-content').height()) / 3);
+						top = top > 0 ? top : 0;
+						$clone.remove();
+						$(this).find('.modal-content').css("margin-top", top);
+					});
+		}
+		$('.modal').on('show.bs.modal', centerModals);
+		$(window).on('resize', centerModals);
 	</script>
 </body>
 </html>

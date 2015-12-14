@@ -15,6 +15,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
+import com.bank.utils.RegularUtil;
+import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("/index")
@@ -41,10 +43,10 @@ public class IndexController {
 		if (server_sessionid.equals(user_sessionid)) {
 			return JsonUtil.getNotice(is.findeByNum(num));
 		}else{
-			System.out.println("¾Ü¾øµÇÂ½"+req.getSession());
+			System.out.println("æ‹’ç»ç™»é™†"+req.getSession());
 			JSONArray jar = new JSONArray();
 			JSONObject jo = new JSONObject();
-			jo.put("304", "¾Ü¾øµÇÂ½");
+			jo.put("304", "æ‹’ç»ç™»é™†");
 			jar.add(jo);
 			return jar;
 		}
@@ -55,4 +57,5 @@ public class IndexController {
 		req.getSession().invalidate();
 		return "index";
 	}
+	
 }

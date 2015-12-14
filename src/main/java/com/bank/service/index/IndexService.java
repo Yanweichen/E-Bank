@@ -22,7 +22,7 @@ public class IndexService implements BaseService<IndexModel> {
 	public List<IndexModel> findeByNum(Integer num){
 		return indexdao.selectByNum(num);
 	}
-
+	
 	public void add(IndexModel model) {
 		// TODO Auto-generated method stub
 		
