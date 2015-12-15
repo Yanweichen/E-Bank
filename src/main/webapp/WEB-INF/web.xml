@@ -41,4 +41,126 @@
     <servlet-name>SpringMVC</servlet-name>
     <url-pattern>*.action</url-pattern>
   </servlet-mapping>
+  
+  <!-- kaptcha验证码servlet -->  
+      <servlet>  
+        <servlet-name>Kaptcha</servlet-name>  
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>  
+        <init-param>  
+            <description> Border around kaptcha. Legal values are yes or no. </description>  
+            <param-name>kaptcha.border</param-name>  
+            <param-value>no</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>Color of the border. Legal values are r,g,b (and optional alpha) or white,black,blue. </description>  
+            <param-name>kaptcha.border.color</param-name>  
+            <param-value>red</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>Thickness of the border around kaptcha. Legal values are > 0. </description>  
+            <param-name>kaptcha.border.thickness</param-name>  
+            <param-value>5</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>Width in pixels of the kaptcha image. </description>  
+            <param-name>kaptcha.image.width</param-name>  
+            <param-value>160</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>Height in pixels of the kaptcha image. </description>  
+            <param-name>kaptcha.image.height</param-name>  
+            <param-value>80</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The image producer. </description>  
+            <param-name>kaptcha.producer.impl</param-name>  
+            <param-value>com.google.code.kaptcha.impl.DefaultKaptcha </param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The text producer. </description>  
+            <param-name>kaptcha.textproducer.impl</param-name>  
+            <param-value>com.google.code.kaptcha.text.impl.DefaultTextCreator</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The characters that will create the kaptcha. </description>  
+            <param-name>kaptcha.textproducer.char.string</param-name>  
+            <param-value>abcde2345678gfynmnpwx</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The number of characters to display. </description>  
+            <param-name>kaptcha.textproducer.char.length</param-name>  
+            <param-value>5</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>A list of comma separated font names.</description>  
+            <param-name>kaptcha.textproducer.font.names</param-name>  
+            <param-value>Arial, Courier</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The size of the font to use. </description>  
+            <param-name>kaptcha.textproducer.font.size</param-name>  
+            <param-value>40</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The color to use for the font. Legal values are r,g,b. </description>  
+            <param-name>kaptcha.textproducer.font.color</param-name>  
+            <param-value>black</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The noise producer. </description>  
+            <param-name>kaptcha.noise.impl</param-name>  
+            <param-value>com.google.code.kaptcha.impl.NoNoise </param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The noise color. Legal values are r,g,b. </description>  
+            <param-name>kaptcha.noise.color</param-name>  
+            <param-value>black</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The obscurificator implementation. </description>  
+            <param-name>kaptcha.obscurificator.impl</param-name>  
+            <param-value>com.google.code.kaptcha.impl.WaterRipple</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The background implementation. </description>  
+            <param-name>kaptcha.background.impl</param-name>  
+            <param-value>com.google.code.kaptcha.impl.DefaultBackground</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>Ending background color. Legal values are r,g,b. </description>  
+            <param-name>kaptcha.background.clear.to</param-name>  
+            <param-value>white</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The word renderer implementation. </description>  
+            <param-name>kaptcha.word.impl</param-name>  
+            <param-value>com.google.code.kaptcha.text.impl.DefaultWordRenderer</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The value for the kaptcha is generated and is put into the HttpSession. This is the key value for that item in the session. </description>  
+            <param-name>kaptcha.session.key</param-name>  
+            <param-value>KAPTCHA_SESSION_KEY</param-value>  
+        </init-param>  
+        <init-param>  
+            <description>The date the kaptcha is generated is put into the HttpSession. This is the key value for that item in the session. </description>  
+            <param-name>kaptcha.session.date</param-name>  
+            <param-value>KAPTCHA_SESSION_DATE</param-value>  
+        </init-param> 
+        <init-param>
+			<param-name>kaptcha.textproducer.char.space</param-name>
+			<param-value>5</param-value>
+		</init-param> 
+        <init-param>
+			<param-name>kaptcha.noise.impl</param-name>
+			<param-value>com.google.code.kaptcha.impl.Default</param-value>
+		</init-param> 
+        <init-param>
+			<param-name>kaptcha.noise.color</param-name>
+			<param-value>black</param-value>
+		</init-param> 
+    </servlet>  
+    <servlet-mapping>  
+        <servlet-name>Kaptcha</servlet-name>  
+        <url-pattern>/Kaptcha.jpg</url-pattern>  
+    </servlet-mapping>
 </web-app>

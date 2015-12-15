@@ -33,25 +33,47 @@ label{
 			<div class="col-sm-4 col-sm-offset-4">
 				<form id="regform" action="user/regfirst.action" method="post">
 					<div class="form-group">
-						<label for="user_name">姓名</label> 
-						<input type="text" class="form-control" id="exampleInputName2"
-							name = "user_name" placeholder="请输入本人姓名">
+					<p></p>
+					<div class="row">
+						<div class="col-sm-4" >
+							<label for="user_name" style="margin-top: 5px">开户地区</label> 
+						</div>
+						<div  class="col-sm-4">
+							<select id="province" class="form-control">
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<select id = "city" class="form-control">
+							</select>
+						</div>
+					</div>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputName2">证件类型</label> 
-						<select class="form-control">
-							<option>身份证</option>
-						</select>
+						<label for="exampleInputName2">预留信息</label> 
+						<input type="text" class="form-control" id="user_obligate_info"
+							name = "user_obligate_info" placeholder="此信息会在您登陆时提示">
 					</div>
 					<div class="form-group">
-						<label for="user_idcard">证件号码</label> 
-						<input type="text" class="form-control" id="exampleInputName2"
-							name = "user_idcard" placeholder="请输入证件号码">
+						<label for="exampleInputPassword1">登陆密码</label>
+    					<input type="password" class="form-control" id="user_pass" 
+    						name = "user_pass" placeholder="请输入登陆密码">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputName2">手机号码</label> 
-							<input type="text" class="form-control" id="exampleInputName2"
-							name = "user_phone" placeholder="请输入手机号码">
+						<label for="exampleInputPassword1">重复登陆密码</label>
+    					<input type="password" class="form-control" id="user_pass_again" 
+    						name = "user_pass_again" placeholder="请重复输入登陆密码">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">验证码</label>
+						<div class="row">
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="exampleInputName2"
+									name = "user_code" placeholder="验证码">
+							</div>
+							<div class="col-sm-6">
+								<img src="Kaptcha.jpg" alt="..." class="img-rounded" style="height: 30px;width: 130px;">
+							</div>
+						</div>
 					</div>
 					<div class="form-group" align="center">
 						<div class="row">
@@ -96,57 +118,76 @@ label{
 	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript" src="page/assets/js/jquery.validate-1.13.1.js"></script>
 	<script type="text/javascript" src="page/assets/js/additional-methods.js"></script>
+	<script src="page/assets/js/password.js"></script>
 	<script type="text/javascript">
+	//启用密码可视
+        $('#user_pass').password().on('show.bs.password')
+        $('#user_pass_again').password().on('show.bs.password')
+	//二级联动
+	//获取省
+	 $.getJSON("user/getProvince.action", function(json){
+		 	$.each(json, function(index,item){ 
+	 	 	 	$("#province").append("<option value='"+item.code+"'>"+item.name+"</option>");
+    		});  
+		});
+	//首次加载
+	 $.getJSON("user/getCity.action",{"code":"01"}, function(json){
+		 		$("#city").empty(); 
+		 	$.each(json, function(index,item){
+	 	 	 	$("#city").append("<option value='"+item.code+"'>"+item.name+"</option>");
+ 		});  
+	 });
+	 $("#province").change(function(){ 
+		 var pselect = $(this); 
+		 var code = pselect.attr("value");		 
+		 $.getJSON("user/getCity.action",{"code":code}, function(json){
+			 		$("#city").empty(); 
+			 	$.each(json, function(index,item){
+		 	 	 	$("#city").append("<option value='"+item.code+"'>"+item.name+"</option>");
+	    		});  
+		 });
+	 });
 	$(document).ready(function() {
 	    $('#regform').bootstrapValidator({
 	        message: 'This value is not valid',
 	        submitButtons: 'button[type="submit"]',
 	        feedbackIcons: {
-	            valid: 'glyphicon glyphicon-ok',
+	           
 	            invalid: 'glyphicon glyphicon-remove',
 	            validating: 'glyphicon glyphicon-refresh'
 	        },
 	        fields: {
-	            user_name: {
+	        	user_obligate_info: {
 	                validators: {
 	                    notEmpty: {
-	                        message: '用户名不能为空'
+	                        message: '预留信息不能为空'
 	                    },
 	                }
 	            },
-	            user_idcard: {
+	            user_pass: {
 	            	trigger:"blur",
 	                validators: {
 	                    notEmpty: {
-	                        message: '身份证信息不能为空'
+	                        message: '密码不能为空'
 	                    },
-	                    remote: {
-                            url: 'user/verifyIdCard.action',
-                            type: "post",
-                            async: false,
-                            data:
-                            {
-                            	user_idcard: function(validator)
-                                {
-                                    return $('#regform :input[name="user_idcard"]').val();
-
-                                }
-                            },
-                        },
+	                    identical: {
+	                        field: 'user_pass_again',
+	                        message: '请输入确认密码'
+	                    },
 	                }
 	            },
-	            user_phone: {
-	            	threshold:10,
+	            user_pass_again: {
+	            	trigger:"blur",
 	                validators: {
 	                    notEmpty: {
-	                        message: '手机号码不能为空'
+	                        message: '请确认密码'
 	                    },
-	                    regexp: {
-	                        regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
-	                        message: '非法的手机号码'
-	                    }
+	                    identical: {
+	                        field: 'user_pass',
+	                        message: '两次密码不一致'
+	                    },
 	                }
-	            },
+	            }
 
 	        }
 	    }).on('success.form.bv', function(e) {
