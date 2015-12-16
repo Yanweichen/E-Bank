@@ -17,7 +17,18 @@
   <insert id="insert_first_step" parameterType="com.bank.model.user.UserModel">
   	INSERT INTO user_userinfo(user_name,user_idcard,user_phone) VALUES(#{user_name},#{user_idcard},#{user_phone});
   </insert>
+  <!-- 注册第二步 -->
+  <update id="insert_second_step" parameterType="com.bank.model.user.UserModel">
+  	UPDATE user_userinfo 
+  	SET user_city = #{user_city},user_obligate_info = #{user_obligate_info},user_pass = #{user_pass},user_email = #{user_email}
+  	WHERE user_idcard = #{user_idcard}
+  </update>
+  <!-- 根据身份证号查询用户 -->
   <select id="selectUserByIdCard" parameterType="String" resultType="com.bank.model.user.UserModel">
   	SELECT * FROM user_userinfo WHERE user_idcard = #{idcard};
   </select>
+  <!-- 根据身份证号删除用户 -->
+  <delete id="deleteUserByIdcard" parameterType="String">
+  	DELETE FROM user_userinfo WHERE user_idcard = #{idcard}
+  </delete>
 </mapper>

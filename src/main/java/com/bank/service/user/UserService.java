@@ -23,12 +23,29 @@ public class UserService implements BaseService<UserModel> {
 	public int addUser_first(UserModel u){
 		return ud.insert_first_step(u);
 	}
+	/**
+	 * 注册第二步
+	 * @param u
+	 * @return
+	 */
+	public int addUser_second(UserModel u){
+		return ud.insert_second_step(u);
+	}
 	
 	/**
-	 * 验证身份证信息
+	 * 根据身份证id查询用户
 	 */
-	public UserModel verifyIdCard(String idcard){
+	public UserModel findUserByIdCard(String idcard){
 		return ud.selectUserByIdCard(idcard);
+	}
+	
+	/**
+	 * 根据身份证id删除用户
+	 * @param idcard
+	 * @return
+	 */
+	public int removeUserByIdCard(String idcard){
+		return ud.deleteUserByIdcard(idcard);
 	}
 	
 	@Override

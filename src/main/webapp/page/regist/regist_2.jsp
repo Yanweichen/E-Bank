@@ -31,7 +31,7 @@ label{
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4">
-				<form id="regform" action="user/regfirst.action" method="post">
+				<form id="regform" action="user/regsecond.action" method="post">
 					<div class="form-group">
 					<p></p>
 					<div class="row">
@@ -43,7 +43,7 @@ label{
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<select id = "city" class="form-control">
+							<select id = "city" name="user_city" class="form-control">
 							</select>
 						</div>
 					</div>
@@ -64,14 +64,19 @@ label{
     						name = "user_pass_again" placeholder="请重复输入登陆密码">
 					</div>
 					<div class="form-group">
+						<label for="exampleInputName2">电子邮箱</label> 
+						<input type="text" class="form-control" id="user_obligate_info"
+							name = "user_email" placeholder="找回密码时使用">
+					</div>
+					<div class="form-group">
 						<label for="exampleInputPassword1">验证码</label>
 						<div class="row">
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="exampleInputName2"
+								<input type="text" class="form-control" id="user_code"
 									name = "user_code" placeholder="验证码">
 							</div>
 							<div class="col-sm-6">
-								<img src="Kaptcha.jpg" alt="..." class="img-rounded" style="height: 30px;width: 130px;">
+								<img src="Kaptcha.jpg" id="codeimg" alt="..." class="img-rounded" style="height: 30px;width: 130px;">
 							</div>
 						</div>
 					</div>
@@ -106,7 +111,7 @@ label{
 						<h4 class="modal-title">提示</h4>
 				</div>
 				<div class="modal-body">
-						<p>注册失败！</p>
+						<p id = "msg"></p>
 				</div>
 			</div>
 		</div>
@@ -120,6 +125,10 @@ label{
 	<script type="text/javascript" src="page/assets/js/additional-methods.js"></script>
 	<script src="page/assets/js/password.js"></script>
 	<script type="text/javascript">
+	//刷新验证码
+	$("#codeimg").click( function () {
+		$(this).attr("src","Kaptcha.jpg?r="+new Date());; 
+	});
 	//启用密码可视
         $('#user_pass').password().on('show.bs.password')
         $('#user_pass_again').password().on('show.bs.password')
@@ -134,16 +143,17 @@ label{
 	 $.getJSON("user/getCity.action",{"code":"01"}, function(json){
 		 		$("#city").empty(); 
 		 	$.each(json, function(index,item){
-	 	 	 	$("#city").append("<option value='"+item.code+"'>"+item.name+"</option>");
+	 	 	 	$("#city").append("<option value='"+item.name+"'>"+item.name+"</option>");
  		});  
 	 });
+	//获取市
 	 $("#province").change(function(){ 
 		 var pselect = $(this); 
 		 var code = pselect.attr("value");		 
 		 $.getJSON("user/getCity.action",{"code":code}, function(json){
 			 		$("#city").empty(); 
 			 	$.each(json, function(index,item){
-		 	 	 	$("#city").append("<option value='"+item.code+"'>"+item.name+"</option>");
+		 	 	 	$("#city").append("<option value='"+item.name+"'>"+item.name+"</option>");
 	    		});  
 		 });
 	 });
@@ -187,8 +197,39 @@ label{
 	                        message: '两次密码不一致'
 	                    },
 	                }
-	            }
+	            },
+	            user_email:{
+	            	validators: {
+	                    notEmpty: {
+	                        message: '请输入邮箱'
+	                    },
+	                    regexp: {
+	                        regexp: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/,
+	                        message: '非法的邮箱地址'
+	                    }
+	                }
+	            },
+	            user_code:{
+	            	trigger:"blur",
+	            	validators: {
+	            		notEmpty: {
+	                      message: '请输入验证码'
+	               		 },
+	            	remote: {
+                        url: 'user/verifyCode.action',
+                        type: "post",
+                        async: false,
+                        data:
+                        {
+                        	user_code: function(validator)
+                            {
+                                return $('#regform :input[name="user_code"]').val();
 
+                            }
+                        },
+                    },
+                  }
+	           }
 	        }
 	    }).on('success.form.bv', function(e) {
             // Prevent form submission
@@ -202,11 +243,12 @@ label{
 
             // Use Ajax to submit form data
             $.post($form.attr('action'), $form.serialize(), function(result) {
-                console.log(result);
-				if (result.error==202) {
+				if (result.error==200) {
+					//跳转到确认信息界面
+					location.href = "user/regthird.action";
+				}else {
+	                $("#msg").append(result.msg)
 	                $("#isSuc").modal(); 
-				}else{
-					location.href = "page/regist/regist_2.jsp";
 				}
 					
             }, 'json');

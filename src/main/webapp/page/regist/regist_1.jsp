@@ -129,7 +129,6 @@ label{
                             	user_idcard: function(validator)
                                 {
                                     return $('#regform :input[name="user_idcard"]').val();
-
                                 }
                             },
                         },
