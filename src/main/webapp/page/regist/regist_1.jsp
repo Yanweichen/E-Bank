@@ -128,7 +128,7 @@ label{
 	                    remote: {
                             url: 'user/verifyIdCard.action',
                             type: "post",
-                            async: false,
+                            async: true,
                             data:
                             {
                             	user_idcard: function(validator)

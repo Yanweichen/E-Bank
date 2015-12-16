@@ -24,7 +24,7 @@ label{
 }	
 </style>
 </head>
-<body style="background-image: url('page/assets/img/bg_grid.png');">
+<body onunload="closeWindow()" style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
 	<jsp:include page="../head_foot/head.html"></jsp:include>
 	
@@ -121,6 +121,51 @@ label{
 			</div>
 		</div>
 	</div>
+	<div id="isColse" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+						<p id = "msg"></p>
+				</div>
+				 <div class="modal-footer">
+		      	 <input type="hidden" id="url"/>
+		      	 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		      	 <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>
+		      </div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<!-- 信息删除确认 -->
+		<div class="modal fade bs-example-modal-sm" id="delcfmModel">
+		  <div class="modal-dialog">
+		    <div class="modal-content message_align">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+		        <h4 class="modal-title">提示信息</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>您确认要退出吗？您的信息将会丢失</p>
+		      </div>
+		      <div class="modal-footer">
+		      	 <input type="hidden" id="url"/>
+		      	 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		      	 <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+	
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
@@ -275,6 +320,7 @@ label{
 		}
 		$('.modal').on('show.bs.modal', centerModals);
 		$(window).on('resize', centerModals);
+	//页面关闭回调
 	</script>
 </body>
 </html>
