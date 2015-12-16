@@ -203,7 +203,19 @@ a:HOVER {
 		</div>
 	</div>
 	<!-- foot -->
-	<jsp:include page="head_foot/foot.html"></jsp:include>
+	<div id="foot" class="container">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<p align="center">
+				<a id="E-Bank" href="<%=basePath%>page/index.jsp" target="_blank">E-Bank</a> | <a href="#" target="_blank">Bank
+					Online</a> | Complaint Guidelines | 审核时间[2015]-070
+			</p>
+			<p align="center">Copyright &copy; 2015 - e-bank.All Rights
+				Reserved.
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yanweichen| 版权所有</p>
+		</div>
+	</div>
+	</div>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
