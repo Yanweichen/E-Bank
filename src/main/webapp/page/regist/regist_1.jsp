@@ -29,6 +29,11 @@ label{
 	<jsp:include page="../head_foot/head.html"></jsp:include>
 	
 	<div class="container">
+		<ol class="breadcrumb">
+			<li style="color: #3f316d">填写信息</li>
+			<li class="active">完善信息</li>
+			<li class="active">确认信息</li>
+		</ol>
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 				<form id="regform" action="user/regfirst.action" method="post">

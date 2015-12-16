@@ -25,6 +25,11 @@
 	<!-- 头部导航 -->
 	<jsp:include page="../head_foot/head.html"></jsp:include>
 	<div class="container">
+		<ol class="breadcrumb">
+			<li class="active">填写信息</li>
+			<li class="active">完善信息</li>
+			<li style="color: #3f316d">确认信息</li>
+		</ol>	
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
 				<div class="panel panel-danger">
@@ -101,7 +106,7 @@
 		$("#cancel").click(function(){
 			$.getJSON("user/removeuser.action",{"idcard":"${user.user_idcard}"},function(result){
 				if(result.error==200){
-					 $("#msg").append(result.msg)
+					 $("#msg").append("取消成功！请重新注册")
 		             $("#isSuc").modal().on('hidden.bs.modal',function(){
 						location.href = "page/regist/regist_1.jsp";
 		             });
