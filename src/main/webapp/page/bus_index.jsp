@@ -28,7 +28,7 @@
 <body>
 	<div class="header" style="height: 55px">
 		<div class="dl-title">
-			<h1
+			<h1 id="logo"
 				style="color: white; margin: 15px 15px 15px 15px; font-size: 22px; letter-spacing: 3px;">e-bank</h1>
 		</div>
 		<div style="float: right;">
@@ -178,6 +178,10 @@
 			$('.dl-second-nav,.bui-nav-tab,.bui-nav-tab-hover').height(height);
 			$('.tab-content-container').height(height - 21);
 		});
+		//首页跳转
+		$("#logo").click(function(){
+			location.href = "page/index.jsp"
+		})
 	</script>
 	<div style="text-align: center;">
 		<p></p>
