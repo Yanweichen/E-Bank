@@ -11,6 +11,7 @@
 <base href=" <%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="page/assets//img/tubiao.ico" /> 
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/bootstrapValidator.min.css"/>
 <title>注册</title>

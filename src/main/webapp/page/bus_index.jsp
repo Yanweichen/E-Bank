@@ -11,6 +11,7 @@
 <base href=" <%=basePath%>">
 <title>我的银行</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="page/assets//img/tubiao.ico" /> 
 <link href="page/assets/css/dpl-min.css" rel="stylesheet"
 	type="text/css" />
 <link href="page/assets/css/bui-min.css" rel="stylesheet"

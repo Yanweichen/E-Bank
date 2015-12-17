@@ -16,8 +16,8 @@ public class RegularUtil {
 	public static final int loss = 5;//挂失
 	
 	public static String getlocathost(){
-//		String ip = "115.159.66.149";
-		String ip = "localhost";
+		String ip = "115.159.66.149";
+//		String ip = "localhost";
 //		try {
 //			 ip = InetAddress.getLocalHost().getHostAddress();
 //		} catch (UnknownHostException e) {
