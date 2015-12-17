@@ -1,10 +1,12 @@
 package com.bank.controller.user;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -230,6 +232,8 @@ public class UserInfoController {
 		String user_email = user.getUser_email();
 		email.add(user_email);
 		String user_idcard = user.getUser_idcard();
+		//base64加密
+		user_idcard = Base64.encodeBase64URLSafeString(user_idcard.getBytes());
 		String user_name = user.getUser_name();
 		boolean issuc = new Mail().send("505717760@qq.com",email , null,"e-bank账号激活", "<h1>您好,"+user_name+"</h1> "
 				+ "<a href=\"http://"+RegularUtil.getlocathost()+"/user/activateUser.action?user_idcard="+user_idcard+"\">请您点击这里激活您的账号</a>");
@@ -238,6 +242,13 @@ public class UserInfoController {
 	
 	@RequestMapping("/activateUser")
 	public ModelAndView activateUser(String user_idcard) {
+		//base64解密
+		try {
+			user_idcard = new String(Base64.decodeBase64(user_idcard),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ModelAndView mv = new ModelAndView();
 		if (user_idcard != null && modifyUserState(RegularUtil.normal,user_idcard)) {
 			mv.addObject("isactivate", "激活成功！");
