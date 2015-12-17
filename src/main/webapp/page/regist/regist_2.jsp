@@ -321,6 +321,24 @@ label{
 		$('.modal').on('show.bs.modal', centerModals);
 		$(window).on('resize', centerModals);
 	//页面关闭回调
+	
+		window.onbeforeunload = function(e) {
+			e = e || window.event;
+			var msg = "您确定要离开此页面吗？";
+
+			// IE
+			e.cancelBubble = true;
+			e.returnValue = msg;
+
+			// Firefox
+			if (e.stopPropagation) {
+				e.stopPropagation();
+				e.preventDefault();
+			}
+
+			// Chrome / Safari
+			return msg;
+		};
 	</script>
 </body>
 </html>
