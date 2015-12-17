@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface BaseService <T>{
 
-	public void add(T model);
+	public int add(T model);
 	
-	public void RemoveById(Integer id);
+	public int RemoveById(Integer id);
 	
-	public void alterById(Integer id);
+	public int alterById(Integer id);
 	
 	public T findById(Integer id);
 	

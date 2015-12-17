@@ -39,27 +39,27 @@
   					<div class="panel-body">
   					<div class="form-group has-error">
   						<label for="user_name">注册姓名</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_name}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_name}</c:if>" readonly>
 					</div>
 					<div class="form-group has-error">
   						<label for="user_name">开户城市</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_city}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_city}</c:if>" readonly>
 					</div>
 					<div class="form-group has-success">
   						<label for="user_name">预留信息</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_obligate_info}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_obligate_info}</c:if>" readonly>
 					</div>
 					<div class="form-group has-error">
   						<label for="user_name">身份证号码</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_idcard}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_idcard}</c:if>" readonly>
 					</div>
 					<div class="form-group has-success">
   						<label for="user_name">预留电话</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_phone}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_phone}</c:if>" readonly>
 					</div>
 					<div class="form-group has-success">
   						<label for="user_name">预留信箱</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_email}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_email}</c:if>" readonly>
 					</div>
   					</div>
   					<div class="form-group" align="center">
@@ -100,24 +100,26 @@
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+		//确认
 		$("#confirm").click(function(){
-			alert(${user.user_idcard})
-		})
-		$("#cancel").click(function(){
-			$.getJSON("user/removeuser.action",{"idcard":"${user.user_idcard}"},function(result){
-				if(result.error==200){
-					 $("#msg").append("取消成功！请重新注册")
+			$.getJSON("user/adduser.action", function(json){
+				if(json.error == 200){
+					location.href = "page/regist/regist_success.jsp";
+				}else{
+					$("#msg").append("注册失败！请检查您的网络！")
 		             $("#isSuc").modal().on('hidden.bs.modal',function(){
 						location.href = "page/regist/regist_1.jsp";
-		             });
-				}else{
-					 $("#msg").empty();
-					 $("#msg").append("取消失败,请稍后再试");
-		             $("#isSuc").modal(); 
+		            });
 				}
-			})
+	 		});
 		})
-		
+		//取消
+		$("#cancel").click(function(){
+			 $("#msg").append("取消成功！请重新注册")
+             $("#isSuc").modal().on('hidden.bs.modal',function(){
+				location.href = "page/regist/regist_1.jsp";
+             });
+		})
 		
 		//模态框居中
 		function centerModals() {

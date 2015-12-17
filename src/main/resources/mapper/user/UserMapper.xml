@@ -14,14 +14,11 @@
     <result column="user_email" property="user_email" jdbcType="VARCHAR" />
   </resultMap>
   <!-- 注册第一步 -->
-  <insert id="insert_first_step" parameterType="com.bank.model.user.UserModel">
-  	INSERT INTO user_userinfo(user_name,user_idcard,user_phone) VALUES(#{user_name},#{user_idcard},#{user_phone});
+  <insert id="insert" parameterType="com.bank.model.user.UserModel">
+  	INSERT INTO user_userinfo VALUES(null,#{user_name},#{user_pass},null,#{user_city},#{user_obligate_info},null,#{user_idcard},#{user_phone},#{user_email},0);
   </insert>
-  <!-- 注册第二步 -->
-  <update id="insert_second_step" parameterType="com.bank.model.user.UserModel">
-  	UPDATE user_userinfo 
-  	SET user_city = #{user_city},user_obligate_info = #{user_obligate_info},user_pass = #{user_pass},user_email = #{user_email}
-  	WHERE user_idcard = #{user_idcard}
+  <update id="updateUserStateByIdcard">
+  	UPDATE user_userinfo SET user_state = #{0} WHERE user_idcard = #{1};
   </update>
   <!-- 根据身份证号查询用户 -->
   <select id="selectUserByIdCard" parameterType="String" resultType="com.bank.model.user.UserModel">
@@ -29,6 +26,6 @@
   </select>
   <!-- 根据身份证号删除用户 -->
   <delete id="deleteUserByIdcard" parameterType="String">
-  	DELETE FROM user_userinfo WHERE user_idcard = #{idcard}
+  	DELETE FROM user_userinfo WHERE user_idcard = #{idcard};
   </delete>
 </mapper>

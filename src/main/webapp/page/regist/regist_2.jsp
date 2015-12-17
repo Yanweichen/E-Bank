@@ -23,8 +23,10 @@ label{
 	background-color: #3f316d;
 }	
 </style>
+<script>  
+</script>
 </head>
-<body onunload="closeWindow()" style="background-image: url('page/assets/img/bg_grid.png');">
+<body onbeforeunload="checkLeave()" onunload="checkLeave()" style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
 	<jsp:include page="../head_foot/head.html"></jsp:include>
 	
@@ -305,6 +307,7 @@ label{
         });
 	});
 	
+	
 	//模态框居中
 		function centerModals() {
 			$('.modal').each(
@@ -320,25 +323,7 @@ label{
 		}
 		$('.modal').on('show.bs.modal', centerModals);
 		$(window).on('resize', centerModals);
-	//页面关闭回调
-	
-		window.onbeforeunload = function(e) {
-			e = e || window.event;
-			var msg = "您确定要离开此页面吗？";
-
-			// IE
-			e.cancelBubble = true;
-			e.returnValue = msg;
-
-			// Firefox
-			if (e.stopPropagation) {
-				e.stopPropagation();
-				e.preventDefault();
-			}
-
-			// Chrome / Safari
-			return msg;
-		};
+		
 	</script>
 </body>
 </html>

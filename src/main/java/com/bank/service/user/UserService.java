@@ -48,34 +48,40 @@ public class UserService implements BaseService<UserModel> {
 		return ud.deleteUserByIdcard(idcard);
 	}
 	
-	@Override
-	public void add(UserModel model) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * 根据身份证信息修改用户状态
+	 * @param state
+	 * @param idcard
+	 * @return
+	 */
+	public int alterUserStateByIdCadr(int state,String idcard){
+		return ud.updateUserStateByIdcard(state,idcard);
 	}
-
+	
 	@Override
-	public void RemoveById(Integer id) {
-		// TODO Auto-generated method stub
-		
+	public int add(UserModel model) {
+		return ud.insert(model);
 	}
-
 	@Override
-	public void alterById(Integer id) {
+	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
-
+	@Override
+	public int alterById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	@Override
 	public UserModel findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public List<UserModel> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

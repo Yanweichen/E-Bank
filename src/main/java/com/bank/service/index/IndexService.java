@@ -22,27 +22,32 @@ public class IndexService implements BaseService<IndexModel> {
 	public List<IndexModel> findeByNum(Integer num){
 		return indexdao.selectByNum(num);
 	}
-	
-	public void add(IndexModel model) {
+
+	@Override
+	public int add(IndexModel model) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
-	public void RemoveById(Integer id) {
+	@Override
+	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
-	public void alterById(Integer id) {
+	@Override
+	public int alterById(Integer id) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
+	@Override
 	public IndexModel findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public List<IndexModel> findAll() {
 		// TODO Auto-generated method stub
 		return null;

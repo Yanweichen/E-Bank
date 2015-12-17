@@ -12,7 +12,14 @@ public class UserModel {
 	private String user_idcard;
 	private String user_phone;
 	private String user_email;
+	private String user_state;
 	
+	public String getUser_state() {
+		return user_state;
+	}
+	public void setUser_state(String user_state) {
+		this.user_state = user_state;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

@@ -1,5 +1,8 @@
 package com.bank.controller.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bank.model.user.UserModel;
 import com.bank.service.user.UserService;
 import com.bank.utils.JsonUtil;
+import com.bank.utils.Mail;
 import com.bank.utils.PortUtil;
 import com.bank.utils.RegularUtil;
 import com.google.gson.JsonObject;
@@ -34,13 +38,13 @@ public class UserInfoController {
 	@RequestMapping("/regfirst")
 	@ResponseBody
 	public JSONObject regist_First(UserModel user,HttpServletRequest req){
-		int a = us.addUser_first(user);
-		req.getSession().setAttribute("reguser", user);
+//		int a = us.addUser_first(user);
 		JSONObject jo = new JSONObject();
-		if (a!=1) {
+		if (user==null) {
 			jo.put("error", "202");
 			jo.put("msg", "参数有误");
 		}else{
+			req.getSession().setAttribute("reguser", user);
 			jo.put("error", "200");
 			jo.put("msg", "success");
 		}
@@ -57,7 +61,6 @@ public class UserInfoController {
 	@RequestMapping("/regsecond")
 	@ResponseBody
 	public JSONObject regist_Second(UserModel user,@RequestParam("user_code")String user_code,HttpServletRequest req){
-		System.out.println(user);
 		JSONObject jo = new JSONObject();
 		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
 		if (sessionuser==null) {
@@ -65,16 +68,12 @@ public class UserInfoController {
 			jo.put("msg", "访问被拒绝，非法操作");
 			return jo;
 		}
-		//获得useridcard
+		user.setUser_name(sessionuser.getUser_name());
 		user.setUser_idcard(sessionuser.getUser_idcard());
-		int issuc = us.addUser_second(user);
-		if (issuc!=1) {
-			jo.put("error", "202");
-			jo.put("msg", "参数有误");
-		}else{
-			jo.put("error", "200");
-			jo.put("msg", "success");
-		}
+		user.setUser_phone(sessionuser.getUser_phone());
+		req.getSession().setAttribute("reguser", user);
+		jo.put("error", "200");
+		jo.put("msg", "success");
 		return jo;
 	}
 	
@@ -87,15 +86,39 @@ public class UserInfoController {
 	public ModelAndView regist_third(HttpServletRequest req){
 		ModelAndView mv = new ModelAndView();
 		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
-		if (sessionuser==null) {
-			
-		}
 		UserModel user = us.findUserByIdCard(sessionuser.getUser_idcard());
 		mv.setViewName("regist/regist_3");
 		mv.addObject("user", user);
 		return mv;
 	}
+
+	/**
+	 * 添加用户
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/adduser")
+	public JSONObject addUser(HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
+		if (sessionuser==null) {
+			jo.put("error", "401");
+			jo.put("msg", "访问被拒绝，非法操作");
+			return jo;
+		}
+		send_email_activite(sessionuser);//发送激活邮件
+		us.add(sessionuser);
+		jo.put("error", "200");
+		jo.put("msg", "success");
+		return jo;
+	}
 	
+	/**
+	 * 根据身份证删除用户
+	 * @param idcard
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/removeuser")
 	public JSONObject remove_UserByIdcadr(String idcard){
@@ -176,4 +199,67 @@ public class UserInfoController {
 		return jarr;
 	}
 
+	@ResponseBody
+	@RequestMapping("/sendMail_Reg_Again")
+	public JSONObject sendMail_Reg_Again(HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		UserModel user = (UserModel) req.getSession().getAttribute("reguser");
+		if (user==null) {
+			jo.put("error", "203");
+			jo.put("msg", "非法操作！");
+			return jo;
+		}
+		boolean issuc = send_email_activite(user);//发送激活邮件
+		if (issuc) {
+			jo.put("error", "200");
+			jo.put("msg", "发送成功！");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "发送失败！");
+		}
+		return jo;
+	}
+
+	/**
+	 * 发送激活邮件
+	 * @param user
+	 * @return
+	 */
+	private boolean send_email_activite(UserModel user) {
+		List<String> email = new ArrayList<String>();
+		String user_email = user.getUser_email();
+		email.add(user_email);
+		String user_idcard = user.getUser_idcard();
+		String user_name = user.getUser_name();
+		boolean issuc = new Mail().send("505717760@qq.com",email , null,"e-bank账号激活", "<h1>您好,"+user_name+"</h1> "
+				+ "<a href=\"http://"+RegularUtil.getlocathost()+"/user/activateUser.action?user_idcard="+user_idcard+"\">请您点击这里激活您的账号</a>");
+		return issuc;
+	}
+	
+	@RequestMapping("/activateUser")
+	public ModelAndView activateUser(String user_idcard) {
+		ModelAndView mv = new ModelAndView();
+		if (user_idcard != null && modifyUserState(RegularUtil.normal,user_idcard)) {
+			mv.addObject("isactivate", "激活成功！");
+		} else {
+			mv.addObject("isactivate", "激活失败！");
+		}
+		mv.setViewName("regist/reg_activate_suc");
+		return mv;
+	}
+	
+	/**
+	 * 修改用户状态
+	 * @param idcard
+	 * @param state
+	 * @return
+	 */
+	public boolean modifyUserState(int state,String idcard){
+		int issuc = us.alterUserStateByIdCadr(state,idcard);
+		if (issuc==1) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
