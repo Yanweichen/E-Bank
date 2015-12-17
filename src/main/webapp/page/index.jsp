@@ -88,8 +88,28 @@ a:HOVER {
 </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" style="background-image: url('<%=basePath%>page/assets/img/bg_grid.png');">
-	<!-- 头部导航 -->
-	<jsp:include page="head_foot/head.html"></jsp:include>
+	<!-- 头部导航  -->
+	<nav class="navbar navbar-divider" style="background-image: url('<%=basePath%>page/assets/img/main-nav-bg2.png');"  id="section-4">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a class="navbar-brand" style="color: white;letter-spacing: 10px;" href="<%=basePath%>page/index.jsp">e-bank</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="搜&nbsp;索">
+					</div>
+					<button type="submit" class="btn btn-default btnwindth">搜&nbsp;索</button>
+				</form>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
 	<!-- 头部 -->
 	<div class="container" id="section-4">
 		<div class="row">
