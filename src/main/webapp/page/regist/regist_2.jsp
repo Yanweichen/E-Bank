@@ -299,6 +299,7 @@ label{
 					//跳转到确认信息界面
 					location.href = "user/regthird.action";
 				}else {
+					$("#msg").empty(); 
 	                $("#msg").append(result.msg)
 	                $("#isSuc").modal(); 
 				}

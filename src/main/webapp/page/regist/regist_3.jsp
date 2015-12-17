@@ -106,7 +106,8 @@
 				if(json.error == 200){
 					location.href = "page/regist/regist_success.jsp";
 				}else{
-					$("#msg").append("注册失败！请检查您的网络！")
+					 $("#msg").empty(); 
+					 $("#msg").append("注册失败！请检查您的网络！")
 		             $("#isSuc").modal().on('hidden.bs.modal',function(){
 						location.href = "page/regist/regist_1.jsp";
 		            });
@@ -115,6 +116,7 @@
 		})
 		//取消
 		$("#cancel").click(function(){
+			 $("#msg").empty(); 
 			 $("#msg").append("取消成功！请重新注册")
              $("#isSuc").modal().on('hidden.bs.modal',function(){
 				location.href = "page/regist/regist_1.jsp";

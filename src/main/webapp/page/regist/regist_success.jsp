@@ -94,6 +94,7 @@
 	$(function(){
 		$("#send_email").click(function(){
 			$.post("user/sendMail_Reg_Again.action",function(result){
+					$("#msg").empty()
 					$("#msg").append(result.msg)
 					$("#isSuc").modal()
 			})

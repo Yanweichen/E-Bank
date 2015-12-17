@@ -104,7 +104,7 @@ public class Mail {
 			message.addFrom(InternetAddress.parse(fromAddress));
 			message.setSentDate(new Date());
 			BodyPart mainBody = new MimeBodyPart();
-			mainBody.setContent(content, "text/plain;charset=UTF-8");
+			mainBody.setContent(content, "text/html;charset=UTF-8");
 			multipart.addBodyPart(mainBody);
 			for (Entry<String, String> e : mailAttachment.entrySet()) {
 				BodyPart bodyPart = new MimeBodyPart();

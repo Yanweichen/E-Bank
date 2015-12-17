@@ -16,12 +16,12 @@ public class RegularUtil {
 	public static final int loss = 5;//挂失
 	
 	public static String getlocathost(){
-		String ip = null;
-		try {
-			 ip = InetAddress.getLocalHost().getHostAddress();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+		String ip = "115.159.66.149";
+//		try {
+//			 ip = InetAddress.getLocalHost().getHostAddress();
+//		} catch (UnknownHostException e) {
+//			e.printStackTrace();
+//		}
 		return ip;
 	};
 }
