@@ -3,7 +3,8 @@
 <%
 	String path = request.getContextPath();
 	// 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE HTML>
 <html>
@@ -11,7 +12,9 @@
 <base href=" <%=basePath%>">
 <title>我的银行</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="shortcut icon" type="image/x-icon" href="page/assets//img/tubiao.ico" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="page/assets//img/tubiao.ico" />
 <link href="page/assets/css/dpl-min.css" rel="stylesheet"
 	type="text/css" />
 <link href="page/assets/css/bui-min.css" rel="stylesheet"
@@ -20,8 +23,8 @@
 	type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-.touxiang{
-	float:left;
+.touxiang {
+	float: left;
 	margin: 0px 10px 5px 0px;
 }
 </style>
@@ -30,7 +33,7 @@
 	<div class="header" style="height: 55px">
 		<div class="dl-title">
 			<h1 id="logo"
-				style="color: white; margin: 15px 15px 15px 15px; font-size: 22px; letter-spacing: 3px;">e-bank</h1>
+				style="cursor: pointer; color: white; margin: 15px 15px 15px 15px; font-size: 22px; letter-spacing: 3px;">e-bank</h1>
 		</div>
 		<div style="float: right;">
 			<img alt="" src="page/assets/img/touxiang_zhushou.jpg"
@@ -180,7 +183,7 @@
 			$('.tab-content-container').height(height - 21);
 		});
 		//首页跳转
-		$("#logo").click(function(){
+		$("#logo").click(function() {
 			location.href = "page/index.jsp"
 		})
 	</script>

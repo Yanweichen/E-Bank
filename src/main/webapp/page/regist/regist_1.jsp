@@ -22,7 +22,10 @@ label{
 .btncolor{
 	color:#CCC;
 	background-color: #3f316d;
-}	
+}
+#go{
+	opacity: 0.0;
+}
 </style>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
@@ -35,31 +38,31 @@ label{
 			<li class="active">完善信息</li>
 			<li class="active">确认信息</li>
 		</ol>
-		<div class="row">
+		<div id="regdiv" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 				<form id="regform" action="user/regfirst.action" method="post">
-					<div class="form-group">
+					<div id="user_name" class="form-group">
 						<label for="user_name">姓名</label> 
 						<input type="text" class="form-control" id="exampleInputName2"
 							name = "user_name" placeholder="请输入本人姓名">
 					</div>
-					<div class="form-group">
+					<div id="user_card_type" class="form-group">
 						<label for="exampleInputName2">证件类型</label> 
 						<select class="form-control">
 							<option>身份证</option>
 						</select>
 					</div>
-					<div class="form-group">
+					<div id="user_idcard" class="form-group">
 						<label for="user_idcard">证件号码</label> 
 						<input type="text" class="form-control" id="exampleInputName2"
 							name = "user_idcard" placeholder="请输入证件号码">
 					</div>
-					<div class="form-group">
+					<div id="user_phone" class="form-group">
 						<label for="exampleInputName2">手机号码</label> 
 							<input type="text" class="form-control" id="exampleInputName2"
 							name = "user_phone" placeholder="请输入手机号码">
 					</div>
-					<div class="form-group" align="center">
+					<div id="go" class="form-group" align="center">
 						<div class="row">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-2">
@@ -100,8 +103,8 @@ label{
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
-	<script type="text/javascript" src="page/assets/js/jquery.validate-1.13.1.js"></script>
-	<script type="text/javascript" src="page/assets/js/additional-methods.js"></script>
+	<script src="page/assets/js/velocity.min.js"></script>
+	<script src="page/assets/js/velocity.ui.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
 	    $('#regform').bootstrapValidator({
@@ -176,6 +179,23 @@ label{
             }, 'json');
         });
 	});
+	//出场动画
+	$(function(){
+		var seqInit=[{
+	        elements:$("#regdiv"),
+	        properties:'transition.bounceLeftIn',
+	        options:{
+	        	delay:10
+	        }
+	    },{
+	        elements:$("#go"),
+	        properties:'transition.bounceLeftIn',
+	        options:{
+	        	delay:10
+	        }
+	    },];
+		 $.Velocity.RunSequence(seqInit);
+		})
 	
 	//模态框居中
 		function centerModals() {

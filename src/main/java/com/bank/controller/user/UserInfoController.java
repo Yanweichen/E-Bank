@@ -80,21 +80,6 @@ public class UserInfoController {
 	}
 	
 	/**
-	 * 注册第三步
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping("/regthird")
-	public ModelAndView regist_third(HttpServletRequest req){
-		ModelAndView mv = new ModelAndView();
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
-		UserModel user = us.findUserByIdCard(sessionuser.getUser_idcard());
-		mv.setViewName("regist/regist_3");
-		mv.addObject("user", user);
-		return mv;
-	}
-
-	/**
 	 * 添加用户
 	 * @param req
 	 * @return

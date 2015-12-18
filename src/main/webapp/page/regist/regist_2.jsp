@@ -22,7 +22,10 @@ label{
 .btncolor{
 	color:#CCC;
 	background-color: #3f316d;
-}	
+}
+#go{
+	opacity: 0.0;
+}
 </style>
 <script>  
 </script>
@@ -37,7 +40,7 @@ label{
 			<li style="color: #3f316d">完善信息</li>
 			<li class="active">确认信息</li>
 		</ol>		
-		<div class="row">
+		<div id="regdiv" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 				<form id="regform" action="user/regsecond.action" method="post">
 					<div class="form-group">
@@ -88,7 +91,7 @@ label{
 							</div>
 						</div>
 					</div>
-					<div class="form-group" align="center">
+					<div id="go" class="form-group" align="center">
 						<div class="row">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-2">
@@ -169,14 +172,16 @@ label{
 		</div><!-- /.modal -->
 
 	
-	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript" src="page/assets/js/jquery.validate-1.13.1.js"></script>
 	<script type="text/javascript" src="page/assets/js/additional-methods.js"></script>
 	<script src="page/assets/js/password.js"></script>
+	<script src="page/assets/js/velocity.min.js"></script>
+	<script src="page/assets/js/velocity.ui.min.js"></script>
 	<script type="text/javascript">
 	//刷新验证码
 	$("#codeimg").click( function () {
@@ -298,7 +303,7 @@ label{
             $.post($form.attr('action'), $form.serialize(), function(result) {
 				if (result.error==200) {
 					//跳转到确认信息界面
-					location.href = "user/regthird.action";
+					location.href = "page/regist/regist_3.jsp";
 				}else {
 					$("#msg").empty(); 
 	                $("#msg").append(result.msg)
@@ -308,7 +313,22 @@ label{
             }, 'json');
         });
 	});
-	
+	$(function(){
+		var seqInit=[{
+	        elements:$("#regdiv"),
+	        properties:'transition.bounceRightIn',
+	        options:{
+	        	delay:10
+	        }
+	    },{
+	        elements:$("#go"),
+	        properties:'transition.bounceRightIn',
+	        options:{
+	        	delay:10
+	        }
+	    },];
+		 $.Velocity.RunSequence(seqInit);
+		})
 	
 	//模态框居中
 		function centerModals() {

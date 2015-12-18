@@ -19,7 +19,10 @@
 .btncolor{
 	color:#CCC;
 	background-color: #3f316d;
-}	
+}
+#go{
+	opacity: 0.0;
+}
 </style>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
@@ -31,7 +34,7 @@
 			<li class="active">完善信息</li>
 			<li style="color: #3f316d">确认信息</li>
 		</ol>	
-		<div class="row">
+		<div id="regdiv" class="row">
 			<div class="col-sm-6 col-sm-offset-3">
 				<div class="panel panel-danger">
 					<div class="panel-heading">
@@ -63,7 +66,7 @@
 						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_email}</c:if>" readonly>
 					</div>
   					</div>
-  					<div class="form-group" align="center">
+  					<div id="go" class="form-group" align="center">
   						<div class="row">
 							<div class="col-sm-2 col-sm-offset-3">
 								<button id="confirm" type="button" class="btn btn-default btncolor">确认</button>
@@ -100,6 +103,8 @@
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/velocity.min.js"></script>
+	<script src="page/assets/js/velocity.ui.min.js"></script>
 	<script type="text/javascript">
 		//确认
 		$("#confirm").click(function(){
@@ -123,7 +128,23 @@
 				location.href = "page/regist/regist_1.jsp";
              });
 		})
-		
+		//出场动画
+		$(function(){
+		var seqInit=[{
+	        elements:$("#regdiv"),
+	        properties:'transition.bounceDownIn',
+	        options:{
+	        	delay:10
+	        }
+	    },{
+	        elements:$("#go"),
+	        properties:'transition.bounceDownIn',
+	        options:{
+	        	delay:10
+	        }
+	    },];
+		 $.Velocity.RunSequence(seqInit);
+		})
 		//模态框居中
 		function centerModals() {
 			$('.modal').each(

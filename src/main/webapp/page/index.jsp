@@ -51,7 +51,9 @@ a:HOVER {
 .tabradio{
 	border-radius:15px 15px 0px 0px;
 }
-
+#login_on{
+	opacity: 0.0;
+}
   /* Custom Styles */
     ul.nav-tabss{
         width: 140px;
@@ -91,7 +93,7 @@ a:HOVER {
 <body data-spy="scroll" data-target="#myScrollspy" style="background-image: url('<%=basePath%>page/assets/img/bg_grid.png');">
 	<!-- 头部导航  -->
 	<nav class="navbar navbar-divider" style="background-image: url('<%=basePath%>page/assets/img/main-nav-bg2.png');"  id="section-4">
-		<div class="container">
+		<div class="container" id="section-4">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<a class="navbar-brand" style="color: white;letter-spacing: 10px;" href="<%=basePath%>page/index.jsp">e-bank</a>
@@ -112,7 +114,7 @@ a:HOVER {
 		<!-- /.container-fluid -->
 	</nav>
 	<!-- 头部 -->
-	<div class="container" id="section-4">
+	<div class="container" id="login_on">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="thumbnail yuanjiao">
