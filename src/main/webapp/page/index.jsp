@@ -114,10 +114,10 @@ a:HOVER {
 		<!-- /.container-fluid -->
 	</nav>
 	<!-- 头部 -->
-	<div class="container" id="login_on">
+	<div class="container" >
 		<div class="row">
 			<div class="col-sm-3">
-				<div class="thumbnail yuanjiao">
+				<div class="thumbnail yuanjiao" id = "login_on">
 					<img src="<%=basePath%>page/assets/img/touxiang_zhushou.jpg" class="img-circle touxiang" alt="...">
 					<div class="caption">
 						<h3 class="text-center">Hello,Root</h3>
