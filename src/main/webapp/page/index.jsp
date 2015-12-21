@@ -52,7 +52,11 @@ a:HOVER {
 	border-radius:15px 15px 0px 0px;
 }
 #login_on{
-	opacity: 0.0;
+	display:none;
+    opacity: 0.0;
+}
+#login_off{
+	
 }
   /* Custom Styles */
     ul.nav-tabss{
@@ -88,9 +92,12 @@ a:HOVER {
     ul.nav-tabss.affix{
         top: 30px; /* Set the top position of pinned element */
     }
+    
 </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" style="background-image: url('<%=basePath%>page/assets/img/bg_grid.png');">
+<canvas id="cas" style="position: absolute;z-index: -1"></canvas>
+<script src="<%=basePath%>page/assets/js/pointbg.js"></script>
 	<!-- 头部导航  -->
 	<nav class="navbar navbar-divider" style="background-image: url('<%=basePath%>page/assets/img/main-nav-bg2.png');"  id="section-4">
 		<div class="container" id="section-4">
@@ -115,15 +122,25 @@ a:HOVER {
 	</nav>
 	<!-- 头部 -->
 	<div class="container" >
-		<div class="row">
+		<div class="row" >
 			<div class="col-sm-3">
 				<div class="thumbnail yuanjiao" id = "login_on">
 					<img src="<%=basePath%>page/assets/img/touxiang_zhushou.jpg" class="img-circle touxiang" alt="...">
 					<div class="caption">
-						<h3 class="text-center">Hello,Root</h3>
+						<h3 class="text-center">Hello,Baby</h3>
 						<p align="center">
 							<a href="<%=basePath%>page/bus_index.jsp" target="_blank" class="btn btn-primary btncolor" onfocus=this.blur() role="button">我的银行</a> 
-							<a href="#" class="btn btn-default" role="button">退出</a>
+							<a href="#" id="btn_out" class="btn btn-default" role="button">退出</a>
+						</p>
+					</div>
+				</div>
+				<div class="thumbnail yuanjiao" id="login_off" >
+					<img src="<%=basePath%>page/assets/img/default_head_img.png" class="img-circle touxiang" alt="...">
+					<div class="caption">
+						<h3 class="text-center">Please Login</h3>
+						<p align="center">
+							<a id="login" target="_blank" class="btn btn-primary btncolor" onfocus=this.blur() role="button">登陆</a> 
+							<a href="<%=basePath%>page/regist/regist_1.jsp" class="btn btn-default" role="button">注册</a>
 						</p>
 					</div>
 				</div>
@@ -164,7 +181,7 @@ a:HOVER {
 		</div>
 	</div>
 	<!-- 主体部分  -->
-	<div class="container">
+	<div class="container" >
 		<div class="row">
 		<div class="col-sm-11" id="section-1">
 			<!-- Nav tabs -->
@@ -225,22 +242,80 @@ a:HOVER {
 			</div>
 		</div>
 	</div>
+	
 	<!-- foot -->
 	<div id="foot" class="container">
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<p align="center">
-				<a id="E-Bank" href="<%=basePath%>page/index.jsp" target="_blank">E-Bank</a> | <a href="#" target="_blank">Bank
-					Online</a> | Complaint Guidelines | 审核时间[2015]-070
-			</p>
-			<p align="center">Copyright &copy; 2015 - e-bank.All Rights
-				Reserved.
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yanweichen| 版权所有</p>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<p align="center">
+					<a id="E-Bank" href="<%=basePath%>page/index.jsp" target="_blank">E-Bank</a> | <a href="#" target="_blank">Bank
+						Online</a> | Complaint Guidelines | 审核时间[2015]-070
+				</p>
+				<p align="center">Copyright &copy; 2015 - e-bank.All Rights
+					Reserved.
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yanweichen| 版权所有</p>
+			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="exampleModalLabel">Login</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="container">
+							<div class="row">
+								<div class="form-group">
+									<label for="recipient-name" class="control-label">Phone/IdCard/E-mail:</label>
+									<div class="input-group col-sm-5">
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-user"></span></span> <input type="text"
+											class="form-control" name="user_account">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="control-label">Password:</label>
+									<div class="input-group col-sm-5">
+										<span class="input-group-addon"><span
+											class="glyphicon glyphicon-lock"></span></span> <input
+											type="password" class="form-control" name="user_account">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="control-label">Verification Code:</label>
+									<div class="row">
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="user_code"
+												name="user_code" placeholder="verification">
+										</div>
+										<div class="col-sm-3">
+											<img src="<%=basePath%>Kaptcha.jpg" id="codeimg" alt="..."
+												class="img-rounded" style="height: 33px; width: 130px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="btn_login" data-dismiss="modal" class="btn btn-primary btncolor">Login</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
+	<script src="<%=basePath%>page/assets/js/velocity.min.js"></script>
+	<script src="<%=basePath%>page/assets/js/velocity.ui.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#myNav").affix({
@@ -251,6 +326,80 @@ a:HOVER {
 		});
 		//启动轮播
 		$('#carousel-example-generic').carousel('cycle')
+		//刷新验证码
+		$("#codeimg").click( function () {
+			$(this).attr("src","<%=basePath%>Kaptcha.jpg?r="+new Date());; 
+		});
+		//出场动画
+		$.Velocity.RegisterUI('linxin.slideUpIn',{
+		defaultDuration:500,
+		calls:[
+			[{opacity:[1,0],translateY:[0,100]}]
+		]
+      });
+
+     $.Velocity.RegisterUI('linxin.slideDownOut',{
+		defaultDuration:500,
+		calls:[
+			[{opacity:[0,1],translateY:[100,0]}]
+		]
+      });
+
+     $.Velocity.RegisterUI('linxin.scaleIn',{
+		defaultDuration:300,
+		calls:[
+			[{opacity:[1,0],scale:[1,0.3]}]
+		]
+      });
+
+     $.Velocity.RegisterUI('linxin.scaleOut',{
+		defaultDuration:300,
+		calls:[
+			[{opacity:[0,1],scale:[0.3,1]}]
+		]
+      });
+     var seqOut;
+		$(function(){
+			seqOut=[{
+		        elements:$("#login_on"),
+		        properties:'linxin.scaleOut',
+		        options:{
+		        	delay:10
+		        }
+		    },{
+		        elements:$("#login_off"),
+		        properties:'linxin.scaleIn',
+		        options:{
+		        	delay:10   
+		        }
+		    },];
+			})
+		var seqLogin;
+		$(function(){
+			seqLogin=[{
+		        elements:$("#login_off"),
+		        properties:'linxin.scaleOut',
+		        options:{
+		        	delay:10
+		        }
+		    },{
+		        elements:$("#login_on"),
+		        properties:'linxin.scaleIn',
+		        options:{
+		        	delay:10   
+		        }
+		    },];
+			})
+	$("#btn_out").click(function(){
+		$.Velocity.RunSequence(seqOut);
+	})
+	$("#btn_login").click(function(){
+		$.Velocity.RunSequence(seqLogin);
+	})
+	$("#login").click(function(){
+		$('#loginModal').modal('show')
+	})
+	
 	</script>
 </body>
 </html>
