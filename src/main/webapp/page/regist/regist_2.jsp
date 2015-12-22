@@ -183,10 +183,10 @@ label{
 	<script src="page/assets/js/velocity.min.js"></script>
 	<script src="page/assets/js/velocity.ui.min.js"></script>
 	<script type="text/javascript">
-	//刷新验证码
-	$("#codeimg").click( function () {
-		$(this).attr("src","Kaptcha.jpg?r="+new Date());; 
-	});
+		//刷新验证码
+		$("#codeimg").click( function () {
+			$(this).attr("src","Kaptcha.jpg?r="+new Date());; 
+		});
 	//启用密码可视
         $('#user_pass').password().on('show.bs.password')
         $('#user_pass_again').password().on('show.bs.password')

@@ -52,11 +52,16 @@ a:HOVER {
 	border-radius:15px 15px 0px 0px;
 }
 #login_on{
-	display:none;
-    opacity: 0.0;
+	display: none;
+	position: absolute;
+	width: 90%
 }
 #login_off{
-	
+	position: absolute;
+	width: 90%
+}
+#login_box{
+	position: relative;
 }
   /* Custom Styles */
     ul.nav-tabss{
@@ -96,7 +101,7 @@ a:HOVER {
 </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" style="background-image: url('<%=basePath%>page/assets/img/bg_grid.png');">
-<canvas id="cas" style="position: absolute;z-index: -1"></canvas>
+<canvas id="cas" style="position: absolute;z-index: -1;height: 100%;width: 100%;"></canvas>
 <script src="<%=basePath%>page/assets/js/pointbg.js"></script>
 	<!-- 头部导航  -->
 	<nav class="navbar navbar-divider" style="background-image: url('<%=basePath%>page/assets/img/main-nav-bg2.png');"  id="section-4">
@@ -123,7 +128,7 @@ a:HOVER {
 	<!-- 头部 -->
 	<div class="container" >
 		<div class="row" >
-			<div class="col-sm-3">
+			<div class="col-sm-3" id="login_box">
 				<div class="thumbnail yuanjiao" id = "login_on">
 					<img src="<%=basePath%>page/assets/img/touxiang_zhushou.jpg" class="img-circle touxiang" alt="...">
 					<div class="caption">
@@ -181,7 +186,7 @@ a:HOVER {
 		</div>
 	</div>
 	<!-- 主体部分  -->
-	<div class="container" >
+	<div class="container" style="margin-top: 30px;">
 		<div class="row">
 		<div class="col-sm-11" id="section-1">
 			<!-- Nav tabs -->
@@ -364,13 +369,13 @@ a:HOVER {
 		        elements:$("#login_on"),
 		        properties:'linxin.scaleOut',
 		        options:{
-		        	delay:10
+		        	sequenceQueue:false
 		        }
 		    },{
 		        elements:$("#login_off"),
 		        properties:'linxin.scaleIn',
 		        options:{
-		        	delay:10   
+		        	    delay:10
 		        }
 		    },];
 			})
@@ -380,13 +385,13 @@ a:HOVER {
 		        elements:$("#login_off"),
 		        properties:'linxin.scaleOut',
 		        options:{
-		        	delay:10
+		        	sequenceQueue:false  
 		        }
 		    },{
 		        elements:$("#login_on"),
 		        properties:'linxin.scaleIn',
 		        options:{
-		        	delay:10   
+		        	delay:10 
 		        }
 		    },];
 			})
