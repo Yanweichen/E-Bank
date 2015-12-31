@@ -64,10 +64,10 @@
 			</div>
 		</div>
 	</div>
+	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	
-	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	</script>

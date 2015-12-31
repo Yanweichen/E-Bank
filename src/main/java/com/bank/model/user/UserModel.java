@@ -1,5 +1,7 @@
 package com.bank.model.user;
 
+import java.util.Date;
+
 public class UserModel {
 	
 	private String user_id;
@@ -13,7 +15,21 @@ public class UserModel {
 	private String user_phone;
 	private String user_email;
 	private String user_state;
+	private Date user_last_login_time;
+	private Date user_regist_time;
 	
+	public Date getUser_regist_time() {
+		return user_regist_time;
+	}
+	public void setUser_regist_time(Date user_regist_time) {
+		this.user_regist_time = user_regist_time;
+	}
+	public Date getUser_last_login_time() {
+		return user_last_login_time;
+	}
+	public void setUser_last_login_time(Date user_last_login_time) {
+		this.user_last_login_time = user_last_login_time;
+	}
 	public String getUser_state() {
 		return user_state;
 	}

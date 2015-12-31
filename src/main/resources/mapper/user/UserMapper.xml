@@ -12,20 +12,24 @@
     <result column="user_idcard" property="user_idcard" jdbcType="VARCHAR" />
     <result column="user_phone" property="user_phone" jdbcType="VARCHAR" />
     <result column="user_email" property="user_email" jdbcType="VARCHAR" />
+    <result column="user_last_login_time" property="user_last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    <result column="user_regist_time" property="user_regist_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
   </resultMap>
-  <!-- 注册第一步 -->
+  <!-- 注册-->
   <insert id="insert" parameterType="com.bank.model.user.UserModel">
-  	INSERT INTO user_userinfo VALUES(null,#{user_name},#{user_pass},null,#{user_city},#{user_obligate_info},null,#{user_idcard},#{user_phone},#{user_email},0);
+  	INSERT INTO user_userinfo VALUES(null,#{user_name},#{user_pass},null,#{user_city},
+  	#{user_obligate_info},null,#{user_idcard},#{user_phone},#{user_email},0,#{user_last_login_time},#{user_regist_time});
   </insert>
+  <!-- 更新用户状态 -->
   <update id="updateUserStateByIdcard">
   	UPDATE user_userinfo SET user_state = #{0} WHERE user_idcard = #{1};
   </update>
-  <!-- 根据身份证号查询用户 -->
-  <select id="selectUserByIdCard" parameterType="String" resultType="com.bank.model.user.UserModel">
-  	SELECT * FROM user_userinfo WHERE user_idcard = #{idcard};
+  <!-- 根据账号查询用户 -->
+  <select id="selectUserByAccount" parameterType="String" resultType="com.bank.model.user.UserModel">
+  	SELECT * FROM user_userinfo WHERE user_idcard = #{account} OR user_phone = #{account} OR user_email = #{account};
   </select>
-  <!-- 根据身份证号删除用户 -->
+  <!-- 根据账号删除用户 -->
   <delete id="deleteUserByIdcard" parameterType="String">
-  	DELETE FROM user_userinfo WHERE user_idcard = #{idcard};
+  	DELETE FROM user_userinfo WHERE user_idcard = #{account} OR user_phone = #{account} OR user_email = #{account};
   </delete>
 </mapper>

@@ -5,8 +5,12 @@ import java.net.UnknownHostException;
 
 public class RegularUtil {
 
-	//邮箱正则表达式
+	//身份证正则表达式
 	public static final String  IdCardRegular = "^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
+	//邮箱正则
+	public static final String  EmailRegular = "^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$";
+	//手机正则
+	public static final String  PhoneRegular = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
 	
 	//用户或卡状态
 	public static final int nonactivated = 0;//未激活

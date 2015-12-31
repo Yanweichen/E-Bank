@@ -172,9 +172,9 @@ label{
 		</div><!-- /.modal -->
 
 	
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
-	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript" src="page/assets/js/jquery.validate-1.13.1.js"></script>
@@ -261,10 +261,19 @@ label{
 	                    notEmpty: {
 	                        message: '请输入邮箱'
 	                    },
-	                    regexp: {
-	                        regexp: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/,
-	                        message: '非法的邮箱地址'
-	                    }
+	                    remote: {
+                            url: 'user/verifyAccount.action',
+                            type: "post",
+                            async: true,
+                            data:
+                            {
+                            	user_account: function(validator)
+                                {
+                                    return $('#regform :input[name="user_email"]').val();
+                                },
+                                accountType : 1
+                            },
+                        },
 	                }
 	            },
 	            user_code:{

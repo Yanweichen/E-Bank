@@ -7,7 +7,7 @@ public interface UserDAO extends BaseDAO<UserModel>{
 
 	public int insert_first_step(UserModel user);
 	public int insert_second_step(UserModel user);
-	public UserModel selectUserByIdCard(String idcard);
-	public int deleteUserByIdcard(String idcard);
+	public UserModel selectUserByAccount(String account);
+	public int deleteUserByAccount(String account);
 	public int updateUserStateByIdcard(int state,String idcard);
 }

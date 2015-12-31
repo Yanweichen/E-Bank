@@ -33,19 +33,19 @@ public class UserService implements BaseService<UserModel> {
 	}
 	
 	/**
-	 * 根据身份证id查询用户
+	 * 根据账号查询用户
 	 */
-	public UserModel findUserByIdCard(String idcard){
-		return ud.selectUserByIdCard(idcard);
+	public UserModel findUserByAccoutn(String account){
+		return ud.selectUserByAccount(account);
 	}
 	
 	/**
-	 * 根据身份证id删除用户
+	 * 根据账号删除用户
 	 * @param idcard
 	 * @return
 	 */
-	public int removeUserByIdCard(String idcard){
-		return ud.deleteUserByIdcard(idcard);
+	public int removeUserByAccount(String account){
+		return ud.deleteUserByAccount(account);
 	}
 	
 	/**

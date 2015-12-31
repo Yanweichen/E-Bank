@@ -130,15 +130,16 @@ label{
 	                        message: '身份证信息不能为空'
 	                    },
 	                    remote: {
-                            url: 'user/verifyIdCard.action',
+                            url: 'user/verifyAccount.action',
                             type: "post",
                             async: true,
                             data:
                             {
-                            	user_idcard: function(validator)
+                            	user_account: function(validator)
                                 {
                                     return $('#regform :input[name="user_idcard"]').val();
-                                }
+                                },
+                                accountType : 0
                             },
                         },
 	                }
@@ -149,10 +150,19 @@ label{
 	                    notEmpty: {
 	                        message: '手机号码不能为空'
 	                    },
-	                    regexp: {
-	                        regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
-	                        message: '非法的手机号码'
-	                    }
+	                    remote: {
+                            url: 'user/verifyAccount.action',
+                            type: "post",
+                            async: true,
+                            data:
+                            {
+                            	user_account: function(validator)
+                                {
+                                    return $('#regform :input[name="user_phone"]').val();
+                                },
+                                accountType : 2
+                            },
+                        },
 	                }
 	            },
 

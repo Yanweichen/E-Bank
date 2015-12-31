@@ -2,6 +2,7 @@ package com.bank.controller.user;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +25,43 @@ import com.bank.utils.PortUtil;
 import com.bank.utils.RegularUtil;
 import com.google.gson.JsonObject;
 
+/**
+ * @author yanwe
+ * error 200 成功 
+ * error 202 参数有误
+ * error 203 操作失败
+ * error 401 非法操作 
+ * 
+ */
 @RequestMapping("/user")
 @Controller
 public class UserInfoController {
 
 	@Autowired
 	private UserService us;
+	
+	/**
+	 * 登陆
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/login")
+	public JSONObject login(String account,String pass){
+		UserModel um = us.findUserByAccoutn(account);
+		JSONObject jo = new JSONObject();
+		if (um==null) {
+			jo.put("error", "203");
+			jo.put("msg", "该用户不存在");
+		}
+		if (um.getUser_pass().equals(pass)) {
+			jo.put("error", "200");
+			jo.put("msg", "登陆成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "密码错误");
+		}
+		return jo;
+	}
 	
 	/**
 	 * 一级注册
@@ -40,7 +72,6 @@ public class UserInfoController {
 	@RequestMapping("/regfirst")
 	@ResponseBody
 	public JSONObject regist_First(UserModel user,HttpServletRequest req){
-//		int a = us.addUser_first(user);
 		JSONObject jo = new JSONObject();
 		if (user==null) {
 			jo.put("error", "202");
@@ -94,6 +125,8 @@ public class UserInfoController {
 			jo.put("msg", "访问被拒绝，非法操作");
 			return jo;
 		}
+		sessionuser.setUser_last_login_time(new Date());
+		sessionuser.setUser_regist_time(new Date());
 		send_email_activite(sessionuser);//发送激活邮件
 		us.add(sessionuser);
 		jo.put("error", "200");
@@ -102,15 +135,15 @@ public class UserInfoController {
 	}
 	
 	/**
-	 * 根据身份证删除用户
+	 * 根据账户删除用户
 	 * @param idcard
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/removeuser")
-	public JSONObject remove_UserByIdcadr(String idcard){
+	public JSONObject remove_UserByIdcadr(String account){
 		JSONObject jo = new JSONObject();
-		int isSuc = us.removeUserByIdCard(idcard);
+		int isSuc = us.removeUserByAccount(account);
 		System.out.println(isSuc);
 		if (isSuc!=1) {
 			jo.put("error", "202");
@@ -144,25 +177,59 @@ public class UserInfoController {
 	}
 	
 	/**
-	 * 身份证查重
-	 * @param idcard
+	 * @param account 查重的账号(身份证,邮箱,手机号)
+	 * @param accountType 需要查重的类型 0 身份证 1 邮箱 2 手机
 	 * @return
 	 */
-	@RequestMapping("/verifyIdCard")
+	@RequestMapping("/verifyAccount")
 	@ResponseBody
-	public JSONObject verifyUserIdCard(@RequestParam("user_idcard")String idcard){
+	public JSONObject verifyUserIdCard(@RequestParam("user_account")String account,int accountType){
 		JSONObject jo = new JSONObject();
-		if (idcard.matches(RegularUtil.IdCardRegular)) {
-		} else {
-			jo.put("valid", false);
-			jo.put("message", "非法的身份证号");
-			return jo;
-		}
-		if (us.findUserByIdCard(idcard)!=null) {
-			jo.put("valid",false);
-			jo.put("message","该身份证已注册");
-		}else{
-			jo.put("valid", true);
+		switch (accountType) {
+		case 0:
+			if (account.matches(RegularUtil.IdCardRegular)) {
+			} else {
+				jo.put("valid", false);
+				jo.put("message", "非法的身份证号");
+				return jo;
+			}
+			if (us.findUserByAccoutn(account)!=null) {
+				jo.put("valid",false);
+				jo.put("message","该身份证已注册");
+			}else{
+				jo.put("valid", true);
+			}
+			break;
+		case 1:
+			if (account.matches(RegularUtil.EmailRegular)) {
+			} else {
+				jo.put("valid", false);
+				jo.put("message", "邮箱格式不正确");
+				return jo;
+			}
+			if (us.findUserByAccoutn(account)!=null) {
+				jo.put("valid",false);
+				jo.put("message","该邮箱已注册");
+			}else{
+				jo.put("valid", true);
+			}
+			break;
+		case 2:
+			if (account.matches(RegularUtil.PhoneRegular)) {
+			} else {
+				jo.put("valid", false);
+				jo.put("message", "手机号码格式不正确");
+				return jo;
+			}
+			if (us.findUserByAccoutn(account)!=null) {
+				jo.put("valid",false);
+				jo.put("message","该号码已注册");
+			}else{
+				jo.put("valid", true);
+			}
+			break;
+		default:
+			break;
 		}
 		return jo;
 	}
@@ -192,7 +259,7 @@ public class UserInfoController {
 		JSONObject jo = new JSONObject();
 		UserModel user = (UserModel) req.getSession().getAttribute("reguser");
 		if (user==null) {
-			jo.put("error", "203");
+			jo.put("error", "401");
 			jo.put("msg", "非法操作！");
 			return jo;
 		}
