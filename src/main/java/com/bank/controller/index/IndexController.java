@@ -58,4 +58,8 @@ public class IndexController {
 		return "index";
 	}
 	
+	@RequestMapping("/myBank")
+	public String gotoMyBank(){
+		return "/WEB-INF/bus_index";
+	}
 }

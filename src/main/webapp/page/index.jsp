@@ -134,7 +134,7 @@ a:HOVER {
 					<div class="caption">
 						<h3 class="text-center">Hello,Baby</h3>
 						<p align="center">
-							<a href="<%=basePath%>page/bus_index.jsp" target="_blank" class="btn btn-primary btncolor" onfocus=this.blur() role="button">我的银行</a> 
+							<a href="<%=basePath%>index/myBank.action" target="_blank" class="btn btn-primary btncolor" onfocus=this.blur() role="button">我的银行</a> 
 							<a href="#" id="btn_out" class="btn btn-default" role="button">退出</a>
 						</p>
 					</div>
@@ -273,8 +273,8 @@ a:HOVER {
 					</button>
 					<h4 class="modal-title" id="exampleModalLabel">Login</h4>
 				</div>
+				<form name="loginfrom" action="<%=basePath%>/user/login.action" method="post">
 				<div class="modal-body">
-					<form>
 						<div class="container">
 							<div class="row">
 								<div class="form-group">
@@ -290,7 +290,7 @@ a:HOVER {
 									<div class="input-group col-sm-5">
 										<span class="input-group-addon"><span
 											class="glyphicon glyphicon-lock"></span></span> <input
-											type="password" class="form-control" name="user_account">
+											type="password" class="form-control" name="user_password">
 									</div>
 								</div>
 								<div class="form-group">
@@ -308,12 +308,13 @@ a:HOVER {
 								</div>
 							</div>
 						</div>
-					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" id="btn_login" data-dismiss="modal" class="btn btn-primary btncolor">Login</button>
+					<button type="submit" id="btn_login" data-dismiss="modal" class="btn btn-primary btncolor">Login</button>
+					<input type="submit">
 				</div>
+			</form>
 			</div>
 		</div>
 	</div>

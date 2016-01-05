@@ -4,8 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import com.bank.model.user.UserModel;
 import com.bank.service.user.UserService;
 import com.bank.utils.JsonUtil;
 import com.bank.utils.Mail;
+import com.bank.utils.MySessionContext;
 import com.bank.utils.PortUtil;
 import com.bank.utils.RegularUtil;
 import com.google.gson.JsonObject;
@@ -33,7 +37,7 @@ import com.google.gson.JsonObject;
  * error 401 非法操作 
  * 
  */
-@RequestMapping("/user")
+@RequestMapping("user")
 @Controller
 public class UserInfoController {
 
@@ -44,16 +48,59 @@ public class UserInfoController {
 	 * 登陆
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/login")
-	public JSONObject login(String account,String pass){
+	public JSONObject login(@RequestParam("user_account")String account,@RequestParam("user_password")String pass,HttpServletRequest req){
 		UserModel um = us.findUserByAccoutn(account);
 		JSONObject jo = new JSONObject();
 		if (um==null) {
 			jo.put("error", "203");
 			jo.put("msg", "该用户不存在");
+			return jo;
 		}
+		
+		//验证密码
 		if (um.getUser_pass().equals(pass)) {
+			ServletContext application = req.getServletContext();
+			HttpSession nowUser = req.getSession();
+			String sessionid = nowUser.getId();
+			System.out.println(sessionid+"------sessionid");
+			//首次登陆
+			if (application.getAttribute("UserLoginMap")==null) {
+				RegularUtil.UserLoginMap.put(um, sessionid);
+				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
+				nowUser.setAttribute("user", um);
+				jo.put("error", "200");
+				jo.put("msg", "登陆成功");
+				return jo;
+			}
+			//查询是否存在登陆
+			RegularUtil.UserLoginMap = (Map<UserModel, String>) application.getAttribute("UserLoginMap");
+			for (Map.Entry<UserModel, String> entry : RegularUtil.UserLoginMap.entrySet()) {
+				if (um.getUser_id().equals(entry.getKey().getUser_id())) {
+					if(!entry.getValue().equals(sessionid)){
+						//不同session登陆强制下线
+						MySessionContext myc= MySessionContext.getInstance();
+						HttpSession olduser = myc.getSession(entry.getValue()); 
+						olduser.removeAttribute("user");
+						myc.mymap.remove(entry.getValue());
+						RegularUtil.UserLoginMap.remove(entry.getKey());
+						nowUser.setAttribute("user", um);
+						jo.put("error", "200");
+						jo.put("msg", "登陆成功");
+						return jo;
+					}
+					//已登陆
+					jo.put("error", "203");
+					jo.put("msg", "该用户已登陆");
+					return jo;
+				}
+			}
+			//登陆表中未查询到则存入登陆表
+			RegularUtil.UserLoginMap.put(um, sessionid);
+			application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
+			nowUser.setAttribute("user", um);
 			jo.put("error", "200");
 			jo.put("msg", "登陆成功");
 		}else{
@@ -77,7 +124,7 @@ public class UserInfoController {
 			jo.put("error", "202");
 			jo.put("msg", "参数有误");
 		}else{
-			req.getSession().setAttribute("reguser", user);
+			req.getSession().setAttribute("user", user);
 			jo.put("error", "200");
 			jo.put("msg", "success");
 		}
@@ -95,7 +142,7 @@ public class UserInfoController {
 	@ResponseBody
 	public JSONObject regist_Second(UserModel user,@RequestParam("user_code")String user_code,HttpServletRequest req){
 		JSONObject jo = new JSONObject();
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
 		if (sessionuser==null) {
 			jo.put("error", "401");
 			jo.put("msg", "访问被拒绝，非法操作");
@@ -104,7 +151,7 @@ public class UserInfoController {
 		user.setUser_name(sessionuser.getUser_name());
 		user.setUser_idcard(sessionuser.getUser_idcard());
 		user.setUser_phone(sessionuser.getUser_phone());
-		req.getSession().setAttribute("reguser", user);
+		req.getSession().setAttribute("user", user);
 		jo.put("error", "200");
 		jo.put("msg", "success");
 		return jo;
@@ -119,7 +166,7 @@ public class UserInfoController {
 	@RequestMapping("/adduser")
 	public JSONObject addUser(HttpServletRequest req){
 		JSONObject jo = new JSONObject();
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
 		if (sessionuser==null) {
 			jo.put("error", "401");
 			jo.put("msg", "访问被拒绝，非法操作");
@@ -307,7 +354,7 @@ public class UserInfoController {
 		} else {
 			mv.addObject("isactivate", "激活失败！");
 		}
-		mv.setViewName("regist/reg_activate_suc");
+		mv.setViewName("page/regist/reg_activate_suc");
 		return mv;
 	}
 	

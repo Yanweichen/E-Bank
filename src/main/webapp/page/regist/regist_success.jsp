@@ -49,7 +49,7 @@
 						<a href="page/index.jsp">回到首页</a>
 					</div>
 					<div class="form-group">
-						<a href="page/bus_index.jsp">立即登陆到我的银行</a>
+						<a href="index/myBank.action">立即登陆到我的银行</a>
 					</div>
 				</div>
 			</div>		

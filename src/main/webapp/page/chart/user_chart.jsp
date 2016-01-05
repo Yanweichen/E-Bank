@@ -145,6 +145,7 @@
 					<h4 class="wordspace2">Root,欢迎登陆！您是本行XXX级用户</h4>
 					<p >今天是2015年12月10日,星期四</p>
 					<p >上次登录时间2015年12月10日19:19:44,今日是第X次登陆</p>
+					<a href="index/notice.action?num=3">测试</a>
 				</div>
 			</div>
 			<div class="col-sm-2">
