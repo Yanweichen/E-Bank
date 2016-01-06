@@ -72,7 +72,7 @@ public class UserInfoController {
 				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 				nowUser.setAttribute("user", um);
 				jo.put("error", "200");
-				jo.put("msg", "登陆成功");
+				jo.put("msg", um.getUser_name());
 				return jo;
 			}
 			//查询是否存在登陆
@@ -89,10 +89,10 @@ public class UserInfoController {
 						application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 						nowUser.setAttribute("user", um);
 						jo.put("error", "200");
-						jo.put("msg", "登陆成功");
+						jo.put("msg", um.getUser_name());
 						return jo;
 					}
-					//已登陆
+					//已登陆(同一浏览器同时登陆)
 					jo.put("error", "203");
 					jo.put("msg", "该用户已登陆");
 					return jo;
@@ -103,10 +103,32 @@ public class UserInfoController {
 			application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 			nowUser.setAttribute("user", um);
 			jo.put("error", "200");
-			jo.put("msg", "登陆成功");
+			jo.put("msg", um.getUser_name());
 		}else{
 			jo.put("error", "203");
 			jo.put("msg", "密码错误");
+		}
+		return jo;
+	}
+	
+	/**
+	 * 用户退出
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/logout")
+	public JSONObject Logout(HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
+		if (user!=null) {
+			req.getSession().removeAttribute("user");
+			RegularUtil.UserLoginMap.remove(user);
+			jo.put("error", "200");
+			jo.put("msg", "退出成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "退出失败");
 		}
 		return jo;
 	}
@@ -143,7 +165,7 @@ public class UserInfoController {
 	@ResponseBody
 	public JSONObject regist_Second(UserModel user,@RequestParam("user_code")String user_code,HttpServletRequest req){
 		JSONObject jo = new JSONObject();
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user"));
 		if (sessionuser==null) {
 			jo.put("error", "401");
 			jo.put("msg", "访问被拒绝，非法操作");
@@ -373,4 +395,5 @@ public class UserInfoController {
 			return false;
 		}
 	}
+	
 }

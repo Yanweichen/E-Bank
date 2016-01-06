@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	// 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:
@@ -12,6 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>page/assets//img/tubiao.ico" /> 
 <link href="<%=basePath%>page/assets/css/bootstrap.css" rel="stylesheet">
+<link href="<%=basePath%>page/assets/css/loading.css" rel="stylesheet">
 <title>e-bank</title>
 <style type="text/css">
 .btnwindth {
@@ -103,6 +105,7 @@ a:HOVER {
 <body data-spy="scroll" data-target="#myScrollspy" style="background-image: url('<%=basePath%>page/assets/img/bg_grid.png');">
 <canvas id="cas" style="position: absolute;z-index: -1;height: 100%;width: 100%;"></canvas>
 <script src="<%=basePath%>page/assets/js/pointbg.js"></script>
+
 	<!-- 头部导航  -->
 	<nav class="navbar navbar-divider" style="background-image: url('<%=basePath%>page/assets/img/main-nav-bg2.png');"  id="section-4">
 		<div class="container" id="section-4">
@@ -126,13 +129,14 @@ a:HOVER {
 		<!-- /.container-fluid -->
 	</nav>
 	<!-- 头部 -->
+	
 	<div class="container" >
 		<div class="row" >
 			<div class="col-sm-3" id="login_box">
 				<div class="thumbnail yuanjiao" id = "login_on">
 					<img src="<%=basePath%>page/assets/img/touxiang_zhushou.jpg" class="img-circle touxiang" alt="...">
 					<div class="caption">
-						<h3 class="text-center">Hello,Baby</h3>
+						<h3 class="text-center" id="login_user_name"><c:if test="${!empty user}">Hello,${user.user_name}</c:if></h3>
 						<p align="center">
 							<a href="<%=basePath%>index/myBank.action" target="_blank" class="btn btn-primary btncolor" onfocus=this.blur() role="button">我的银行</a> 
 							<a href="#" id="btn_out" class="btn btn-default" role="button">退出</a>
@@ -247,7 +251,6 @@ a:HOVER {
 			</div>
 		</div>
 	</div>
-	
 	<!-- foot -->
 	<div id="foot" class="container">
 		<div class="row">
@@ -271,34 +274,31 @@ a:HOVER {
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="exampleModalLabel">Login</h4>
+					<h4 class="modal-title" id="exampleModalLabel">登陆</h4>
 				</div>
-				<form name="loginfrom" action="<%=basePath%>/user/login.action" method="post">
+				<form id="loginfrom" action="<%=basePath%>/user/login.action" method="post">
 				<div class="modal-body">
 						<div class="container">
 							<div class="row">
 								<div class="form-group">
-									<label for="recipient-name" class="control-label">Phone/IdCard/E-mail:</label>
+									<label for="recipient-name" class="control-label">电话/身份证号/邮箱:</label>
 									<div class="input-group col-sm-5">
-										<span class="input-group-addon"><span
-											class="glyphicon glyphicon-user"></span></span> <input type="text"
+										 <input type="text"
 											class="form-control" name="user_account">
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="message-text" class="control-label">Password:</label>
+									<label for="message-text" class="control-label">密码:</label>
 									<div class="input-group col-sm-5">
-										<span class="input-group-addon"><span
-											class="glyphicon glyphicon-lock"></span></span> <input
-											type="password" class="form-control" name="user_password">
+										<input type="password" class="form-control" name="user_password">
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="message-text" class="control-label">Verification Code:</label>
+									<label for="message-text" class="control-label">验证码:</label>
 									<div class="row">
 										<div class="col-sm-3">
 											<input type="text" class="form-control" id="user_code"
-												name="user_code" placeholder="verification">
+												name="user_code" placeholder="验证码">
 										</div>
 										<div class="col-sm-3">
 											<img src="<%=basePath%>Kaptcha.jpg" id="codeimg" alt="..."
@@ -310,18 +310,24 @@ a:HOVER {
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" id="btn_login" data-dismiss="modal" class="btn btn-primary btncolor">Login</button>
-					<input type="submit">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" id="btn_login" class="btn btn-primary btncolor">登陆</button>
 				</div>
 			</form>
 			</div>
 		</div>
 	</div>
+	<div class="spinner">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/velocity.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/velocity.ui.min.js"></script>
+	<script src="<%=basePath%>page/assets/js/fakeloader.min.js"></script>
+	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#myNav").affix({
@@ -397,15 +403,93 @@ a:HOVER {
 		    },];
 			})
 	$("#btn_out").click(function(){
-		$.Velocity.RunSequence(seqOut);
-	})
-	$("#btn_login").click(function(){
-		$.Velocity.RunSequence(seqLogin);
+		$.post("user/logout.action",function(result){
+			if (result.error == 200) {
+				$.Velocity.RunSequence(seqOut);
+				window.location.reload();//刷新当前页面.
+			}else{
+				alert(result.msg)
+			}
+		})
 	})
 	$("#login").click(function(){
-		$('#loginModal').modal('show')
+		//$('#loginModal').modal('show')
 	})
-	
+	$(document).ready(function() {
+	    $('#loginfrom').bootstrapValidator({
+	        message: 'This value is not valid',
+	        submitButtons: 'button[type="submit"]',
+	        feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {
+	        	user_account: {
+	                validators: {
+	                    notEmpty: {
+	                        message: '用户名不能为空'
+	                    },
+	                }
+	            },
+	            user_password: {
+	                validators: {
+	                    notEmpty: {
+	                        message: '密码不能为空'
+	                    },
+	                }
+	            },
+	            user_code: {
+	            	threshold:5,
+	                validators: {
+	                    notEmpty: {
+	                        message: '验证码不能为空'
+	                    },
+	                    remote: {
+                            url: 'user/verifyCode.action',
+                            type: "post",
+                            async: true,
+                            data:
+                            {
+                            	user_account: function(validator)
+                                {
+                                    return $('#loginfrom :input[name="user_code"]').val();
+                                },
+                            },
+                        },
+	                }
+	            },
+
+	        }
+	    }).on('success.form.bv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+				if (result.error==203) {
+					alert(result.msg)					
+				}else{
+					$('#loginModal').modal('hide')
+					$.Velocity.RunSequence(seqLogin);
+					$("#login_user_name").append("Hello,"+result.msg)
+				}
+					
+            }, 'json');
+        });
+	});
 	</script>
+	<!-- 如果登陆 -->
+	<c:if test="${!empty user}">
+		<script type="text/javascript">
+			$("#login_off").css({"display":"none"})
+			$("#login_on").css({"display":"inline-block"})
+		</script>
+	</c:if>
 </body>
 </html>
