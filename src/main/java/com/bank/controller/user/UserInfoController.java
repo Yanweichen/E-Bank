@@ -84,8 +84,9 @@ public class UserInfoController {
 						MySessionContext myc= MySessionContext.getInstance();
 						HttpSession olduser = myc.getSession(entry.getValue()); 
 						olduser.removeAttribute("user");
-						myc.mymap.remove(entry.getValue());
 						RegularUtil.UserLoginMap.remove(entry.getKey());
+						RegularUtil.UserLoginMap.put(um, sessionid);
+						application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 						nowUser.setAttribute("user", um);
 						jo.put("error", "200");
 						jo.put("msg", "登陆成功");
