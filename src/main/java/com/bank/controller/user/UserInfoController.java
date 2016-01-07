@@ -3,6 +3,7 @@ package com.bank.controller.user;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +66,6 @@ public class UserInfoController {
 			ServletContext application = req.getServletContext();
 			HttpSession nowUser = req.getSession();
 			String sessionid = nowUser.getId();
-			System.out.println(sessionid+"------sessionid");
 			//首次登陆
 			if (application.getAttribute("UserLoginMap")==null) {
 				RegularUtil.UserLoginMap.put(um, sessionid);

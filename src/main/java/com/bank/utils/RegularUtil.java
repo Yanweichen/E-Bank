@@ -15,7 +15,7 @@ public class RegularUtil {
 	public static final String  PhoneRegular = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
 	
 	//用户登录map
-	public static Map<UserModel,String> UserLoginMap = new HashMap<>();
+	public static Map<UserModel,String> UserLoginMap = new HashMap<UserModel,String>();
 	
 	//用户或卡状态
 	public static final int nonactivated = 0;//未激活
