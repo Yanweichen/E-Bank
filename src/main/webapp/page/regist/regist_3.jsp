@@ -110,7 +110,7 @@
 		$("#confirm").click(function(){
 			$.getJSON("user/adduser.action", function(json){
 				if(json.error == 200){
-					location.href = "page/regist/regist_success.jsp";
+					location.href = "user/regsuc.action";
 				}else{
 					 $("#msg").empty(); 
 					 $("#msg").append("注册失败！请检查您的网络！")

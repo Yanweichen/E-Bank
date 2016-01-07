@@ -60,6 +60,6 @@ public class IndexController {
 	
 	@RequestMapping("/myBank")
 	public String gotoMyBank(){
-		return "/WEB-INF/bus_index";
+		return "bus_index";
 	}
 }

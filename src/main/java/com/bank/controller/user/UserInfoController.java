@@ -377,7 +377,7 @@ public class UserInfoController {
 		} else {
 			mv.addObject("isactivate", "激活失败！");
 		}
-		mv.setViewName("page/regist/reg_activate_suc");
+		mv.setViewName("reg_activate_suc");
 		return mv;
 	}
 	
@@ -394,6 +394,15 @@ public class UserInfoController {
 		}else{
 			return false;
 		}
+	}
+	
+	/**
+	 * 注册成功
+	 * @return
+	 */
+	@RequestMapping("/regsuc")
+	public String UserRegSuc(){
+		return "regist_success";
 	}
 	
 }
