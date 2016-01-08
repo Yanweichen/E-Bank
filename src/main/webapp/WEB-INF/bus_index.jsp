@@ -39,8 +39,8 @@
 			<img alt="" src="page/assets/img/touxiang_zhushou.jpg"
 				class="img-circle touxiang">
 			<div class="dl-log" style="float: right;">
-				欢迎您，<span class="dl-log-user">root</span><a
-					href="/chinapost/index.php?m=Public&a=logout" title="退出系统"
+				欢迎您，<span class="dl-log-user">${user.user_name}</span><a id="logout"
+					href="#" title="退出系统"
 					class="dl-log-quit">[退出]</a>
 			</div>
 		</div>
@@ -185,6 +185,20 @@
 		//首页跳转
 		$("#logo").click(function() {
 			location.href = "page/index.jsp"
+		})
+		$("#btn_out").click(function() {
+			$.post("user/logout.action", function(result) {
+				$(".fakeloader").fakeLoader({
+	                spinner:"spinner2",
+	                show:true
+	            });
+				if (result.error == 200) {
+					$.Velocity.RunSequence(seqOut);
+					location.href = "page/index.jsp"
+				} else {
+					alert(result.msg)
+				}
+			})
 		})
 	</script>
 	<div style="text-align: center;">
