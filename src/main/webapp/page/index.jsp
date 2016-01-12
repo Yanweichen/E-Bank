@@ -37,18 +37,17 @@ a:HOVER {
 .tabbg {
 	background-color: white;
 	margin-left: 1px;
-	height: 200px;
 	border-radius: 0px 15px 20px 25px;
 }
 
 .centerpanel {
-	margin-top: 40px;
+	margin-top: 10px;
 	height: 400px;
 	border-radius: 0px 15px 20px 25px;
 }
 
 .touxiang {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
 .btncolor {
@@ -116,6 +115,20 @@ ul.nav-tabss li:last-child a {
 ul.nav-tabss.affix {
 	top: 30px; /* Set the top position of pinned element */
 }
+
+a.indexicon:link {color: #4C9ED9;text-decoration: none;}		/* 未访问的链接 */
+a.indexicon:visited {color: #4C9ED9;text-decoration: none;}	/* 已访问的链接 */
+a.indexicon:hover {color: #CC0000;text-decoration: none;}		/* 鼠标移动到链接上 */
+a.indexicon:active {color: #4C9ED9;text-decoration: none;}    /* 选定的链接 */
+
+ul.news{list-style:none;padding-left: 0px;}
+ul.news li{ background:url('<%=basePath%>page/assets/img/rightjiantou.png') no-repeat left 4px; padding-left:20px; font-size:14px;line-height:22px;margin-left: 0px;}
+ul.news li a { color: #000000; text-decoration: none;}
+ul.news li a:link {color: #000000;text-decoration: none;}
+ul.news li a:active {color: #000000;text-decoration: none;}
+ul.news li a:visited {color: #000000;text-decoration: none;}
+ul.news li a:hover {color: #bc0021;text-decoration: underline;}
+ul.news li p{float:right; color:#000000}
 </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy"
@@ -132,7 +145,7 @@ ul.nav-tabss.affix {
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<a class="navbar-brand" style="color: white; letter-spacing: 10px;"
-					href="<%=basePath%>page/index.jsp">e-bank</a>
+					href="<%=basePath%>index/index.action">e-bank</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -232,51 +245,130 @@ ul.nav-tabss.affix {
 					<li role="presentation" class="active"><a href="#home"
 						aria-controls="home" role="tab" onfocus=this.blur()
 						data-toggle="tab" style="border-radius: 10px 10px 0px 0px;">快捷服务</a></li>
-					<li role="presentation"><a href="#profile"
-						aria-controls="profile" role="tab" onfocus=this.blur()
-						data-toggle="tab" style="border-radius: 10px 10px 0px 0px;">近期活动</a></li>
-					<li role="presentation"><a href="#messages"
-						aria-controls="messages" role="tab" onfocus=this.blur()
-						data-toggle="tab" style="border-radius: 10px 10px 0px 0px;">近期公告</a></li>
 					<li role="presentation"><a href="#settings"
 						aria-controls="settings" role="tab" onfocus=this.blur()
 						data-toggle="tab" style="border-radius: 10px 10px 0px 0px;">金融信息</a></li>
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active tabbg" id="home">
-						A</div>
+					<div role="tabpanel" class="tab-pane active tabbg" id="home" style="padding-top: 5%;height: 170px">
+						<div class="row" align="center" >
+							<div class="col-sm-2">
+								<dl>
+									<a class="indexicon" onmouseover="document.getElementById('icon_1').src='<%=basePath%>page/assets/img/e-bank_index_icon/e-pay-hover.gif';" 
+										 onmouseout="document.getElementById('icon_1').src='<%=basePath%>page/assets/img/e-bank_index_icon/e-pay.gif';" 
+										 href="www.baidu.com">
+									<dt>
+										<img id="icon_1" 
+										 src="<%=basePath%>page/assets/img/e-bank_index_icon/e-pay.gif" class="img-responsive" alt="Responsive image">
+									</dt>
+									<dd><h5>e支付</h5></dd>
+									</a>
+								</dl>
+							</div>
+							<div class="col-sm-2">
+								<dl>
+									<a class="indexicon" onmouseover="document.getElementById('icon_2').src='<%=basePath%>page/assets/img/e-bank_index_icon/zhuanzhang-hover.gif';" 
+										 onmouseout="document.getElementById('icon_2').src='<%=basePath%>page/assets/img/e-bank_index_icon/zhuanzhang.gif';" 
+										 href="www.baidu.com">
+									<dt>
+										<img id="icon_2" 
+										 src="<%=basePath%>page/assets/img/e-bank_index_icon/zhuanzhang.gif" class="img-responsive" alt="Responsive image">
+									</dt>
+									<dd><h5>e转账</h5></dd>
+									</a>
+								</dl>
+							</div>
+							<div class="col-sm-2">
+								<dl>
+									<a class="indexicon" onmouseover="document.getElementById('icon_3').src='<%=basePath%>page/assets/img/e-bank_index_icon/open-card-hover.gif';" 
+										 onmouseout="document.getElementById('icon_3').src='<%=basePath%>page/assets/img/e-bank_index_icon/open-card.gif';" 
+										 href="www.baidu.com">
+									<dt>
+										<img id="icon_3" 
+										 src="<%=basePath%>page/assets/img/e-bank_index_icon/open-card.gif" class="img-responsive" alt="Responsive image">
+									</dt>
+									<dd><h5>e开卡</h5></dd>
+									</a>
+								</dl>
+							</div>
+							<div class="col-sm-2">
+								<dl>
+									<a class="indexicon" onmouseover="document.getElementById('icon_4').src='<%=basePath%>page/assets/img/e-bank_index_icon/loan-hover.gif';" 
+										 onmouseout="document.getElementById('icon_4').src='<%=basePath%>page/assets/img/e-bank_index_icon/loan.gif';" 
+										 href="www.baidu.com">
+									<dt>
+										<img id="icon_4" 
+										 src="<%=basePath%>page/assets/img/e-bank_index_icon/loan.gif" class="img-responsive" alt="Responsive image">
+									</dt>
+									<dd><h5>e存款</h5></dd>
+									</a>
+								</dl>
+							</div>
+							<div class="col-sm-2">
+								<dl>
+									<a class="indexicon" onmouseover="document.getElementById('icon_5').src='<%=basePath%>page/assets/img/e-bank_index_icon/deposit-hover.gif';" 
+										 onmouseout="document.getElementById('icon_5').src='<%=basePath%>page/assets/img/e-bank_index_icon/deposit.gif';" 
+										 href="www.baidu.com">
+									<dt>
+										<img id="icon_5" 
+										 src="<%=basePath%>page/assets/img/e-bank_index_icon/deposit.gif" class="img-responsive" alt="Responsive image">
+									</dt>
+									<dd><h5>e贷款</h5></dd>
+									</a>
+								</dl>
+							</div>
+							<div class="col-sm-2">
+								<dl>
+									<a class="indexicon" 
+										 onmouseover="document.getElementById('icon_6').src='<%=basePath%>page/assets/img/e-bank_index_icon/jsq-hover.gif';" 
+										 onmouseout="document.getElementById('icon_6').src='<%=basePath%>page/assets/img/e-bank_index_icon/jsq.gif';" 
+										 href="www.baidu.com">
+									<dt>
+										<img id="icon_6" 
+										 src="<%=basePath%>page/assets/img/e-bank_index_icon/jsq.gif" class="img-responsive" alt="Responsive image">
+									</dt>
+									<dd><h5>e计算</h5></dd>
+									</a>
+								</dl>
+							</div>
+						</div>
+					</div>
 					<div role="tabpanel" class="tab-pane tabbg" id="profile">B</div>
-					<div role="tabpanel" class="tab-pane tabbg" id="messages">C</div>
-					<div role="tabpanel" class="tab-pane tabbg" id="settings">D</div>
 				</div>
 			</div>
 			<div class="col-sm-1"></div>
 		</div>
 	</div>
-
+	
+	<div class="container touxiang" id="section-3">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-default tabbg">
+					<div class="panel-body">
+						<div class="row" style="margin-left: 3px">
+							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">重要公告</h5></div>
+							
+							<div class="col-sm-3 col-sm-offset-5"><h5>更多>></h5></div>
+						</div>
+						<ul id="notice" class="news" style="margin-top: 10px;letter-spacing: 1px;">
+						</ul>
+						</div>
+				</div>
+			</div>
+			<div class="col-sm-7">
+				<div class="panel panel-default tabbg">
+					<div class="panel-body">Basic panel example</div> 
+				</div>
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+	<!-- 底部 -->
 	<div class="container" id="section-2">
 		<div class="row">
 			<div class="col-sm-11">
 				<div class="panel panel-default centerpanel">
-					<div class="panel-body">Basic panel example</div>
-				</div>
-			</div>
-			<div class="col-sm-1"></div>
-		</div>
-
-	</div>
-
-	<!-- 底部 -->
-	<div class="container touxiang" id="section-3">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="panel panel-default tabbg">
-					<div class="panel-body">Basic panel example</div>
-				</div>
-			</div>
-			<div class="col-sm-5">
-				<div class="panel panel-default tabbg">
 					<div class="panel-body">Basic panel example</div>
 				</div>
 			</div>
@@ -360,6 +452,11 @@ ul.nav-tabss.affix {
 	<script src="<%=basePath%>page/assets/js/bootstrapValidator.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
+		$.getJSON("<%=basePath%>/index/notice.action", { num: 5 }, function(json){
+			$.each(json,function(i,obj){
+				$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"+$.parseJSON(obj).index_title+"</a></li>");
+			});
+		});
 		$(document).ready(function() {
 			$("#myNav").affix({
 				offset : {
@@ -439,7 +536,7 @@ ul.nav-tabss.affix {
 			}, ];
 		})
 		$("#btn_out").click(function() {
-			$.post("user/logout.action", function(result) {
+			$.post("<%=basePath%>user/logout.action", function(result) {
 				$(".fakeloader").fakeLoader({
 	                spinner:"spinner2",
 	                show:true
@@ -492,7 +589,7 @@ ul.nav-tabss.affix {
 																message : '验证码不能为空'
 															},
 															remote : {
-																url : 'user/verifyCode.action',
+																url : '<%=basePath%>user/verifyCode.action',
 																type : "post",
 																async : true,
 																data : {

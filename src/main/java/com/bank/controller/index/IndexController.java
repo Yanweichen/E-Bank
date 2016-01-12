@@ -28,28 +28,28 @@ public class IndexController {
 	@ResponseBody
 	@RequestMapping("/notice")
 	public JSONArray getNotice(@RequestParam("num")Integer num,HttpServletRequest req){
-		HttpSession session = req.getSession(true);
-		String user_sessionid = null;
-		if (req.getCookies()!=null) {
-			for (Cookie cookie: req.getCookies()) {
-				if ("JSESSIONID".equals(cookie.getName())) {
-					user_sessionid = cookie.getValue();
-				}
-			}
-		}
-		String server_sessionid = session.getId();
-		System.out.println("user_sessionid:"+user_sessionid);
-		System.out.println("server_sessionid:"+server_sessionid);
-		if (server_sessionid.equals(user_sessionid)) {
+//		HttpSession session = req.getSession(true);
+//		String user_sessionid = null;
+//		if (req.getCookies()!=null) {
+//			for (Cookie cookie: req.getCookies()) {
+//				if ("JSESSIONID".equals(cookie.getName())) {
+//					user_sessionid = cookie.getValue();
+//				}
+//			}
+//		}
+//		String server_sessionid = session.getId();
+//		System.out.println("user_sessionid:"+user_sessionid);
+//		System.out.println("server_sessionid:"+server_sessionid);
+//		if (server_sessionid.equals(user_sessionid)) {
 			return JsonUtil.getNotice(is.findeByNum(num));
-		}else{
-			System.out.println("拒绝登陆"+req.getSession());
-			JSONArray jar = new JSONArray();
-			JSONObject jo = new JSONObject();
-			jo.put("304", "拒绝登陆");
-			jar.add(jo);
-			return jar;
-		}
+//		}else{
+//			System.out.println("拒绝登陆"+req.getSession());
+//			JSONArray jar = new JSONArray();
+//			JSONObject jo = new JSONObject();
+//			jo.put("304", "拒绝登陆");
+//			jar.add(jo);
+//			return jar;
+//		}
 	}
 	
 	@RequestMapping("/session")
@@ -61,5 +61,9 @@ public class IndexController {
 	@RequestMapping("/myBank")
 	public String gotoMyBank(){
 		return "bus_index";
+	}
+	@RequestMapping("/index")
+	public String gotoIndex(){
+		return "index";
 	}
 }
