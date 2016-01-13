@@ -1,5 +1,6 @@
 package com.bank.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class JsonUtil {
 	public static JSONArray getNotice(List<IndexModel> ilist){
 		JSONArray jarr =  new JSONArray();
 		for (IndexModel im : ilist) {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+			im.setIndex_uptime_format(sdf.format(im.getIndex_uptime()));
 			jarr.add(gson.toJson(im));
 		}
 		return jarr;

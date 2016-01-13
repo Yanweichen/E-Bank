@@ -22,6 +22,10 @@ public class IndexService implements BaseService<IndexModel> {
 	public List<IndexModel> findeByNum(Integer num){
 		return indexdao.selectByNum(num);
 	}
+	
+	public List<IndexModel> findeByTypeForIndex(Integer type){
+		return indexdao.selectByTypeForIndex(type);
+	}
 
 	@Override
 	public int add(IndexModel model) {

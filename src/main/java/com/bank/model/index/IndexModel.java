@@ -14,6 +14,14 @@ public class IndexModel {
 	private Date index_uptime;//上传时间
 	private String upfrom;//上传者
 	
+	private String index_uptime_format;//格式化后的时间
+	
+	public String getIndex_uptime_format() {
+		return index_uptime_format;
+	}
+	public void setIndex_uptime_format(String index_uptime_format) {
+		this.index_uptime_format = index_uptime_format;
+	}
 	public String getUpfrom() {
 		return upfrom;
 	}

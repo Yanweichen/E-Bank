@@ -21,4 +21,15 @@
 	ORDER BY index_uptime DESC 
 	LIMIT 0,#{num,jdbcType=INTEGER};
   </select>
+  <!-- 根据类型查询首页内容 -->
+  <select id="selectByTypeForIndex" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT  
+    <include refid="Base_Column_List" />
+	FROM index_entry_view ent,index_type typ,admin ad 
+	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND index_pid = #{type};
+  </select>
+   <insert id="insert" parameterType="com.bank.model.index.IndexModel">
+  	INSERT INTO index_entry VALUES(null,#{index_type},#{index_title},#{index_content},
+  	#{index_uptime},#{upfrom});
+  </insert>
 </mapper>

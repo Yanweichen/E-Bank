@@ -13,4 +13,5 @@ import com.bank.model.index.IndexModel;
 public interface IndexDAO extends BaseDAO<IndexModel>{
 	
 	public List<IndexModel> selectByNum(Integer num);
+	public List<IndexModel> selectByTypeForIndex(Integer type);
 }

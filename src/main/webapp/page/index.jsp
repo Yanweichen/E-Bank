@@ -353,12 +353,20 @@ ul.news li p{float:right; color:#000000}
 						</div>
 						<ul id="notice" class="news" style="margin-top: 10px;letter-spacing: 1px;">
 						</ul>
-						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-7">
 				<div class="panel panel-default tabbg">
-					<div class="panel-body">Basic panel example</div> 
+					<div class="panel-body">
+						<div class="row" style="margin-left: 3px">
+							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">近期活动</h5></div>
+							
+							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px">更多>></h5></div>
+						</div>
+						<ul id="activity" class="news" style="margin-top: 10px;letter-spacing: 1px;">
+						</ul>
+					</div> 
 				</div>
 			</div>
 			<div class="col-sm-1"></div>
@@ -444,6 +452,7 @@ ul.news li p{float:right; color:#000000}
 			</div>
 		</div>
 	</div>
+	
 	<div class="fakeloader"></div>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
@@ -452,9 +461,32 @@ ul.news li p{float:right; color:#000000}
 	<script src="<%=basePath%>page/assets/js/bootstrapValidator.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
-		$.getJSON("<%=basePath%>/index/notice.action", { num: 5 }, function(json){
+	//获取公告
+		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 1 }, function(json){
 			$.each(json,function(i,obj){
-				$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"+$.parseJSON(obj).index_title+"</a></li>");
+				jo = $.parseJSON(obj);
+				var title;
+				if (jo.index_title.length>20) {
+					title = jo.index_title.substring(0,15)+"...";
+				}else{
+					title = jo.index_title;
+				}
+				$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
+				+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+			});
+		});
+	//获取活动
+		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 2 }, function(json){
+			$.each(json,function(i,obj){
+				jo = $.parseJSON(obj);
+				var title;
+				if (jo.index_title.length>20) {
+					title = jo.index_title.substring(0,15)+"...";
+				}else{
+					title = jo.index_title;
+				}
+				$("#activity").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
+				+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
 			});
 		});
 		$(document).ready(function() {
