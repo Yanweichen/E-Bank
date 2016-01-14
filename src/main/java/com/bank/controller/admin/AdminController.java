@@ -10,6 +10,7 @@ import javax.xml.ws.spi.http.HttpContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,15 +27,17 @@ public class AdminController {
 
 	@Autowired
 	private AdminService as;
-	//错误次数
-	private int count;
+	private int[] numArray= {3,2,1};
+	
 	/**
 	 * ModelAttribute标记的方法会在所有其他方法之前调用
 	 */
-	@ModelAttribute
+	@InitBinder
 	public void init(HttpServletRequest req){
 		ServletContext application = req.getServletContext();
 		application.setAttribute("adminip", RegularUtil.IPMap);
+		RegularUtil.LoginCountMap.put(req.getRemoteAddr(), 1);
+		application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
 	}
 	
 	/**
@@ -62,7 +65,12 @@ public class AdminController {
 		ServletContext application = req.getSession().getServletContext();
 		String ip = req.getRemoteAddr();
 		String Host = req.getRemoteHost();
-		
+		//获取登录次数
+		HashMap<String,Integer> loginCount = ((HashMap<String,Integer>)application.getAttribute("LoginCount"));
+		int count = loginCount.get(ip);
+		//记录登录次数
+		loginCount.put(ip, ++count);
+		count = loginCount.get(ip);
 		if (count==3||hasIp(ip,application)) {
 			((HashMap<String,String>)application.getAttribute("adminip")).put(ip, Host);
 			jo.put("error", "203");
@@ -70,9 +78,9 @@ public class AdminController {
 			return jo;
 		}
 		if (am==null) {
-			jo.put("error", "203");
-			jo.put("msg", "账号不存在");
 			count++;
+			jo.put("error", "203");
+			jo.put("msg", "账号不存在,您还可以尝试"+numArray[count-1]+"次");
 		}else{
 			if (am.getAdmin_password().equals(pass)) {
 				req.getSession().setAttribute("admin", am);
@@ -81,7 +89,7 @@ public class AdminController {
 				count=0;
 			}else{
 				jo.put("error", "203");
-				jo.put("msg", "密码错误");
+				jo.put("msg", "密码错误,您还可以尝试"+numArray[count-1]+"次");
 				count++;
 			}
 		}
