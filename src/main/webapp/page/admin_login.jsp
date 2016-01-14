@@ -18,14 +18,23 @@
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <style>
 .ios7_b {
-				filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
-				-webkit-filter: blur(5px) contrast(0.4) brightness(1.4);
-				clip: rect(205px 572px 516px 351px);
+				filter: blur(5px) contrast(0.4) brightness(1.4);
 				transition: all 0.5s ease-in-out;
 			}
-.ios7{
- 	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
-    filter: grayscale(100%);
+.appleinputup{
+	border-radius: 15px 15px 0 0;
+	height: 50px;
+	border-bottom:1px;
+}
+.appleinputdown{
+	border-radius: 0 0 15px 15px;
+	height: 50px;
+}
+.loginbtn{
+	margin-top: 20px;
+	background-color: #3f316d;
+	border: 0px;
+	color: white;
 }
 </style>
 </head>
@@ -36,15 +45,63 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4">
-				<div class="panel panel-default"
-					style="margin-top: 80%; height: 400px;">
-					<div class="panel-body">
-						Basic panel example
-					</div>
+				<form id="adminloginfrom" style="margin-top: 100%">
+					<input type="email" class="form-control appleinputup" id="adminname" name="adminname"
+							placeholder="请输入管理员账户">
+					<input type="password" class="form-control appleinputdown" id="adminpass" name="adminpass"
+						placeholder="请输入管理员密码">
+					<button id ="loginbtn" type="button" class="btn btn-default btn-lg btn-block loginbtn">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button id="isSucCloseBtn" type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+					<p id = "msg"></p>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/fakeloader.js"></script>
+	<script type="text/javascript">
+		$("#loginbtn").click(function () {
+			$.post("admin/login.action", $("#adminloginfrom").serialize(),function(result){
+				if (result.error==200) {
+					//跳转
+				}else{
+					$("#msg").empty(); 
+					$("#msg").append(result.msg);
+					$("#isSuc").modal(); 
+				}
+			});
+		})
+		//模态框居中
+		function centerModals() {
+			$('.modal').each(
+					function(i) {
+						var $clone = $(this).clone().css('display', 'block')
+								.appendTo('body');
+						var top = Math.round(($clone.height() - $clone.find(
+								'.modal-content').height()) / 3);
+						top = top > 0 ? top : 0;
+						$clone.remove();
+						$(this).find('.modal-content').css("margin-top", top);
+					});
+		}
+		$('.modal').on('show.bs.modal', centerModals);
+		$(window).on('resize', centerModals);
+	</script>
 </body>
 </html>

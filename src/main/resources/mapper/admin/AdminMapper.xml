@@ -19,7 +19,7 @@
   	UPDATE user_userinfo SET user_state = #{0} WHERE user_idcard = #{1};
   </update>
   <!-- 根据账号查询用户 -->
-  <select id="selectUserByAccount" parameterType="String" resultType="com.bank.model.user.UserModel">
+  <select id="selectAdminByName" parameterType="String" resultType="com.bank.model.admin.AdminModel">
   	SELECT * FROM admin WHERE admin_name = #{admin_name} ;
   </select>
   <!-- 根据账号删除用户 -->

@@ -16,6 +16,8 @@ public class RegularUtil {
 	
 	//用户登录map
 	public static Map<UserModel,String> UserLoginMap = new HashMap<UserModel,String>();
+	//Ipmap
+	public static Map<String,String> IPMap = new HashMap<String,String>();
 	
 	//用户或卡状态
 	public static final int nonactivated = 0;//未激活
