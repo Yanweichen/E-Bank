@@ -1,17 +1,13 @@
 package com.bank.controller.admin;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.xml.ws.spi.http.HttpContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,9 +31,7 @@ public class AdminController {
 	@InitBinder
 	public void init(HttpServletRequest req){
 		ServletContext application = req.getServletContext();
-		application.setAttribute("adminip", RegularUtil.IPMap);
-		RegularUtil.LoginCountMap.put(req.getRemoteAddr(), 1);
-		application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
+	
 	}
 	
 	/**
@@ -65,20 +59,28 @@ public class AdminController {
 		ServletContext application = req.getSession().getServletContext();
 		String ip = req.getRemoteAddr();
 		String Host = req.getRemoteHost();
-		//获取登录次数
 		HashMap<String,Integer> loginCount = ((HashMap<String,Integer>)application.getAttribute("LoginCount"));
+		//首次程序首次运行
+		if (loginCount==null) {
+			application.setAttribute("adminip", RegularUtil.IPMap);
+			application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
+			loginCount = ((HashMap<String,Integer>)application.getAttribute("LoginCount"));
+		}
+		//ip首次
+		if (loginCount.get(ip)==null) {
+			RegularUtil.LoginCountMap.put(ip, 1);
+			application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
+			loginCount = ((HashMap<String,Integer>)application.getAttribute("LoginCount"));
+		}
+		//获取登录次数
 		int count = loginCount.get(ip);
-		//记录登录次数
-		loginCount.put(ip, ++count);
-		count = loginCount.get(ip);
-		if (count==3||hasIp(ip,application)) {
+		if (count>3||hasIp(ip,application)) {
 			((HashMap<String,String>)application.getAttribute("adminip")).put(ip, Host);
 			jo.put("error", "203");
 			jo.put("msg", "您的ip已锁定,请联系管理员");
 			return jo;
 		}
 		if (am==null) {
-			count++;
 			jo.put("error", "203");
 			jo.put("msg", "账号不存在,您还可以尝试"+numArray[count-1]+"次");
 		}else{
@@ -90,9 +92,10 @@ public class AdminController {
 			}else{
 				jo.put("error", "203");
 				jo.put("msg", "密码错误,您还可以尝试"+numArray[count-1]+"次");
-				count++;
 			}
 		}
+		//记录登录次数
+		loginCount.put(ip, ++count);
 		return jo;
 	}
 	

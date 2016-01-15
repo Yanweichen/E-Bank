@@ -47,14 +47,6 @@ public class UserInfoController {
 	private UserService us;
 	
 	/**
-	 * ModelAttribute标记的方法会在所有其他方法之前调用
-	 */
-	@ModelAttribute
-	public void init(HttpServletRequest req){
-		ServletContext application = req.getServletContext();
-		application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
-	}
-	/**
 	 * 登陆
 	 * @return
 	 */
@@ -75,15 +67,15 @@ public class UserInfoController {
 			ServletContext application = req.getServletContext();
 			HttpSession nowUser = req.getSession();
 			String sessionid = nowUser.getId();
-//			//首次登陆
-//			if (application.getAttribute("UserLoginMap")==null) {
-//				RegularUtil.UserLoginMap.put(um, sessionid);
-//				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
-//				nowUser.setAttribute("user", um);
-//				jo.put("error", "200");
-//				jo.put("msg", um.getUser_name());
-//				return jo;
-//			}
+			//首次登陆
+			if (application.getAttribute("UserLoginMap")==null) {
+				RegularUtil.UserLoginMap.put(um, sessionid);
+				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
+				nowUser.setAttribute("user", um);
+				jo.put("error", "200");
+				jo.put("msg", um.getUser_name());
+				return jo;
+			}
 			//查询是否存在登陆
 			RegularUtil.UserLoginMap = (Map<UserModel, String>) application.getAttribute("UserLoginMap");
 			for (Map.Entry<UserModel, String> entry : RegularUtil.UserLoginMap.entrySet()) {
