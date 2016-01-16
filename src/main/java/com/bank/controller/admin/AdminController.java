@@ -89,6 +89,8 @@ public class AdminController {
 				jo.put("error", "200");
 				jo.put("msg", "登陆成功");
 				count=0;
+				RegularUtil.LoginCountMap.put(ip, count);
+				application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
 			}else{
 				jo.put("error", "203");
 				jo.put("msg", "密码错误,您还可以尝试"+numArray[count-1]+"次");

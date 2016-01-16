@@ -69,6 +69,7 @@ public class UserInfoController {
 			String sessionid = nowUser.getId();
 			//首次登陆
 			if (application.getAttribute("UserLoginMap")==null) {
+				RegularUtil.UserLoginMap = new HashMap<UserModel, String>();
 				RegularUtil.UserLoginMap.put(um, sessionid);
 				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 				nowUser.setAttribute("user", um);
