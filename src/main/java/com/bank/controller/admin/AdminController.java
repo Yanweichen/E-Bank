@@ -68,21 +68,33 @@ public class AdminController {
 		}
 		//ip首次
 		if (loginCount.get(ip)==null) {
-			RegularUtil.LoginCountMap.put(ip, 1);
+			RegularUtil.LoginCountMap.put(ip, 0);
 			application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
 			loginCount = ((HashMap<String,Integer>)application.getAttribute("LoginCount"));
 		}
 		//获取登录次数
 		int count = loginCount.get(ip);
-		if (count>3||hasIp(ip,application)) {
+		if (count>=3||hasIp(ip,application)) {
+			//最后一次登陆判断是否正确
+			if (count==3 && am!=null && am.getAdmin_password().equals(pass)) {
+				req.getSession().setAttribute("admin", am);
+				jo.put("error", "200");
+				jo.put("msg", "登陆成功");
+				count=0;
+				RegularUtil.LoginCountMap.put(ip, count);
+				application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
+				return jo;
+			}
 			((HashMap<String,String>)application.getAttribute("adminip")).put(ip, Host);
 			jo.put("error", "203");
 			jo.put("msg", "您的ip已锁定,请联系管理员");
+			//记录登录次数
+			loginCount.put(ip, ++count);
 			return jo;
 		}
 		if (am==null) {
 			jo.put("error", "203");
-			jo.put("msg", "账号不存在,您还可以尝试"+numArray[count-1]+"次");
+			jo.put("msg", "账号不存在,您还可以尝试"+numArray[count]+"次");
 		}else{
 			if (am.getAdmin_password().equals(pass)) {
 				req.getSession().setAttribute("admin", am);
@@ -91,9 +103,10 @@ public class AdminController {
 				count=0;
 				RegularUtil.LoginCountMap.put(ip, count);
 				application.setAttribute("LoginCount", RegularUtil.LoginCountMap);
+				return jo;
 			}else{
 				jo.put("error", "203");
-				jo.put("msg", "密码错误,您还可以尝试"+numArray[count-1]+"次");
+				jo.put("msg", "密码错误,您还可以尝试"+numArray[count]+"次");
 			}
 		}
 		//记录登录次数
