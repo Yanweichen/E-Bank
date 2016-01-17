@@ -44,7 +44,7 @@
 	<script src="page/assets/js/pointbg.js"></script>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div id="logindiv" class="col-sm-4 col-sm-offset-4">
 				<form id="adminloginfrom" style="margin-top: 100%">
 					<input type="email" class="form-control appleinputup" id="adminname" name="adminname"
 							placeholder="请输入管理员账户">
@@ -72,14 +72,38 @@
 			</div>
 		</div>
 	</div>
+	<div class="fakeloader"></div>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script src="page/assets/js/fakeloader.js"></script>
+	<script src="page/assets/js/velocity.min.js"></script>
+	<script src="page/assets/js/velocity.ui.min.js"></script>
 	<script type="text/javascript">
+	$.Velocity.RunSequence("slideUpIn");
+	//出场动画
+	$(function(){
+		var seqInit=[{
+	        elements:$("#logindiv"),
+	        properties:'transition.flipXIn',
+	        options:{
+	        	delay:10
+	        }
+	    }];
+		 $.Velocity.RunSequence(seqInit);
+		})
 		$("#loginbtn").click(function () {
+			$(".fakeloader").fakeLoader({
+                spinner:"spinner2",
+                show:true
+            });
 			$.post("admin/login.action", $("#adminloginfrom").serialize(),function(result){
+				$(".fakeloader").fakeLoader({
+	                spinner:"spinner2",
+	                show:false
+	            });
 				if (result.error==200) {
 					//跳转
+					location.href = "admin/adminIndex.action"
 				}else{
 					$("#msg").empty(); 
 					$("#msg").append(result.msg);

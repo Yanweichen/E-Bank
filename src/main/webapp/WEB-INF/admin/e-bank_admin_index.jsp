@@ -50,7 +50,7 @@
 			<ul id="J_Nav" class="nav-list ks-clear"
 				style="background-image: url('page/assets/img/main-nav-bg21.png');">
 				<li class="nav-item dl-selected">
-					<div class="nav-item-inner nav-home">我的账户</div>
+					<div class="nav-item-inner nav-home">首页管理</div>
 				</li>
 				<li class="nav-item dl-selected">
 					<div class="nav-item-inner nav-order">转账汇款</div>
@@ -77,10 +77,10 @@
 				id : '1',
 				homePage : 'user_chart',
 				menu : [ {
-					text : '我的账户',
+					text : '首页管理',
 					items : [ {
 						id : 'user_chart',
-						text : '资金流向',
+						text : '更新公告',
 						href : 'myaccount/mychart.action'
 					}, {
 						id : '12',

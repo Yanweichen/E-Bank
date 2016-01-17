@@ -135,4 +135,15 @@ public class AdminController {
 		return jo;
 	}
 	
+	/**
+	 * 前往首页
+	 * @return
+	 */
+	@RequestMapping("/adminIndex")
+	public String goAdminIndex(HttpServletRequest req){
+		if (req.getSession().getAttribute("admin")==null) {
+			return "";//非法操作界面
+		}
+		return "admin/e-bank_admin_index";
+	}
 }
