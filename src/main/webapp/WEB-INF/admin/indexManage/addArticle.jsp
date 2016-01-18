@@ -22,8 +22,8 @@
 <title>添加文章</title>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
-<div class="row" >
-	<div class="col-sm-6" style="margin-left: 20px;margin-top: 20px;">
+<div class="row" style="padding: 20px">
+	<div class="col-sm-6">
 		<div class="row">
 		  <div class="col-sm-12">
 		  <div class="form-group">
@@ -108,9 +108,12 @@
 				<button id="submit" type="button" class="btn btn-default btn-lg btn-block">提交</button>
 			</div>
 			<div class="col-sm-6">
-				<button type="button" class="btn btn-default btn-lg btn-block">预览</button>
+				<button id="previewbtn" type="button" class="btn btn-default btn-lg btn-block">预览</button>
 			</div>
 		</div>
+	</div>
+	<div class="col-sm-6">
+		<div id="preview" class="well well-lg" style="height: 800px"></div>
 	</div>
 </div><!-- /.row -->
 <script src="page/assets/js/jquery-1.8.1.min.js"></script>
@@ -168,7 +171,7 @@ function initToolbarBootstrapBindings() {
 		return {
 			index_type : type,
 			index_title : $("#title").val(),
-			index_content : $("#editor").text(),
+			index_content : $("#editor").html(),
 		}
 	}
 	$("#submit").click(function () {
@@ -177,6 +180,10 @@ function initToolbarBootstrapBindings() {
 				alert("上传成功");
 			}
 		})
+	});
+	$("#previewbtn").click(function () {
+		$("#preview").empty();
+		$("#preview").html($("#editor").html());
 	});
 </script>
 </body>

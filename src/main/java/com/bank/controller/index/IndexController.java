@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.admin.AdminModel;
 import com.bank.model.index.IndexModel;
+import com.bank.model.other.Page;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
 
@@ -88,5 +89,18 @@ public class IndexController {
 	@RequestMapping("/index")
 	public String gotoIndex(){
 		return "index";
+	}
+	
+	private Page getPage(String page,String rows){
+		//当前页  
+        int intPage = Integer.parseInt((page == null || page == "0") ? "1":page);  
+        //每页显示条数  
+        int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);  
+        //每页的开始记录  第一页为1  第二页为number +1   
+        int start = (intPage-1)*number; 
+        Page p = new Page();
+        p.setStart(start);
+        p.setMax(number);
+        return p;
 	}
 }

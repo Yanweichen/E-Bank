@@ -15,28 +15,48 @@
 <title>首页管理</title>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-12">
-			<table id="isputaway" data-toggle="table" data-width="50px" data-pagination="true" 
-			   data-side-pagination="server"
-		       data-show-refresh="true"
-		       data-show-toggle="true"
-		       data-show-columns="true">
-			    <thead>
-			        <tr>
-			            <th data-field="index_id" data-align="center">ID</th>
-			            <th data-field="index_type" data-align="right">类型</th>
-			            <th data-field="index_title" data-align="center">标题</th>
-			            <th data-field="index_content" data-align="">内容</th>
-			            <th data-field="index_uptime_format" data-align="">上传时间</th>
-			            <th data-field="upfrom" data-align="">上传者</th>
-			        </tr>
-			    </thead>
-			</table>
+	<div class="row" style="padding: 20px">
+		<div class="row">
+			<div class="col-sm-12">
+				<table id="isputaway" data-toggle="table" data-width="50px" data-pagination="true" 
+				   data-side-pagination="server"
+			       data-show-refresh="true"
+			       data-show-toggle="true"
+			       data-show-columns="true">
+				    <thead>
+				        <tr>
+				            <th data-field="index_id" data-align="center">ID</th>
+				            <th data-field="index_type" data-align="right">类型</th>
+				            <th data-field="index_title" data-align="center">标题</th>
+				            <th data-field="index_content" data-align="">内容</th>
+				            <th data-field="index_uptime_format" data-align="">上传时间</th>
+				            <th data-field="upfrom" data-align="">上传者</th>
+				        </tr>
+				    </thead>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<table id="all" data-toggle="table" data-width="50px" data-pagination="true" 
+				   data-side-pagination="server"
+			       data-show-refresh="true"
+			       data-show-toggle="true"
+			       data-show-columns="true">
+				    <thead>
+				        <tr>
+				            <th data-field="index_id" data-align="center">ID</th>
+				            <th data-field="index_type" data-align="right">类型</th>
+				            <th data-field="index_title" data-align="center">标题</th>
+				            <th data-field="index_content" data-align="">内容</th>
+				            <th data-field="index_uptime_format" data-align="">上传时间</th>
+				            <th data-field="upfrom" data-align="">上传者</th>
+				        </tr>
+				    </thead>
+				</table>
+			</div>
 		</div>
 	</div>
-</div>
 <script src="page/assets/js/jquery-1.8.1.min.js"></script>
 <script src="page/assets/js/bootstrap.min.js"></script>
 <script src="page/assets/js/bootstrap-table.js"></script>
@@ -44,6 +64,10 @@
 <script type="text/javascript">
 $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
 $('#isputaway').bootstrapTable({
+    url: 'index/indexnotice.action',
+    queryParams: "type=0"
+});
+$('#all').bootstrapTable({
     url: 'index/indexnotice.action',
     queryParams: "type=0"
 });
