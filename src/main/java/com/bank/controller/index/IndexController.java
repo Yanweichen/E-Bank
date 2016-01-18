@@ -1,6 +1,10 @@
 package com.bank.controller.index;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.admin.AdminModel;
 import com.bank.model.index.IndexModel;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
@@ -23,20 +28,26 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/notice")
-	public JSONArray getNotice(@RequestParam("num")Integer num,HttpServletRequest req){
-			return JsonUtil.getNotice(is.findeByNum(num));
+	public JSONObject getNotice(@RequestParam("num")Integer num,HttpServletRequest req){
+		List<IndexModel> list = is.findeByNum(num);
+			return JsonUtil.getNotice(list,list.size(),"YYYY-MM-dd HH:mm:ss");
 	}
 	
 	/**
 	 * 获取首页公告或活动
-	 * @param type 
+	 * @param type 0 全部 1公告 2活动
 	 * @param req
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/indexnotice")
-	public JSONArray getNoticeByTypeForIndex(@RequestParam("type")Integer type,HttpServletRequest req){
-		return JsonUtil.getNotice(is.findeByTypeForIndex(type));
+	public JSONObject getNoticeByTypeForIndex(@RequestParam("type")Integer type,HttpServletRequest req){
+		if (type==0) {
+			List<IndexModel> list = is.findAll();
+			return JsonUtil.getNotice(list, list.size(),"YYYY-MM-dd HH:mm:ss");
+		}
+		List<IndexModel> list = is.findeByTypeForIndex(type);
+		return JsonUtil.getNotice(list,list.size(),"MM/dd");
 	}
 	
 	
@@ -48,9 +59,18 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/addnotice")
-	public JSONObject addNewNotice(IndexModel im){
-		int isSuC = is.add(im);
+	public JSONObject addNewNotice(IndexModel im,HttpServletRequest req){
+		HttpSession session = req.getSession();
+		AdminModel am = (AdminModel) session.getAttribute("admin");
 		JSONObject jo = new JSONObject();
+		if (im==null||am==null) {
+			jo.put("error", "200");
+			jo.put("msg", "添加失败");
+			return jo;
+		}
+		im.setIndex_uptime(new Date());
+		im.setUpfrom(am.getAdmin_id());
+		int isSuC = is.add(im);
 		if (isSuC==1) {
 			jo.put("error", "200");
 			jo.put("msg", "添加成功");

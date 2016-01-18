@@ -75,17 +75,17 @@
 		BUI.use('common/main', function() {
 			var config = [ {
 				id : '1',
-				homePage : 'user_chart',
+				homePage : 'updateIndex',
 				menu : [ {
 					text : '首页管理',
 					items : [ {
-						id : 'user_chart',
+						id : 'updateIndex',
 						text : '更新公告',
-						href : 'myaccount/mychart.action'
+						href : 'admin/updateIndex.action'
 					}, {
 						id : '12',
-						text : '账户列表',
-						href : 'page/dynamic/activityMng.html'
+						text : '添加文章',
+						href : 'admin/AddIndex.action'
 					}, {
 						id : '3',
 						text : '账户查询',

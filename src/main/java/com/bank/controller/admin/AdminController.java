@@ -146,4 +146,28 @@ public class AdminController {
 		}
 		return "admin/e-bank_admin_index";
 	}
+	/**
+	 * 前往更新首页页面
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/updateIndex")
+	public String UpdateIndex(HttpServletRequest req){
+		if (req.getSession().getAttribute("admin")==null) {
+			return "";//非法操作界面
+		}
+		return "admin/indexManage/indexManage";
+	}
+	/**
+	 * 前往更新首页页面
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/AddIndex")
+	public String AddIndex(HttpServletRequest req){
+		if (req.getSession().getAttribute("admin")==null) {
+			return "";//非法操作界面
+		}
+		return "admin/indexManage/addArticle";
+	}
 }

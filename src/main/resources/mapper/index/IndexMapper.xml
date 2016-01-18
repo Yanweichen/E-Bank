@@ -28,6 +28,14 @@
 	FROM index_entry_view ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND index_pid = #{type};
   </select>
+  <!-- 查询所有 -->
+  <select id="selectAll" resultMap="BaseResultMap" >
+    SELECT  
+    <include refid="Base_Column_List" />
+	FROM index_entry_view ent,index_type typ,admin ad 
+	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`;
+  </select>
+  
    <insert id="insert" parameterType="com.bank.model.index.IndexModel">
   	INSERT INTO index_entry VALUES(null,#{index_type},#{index_title},#{index_content},
   	#{index_uptime},#{upfrom});

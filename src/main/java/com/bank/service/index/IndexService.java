@@ -26,11 +26,11 @@ public class IndexService implements BaseService<IndexModel> {
 	public List<IndexModel> findeByTypeForIndex(Integer type){
 		return indexdao.selectByTypeForIndex(type);
 	}
-
+	
 	@Override
 	public int add(IndexModel model) {
 		// TODO Auto-generated method stub
-		return 0;
+		return indexdao.insert(model);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class IndexService implements BaseService<IndexModel> {
 	@Override
 	public List<IndexModel> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return indexdao.selectAll();
 	}
 	
 }

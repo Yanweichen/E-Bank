@@ -452,7 +452,6 @@ ul.news li p{float:right; color:#000000}
 			</div>
 		</div>
 	</div>
-	
 	<div class="fakeloader"></div>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
@@ -463,8 +462,7 @@ ul.news li p{float:right; color:#000000}
 	<script type="text/javascript">
 	//获取公告
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 1 }, function(json){
-			$.each(json,function(i,obj){
-				jo = $.parseJSON(obj);
+			$.each(json.rows,function(i,jo){
 				var title;
 				if (jo.index_title.length>20) {
 					title = jo.index_title.substring(0,15)+"...";
@@ -477,8 +475,7 @@ ul.news li p{float:right; color:#000000}
 		});
 	//获取活动
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 2 }, function(json){
-			$.each(json,function(i,obj){
-				jo = $.parseJSON(obj);
+			$.each(json.rows,function(i,jo){
 				var title;
 				if (jo.index_title.length>20) {
 					title = jo.index_title.substring(0,15)+"...";
