@@ -20,6 +20,13 @@
 <title>首页管理</title>
 </head>
 <body>
+	<div id="toolbar">
+       <ul class="nav nav-pills">
+ 		 <li role="presentation" class="active"><a href="#" style="padding:0px 20px 0px 20px">全部</a></li>
+  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">活动</a></li>
+  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">公告</a></li>
+	   </ul>
+    </div>
 	<div class="row" style="padding: 40px">
 		<div class="row">
 			<div class="col-sm-12">
@@ -29,13 +36,13 @@
 			       data-show-toggle="true"
 			       data-show-columns="true"
 			       data-detail-view="true"
-			       data-detail-formatter="detailFormatter">
+			       data-detail-formatter="detailFormatter"
+			       data-toolbar="#toolbar">
 				    <thead>
 				        <tr>
-				        	<th class="detail"><div class="fht-cell"></div></th>
 				            <th data-field="index_id" data-align="center">ID</th>
 				            <th data-field="index_type" data-align="right">类型</th>
-				            <th data-field="index_title" data-align="center">标题</th>
+				            <th data-width="40%" data-field="index_title" data-align="center">标题</th>
 				            <th data-field="index_uptime_format" data-align="">上传时间</th>
 				            <th data-field="upfrom" data-align="">上传者</th>
 				            <th data-field="action" data-align="" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
@@ -46,6 +53,13 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
+			<div id="toolbarAll">
+		       <ul class="nav nav-pills">
+		 		 <li role="presentation" class="active"><a href="#" style="padding:0px 20px 0px 20px">全部</a></li>
+		  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">活动</a></li>
+		  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">公告</a></li>
+			   </ul>
+		    </div>
 				<table id="all" data-toggle="table" 
 				   data-width="50px" 
 				   data-pagination="true" 
@@ -53,13 +67,15 @@
 			       data-show-refresh="true"
 			       data-page-list="[5, 10, 20, 50, 100, 200]"
 			       data-show-toggle="true"
-			       data-show-columns="true">
+			       data-show-columns="true"
+			       data-detail-view="true"
+			       data-detail-formatter="detailFormatter"
+			       data-toolbar="#toolbarAll">
 				    <thead>
 				        <tr>
 				            <th data-field="index_id" data-align="center" data-sortable="true">ID</th>
 				            <th data-field="index_type" data-align="right">类型</th>
-				            <th data-field="index_title" data-align="center">标题</th>
-				            <th data-field="index_content" data-align="">内容</th>
+				            <th data-width="40%" data-field="index_title" data-align="center">标题</th>
 				            <th data-field="index_uptime_format" data-align="" data-sortable="true">上传时间</th>
 				            <th data-field="upfrom" data-align="">上传者</th>
 				            <th data-field="action" data-align="" data-formatter="actionFormatterAll" data-events="actionEventsAll">操作</th>
@@ -319,11 +335,15 @@
 	    }
 	}
 	function detailFormatter(index, row) {
-        var html = [];
-        $.each(row, function (key, value) {
-            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
-        });
-        return html.join('');
+//         var html = [];
+//         $.each(row, function (key, value) {
+//             html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+//         });
+//         return html.join('');
+		 return [
+		         '<h3>'+row.index_title+'</h3>',
+		         '<div>'+row.index_content+'</div>',
+		         ].join('')
     }
 </script>
 </body>

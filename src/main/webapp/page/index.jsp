@@ -155,7 +155,7 @@ ul.news li p{float:right; color:#000000}
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="搜&nbsp;索">
 					</div>
-					<button type="submit" class="btn btn-default btnwindth">搜&nbsp;索</button>
+					<button id="adminlogin" type="button" class="btn btn-default btnwindth">管理员入口</button>
 				</form>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -667,6 +667,9 @@ ul.news li p{float:right; color:#000000}
 																	}
 																}, 'json');});
 							});
+		$("#adminlogin").click(function() {
+			window.location="<%=basePath%>page/admin_login.jsp"
+		})
 
 	</script>
 	<!-- 如果登陆 -->
