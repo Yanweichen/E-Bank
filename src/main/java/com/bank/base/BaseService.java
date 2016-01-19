@@ -8,7 +8,7 @@ public interface BaseService <T>{
 	
 	public int RemoveById(Integer id);
 	
-	public int alterById(Integer id);
+	public int alterById(T model);
 	
 	public T findById(Integer id);
 	

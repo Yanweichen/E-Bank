@@ -2,25 +2,33 @@ package com.bank.model.other;
 
 public class Page {
 
-	private int start;
-	private int max;
-	
-	public int getStart() {
-		return start;
+	private int limit;
+	private int offset;
+	private String order;
+	private String sort;
+	public int getLimit() {
+		return limit;
 	}
-	public void setStart(int start) {
-		this.start = start;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
-	public int getMax() {
-		return max;
+	public int getOffset() {
+		return offset;
 	}
-	public void setMax(int max) {
-		this.max = max;
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
-	@Override
-	public String toString() {
-		return "Page [start=" + start + ", max=" + max + "]";
+	public String getOrder() {
+		return order;
 	}
-	
-	
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
 }

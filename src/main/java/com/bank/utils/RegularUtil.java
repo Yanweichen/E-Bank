@@ -28,6 +28,9 @@ public class RegularUtil {
 	public static final int freeze = 4;//冻结
 	public static final int loss = 5;//挂失
 	
+	public static final int Stick = 1;//挂失
+	public static final int Star = 5;//挂失
+	
 	public static String getlocathost(){
 		String ip = "115.159.66.149";
 //		String ip = "localhost";

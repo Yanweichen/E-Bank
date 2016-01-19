@@ -13,9 +13,16 @@ public class IndexModel {
 	private String index_content;//内容
 	private Date index_uptime;//上传时间
 	private String upfrom;//上传者
+	private String index_state;//文章状态
 	
 	private String index_uptime_format;//格式化后的时间
 	
+	public String getIndex_state() {
+		return index_state;
+	}
+	public void setIndex_state(String index_state) {
+		this.index_state = index_state;
+	}
 	public String getIndex_uptime_format() {
 		return index_uptime_format;
 	}
@@ -61,7 +68,8 @@ public class IndexModel {
 	@Override
 	public String toString() {
 		return "IndexModel [index_id=" + index_id + ", index_type=" + index_type + ", index_title=" + index_title
-				+ ", index_content=" + index_content + ", index_uptime=" + index_uptime + "]";
+				+ ", index_content=" + index_content + ", index_uptime=" + index_uptime + ", upfrom=" + upfrom
+				+ ", index_state=" + index_state + ", index_uptime_format=" + index_uptime_format + "]";
 	}
 	
 }

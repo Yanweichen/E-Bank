@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bank.base.BaseService;
 import com.bank.dao.index.IndexDAO;
 import com.bank.model.index.IndexModel;
+import com.bank.model.other.Page;
 
 /**
  * @author yanwe
@@ -19,12 +20,42 @@ public class IndexService implements BaseService<IndexModel> {
 	@Autowired
 	private IndexDAO indexdao;
 	
-	public List<IndexModel> findeByNum(Integer num){
-		return indexdao.selectByNum(num);
+	/**
+	 * 添加到首页表
+	 * @param im
+	 * @return
+	 */
+	public int removeByIdView(int id){
+		return indexdao.deleteByIdView(id);
+	}
+	
+	/**
+	 * 添加到首页表
+	 * @param im
+	 * @return
+	 */
+	public int add2View(IndexModel im){
+		return indexdao.insertView(im);
+	}
+	
+	public int findCountByTableName(String name){
+		return indexdao.selectCountByTableName(name);
+	}
+	/**
+	 * 分页
+	 * @param page
+	 * @return
+	 */
+	public List<IndexModel> findeByPage(Page page){
+		return indexdao.selectByPage(page);
 	}
 	
 	public List<IndexModel> findeByTypeForIndex(Integer type){
 		return indexdao.selectByTypeForIndex(type);
+	}
+	
+	public int findNumByState(Integer state){
+		return indexdao.selectNumByState(state);
 	}
 	
 	@Override
@@ -33,17 +64,13 @@ public class IndexService implements BaseService<IndexModel> {
 		return indexdao.insert(model);
 	}
 
+	
 	@Override
 	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return indexdao.deleteById(id);
 	}
 
-	@Override
-	public int alterById(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public IndexModel findById(Integer id) {
@@ -55,6 +82,11 @@ public class IndexService implements BaseService<IndexModel> {
 	public List<IndexModel> findAll() {
 		// TODO Auto-generated method stub
 		return indexdao.selectAll();
+	}
+	@Override
+	public int alterById(IndexModel model) {
+		// TODO Auto-generated method stub
+		return indexdao.updateById(model);
 	}
 	
 }

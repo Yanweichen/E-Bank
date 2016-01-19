@@ -68,11 +68,6 @@ public class UserService implements BaseService<UserModel> {
 		return 0;
 	}
 	@Override
-	public int alterById(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
 	public UserModel findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -81,6 +76,11 @@ public class UserService implements BaseService<UserModel> {
 	public List<UserModel> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int alterById(UserModel model) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

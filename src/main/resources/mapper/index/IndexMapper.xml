@@ -9,18 +9,32 @@
     <result column="index_uptime" property="index_uptime" jdbcType="TIMESTAMP" />
     <result column="admin_name" property="upfrom" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
-    index_id,index_type,index_title,index_content,index_uptime,admin_name
+    index_id,index_type,index_title,index_content,index_uptime,admin_name,index_state
   </sql>
+  
+  <!-- 根据表名称查询总数 -->
+  <select id="selectCountByTableName" resultType="java.lang.Integer" statementType="STATEMENT">
+	  SELECT COUNT(*) FROM ${_parameter};
+  </select>
+  
   <!-- 首页分页 -->
-  <select id="selectByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.bank.model.other.Page" >
     SELECT  
     <include refid="Base_Column_List" />
 	FROM index_entry ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` 
-	ORDER BY index_uptime DESC 
-	LIMIT #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER};
+	ORDER BY ${sort} 
+	<if test="order == 'desc'">    
+		DESC
+	</if>
+	<if test="order == 'asc'">
+		ASC
+	</if>
+	LIMIT #{offset},#{limit} ;
   </select>
+  
   <!-- 根据类型查询首页内容 -->
   <select id="selectByTypeForIndex" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     SELECT  
@@ -28,6 +42,7 @@
 	FROM index_entry_view ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND index_pid = #{type};
   </select>
+  
   <!-- 查询所有 -->
   <select id="selectAll" resultMap="BaseResultMap" >
     SELECT  
@@ -36,8 +51,41 @@
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`;
   </select>
   
+  <!-- 插入新文章 总表 -->
    <insert id="insert" parameterType="com.bank.model.index.IndexModel">
   	INSERT INTO index_entry VALUES(null,#{index_type},#{index_title},#{index_content},
-  	#{index_uptime},#{upfrom});
+  	#{index_uptime},#{upfrom},#{index_state});
   </insert>
+  
+  <!-- 插入新文章 首页表 -->
+   <insert id="insertView" parameterType="com.bank.model.index.IndexModel">
+  	INSERT INTO index_entry_view VALUES(null,(SELECT index_type_id FROM index_type WHERE index_type = #{index_type}),#{index_title},#{index_content},
+  	#{index_uptime},(SELECT admin_id FROM admin WHERE admin_name = #{upfrom}),#{index_state});
+  </insert>
+  
+  <update id="updateById" parameterType="com.bank.model.index.IndexModel">
+  	UPDATE index_entry_view 
+  	SET index_pid = (SELECT index_type_id FROM index_type WHERE index_type = #{index_type}),index_title = #{index_title},index_content = #{index_content}
+  	,index_uptime = #{index_uptime},index_state = #{index_state},index_aid = (SELECT admin_id FROM admin WHERE admin_name = #{upfrom})
+  	WHERE index_id = #{index_id};
+  </update>
+  
+  <select id="selectNumByState" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  	SELECT COUNT(*) FROM index_entry_view 
+  	WHERE 
+  	<if test="_parameter == 1">
+	  	index_state = '10' 
+  	</if>
+  	<if test="_parameter == 0">
+	  	index_state = '01' 
+  	</if>
+  	OR index_state = '11';
+  </select>
+  
+  <delete id="deleteById" parameterType="java.lang.Integer">
+  	DELETE FROM index_entry WHERE index_id = #{_parameter}
+  </delete>
+  <delete id="deleteByIdView" parameterType="java.lang.Integer">
+ 	DELETE FROM index_entry_view WHERE index_id = #{_parameter}
+  </delete>
 </mapper>

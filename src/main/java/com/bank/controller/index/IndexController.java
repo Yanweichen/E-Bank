@@ -1,5 +1,7 @@
 package com.bank.controller.index;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.admin.AdminModel;
 import com.bank.model.index.IndexModel;
@@ -28,10 +30,16 @@ public class IndexController {
 	private IndexService is;
 	
 	@ResponseBody
-	@RequestMapping("/notice")
-	public JSONObject getNotice(@RequestParam("num")Integer num,HttpServletRequest req){
-		List<IndexModel> list = is.findeByNum(num);
-			return JsonUtil.getNotice(list,list.size(),"YYYY-MM-dd HH:mm:ss");
+	@RequestMapping("/Allnotice")
+	public JSONObject getNotice(Page page,HttpServletRequest req){
+		if (page.getSort()==null) {
+			page.setSort("index_id");
+		}
+		if ("index_uptime_format".equals(page.getSort())) {
+			page.setSort("index_uptime");
+		}
+		List<IndexModel> list = is.findeByPage(page);
+			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry"),"yyyy-MM-dd HH:mm:ss");
 	}
 	
 	/**
@@ -45,10 +53,10 @@ public class IndexController {
 	public JSONObject getNoticeByTypeForIndex(@RequestParam("type")Integer type,HttpServletRequest req){
 		if (type==0) {
 			List<IndexModel> list = is.findAll();
-			return JsonUtil.getNotice(list, list.size(),"YYYY-MM-dd HH:mm:ss");
+			return JsonUtil.getNotice(list, is.findCountByTableName("index_entry_view"),"yyyy-MM-dd HH:mm:ss");
 		}
 		List<IndexModel> list = is.findeByTypeForIndex(type);
-		return JsonUtil.getNotice(list,list.size(),"MM/dd");
+		return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),"MM/dd");
 	}
 	
 	
@@ -65,19 +73,115 @@ public class IndexController {
 		AdminModel am = (AdminModel) session.getAttribute("admin");
 		JSONObject jo = new JSONObject();
 		if (im==null||am==null) {
-			jo.put("error", "200");
+			jo.put("error", "203");
 			jo.put("msg", "添加失败");
 			return jo;
 		}
 		im.setIndex_uptime(new Date());
 		im.setUpfrom(am.getAdmin_id());
+		im.setIndex_state("00");//设置初始状态
 		int isSuC = is.add(im);
 		if (isSuC==1) {
 			jo.put("error", "200");
 			jo.put("msg", "添加成功");
 		}else{
-			jo.put("error", "200");
+			jo.put("error", "203");
 			jo.put("msg", "添加失败");
+		}
+		return jo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateNoticeState")
+	public JSONObject updateIndexState(String row,String state){
+		JSONObject jo = new JSONObject();//返回给页面的json
+		IndexModel im = JSON.parseObject(row, IndexModel.class);//转换对象
+		JSONObject jrow = JSON.parseObject(row);//传递回来的json
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			im.setIndex_uptime(sdf.parse(jrow.getString("index_uptime_format")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			jo.put("error", "203");
+			jo.put("msg", "修改失败");
+		}
+		im.setIndex_state(state);
+		int isSuC = is.alterById(im);
+		if (isSuC==1) {
+			jo.put("error", "200");
+			jo.put("msg", "修改成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "修改失败");
+		}
+		return jo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/add2View")
+	public JSONObject add2View(String row){
+		JSONObject jrow = JSON.parseObject(row);//传递回来的json
+		JSONObject jo = new JSONObject();//返回给页面的json
+		IndexModel im = JSON.parseObject(row, IndexModel.class);//转换对象
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			im.setIndex_uptime(sdf.parse(jrow.getString("index_uptime_format")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			jo.put("error", "203");
+			jo.put("msg", "修改失败");
+		}
+		int isSuC = 0;
+		try {
+			isSuC = is.add2View(im);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jo.put("error", "203");
+			jo.put("msg", "添加失败");
+			return jo;
+		}
+		if (isSuC==1) {
+			jo.put("error", "200");
+			jo.put("msg", "添加成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "添加失败");
+		}
+		return jo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getCountByState")
+	public JSONObject getCountByState(Integer state){
+		JSONObject jo = new JSONObject();//返回给页面的json
+		int count = is.findNumByState(state);
+		jo.put("error", "200");
+		jo.put("count", count);
+		return jo;
+	}
+
+	/**
+	 * @param id
+	 * @param type 0总表 1预览表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/removeById")
+	public JSONObject deleteById(int id,int type){
+		JSONObject jo = new JSONObject();//返回给页面的json
+		int isSuc = 0;
+		if (type==0) {
+			isSuc = is.RemoveById(id);
+		}else{
+			isSuc = is.removeByIdView(id);
+		}
+		if (isSuc==1) {
+			jo.put("error", "200");
+			jo.put("msg", "删除成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "删除失败");
 		}
 		return jo;
 	}
@@ -99,8 +203,8 @@ public class IndexController {
         //每页的开始记录  第一页为1  第二页为number +1   
         int start = (intPage-1)*number; 
         Page p = new Page();
-        p.setStart(start);
-        p.setMax(number);
+        p.setLimit(start);
+        p.setOffset(number);
         return p;
 	}
 }

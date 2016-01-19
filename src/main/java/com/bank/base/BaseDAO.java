@@ -11,7 +11,7 @@ public interface BaseDAO<T> {
 
 	public int insert(T model);
 	public int deleteById(Integer id);
-	public int updateById(Integer id);
+	public int updateById(T model);
 	public T selectById(Integer id);
 	public List<T> selectAll();
 }

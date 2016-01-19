@@ -38,6 +38,7 @@ public class JsonUtil {
 			jo.put("index_content", im.getIndex_content());
 			jo.put("index_uptime_format", sdf.format(im.getIndex_uptime()));
 			jo.put("upfrom", im.getUpfrom());
+			jo.put("index_state", im.getIndex_state());
 			row.add(jo);
 //			row.add(gson.toJson(im));
 		}
