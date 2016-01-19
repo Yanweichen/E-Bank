@@ -27,7 +27,9 @@
 				   data-side-pagination="server"
 			       data-show-refresh="true"
 			       data-show-toggle="true"
-			       data-show-columns="true">
+			       data-show-columns="true"
+			       data-detail-view="true"
+			       data-detail-formatter="detailFormatter">
 				    <thead>
 				        <tr>
 				        	<th class="detail"><div class="fht-cell"></div></th>
@@ -316,6 +318,13 @@
     		})
 	    }
 	}
+	function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
 </script>
 </body>
 </html>
