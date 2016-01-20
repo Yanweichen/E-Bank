@@ -158,7 +158,7 @@ function initToolbarBootstrapBindings() {
 	$('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
 	var type = 2;//类型
 	$("#activity").click(function () {
-		type=1;
+		type=2;
 		$("#selectType").empty();
 		$("#selectType").append("活动&nbsp;&nbsp;<span class='caret'></span>");
 	});

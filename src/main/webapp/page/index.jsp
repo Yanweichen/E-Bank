@@ -115,20 +115,31 @@ ul.nav-tabss li:last-child a {
 ul.nav-tabss.affix {
 	top: 30px; /* Set the top position of pinned element */
 }
-
+.hand{
+cursor:pointer
+}
 a.indexicon:link {color: #4C9ED9;text-decoration: none;}		/* 未访问的链接 */
 a.indexicon:visited {color: #4C9ED9;text-decoration: none;}	/* 已访问的链接 */
 a.indexicon:hover {color: #CC0000;text-decoration: none;}		/* 鼠标移动到链接上 */
 a.indexicon:active {color: #4C9ED9;text-decoration: none;}    /* 选定的链接 */
 
+a.topstyle:link {color: #B22222;text-decoration: none;}		/* 未访问的链接 */
+a.topstyle:visited {color: #B22222;text-decoration: none;}	/* 已访问的链接 */
+a.topstyle:hover {color: #FF7F00;text-decoration: none;}		/* 鼠标移动到链接上 */
+a.topstyle:active {color: #B22222;text-decoration: none;}    /* 选定的链接 */
+
 ul.news{list-style:none;padding-left: 0px;}
-ul.news li{ background:url('<%=basePath%>page/assets/img/rightjiantou.png') no-repeat left 4px; padding-left:20px; font-size:14px;line-height:22px;margin-left: 0px;}
+ul.news li{ background:url('<%=basePath%>page/assets/img/digest.gif') no-repeat left 4px; padding-left:20px; font-size:14px;line-height:22px;margin-left: 0px;}
 ul.news li a { color: #000000; text-decoration: none;}
 ul.news li a:link {color: #000000;text-decoration: none;}
 ul.news li a:active {color: #000000;text-decoration: none;}
 ul.news li a:visited {color: #000000;text-decoration: none;}
 ul.news li a:hover {color: #bc0021;text-decoration: underline;}
 ul.news li p{float:right; color:#000000}
+
+.starstyle{
+
+}
 </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy"
@@ -351,21 +362,35 @@ ul.news li p{float:right; color:#000000}
 							
 							<div class="col-sm-3 col-sm-offset-5"><h5>更多>></h5></div>
 						</div>
-						<ul id="notice" class="news" style="margin-top: 10px;letter-spacing: 1px;">
-						</ul>
+						<div id="topnoticediv" style="display: none;">
+							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
+							<a style='margin-left: 3px;color: #B22222' class="topstyle hand"><h4 style="display:inline;" id="topnotice"></h4></a>
+						</div>
+<!-- 						<ul id="notice" class="news" style="margin-top: 10px;letter-spacing: 1px;"> -->
+<!-- 						</ul> -->
+						<div id="notice">
+							
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-7">
 				<div class="panel panel-default tabbg">
 					<div class="panel-body">
-						<div class="row" style="margin-left: 3px">
+						<div class="row" style="margin-left: 0px">
 							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">近期活动</h5></div>
 							
 							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px">更多>></h5></div>
 						</div>
-						<ul id="activity" class="news" style="margin-top: 10px;letter-spacing: 1px;">
-						</ul>
+						<div id="topactivitydiv" style="display: none;">
+							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
+							<a  style='margin-left: 3px;color: #B22222;' class="topstyle hand"><h4 style="display:inline;" id="topactivity"></h4></a>
+						</div>
+<!-- 						<ul id="activity" class="news" style="margin-top: 10px;letter-spacing: 1px;"> -->
+<!-- 						</ul> -->
+						<div id="activity">
+							
+						</div>
 					</div> 
 				</div>
 			</div>
@@ -463,27 +488,61 @@ ul.news li p{float:right; color:#000000}
 	//获取公告
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 1 }, function(json){
 			$.each(json.rows,function(i,jo){
-				var title;
-				if (jo.index_title.length>20) {
-					title = jo.index_title.substring(0,15)+"...";
+				var title = jo.index_title;
+				if (jo.index_title.length>=18) {
+					title = title.substring(0,15)+"...";
 				}else{
 					title = jo.index_title;
 				}
-				$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
-				+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+				if (jo.index_state=="10"||jo.index_state=="11") {
+					if (jo.index_title.length>=15) {
+						title = jo.index_title.substring(0,14)+"...";
+					}else{
+						title = jo.index_title;
+					}
+					$("#topnoticediv").css("display", "inline");
+					$("#topnotice").append(title)
+				}else{
+					var src;
+					if (jo.index_state=="01"||jo.index_state=="11") {
+						src = 'indexhoticon.png';
+					} else {
+						src = 'indexnomalicon.png';
+					}
+					$("#notice").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'><a style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
+// 					$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
+// 					+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+				}
 			});
 		});
 	//获取活动
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 2 }, function(json){
 			$.each(json.rows,function(i,jo){
 				var title;
-				if (jo.index_title.length>20) {
-					title = jo.index_title.substring(0,15)+"...";
+				if (jo.index_title.length>40) {
+					title = jo.index_title.substring(0,35)+"...";
 				}else{
 					title = jo.index_title;
 				}
-				$("#activity").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
-				+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+				if (jo.index_state=="10"||jo.index_state=="11") {
+					if (jo.index_title.length>35) {
+						title = jo.index_title.substring(0,31)+"...";
+					}else{
+						title = jo.index_title;
+					}
+					$("#topactivitydiv").css("display", "inline");
+					$("#topactivity").append(title)
+				}else{
+					var src;
+					if (jo.index_state=="01"||jo.index_state=="11") {
+						src = 'indexhoticon.png';
+					} else {
+						src = 'indexnomalicon.png';
+					}
+					$("#activity").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'><a style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
+// 					$("#activity").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
+// 					+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+				}
 			});
 		});
 		$(document).ready(function() {
@@ -668,7 +727,7 @@ ul.news li p{float:right; color:#000000}
 																}, 'json');});
 							});
 		$("#adminlogin").click(function() {
-			window.location="<%=basePath%>page/admin_login.jsp"
+			window.open('<%=basePath%>page/admin_login.jsp') 
 		})
 
 	</script>

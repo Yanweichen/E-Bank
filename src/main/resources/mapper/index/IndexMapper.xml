@@ -23,15 +23,41 @@
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.bank.model.other.Page" >
     SELECT  
     <include refid="Base_Column_List" />
-	FROM index_entry ent,index_type typ,admin ad 
+	FROM ${tableName} ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` 
-	ORDER BY ${sort} 
-	<if test="order == 'desc'">    
-		DESC
+	<if test="search != null">
+		<choose> 
+        <when test="search =='GONGGAO'"> 
+            AND index_pid = 1
+        </when> 
+        <when test="search =='HUODONG'"> 
+            AND index_pid = 2 
+        </when>
+         <when test="search =='TIME'"> 
+	            AND index_uptime BETWEEN DATE_FORMAT(#{startTime}, '%Y%m%d') AND DATE_FORMAT(#{endTime}, '%Y%m%d%H%i%s')
+        </when>  
+        <otherwise> 
+            AND index_title LIKE '%${search}%'
+        </otherwise> 
+    	</choose>
 	</if>
-	<if test="order == 'asc'">
-		ASC
-	</if>
+	ORDER BY 
+	<choose>
+		<when test="sort == null">
+			index_id
+		</when>
+		<otherwise>
+			${sort}
+		</otherwise>
+	</choose>
+	<choose>
+		<when test="order == 'desc'">
+			DESC
+		</when>
+		<otherwise>
+			ASC
+		</otherwise>
+	</choose>
 	LIMIT #{offset},#{limit} ;
   </select>
   
@@ -73,13 +99,15 @@
   <select id="selectNumByState" resultType="java.lang.Integer" parameterType="java.lang.Integer">
   	SELECT COUNT(*) FROM index_entry_view 
   	WHERE 
-  	<if test="_parameter == 1">
-	  	index_state = '10' 
-  	</if>
-  	<if test="_parameter == 0">
-	  	index_state = '01' 
-  	</if>
-  	OR index_state = '11';
+  	<choose>
+		<when test="_parameter == 1">
+			index_pid = 1
+		</when>
+		<otherwise>
+			index_pid = 2 
+		</otherwise>
+	</choose>
+  	AND (index_state = '10' OR index_state = '11');
   </select>
   
   <delete id="deleteById" parameterType="java.lang.Integer">

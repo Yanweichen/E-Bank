@@ -31,26 +31,35 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/Allnotice")
-	public JSONObject getNotice(Page page,HttpServletRequest req){
-		if (page.getSort()==null) {
-			page.setSort("index_id");
-		}
+	public JSONObject getNotice(Page page,HttpServletRequest req) throws ParseException{
 		if ("index_uptime_format".equals(page.getSort())) {
 			page.setSort("index_uptime");
 		}
+		page.setTableName("index_entry");
 		List<IndexModel> list = is.findeByPage(page);
 			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry"),"yyyy-MM-dd HH:mm:ss");
 	}
-	
+
+	@ResponseBody
+	@RequestMapping("/Viewnotice")
+	public JSONObject getViewNotice(Page page,HttpServletRequest req) throws ParseException{
+		if ("index_uptime_format".equals(page.getSort())) {
+			page.setSort("index_uptime");
+		}
+		page.setTableName("index_entry_view");
+		List<IndexModel> list = is.findeByPage(page);
+			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),"yyyy-MM-dd HH:mm:ss");
+	}
 	/**
 	 * 获取首页公告或活动
 	 * @param type 0 全部 1公告 2活动
 	 * @param req
 	 * @return
+	 * @throws ParseException 
 	 */
 	@ResponseBody
 	@RequestMapping("/indexnotice")
-	public JSONObject getNoticeByTypeForIndex(@RequestParam("type")Integer type,HttpServletRequest req){
+	public JSONObject getNoticeByTypeForIndex(@RequestParam("type")Integer type,HttpServletRequest req) throws ParseException{
 		if (type==0) {
 			List<IndexModel> list = is.findAll();
 			return JsonUtil.getNotice(list, is.findCountByTableName("index_entry_view"),"yyyy-MM-dd HH:mm:ss");
@@ -153,9 +162,9 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/getCountByState")
-	public JSONObject getCountByState(Integer state){
+	public JSONObject getCountByState(Integer type){
 		JSONObject jo = new JSONObject();//返回给页面的json
-		int count = is.findNumByState(state);
+		int count = is.findNumByState(type);
 		jo.put("error", "200");
 		jo.put("count", count);
 		return jo;

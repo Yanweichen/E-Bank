@@ -12,9 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="page/assets/css/bootstrap.css">
 <link rel="stylesheet" href="page/assets/css/bootstrap-table.css">
+<link href="page/assets/css/bootstrap-datepicker3.css" rel="stylesheet">
 <style type="text/css">
 .ml10 {
     margin-left: 10px;
+}
+.hand{
+cursor:pointer
 }
 </style>
 <title>首页管理</title>
@@ -22,11 +26,21 @@
 <body>
 	<div id="toolbar">
        <ul class="nav nav-pills">
- 		 <li role="presentation" class="active"><a href="#" style="padding:0px 20px 0px 20px">全部</a></li>
-  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">活动</a></li>
-  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">公告</a></li>
+ 		 <li id="viewall" role="presentation" class="active hand"><a style="padding:0px 20px 0px 20px">全部</a></li>
+  		 <li id="viewactivity" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">活动</a></li>
+  		 <li id="viewnotice" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">公告</a></li>
+  		 <li role="presentation" >
+			<div class="input-daterange input-group" id="viewdate" style="margin-left: 10px">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				<input id="viewstarttime" type="text" class="input-sm form-control" name="start" onfocus="this.blur()" /> 
+				<span class="input-group-addon">至</span> 
+				<input id="viewendtime" type="text" class="input-sm form-control" name="end" onfocus="this.blur()" />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+		 </li>
 	   </ul>
-    </div>
+		
+	</div>
 	<div class="row" style="padding: 40px">
 		<div class="row">
 			<div class="col-sm-12">
@@ -36,14 +50,15 @@
 			       data-show-toggle="true"
 			       data-show-columns="true"
 			       data-detail-view="true"
+			       data-search="true"
 			       data-detail-formatter="detailFormatter"
 			       data-toolbar="#toolbar">
 				    <thead>
 				        <tr>
-				            <th data-field="index_id" data-align="center">ID</th>
+				            <th data-field="index_id" data-align="center" data-sortable="true">ID</th>
 				            <th data-field="index_type" data-align="right">类型</th>
 				            <th data-width="40%" data-field="index_title" data-align="center">标题</th>
-				            <th data-field="index_uptime_format" data-align="">上传时间</th>
+				            <th data-field="index_uptime_format" data-align="" data-sortable="true">上传时间</th>
 				            <th data-field="upfrom" data-align="">上传者</th>
 				            <th data-field="action" data-align="" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
 				        </tr>
@@ -55,9 +70,18 @@
 			<div class="col-sm-12">
 			<div id="toolbarAll">
 		       <ul class="nav nav-pills">
-		 		 <li role="presentation" class="active"><a href="#" style="padding:0px 20px 0px 20px">全部</a></li>
-		  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">活动</a></li>
-		  		 <li role="presentation" ><a href="#" style="padding: 0px 20px 0px 20px">公告</a></li>
+		 		  <li id="allall" role="presentation" class="active hand"><a style="padding:0px 20px 0px 20px">全部</a></li>
+  		 		  <li id="allactivity" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">活动</a></li>
+  				  <li id="allnotice" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">公告</a></li>
+		  		 <li role="presentation" >
+					<div class="input-daterange input-group" id="alldate" style="margin-left: 10px">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						<input id="allstarttime" type="text" class="input-sm form-control" name="start" onfocus="this.blur()" /> 
+						<span class="input-group-addon">至</span> 
+						<input id="allendtime" type="text" class="input-sm form-control" name="end" onfocus="this.blur()" />
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+					</div>
+				 </li>
 			   </ul>
 		    </div>
 				<table id="all" data-toggle="table" 
@@ -69,6 +93,7 @@
 			       data-show-toggle="true"
 			       data-show-columns="true"
 			       data-detail-view="true"
+			       data-search="true"
 			       data-detail-formatter="detailFormatter"
 			       data-toolbar="#toolbarAll">
 				    <thead>
@@ -90,21 +115,97 @@
 <script src="page/assets/js/bootstrap.min.js"></script>
 <script src="page/assets/js/bootstrap-table.js"></script>
 <script src="page/assets/js/bootstrap-table-zh-CN.js"></script>
+<script src="page/assets/js/bootstrap-datepicker.js"></script>
+<script src="page/assets/js/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
-	function queryParams() {
-	    return {
-	        type: 0,
-	        sort: 'index_id',
-	        order: 'desc',
-	        offset: 100,
-	        limit: 1
-	    };
+	function queryParams(type,stime,etime){
+		return {
+			    search:type,
+				limit:10,
+				offset:0,
+				startTime:stime,
+				endTime:etime
+		}
 	}
+	$("#viewall").click(function(){
+		$("#viewall").addClass("active")
+		$("#viewactivity").removeClass("active");
+		$("#viewnotice").removeClass("active");
+		$('#isputaway').bootstrapTable('refresh');
+	})
+	$("#viewactivity").click(function(){
+		$("#viewactivity").addClass("active")
+		$("#viewall").removeClass("active");
+		$("#viewnotice").removeClass("active");
+		$.getJSON("index/Viewnotice.action", queryParams("HUODONG"), function(json){
+			$('#isputaway').bootstrapTable('load', json);
+		});
+	})
+	$("#viewnotice").click(function(){
+		$("#viewnotice").addClass("active")
+		$("#viewall").removeClass("active");
+		$("#viewactivity").removeClass("active");
+		$.getJSON("index/Viewnotice.action", queryParams("GONGGAO"), function(json){
+			$('#isputaway').bootstrapTable('load', json);
+		});
+	})
+	
+	$("#allall").click(function(){
+		$("#allall").addClass("active")
+		$("#allactivity").removeClass("active");
+		$("#allnotice").removeClass("active");
+		$('#all').bootstrapTable('refresh');
+	})
+	$("#allactivity").click(function(){
+		$("#allactivity").addClass("active")
+		$("#allall").removeClass("active");
+		$("#allnotice").removeClass("active");
+		$.getJSON("index/Allnotice.action", queryParams("HUODONG"), function(json){
+			$('#all').bootstrapTable('load', json);
+		});
+	})
+	$("#allnotice").click(function(){
+		$("#allnotice").addClass("active")
+		$("#allall").removeClass("active");
+		$("#allactivity").removeClass("active");
+		$.getJSON("index/Allnotice.action", queryParams("GONGGAO"), function(json){
+			$('#all').bootstrapTable('load', json);
+		});
+	})
+	//日期选择
+	$('#viewdate').datepicker({
+	    format: 'yyyy-mm-dd',
+	    language: "zh-CN",
+	    autoclose:true,
+	    todayBtn:true,
+	    keyboardNavigation:true,
+	    todayHighlight:true,
+	}).on('changeDate', function(ev){
+		//ev.date.valueOf()
+		$.getJSON("index/Viewnotice.action", queryParams("TIME",$("#viewstarttime").val(),$("#viewendtime").val()), function(json){
+			$('#isputaway').bootstrapTable('load', json);
+		});
+	});
+	$('#alldate').datepicker({
+	    format: 'yyyy-mm-dd',
+	    language: "zh-CN",
+	    autoclose:true,
+	    todayBtn:true,
+	    keyboardNavigation:true,
+	    todayHighlight:true,
+	}).on('changeDate', function(ev){
+		$.getJSON("index/Allnotice.action", queryParams("TIME",$("#allstarttime").val(),$("#allendtime").val()), function(json){
+			$('#all').bootstrapTable('load', json);
+		});
+	});
+	
+	//初始化表格
 	$.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
 	$('#isputaway').bootstrapTable({
-	    url: 'index/indexnotice.action',
-	   queryParams: "type=0"
-	});
+	    url: 'index/Viewnotice.action',
+	}).on('load-success.bs.table', function (e, name, args) {
+        console.log('onLoadSuccess');
+    })
 	$('#all').bootstrapTable({
 	    url: 'index/Allnotice.action',
 	});
@@ -175,6 +276,12 @@
 	    	var elementstate = e.target.className;
 	    	if (elementstate=="glyphicon glyphicon-arrow-down") {//置顶
 	    		var updatestate;
+	    		var type;
+	    		if (row.index_type=="公告") {
+					type=1;
+				} else {
+					type=2;
+				}
 	    		switch (state) {
 				case 0:
 					updatestate="10"
@@ -191,7 +298,7 @@
 				default:
 					break;
 				}
-	    		$.post("index/getCountByState.action",{state:1},function(result){
+	    		$.post("index/getCountByState.action",{type:type},function(result){
 	    			if (result.count==0) {
 	    				$.post("index/updateNoticeState.action",{"row":JSON.stringify(row),state:updatestate},function(result){
 			    			if (result.error==200) {
@@ -201,7 +308,11 @@
 							}
 			    		})
 					}else{
-						alert("已经有置顶项了哦~")
+						if (type==1) {
+							alert("公告已经有置顶项了哦~")
+						} else {
+							alert("活动已经有置顶项了哦~")
+						}
 					}
 	    		})
 			} else {//取消置顶

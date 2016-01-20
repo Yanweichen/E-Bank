@@ -1,5 +1,6 @@
 package com.bank.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +25,19 @@ public class JsonUtil {
 	 * 获得公告
 	 * @param ilist
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static JSONObject getNotice(List<IndexModel> ilist,int total,String format){
+	public static JSONObject getNotice(List<IndexModel> ilist,int total,String format) throws ParseException{
 		JSONObject jarr =  new JSONObject();
 		jarr.put("total", total);
 		JSONArray row =  new JSONArray();
-		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		for (IndexModel im : ilist) {
 			JSONObject jo = new JSONObject();
 			jo.put("index_id", im.getIndex_id());
 			jo.put("index_type", im.getIndex_type());
 			jo.put("index_title", im.getIndex_title());
 			jo.put("index_content", im.getIndex_content());
-			jo.put("index_uptime_format", sdf.format(im.getIndex_uptime()));
+			jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
 			jo.put("upfrom", im.getUpfrom());
 			jo.put("index_state", im.getIndex_state());
 			row.add(jo);

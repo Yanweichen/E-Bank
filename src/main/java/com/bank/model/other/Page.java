@@ -6,6 +6,35 @@ public class Page {
 	private int offset;
 	private String order;
 	private String sort;
+	private String search;
+	private String tableName;
+	private String startTime;
+	private String endTime;
+	
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime+" 23:59:59";
+	}
+	public String getTableName() {
+		return tableName;
+	}
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public int getLimit() {
 		return limit;
 	}
