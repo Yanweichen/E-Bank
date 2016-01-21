@@ -362,7 +362,7 @@ ul.news li p{float:right; color:#000000}
 							
 							<div class="col-sm-3 col-sm-offset-5"><h5>更多>></h5></div>
 						</div>
-						<div id="topnoticediv" style="display: none;">
+						<div id="topnoticediv" style="display: none;text-overflow:ellipsis;white-space:nowrap;">
 							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
 							<a target='_blank' id="topnoticeA"style='margin-left: 3px;color: #B22222' class="topstyle hand"><h4 style="display:inline;" id="topnotice"></h4></a>
 						</div>
@@ -489,7 +489,7 @@ ul.news li p{float:right; color:#000000}
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 1 }, function(json){
 			$.each(json.rows,function(i,jo){
 				var title = jo.index_title;
-				if (jo.index_title.length>=18) {
+				if (jo.index_title.length>=16) {
 					title = title.substring(0,15)+"...";
 				}else{
 					title = jo.index_title;
@@ -521,13 +521,13 @@ ul.news li p{float:right; color:#000000}
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 2 }, function(json){
 			$.each(json.rows,function(i,jo){
 				var title;
-				if (jo.index_title.length>40) {
+				if (jo.index_title.length>36) {
 					title = jo.index_title.substring(0,35)+"...";
 				}else{
 					title = jo.index_title;
 				}
 				if (jo.index_state=="10"||jo.index_state=="11") {
-					if (jo.index_title.length>35) {
+					if (jo.index_title.length>32) {
 						title = jo.index_title.substring(0,31)+"...";
 					}else{
 						title = jo.index_title;
