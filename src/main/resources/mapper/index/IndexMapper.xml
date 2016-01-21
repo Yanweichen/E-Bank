@@ -76,6 +76,13 @@
 	FROM index_entry_view ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`;
   </select>
+  <!-- 根据id查询 -->
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT  
+    <include refid="Base_Column_List" />
+	FROM index_entry_view ent,index_type typ,admin ad 
+	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND index_id = #{_parameter};
+  </select>
   
   <!-- 插入新文章 总表 -->
    <insert id="insert" parameterType="com.bank.model.index.IndexModel">

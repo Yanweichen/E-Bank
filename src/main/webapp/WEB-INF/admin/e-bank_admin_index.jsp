@@ -14,6 +14,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
+	href="<%=basePath%>page/assets//img/tubiao.ico" />
+<link rel="shortcut icon" type="image/x-icon"
 	href="page/assets//img/tubiao.ico" />
 <link href="page/assets/css/dpl-min.css" rel="stylesheet"
 	type="text/css" />
@@ -39,8 +41,8 @@
 			<img alt="" src="page/assets/img/touxiang_zhushou.jpg"
 				class="img-circle touxiang">
 			<div class="dl-log" style="float: right;">
-				管理员，<span class="dl-log-user">${user.user_name}</span><a id="logout"
-					href="#" title="退出系统"
+				管理员，<span class="dl-log-user">${admin.admin_name}</span><a id="logout"
+					href="admin/logout.action" title="退出系统"
 					class="dl-log-quit">[退出]</a>
 			</div>
 		</div>

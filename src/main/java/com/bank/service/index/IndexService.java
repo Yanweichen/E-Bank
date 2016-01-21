@@ -75,7 +75,7 @@ public class IndexService implements BaseService<IndexModel> {
 	@Override
 	public IndexModel findById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return indexdao.selectById(id);
 	}
 
 	@Override

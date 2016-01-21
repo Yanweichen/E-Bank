@@ -39,7 +39,6 @@ cursor:pointer
 			</div>
 		 </li>
 	   </ul>
-		
 	</div>
 	<div class="row" style="padding: 40px">
 		<div class="row">
@@ -74,7 +73,7 @@ cursor:pointer
   		 		  <li id="allactivity" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">活动</a></li>
   				  <li id="allnotice" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">公告</a></li>
 		  		 <li role="presentation" >
-					<div class="input-daterange input-group" id="alldate" style="margin-left: 10px">
+					<div class="input-daterange input-group" id="alldate" style="margin-left: 10px;">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 						<input id="allstarttime" type="text" class="input-sm form-control" name="start" onfocus="this.blur()" /> 
 						<span class="input-group-addon">至</span> 
@@ -204,7 +203,7 @@ cursor:pointer
 	$('#isputaway').bootstrapTable({
 	    url: 'index/Viewnotice.action',
 	}).on('load-success.bs.table', function (e, name, args) {
-        console.log('onLoadSuccess');
+        console.log($('#isputaway').bootstrapTable('getOptions').queryParams);
     })
 	$('#all').bootstrapTable({
 	    url: 'index/Allnotice.action',

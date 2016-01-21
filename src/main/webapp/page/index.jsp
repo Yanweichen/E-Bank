@@ -364,7 +364,7 @@ ul.news li p{float:right; color:#000000}
 						</div>
 						<div id="topnoticediv" style="display: none;">
 							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
-							<a style='margin-left: 3px;color: #B22222' class="topstyle hand"><h4 style="display:inline;" id="topnotice"></h4></a>
+							<a target='_blank' id="topnoticeA"style='margin-left: 3px;color: #B22222' class="topstyle hand"><h4 style="display:inline;" id="topnotice"></h4></a>
 						</div>
 <!-- 						<ul id="notice" class="news" style="margin-top: 10px;letter-spacing: 1px;"> -->
 <!-- 						</ul> -->
@@ -384,7 +384,7 @@ ul.news li p{float:right; color:#000000}
 						</div>
 						<div id="topactivitydiv" style="display: none;">
 							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
-							<a  style='margin-left: 3px;color: #B22222;' class="topstyle hand"><h4 style="display:inline;" id="topactivity"></h4></a>
+							<a id="topactivityA" target='_blank' style='margin-left: 3px;color: #B22222;' class="topstyle hand"><h4 style="display:inline;" id="topactivity"></h4></a>
 						</div>
 <!-- 						<ul id="activity" class="news" style="margin-top: 10px;letter-spacing: 1px;"> -->
 <!-- 						</ul> -->
@@ -502,6 +502,7 @@ ul.news li p{float:right; color:#000000}
 					}
 					$("#topnoticediv").css("display", "inline");
 					$("#topnotice").append(title)
+					$("#topnoticeA").attr("href","<%=basePath%>index/articledetail.action?id="+jo.index_id);
 				}else{
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
@@ -509,7 +510,8 @@ ul.news li p{float:right; color:#000000}
 					} else {
 						src = 'indexnomalicon.png';
 					}
-					$("#notice").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'><a style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
+					$("#notice").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src
+					+"'><a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
 // 					$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
 // 					+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
 				}
@@ -532,6 +534,7 @@ ul.news li p{float:right; color:#000000}
 					}
 					$("#topactivitydiv").css("display", "inline");
 					$("#topactivity").append(title)
+					$("#topactivityA").attr("href","<%=basePath%>index/articledetail.action?id="+jo.index_id);
 				}else{
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
@@ -539,9 +542,8 @@ ul.news li p{float:right; color:#000000}
 					} else {
 						src = 'indexnomalicon.png';
 					}
-					$("#activity").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'><a style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
-// 					$("#activity").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
-// 					+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+					$("#activity").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"
+					+src+"'><a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
 				}
 			});
 		});

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -21,6 +22,7 @@ import com.bank.model.index.IndexModel;
 import com.bank.model.other.Page;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
+import com.bank.utils.TimeUtil;
 
 @Controller
 @RequestMapping("/index")
@@ -193,6 +195,29 @@ public class IndexController {
 			jo.put("msg", "删除失败");
 		}
 		return jo;
+	}
+	
+	@RequestMapping("/getArticleById")
+	public JSONObject getArticleById(int id) throws ParseException{
+		JSONObject jo = new JSONObject();//返回给页面的json
+		IndexModel im = is.findById(id);
+		if (im==null) {
+			jo.put("error", "203");
+			jo.put("msg", "查询失败");
+			return jo;
+		}
+		jo = JsonUtil.getSingleNotice(im,"yyyy-MM-dd HH:mm");
+		return jo;
+	}
+
+	@RequestMapping("/articledetail")
+	public ModelAndView gotoArticleDetails(int id) throws ParseException{
+		ModelAndView mv = new ModelAndView();
+		IndexModel im = is.findById(id);
+		im.setIndex_uptime_format(TimeUtil.Date2String(im.getIndex_uptime(), "yyyy-MM-dd HH:mm"));
+		mv.addObject("article",im);
+		mv.setViewName("../page/article/articledetails");;
+		return mv;
 	}
 	
 	@RequestMapping("/myBank")
