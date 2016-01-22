@@ -109,7 +109,23 @@ cursor:pointer
 			</div>
 		</div>
 	</div>
-	
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+						<p id="msg"></p>
+				</div>
+			</div>
+		</div>
+	</div>
 <script src="page/assets/js/jquery-1.8.1.min.js"></script>
 <script src="page/assets/js/bootstrap.min.js"></script>
 <script src="page/assets/js/bootstrap-table.js"></script>
@@ -117,6 +133,11 @@ cursor:pointer
 <script src="page/assets/js/bootstrap-datepicker.js"></script>
 <script src="page/assets/js/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
+	function showMsg(msg) {
+		$("#msg").empty(); 
+        $("#msg").append(msg)
+		$("#isSuc").modal(); 
+	}
 	function queryParams(type,stime,etime){
 		return {
 			    search:type,
@@ -303,14 +324,14 @@ cursor:pointer
 			    			if (result.error==200) {
 					    		e.target.setAttribute("class", "glyphicon glyphicon-arrow-up");
 							} else {
-								alert("置顶失败")
+								showMsg("置顶失败")
 							}
 			    		})
 					}else{
 						if (type==1) {
-							alert("公告已经有置顶项了哦~")
+							showMsg("公告已经有置顶项了哦~")
 						} else {
-							alert("活动已经有置顶项了哦~")
+							showMsg("活动已经有置顶项了哦~")
 						}
 					}
 	    		})
@@ -336,7 +357,7 @@ cursor:pointer
 	    			if (result.error==200) {
 	    				e.target.setAttribute("class", "glyphicon glyphicon-arrow-down");
 					} else {
-						alert("取消置顶失败")
+						showMsg("取消置顶失败")
 					}
 	    		})
 			}
@@ -366,7 +387,7 @@ cursor:pointer
 	    			if (result.error==200) {
 	    				e.target.setAttribute("class", "glyphicon glyphicon-star");
 					} else {
-						alert("取消置顶失败")
+						showMsg("取消置顶失败")
 					}
 	    		})
 			} else {//取消重要
@@ -391,7 +412,7 @@ cursor:pointer
 	    			if (result.error==200) {
 	    				e.target.setAttribute("class", "glyphicon glyphicon-star-empty");
 					} else {
-						alert("取消失败")
+						showMsg("取消失败")
 					}
 	    		})
 				
@@ -403,7 +424,7 @@ cursor:pointer
     			if (result.error==200) {
     				$('#isputaway').bootstrapTable('remove', {field: 'index_id', values: [row.index_id]});
 				} else {
-					alert("删除失败")
+					showMsg("删除失败")
 				}
     		})
 	    }
@@ -422,11 +443,11 @@ cursor:pointer
 	}
 	window.actionEventsAll = {
 	    'click .addview': function (e, value, row, index) {
-	    	$.post("index/add2View.action",{"row":JSON.stringify(row)},function(result){
+	    	$.post("index/add2View.action",{"id":row.index_id},function(result){
     			if (result.error==200) {
     				$('#isputaway').bootstrapTable('refresh');
 				} else {
-					alert("添加失败")
+					showMsg("已经添加过了哦~")
 				}
     		})
 	    },
@@ -439,7 +460,7 @@ cursor:pointer
     		                values: [row.index_id]
     		            });
 				} else {
-					alert("删除失败")
+					showMsg("删除失败")
 				}
     		})
 	    }
@@ -455,6 +476,21 @@ cursor:pointer
 		         '<div>'+row.index_content+'</div>',
 		         ].join('')
     }
+	//模态框居中
+	function centerModals() {
+		$('.modal').each(
+				function(i) {	
+					var $clone = $(this).clone().css('display', 'block')
+							.appendTo('body');
+					var top = Math.round(($clone.height() - $clone.find(
+							'.modal-content').height()) / 3);
+					top = top > 0 ? top : 0;
+					$clone.remove();
+					$(this).find('.modal-content').css("margin-top", top);
+				});
+	}
+	$('.modal').on('show.bs.modal', centerModals);
+	$(window).on('resize', centerModals);
 </script>
 </body>
 </html>

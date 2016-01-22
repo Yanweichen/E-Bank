@@ -5,11 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.index.IndexModel;
 import com.bank.model.other.CityModel;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class JsonUtil {
@@ -17,7 +19,7 @@ public class JsonUtil {
 	private static Gson gson=null;
     static{
         if(gson==null){
-            gson=new Gson();
+            gson=new GsonBuilder().disableHtmlEscaping().create();;
         }
     }
 	
@@ -28,15 +30,18 @@ public class JsonUtil {
 	 * @throws ParseException 
 	 */
 	public static JSONObject getSingleNotice(IndexModel im,String format) throws ParseException{
-		JSONObject jo = new JSONObject();
-		jo.put("index_id", im.getIndex_id());
-		jo.put("index_type", im.getIndex_type());
-		jo.put("index_title", im.getIndex_title());
-		jo.put("index_content", im.getIndex_content());
-		jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
-		jo.put("upfrom", im.getUpfrom());
-		jo.put("index_state", im.getIndex_state());
-		return jo;
+//		JSONObject jo = new JSONObject();
+//		jo.put("index_id", im.getIndex_id());
+//		jo.put("index_type", im.getIndex_type());
+//		jo.put("index_title", im.getIndex_title());
+//		jo.put("index_content", im.getIndex_content());
+//		jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
+//		jo.put("upfrom", im.getUpfrom());
+//		jo.put("index_state", im.getIndex_state());
+//		jo.put("index_hitsnum", im.getIndex_hitsnum());
+//		jo.put("index_label", im.getIndex_label());
+		
+		return (JSONObject) JSON.toJSON(im);
 	}
 	
 	/**
@@ -50,16 +55,18 @@ public class JsonUtil {
 		jarr.put("total", total);
 		JSONArray row =  new JSONArray();
 		for (IndexModel im : ilist) {
-			JSONObject jo = new JSONObject();
-			jo.put("index_id", im.getIndex_id());
-			jo.put("index_type", im.getIndex_type());
-			jo.put("index_title", im.getIndex_title());
-			jo.put("index_content", im.getIndex_content());
-			jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
-			jo.put("upfrom", im.getUpfrom());
-			jo.put("index_state", im.getIndex_state());
-			row.add(jo);
-//			row.add(gson.toJson(im));
+//			JSONObject jo = new JSONObject();
+//			jo.put("index_id", im.getIndex_id());
+//			jo.put("index_type", im.getIndex_type());
+//			jo.put("index_title", im.getIndex_title());
+//			jo.put("index_content", im.getIndex_content());
+//			jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
+//			jo.put("upfrom", im.getUpfrom());
+//			jo.put("index_state", im.getIndex_state());
+//			jo.put("index_hitsnum", im.getIndex_hitsnum());
+//			jo.put("index_label", im.getIndex_label());
+//			row.add(jo);
+			row.add(JSON.toJSON(im));
 		}
 		jarr.put("rows", row);
 		return jarr;

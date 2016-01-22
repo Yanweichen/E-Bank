@@ -34,8 +34,8 @@ public class IndexService implements BaseService<IndexModel> {
 	 * @param im
 	 * @return
 	 */
-	public int add2View(IndexModel im){
-		return indexdao.insertView(im);
+	public int add2View(int id){
+		return indexdao.insertView(id);
 	}
 	
 	public int findCountByTableName(String name){
@@ -57,6 +57,16 @@ public class IndexService implements BaseService<IndexModel> {
 	public int findNumByState(Integer state){
 		return indexdao.selectNumByState(state);
 	}
+	
+	/**
+	 * 根据id增加点击量
+	 * @param id
+	 * @return
+	 */
+	public int addHits(int id){
+		return indexdao.updateHitsNum(indexdao.seletHitsNumById(id), id);
+	}
+	
 	
 	@Override
 	public int add(IndexModel model) {

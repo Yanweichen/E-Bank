@@ -70,13 +70,6 @@ public class IndexController {
 		return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),"MM/dd");
 	}
 	
-	
-	@RequestMapping("/session")
-	public String getTestSession(HttpServletRequest req){
-		req.getSession().invalidate();
-		return "index";
-	}
-	
 	@ResponseBody
 	@RequestMapping("/addnotice")
 	public JSONObject addNewNotice(IndexModel im,HttpServletRequest req){
@@ -130,28 +123,9 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/add2View")
-	public JSONObject add2View(String row){
-		JSONObject jrow = JSON.parseObject(row);//传递回来的json
+	public JSONObject add2View(int id){
 		JSONObject jo = new JSONObject();//返回给页面的json
-		IndexModel im = JSON.parseObject(row, IndexModel.class);//转换对象
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try {
-			im.setIndex_uptime(sdf.parse(jrow.getString("index_uptime_format")));
-		} catch (ParseException e) {
-			e.printStackTrace();
-			jo.put("error", "203");
-			jo.put("msg", "修改失败");
-		}
-		int isSuC = 0;
-		try {
-			isSuC = is.add2View(im);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			jo.put("error", "203");
-			jo.put("msg", "添加失败");
-			return jo;
-		}
+		int isSuC = is.add2View(id);
 		if (isSuC==1) {
 			jo.put("error", "200");
 			jo.put("msg", "添加成功");
@@ -197,6 +171,7 @@ public class IndexController {
 		return jo;
 	}
 	
+	@ResponseBody
 	@RequestMapping("/getArticleById")
 	public JSONObject getArticleById(int id) throws ParseException{
 		JSONObject jo = new JSONObject();//返回给页面的json
@@ -214,6 +189,7 @@ public class IndexController {
 	public ModelAndView gotoArticleDetails(int id) throws ParseException{
 		ModelAndView mv = new ModelAndView();
 		IndexModel im = is.findById(id);
+		is.addHits(id);//增加点击量
 		im.setIndex_uptime_format(TimeUtil.Date2String(im.getIndex_uptime(), "yyyy-MM-dd HH:mm"));
 		mv.addObject("article",im);
 		mv.setViewName("../page/article/articledetails");;

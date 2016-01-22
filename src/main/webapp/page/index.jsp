@@ -115,9 +115,6 @@ ul.nav-tabss li:last-child a {
 ul.nav-tabss.affix {
 	top: 30px; /* Set the top position of pinned element */
 }
-.hand{
-cursor:pointer
-}
 a.indexicon:link {color: #4C9ED9;text-decoration: none;}		/* 未访问的链接 */
 a.indexicon:visited {color: #4C9ED9;text-decoration: none;}	/* 已访问的链接 */
 a.indexicon:hover {color: #CC0000;text-decoration: none;}		/* 鼠标移动到链接上 */
@@ -137,8 +134,19 @@ ul.news li a:visited {color: #000000;text-decoration: none;}
 ul.news li a:hover {color: #bc0021;text-decoration: underline;}
 ul.news li p{float:right; color:#000000}
 
-.starstyle{
-
+.overstep{
+	text-overflow:ellipsis; 
+	white-space:nowrap;
+	overflow:hidden;
+}
+.textbottom{
+	vertical-align:bottom;
+}
+.timestyle{
+	color: #666666;
+}
+.hand{
+	cursor:pointer
 }
 </style>
 </head>
@@ -362,12 +370,10 @@ ul.news li p{float:right; color:#000000}
 							
 							<div class="col-sm-3 col-sm-offset-5"><h5>更多>></h5></div>
 						</div>
-						<div id="topnoticediv" style="display: none;text-overflow:ellipsis;white-space:nowrap;">
-							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
-							<a target='_blank' id="topnoticeA"style='margin-left: 3px;color: #B22222' class="topstyle hand"><h4 style="display:inline;" id="topnotice"></h4></a>
+						<div class="overstep" >
+							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indextopicon.png">
+							<a target='_blank' id="topnoticeA"style='margin-left: 3px;color: #B22222' class="topstyle hand textbottom"></a>
 						</div>
-<!-- 						<ul id="notice" class="news" style="margin-top: 10px;letter-spacing: 1px;"> -->
-<!-- 						</ul> -->
 						<div id="notice">
 							
 						</div>
@@ -382,12 +388,10 @@ ul.news li p{float:right; color:#000000}
 							
 							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px">更多>></h5></div>
 						</div>
-						<div id="topactivitydiv" style="display: none;">
-							<img  alt="" style="height: 30px;width: 30px" src="<%=basePath%>page/assets/img/indextopicon.png">
-							<a id="topactivityA" target='_blank' style='margin-left: 3px;color: #B22222;' class="topstyle hand"><h4 style="display:inline;" id="topactivity"></h4></a>
+						<div class="overstep" >
+							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indextopicon.png">
+							<a target='_blank' id="topactivityA"style='margin-left: 3px;color: #B22222' class="topstyle hand textbottom"></a>
 						</div>
-<!-- 						<ul id="activity" class="news" style="margin-top: 10px;letter-spacing: 1px;"> -->
-<!-- 						</ul> -->
 						<div id="activity">
 							
 						</div>
@@ -489,19 +493,8 @@ ul.news li p{float:right; color:#000000}
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 1 }, function(json){
 			$.each(json.rows,function(i,jo){
 				var title = jo.index_title;
-				if (jo.index_title.length>=16) {
-					title = title.substring(0,15)+"...";
-				}else{
-					title = jo.index_title;
-				}
 				if (jo.index_state=="10"||jo.index_state=="11") {
-					if (jo.index_title.length>=15) {
-						title = jo.index_title.substring(0,14)+"...";
-					}else{
-						title = jo.index_title;
-					}
-					$("#topnoticediv").css("display", "inline");
-					$("#topnotice").append(title)
+					$("#topnoticeA").append(title)
 					$("#topnoticeA").attr("href","<%=basePath%>index/articledetail.action?id="+jo.index_id);
 				}else{
 					var src;
@@ -510,30 +503,16 @@ ul.news li p{float:right; color:#000000}
 					} else {
 						src = 'indexnomalicon.png';
 					}
-					$("#notice").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src
-					+"'><a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
-// 					$("#notice").append("<li style='line-height:28px;'><a href='www.baidu.com'>"
-// 					+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div></li>");
+					$("#notice").append("<div class='row' > <div class='col-sm-10 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
 				}
 			});
 		});
 	//获取活动
 		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 2 }, function(json){
 			$.each(json.rows,function(i,jo){
-				var title;
-				if (jo.index_title.length>36) {
-					title = jo.index_title.substring(0,35)+"...";
-				}else{
-					title = jo.index_title;
-				}
+				var title = jo.index_title;
 				if (jo.index_state=="10"||jo.index_state=="11") {
-					if (jo.index_title.length>32) {
-						title = jo.index_title.substring(0,31)+"...";
-					}else{
-						title = jo.index_title;
-					}
-					$("#topactivitydiv").css("display", "inline");
-					$("#topactivity").append(title)
+					$("#topactivityA").append(title)
 					$("#topactivityA").attr("href","<%=basePath%>index/articledetail.action?id="+jo.index_id);
 				}else{
 					var src;
@@ -542,8 +521,7 @@ ul.news li p{float:right; color:#000000}
 					} else {
 						src = 'indexnomalicon.png';
 					}
-					$("#activity").append("<div style='margin-left: 5px;margin-top: 5px;'> <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"
-					+src+"'><a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" style='margin-left: 8px;' class='hand'>"+title+"</a><div  style='float: right;margin-right: 10px;'>"+jo.index_uptime_format+"</div> </div>")
+					$("#activity").append("<div class='row' > <div class='col-sm-11 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
 				}
 			});
 		});

@@ -14,9 +14,30 @@ public class IndexModel {
 	private Date index_uptime;//上传时间
 	private String upfrom;//上传者
 	private String index_state;//文章状态
+	private String index_label;//文章标签
+	private boolean index_isindex;//是否在首页
+	private int index_hitsnum;//点击量
 	
 	private String index_uptime_format;//格式化后的时间
 	
+	public String getIndex_label() {
+		return index_label;
+	}
+	public void setIndex_label(String index_label) {
+		this.index_label = index_label;
+	}
+	public int getIndex_hitsnum() {
+		return index_hitsnum;
+	}
+	public void setIndex_hitsnum(int index_hitsnum) {
+		this.index_hitsnum = index_hitsnum;
+	}
+	public boolean isIndex_isindex() {
+		return index_isindex;
+	}
+	public void setIndex_isindex(boolean index_isindex) {
+		this.index_isindex = index_isindex;
+	}
 	public String getIndex_state() {
 		return index_state;
 	}

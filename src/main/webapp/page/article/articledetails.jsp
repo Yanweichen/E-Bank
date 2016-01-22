@@ -22,6 +22,9 @@
 .top10{
 	margin-top: 10px
 }
+.top5{
+	margin-top: 5px
+}
 .touming{
 	background-color:rgba(0,0,0,0.1);
 	border: 0;
@@ -42,7 +45,34 @@
 	margin:5px 0px 5px 5px
 }
 a{
+	cursor:pointer;
+	text-decoration: none;
+}
+a:hover {text-decoration: none;}		/* 鼠标移动到链接上 */
+.overstep{
+	text-overflow:ellipsis; 
+	white-space:nowrap;
+	overflow:hidden;
+}
+a.hota:link {color: #3f316d;text-decoration: none;}		/* 未访问的链接 */
+a.hota:visited {color: #3f316d;text-decoration: none;}	/* 已访问的链接 */
+a.hota:hover {color: #4C9ED9;text-decoration: none;}		/* 鼠标移动到链接上 */
+a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
+.textbottom{
+	vertical-align:bottom;
+}
+.timestyle{
+	color: #666666;
+}
+.hand{
 	cursor:pointer
+}
+div.hotdiv:hover{
+	background-color:rgba(255,255,255,0.5);
+	overflow: visible;
+}
+.hotdiv{
+	border-radius: 10px 10px 10px 10px;
 }
 </style>
 </head>
@@ -72,13 +102,17 @@ a{
 					</p>
 				</div>
 				<div class="row top20">
-					<div class="col-sm-5" style="padding-left: 0px">
-					<img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-arrow-up.png'>
-						<h5 class="nosingline updownwenzizhidi"><a>Example page header </a></h5>
+					<div class="col-sm-4 overstep" style="padding-left: 0px">
+						<div class="overstep" >
+							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/circle-arrow-up.png">
+							<a target='_blank' id="beforearticle"style='margin-left: 3px;' class="hand textbottom"></a>
+						</div>
 					</div>
-					<div class="col-sm-4 col-sm-offset-3">
-						<h5 class="nosingline updownwenzizhidi"><a>Example page headerExa  </a></h5>
-						<img  alt='' style='height: 20px;width: 20px;float: right;' src='page/assets/img/circle-arrow-down.png'>
+					<div class="col-sm-4 col-sm-offset-4 overstep">
+						<div class="overstep" >
+							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/circle-arrow-down.png">
+							<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom"></a>
+						</div>
 					</div>
 				</div>
 				<!-- 相关文章 -->
@@ -91,14 +125,44 @@ a{
 					</div>
 					<div class="row top10">
 						<div class="col-sm-5">
-							<a>Example page header Subtext for header</a>
-							<a>Example page header Subtext for header</a>
-							<a>Example page header Subtext for header</a>
+							<div class="overstep top5" >
+								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png">
+								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom">
+									Example page header Subtext for header
+								</a>
+							</div>
+							<div class="overstep top5" >
+								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png">
+								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom">
+									Example page header Subtext for header
+								</a>
+							</div>
+							<div class="overstep top5" >
+								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png">
+								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom">
+									Example page header Subtext for header
+								</a>
+							</div>
 						</div>
 						<div class="col-sm-5 col-sm-offset-2">
-							<a>Example page header Subtext for header</a>
-							<a>Example page header Subtext for header</a>
-							<a>Example page header Subtext for header</a>
+							<div class="overstep top5" >
+								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png">
+								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom">
+									Example page header Subtext for header
+								</a>
+							</div>
+							<div class="overstep top5" >
+								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png">
+								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom">
+									Example page header Subtext for header
+								</a>
+							</div>
+							<div class="overstep top5" >
+								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png">
+								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom">
+									Example page header Subtext for header
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -205,30 +269,21 @@ a{
 			</div>
 			<!-- 右侧部分 -->
 			<div class="col-sm-4 col-sm-offset-1">
-				<div class="list-group" style="background-color:rgba(0,0,0,0.0);">
+				<div class="list-group" >
 					<a href="#" class="list-group-item touming active"style="background-color: #3f316d">
 						<h4 class="list-group-item-heading" style="margin-top: 5px" >热门文章</h4>
 					</a>
-					<a href="#" class="list-group-item touming">
-						<img  alt='' style='height: 20px;width: 20px;margin-right: 5px;margin-bottom: 5px' src='page/assets/img/indexhoticon.png'>
-						<h4 class="list-group-item-heading nosingline">热门文章热门文章热门文章</h4>
-					</a>
-					<a href="#" class="list-group-item touming">
-						<img  alt='' style='height: 20px;width: 20px;margin-right: 5px;margin-bottom: 5px' src='page/assets/img/indexhoticon.png'>
-						<h4 class="list-group-item-heading nosingline">热门文章热门文章热门文章热门文章</h4>
-					</a>
-					<a href="#" class="list-group-item touming">
-						<img  alt='' style='height: 20px;width: 20px;margin-right: 5px;margin-bottom: 5px' src='page/assets/img/indexhoticon.png'>
-						<h4 class="list-group-item-heading nosingline">热门文章热门文章热门文章热门文章</h4>
-					</a>
-					<a href="#" class="list-group-item touming">
-						<img  alt='' style='height: 20px;width: 20px;margin-right: 5px;margin-bottom: 5px' src='page/assets/img/indexhoticon.png'>
-						<h4 class="list-group-item-heading nosingline">热门文章热门文章热门文章热门文章</h4>
-					</a>
-					<a href="#" class="list-group-item touming">
-						<img  alt='' style='height: 20px;width: 20px;margin-right: 5px;margin-bottom: 5px' src='page/assets/img/indexhoticon.png'>
-						<h4 class="list-group-item-heading nosingline">热门文章热门文章热门文章热门文章</h4>
-					</a>
+					<div id="hotlist" class='list-group-item ' style="background-color:rgba(0,0,0,0.1);">
+<!-- 						<div class="row hotdiv top10"> -->
+<!-- 							<div class='col-sm-10 overstep' style="z-index: 10"> -->
+<!-- 								<img alt='' style='height: 25px; width: 25px' src='page/assets/img/indexnomalicon.png'> -->
+<!-- 							    <a target='_blank' href='index/articledetail.action?id="+jo.index_id+' style='margin-left: 3px;font-size: 18px' class='hota hand textbottom'> -->
+<!-- 									热门文章热门文章热门文章热门文章热热门文章热门文章热门文章热门文章热热门文章热门文章热门文章热门文章热热门文章热门文章热门文章热门文章热 -->
+<!-- 							    </a> -->
+<!-- 							</div> -->
+<!-- 							<div class='col-sm-1 timestyle' style="padding-left: 0px;z-index: 9"><span class="badge">1877</span></div> -->
+<!-- 						</div> -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -238,7 +293,35 @@ a{
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	
+		var articletitle = "${article.index_title}";		
+		document.title = articletitle;
+		var articleid = ${article.index_id};
+		function queryParams(sort,order){
+			return {
+					limit:10,
+					offset:0,
+					sort:sort,
+					order:order,
+			}
+		}
+		$(document).ready(function(){
+			$.getJSON("index/getArticleById.action", { id: articleid-1 }, function(json){
+				$("#beforearticle").empty();
+				$("#beforearticle").append(json.index_title);
+				$("#beforearticle").attr("href","index/articledetail.action?id="+(articleid-1));
+			});
+			$.getJSON("index/getArticleById.action", { id: articleid+1 }, function(json){
+				$("#afterarticle").empty();
+				$("#afterarticle").append(json.index_title);
+				$("#afterarticle").attr("href","index/articledetail.action?id="+(articleid+1));
+			});
+			$.getJSON("index/Allnotice.action", queryParams("index_hitsnum","desc"), function(json){
+				$.each(json.rows,function(i,jo){
+					$("#hotlist").append("<div class='row hotdiv top10'><div class='col-sm-10 overstep' style='z-index: 10'><img alt='' style='height: 25px; width: 25px' src='page/assets/img/indexnomalicon.png'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' style='margin-left: 3px;font-size: 18px' class='hota hand textbottom'>"+jo.index_title+"</a> </div> <div class='col-sm-1 timestyle' style='padding-left: 0px;z-index: 9'><span class='badge'>"+jo.index_hitsnum+"</span></div></div>");
+				});
+			});
+		})
+		
 	</script>
 </body>
 </html>

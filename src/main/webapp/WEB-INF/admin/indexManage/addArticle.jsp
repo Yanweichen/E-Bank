@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="page/assets/css/bootstrap.css">
 <link rel="stylesheet" href="page/assets/css/bootstrap-table.css">
 <link rel="stylesheet" href="page/assets/css/bootstrap-wysiwyg.css">
+<link rel="stylesheet" href="page/assets/css/tokenfield-typeahead.css">
+<link rel="stylesheet" href="page/assets/css/bootstrap-tokenfield.css">
 
 <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
@@ -26,6 +28,7 @@
 	<div class="col-sm-6">
 		<div class="row">
 		  <div class="col-sm-12">
+		  <!-- 标题-->
 		  <div class="form-group">
 		    <div class="input-group">
 		      <div class="input-group-btn">
@@ -40,8 +43,19 @@
 		        </ul>
 		      </div><!-- /btn-group -->
 		      <input id="title" type="text" class="form-control">
+		   </div><!-- /input-group -->
+		 </div><!-- /form-group -->
+	    <!-- 标签 -->
+	    <div class="form-group">
+		   <div class="input-group">
+		      <div class="input-group-btn">
+		      	<button type="button" class="btn btn-default" 
+	                     tabindex="-1">标签
+	            </button>
+		      </div><!-- /btn-group -->
+		        <input type="text" class="form-control" id="label" value="关键词1,关键词2,关键词3" />
 		    </div><!-- /input-group -->
-		    </div><!-- /form-group -->
+	    </div>
 		  </div><!-- /.col-lg-6 -->
 		</div>
 	<!-- 富文本编辑器 -->
@@ -116,10 +130,29 @@
 		<div id="preview" class="well well-lg" style="height: 800px"></div>
 	</div>
 </div><!-- /.row -->
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+			aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+							<h4 class="modal-title">提示</h4>
+					</div>
+					<div class="modal-body">
+							<p id="msg"></p>
+					</div>
+				</div>
+			</div>
+		</div>
 <script src="page/assets/js/jquery-1.8.1.min.js"></script>
 <script src="page/assets/js/bootstrap.min.js"></script>
 <script src="page/assets/js/bootstrap-wysiwyg.js"></script>
 <script src="page/assets/js/jquery.hotkeys.js"></script>
+<script src="page/assets/js/bootstrap-tokenfield.js"></script>
+<script src="page/assets/js/typeahead.bundle.js"></script>
 <script type="text/javascript">
 function initToolbarBootstrapBindings() {
     var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
@@ -154,7 +187,7 @@ function initToolbarBootstrapBindings() {
 		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
 		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
 	};
-  initToolbarBootstrapBindings(); 
+  	initToolbarBootstrapBindings(); 
 	$('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
 	var type = 2;//类型
 	$("#activity").click(function () {
@@ -172,12 +205,15 @@ function initToolbarBootstrapBindings() {
 			index_type : type,
 			index_title : $("#title").val(),
 			index_content : $("#editor").html(),
+			index_label : $("#label").val(),
 		}
 	}
 	$("#submit").click(function () {
 		$.post("index/addnotice.action",from(),function(result){
 			if (result.error==200) {
-				alert("上传成功");
+				showMsg("上传成功");
+			}else{
+				showMsg("上传失败");
 			}
 		})
 	});
@@ -185,6 +221,25 @@ function initToolbarBootstrapBindings() {
 		$("#preview").empty();
 		$("#preview").html($("#editor").html());
 	});
+	function showMsg(msg) {
+		$("#msg").empty(); 
+        $("#msg").append(msg)
+		$("#isSuc").modal(); 
+	}
+	//标签js
+	var engine = new Bloodhound({
+		  local: [{value: 'red'}, {value: 'blue'}, {value: 'green'} , {value: 'yellow'}, {value: 'violet'}, {value: 'brown'}, {value: 'purple'}, {value: 'black'}, {value: 'white'}],
+		  datumTokenizer: function(d) {
+		    return Bloodhound.tokenizers.whitespace(d.value);
+		  },
+		  queryTokenizer: Bloodhound.tokenizers.whitespace
+		});
+
+		engine.initialize();
+
+		$('#label').tokenfield({
+		  typeahead: [null, { source: engine.ttAdapter() }]
+		});
 </script>
 </body>
 </html>
