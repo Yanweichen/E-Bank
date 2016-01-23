@@ -58,6 +58,9 @@ public class IndexService implements BaseService<IndexModel> {
 		return indexdao.selectNumByState(state);
 	}
 	
+	public IndexModel findByBoA(String ba,int id){
+		return indexdao.selectOneByBeforeOrAfter(ba, id);
+	}
 	/**
 	 * 根据id增加点击量
 	 * @param id

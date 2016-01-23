@@ -131,4 +131,19 @@
    <update id="deleteByIdView" parameterType="java.lang.Integer">
   	UPDATE index_entry SET index_isindex = FALSE WHERE index_id = #{_parameter};
   </update>
+  <!-- 获取上一条或者下一条记录 -->
+  <select id="selectOneByBeforeOrAfter" resultMap="BaseResultMap">
+	  SELECT 
+	  <include refid="Base_Column_List"/>
+	  FROM index_entry ent,index_type typ,admin ad 
+	  WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND
+	 <choose>
+		<when test="ba == 'before'">
+		  index_id &lt; #{id} ORDER BY index_id DESC LIMIT 1;
+		</when>
+		<otherwise>
+		  index_id &gt; #{id} ORDER BY index_id ASC LIMIT 1;
+		</otherwise>
+		</choose>
+  </select>
 </mapper>

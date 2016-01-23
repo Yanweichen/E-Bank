@@ -305,15 +305,23 @@ div.hotdiv:hover{
 			}
 		}
 		$(document).ready(function(){
-			$.getJSON("index/getArticleById.action", { id: articleid-1 }, function(json){
+			$.getJSON("index/getArticleByBorA.action", { id: articleid,ba:"before" }, function(json){
+				var isNull = typeof(json.index_title) == "undefined";
 				$("#beforearticle").empty();
-				$("#beforearticle").append(json.index_title);
-				$("#beforearticle").attr("href","index/articledetail.action?id="+(articleid-1));
+				$("#beforearticle").append(isNull?"没有上一篇了哦~":json.index_title);
+				if (isNull) {
+					return;
+				}
+				$("#beforearticle").attr("href","index/articledetail.action?id="+(json.index_id));
 			});
-			$.getJSON("index/getArticleById.action", { id: articleid+1 }, function(json){
+			$.getJSON("index/getArticleByBorA.action", { id: articleid,ba:"after" }, function(json){
+				var isNull = typeof(json.index_title) == "undefined";
 				$("#afterarticle").empty();
-				$("#afterarticle").append(json.index_title);
-				$("#afterarticle").attr("href","index/articledetail.action?id="+(articleid+1));
+				$("#afterarticle").append(isNull?"没有下一篇了哦~":json.index_title);
+				if (isNull) {
+					return;
+				}
+				$("#afterarticle").attr("href","index/articledetail.action?id="+(json.index_id));
 			});
 			$.getJSON("index/Allnotice.action", queryParams("index_hitsnum","desc"), function(json){
 				$.each(json.rows,function(i,jo){

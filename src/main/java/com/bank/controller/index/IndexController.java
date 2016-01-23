@@ -185,6 +185,20 @@ public class IndexController {
 		return jo;
 	}
 
+	@ResponseBody
+	@RequestMapping("/getArticleByBorA")
+	public JSONObject getArticleByBorA(int id,String ba) throws ParseException{
+		JSONObject jo = new JSONObject();//返回给页面的json
+		IndexModel im = is.findByBoA(ba, id);
+		if (im==null) {
+			jo.put("error", "203");
+			jo.put("msg", "查询失败");
+			return jo;
+		}
+		jo = JsonUtil.getSingleNotice(im,"yyyy-MM-dd HH:mm");
+		return jo;
+	}
+
 	@RequestMapping("/articledetail")
 	public ModelAndView gotoArticleDetails(int id) throws ParseException{
 		ModelAndView mv = new ModelAndView();

@@ -3,6 +3,8 @@ package com.bank.dao.index;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.bank.base.BaseDAO;
 import com.bank.model.index.IndexModel;
 import com.bank.model.other.Page;
@@ -21,4 +23,5 @@ public interface IndexDAO extends BaseDAO<IndexModel>{
 	public int deleteByIdView(int id);
 	public int seletHitsNumById(int id);
 	public int updateHitsNum(int num,int id);
+	public IndexModel selectOneByBeforeOrAfter(@Param("ba")String ba,@Param("id")int id);
 }
