@@ -15,11 +15,25 @@ public class IndexModel {
 	private String upfrom;//上传者
 	private String index_state;//文章状态
 	private String index_label;//文章标签
+	private String index_from;//文章来源
+	private String index_href;//文章来源链接
 	private boolean index_isindex;//是否在首页
 	private int index_hitsnum;//点击量
 	
 	private String index_uptime_format;//格式化后的时间
 	
+	public String getIndex_from() {
+		return index_from;
+	}
+	public void setIndex_from(String index_from) {
+		this.index_from = index_from;
+	}
+	public String getIndex_href() {
+		return index_href;
+	}
+	public void setIndex_href(String index_href) {
+		this.index_href = index_href;
+	}
 	public String getIndex_label() {
 		return index_label;
 	}

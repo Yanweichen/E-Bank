@@ -24,4 +24,5 @@ public interface IndexDAO extends BaseDAO<IndexModel>{
 	public int seletHitsNumById(int id);
 	public int updateHitsNum(int num,int id);
 	public IndexModel selectOneByBeforeOrAfter(@Param("ba")String ba,@Param("id")int id);
+	public void insertLabel(int id,String label);
 }

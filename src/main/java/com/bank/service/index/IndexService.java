@@ -74,7 +74,15 @@ public class IndexService implements BaseService<IndexModel> {
 	@Override
 	public int add(IndexModel model) {
 		// TODO Auto-generated method stub
-		return indexdao.insert(model);
+		try {
+			int pk = indexdao.insert(model);
+			indexdao.insertLabel(model.getIndex_id(), model.getIndex_label());
+			return pk;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	

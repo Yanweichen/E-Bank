@@ -28,6 +28,46 @@
 	<div class="col-sm-6">
 		<div class="row">
 		  <div class="col-sm-12">
+		      <!-- 来源 -->
+	    <div class="form-group">
+		   <!-- Split button -->
+			<div class="btn-group">
+			  <button  id="frombtn" type="button" class="btn btn-default">原创</button>
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    <span class="caret"></span>
+			    <span class="sr-only">Toggle Dropdown</span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li id="fromself"><a href="javascript:void(0)">原创</a></li>
+			    <li id="fromother"><a href="javascript:void(0)">来自其他网站</a></li>
+			  </ul>
+			</div>
+	    </div>
+	    <!-- 显示或隐藏 -->
+	    <div id = "fromdiv" style="display: none;">
+		    <div class="form-group">
+			   <div class="input-group">
+			      <div class="input-group-btn">
+			      	<button type="button" class="btn btn-default" 
+		                     tabindex="-1">来源
+		            </button>
+			      </div><!-- /btn-group -->
+			        <input type="text" class="form-control" id="index_from" />
+			    </div><!-- /input-group -->
+		    </div>
+		    <div class="form-group">
+			   <div class="input-group">
+			      <div class="input-group-btn">
+			      	<button type="button" class="btn btn-default" 
+		                     tabindex="-1">链接
+		            </button>
+			      </div><!-- /btn-group -->
+			        <input type="text" class="form-control" id="index_href" />
+			    </div><!-- /input-group -->
+		    </div>
+	    </div>
+	    
+	     <!-- 来源 END-->
 		  <!-- 标题-->
 		  <div class="form-group">
 		    <div class="input-group">
@@ -56,8 +96,8 @@
 		        <input type="text" class="form-control" id="label" value="关键词1,关键词2,关键词3" />
 		    </div><!-- /input-group -->
 	    </div>
-		  </div><!-- /.col-lg-6 -->
-		</div>
+		</div><!-- /.col-lg-6 -->
+	  </div>
 	<!-- 富文本编辑器 -->
 	<div class="row">
 		<div class="col-sm-12" >
@@ -206,6 +246,8 @@ function initToolbarBootstrapBindings() {
 			index_title : $("#title").val(),
 			index_content : $("#editor").html(),
 			index_label : $("#label").val(),
+			index_from : $("#index_from").val(),
+			index_href : $("#index_href").val(),
 		}
 	}
 	$("#submit").click(function () {
@@ -240,6 +282,18 @@ function initToolbarBootstrapBindings() {
 		$('#label').tokenfield({
 		  typeahead: [null, { source: engine.ttAdapter() }]
 		});
+		
+	$("#fromself").click(function() {
+		$("#frombtn").empty();
+		$("#frombtn").append("原创");
+		$("#fromdiv").fadeOut("slow");
+		
+	})
+	$("#fromother").click(function() {
+		$("#frombtn").empty();
+		$("#frombtn").append("来自其他网站");
+		$("#fromdiv").fadeIn("slow");
+	})
 </script>
 </body>
 </html>

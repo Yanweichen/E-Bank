@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	// 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:
@@ -91,7 +92,16 @@ div.hotdiv:hover{
 					<h5 class="nosingline titlewenzizhidi" style="text-align:center;">${article.index_uptime_format}</h5></div>
 					<div class="col-sm-3" style="color: #777777">
 					<img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle_global.png'>
-					来源：本站</div>
+					来源：
+						<c:choose>
+						   <c:when test="${!empty article.index_from}">  
+								<a href="${article.index_href}">${article.index_from}</a>
+						   </c:when>
+						   <c:otherwise> 
+								<a href="javascript:void(0)">本站原创</a>
+						   </c:otherwise>
+						</c:choose>
+					</div>
 					<div class="col-sm-4" style="color: #777777">
 					<img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle_profle.png'>
 					发布者:${article.upfrom}</div>
@@ -292,6 +302,7 @@ div.hotdiv:hover{
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	
 	<script type="text/javascript">
 		var articletitle = "${article.index_title}";		
 		document.title = articletitle;

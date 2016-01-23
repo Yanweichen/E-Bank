@@ -12,10 +12,12 @@
     <result column="index_isindex" property="index_isindex" jdbcType="TINYINT" />
     <result column="index_hitsnum" property="index_hitsnum" jdbcType="INTEGER" />
     <result column="index_label" property="index_label" jdbcType="VARCHAR" />
+    <result column="index_from" property="index_from" jdbcType="VARCHAR" />
+    <result column="index_href" property="index_href" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
-    index_id,index_type,index_title,index_content,index_uptime,admin_name,index_state,index_isindex,index_hitsnum,index_label
+    index_id,index_type,index_title,index_content,index_uptime,admin_name,index_state,index_isindex,index_hitsnum,index_label,index_from,index_href
   </sql>
   
   <!-- 根据表名称查询总数 -->
@@ -88,9 +90,9 @@
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND index_id = #{_parameter};
   </select>
   <!-- 插入新文章 总表 -->
-   <insert id="insert" parameterType="com.bank.model.index.IndexModel">
+   <insert id="insert" useGeneratedKeys="true" keyProperty="index_id" parameterType="com.bank.model.index.IndexModel">
   	INSERT INTO index_entry VALUES(null,#{index_type},#{index_title},#{index_content},
-  	#{index_uptime},#{upfrom},#{index_state},#{index_isindex},0,#{index_label});
+  	#{index_uptime},#{upfrom},#{index_state},#{index_isindex},0,#{index_label},#{index_from},#{index_href});
   </insert>
   
   <!-- 添加视图文章 -->
@@ -146,4 +148,10 @@
 		</otherwise>
 		</choose>
   </select>
+  
+  <select id="insertLabel" statementType="CALLABLE">  
+	<![CDATA[  
+		CALL AddEnrtyToAddLabel(#{0},#{1})
+	]]>  
+</select>  
 </mapper>

@@ -40,7 +40,7 @@ public class JsonUtil {
 //		jo.put("index_state", im.getIndex_state());
 //		jo.put("index_hitsnum", im.getIndex_hitsnum());
 //		jo.put("index_label", im.getIndex_label());
-		
+		im.setIndex_uptime_format(TimeUtil.Date2String(im.getIndex_uptime(), format));
 		return (JSONObject) JSON.toJSON(im);
 	}
 	
@@ -66,6 +66,7 @@ public class JsonUtil {
 //			jo.put("index_hitsnum", im.getIndex_hitsnum());
 //			jo.put("index_label", im.getIndex_label());
 //			row.add(jo);
+			im.setIndex_uptime_format(TimeUtil.Date2String(im.getIndex_uptime(), format));
 			row.add(JSON.toJSON(im));
 		}
 		jarr.put("rows", row);

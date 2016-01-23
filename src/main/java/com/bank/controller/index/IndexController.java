@@ -77,15 +77,15 @@ public class IndexController {
 		AdminModel am = (AdminModel) session.getAttribute("admin");
 		JSONObject jo = new JSONObject();
 		if (im==null||am==null) {
-			jo.put("error", "203");
-			jo.put("msg", "添加失败");
+			jo.put("error", "403");
+			jo.put("msg", "非法操作");
 			return jo;
 		}
 		im.setIndex_uptime(new Date());
 		im.setUpfrom(am.getAdmin_id());
 		im.setIndex_state("00");//设置初始状态
 		int isSuC = is.add(im);
-		if (isSuC==1) {
+		if (isSuC!=-1) {
 			jo.put("error", "200");
 			jo.put("msg", "添加成功");
 		}else{
