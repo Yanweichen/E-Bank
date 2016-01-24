@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.index.IndexModel;
+import com.bank.model.index.LabelModel;
 import com.bank.model.other.CityModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -70,6 +71,16 @@ public class JsonUtil {
 			row.add(JSON.toJSON(im));
 		}
 		jarr.put("rows", row);
+		return jarr;
+	}
+	
+	public static JSONArray getAllLabel(List<LabelModel> list){
+		JSONArray jarr = new JSONArray();
+		for (LabelModel labelModel : list) {
+			JSONObject jo = new JSONObject();
+			jo.put("value", labelModel.getLabel_name());
+			jarr.add(jo);
+		}
 		return jarr;
 	}
 

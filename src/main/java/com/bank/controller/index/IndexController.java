@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.admin.AdminModel;
 import com.bank.model.index.IndexModel;
+import com.bank.model.index.LabelModel;
 import com.bank.model.other.Page;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
@@ -83,6 +85,13 @@ public class IndexController {
 		List<IndexModel> list = is.findAboutByLabel(label, num);
 		return JsonUtil.getNotice(list,num,"MM/dd");
 	}
+	@ResponseBody
+	@RequestMapping("/getAllLabel")
+	public JSONArray getAllLabel() throws ParseException{
+		List<LabelModel> list = is.findAllLabel();
+		return JsonUtil.getAllLabel(list);
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping("/addnotice")

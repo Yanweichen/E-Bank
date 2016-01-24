@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.bank.base.BaseDAO;
 import com.bank.model.index.IndexModel;
+import com.bank.model.index.LabelModel;
 import com.bank.model.other.Page;
 
 /**
@@ -26,4 +27,5 @@ public interface IndexDAO extends BaseDAO<IndexModel>{
 	public IndexModel selectOneByBeforeOrAfter(@Param("ba")String ba,@Param("id")int id);
 	public void insertLabel(int id,String label);
 	public List<IndexModel> selectAboutByLabel(@Param("label")String label,@Param("num")int num);
+	public List<LabelModel> selectAllLabel();
 }

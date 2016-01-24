@@ -224,7 +224,6 @@ cursor:pointer
 	$('#isputaway').bootstrapTable({
 	    url: 'index/Viewnotice.action',
 	}).on('load-success.bs.table', function (e, name, args) {
-        console.log($('#isputaway').bootstrapTable('getOptions').queryParams);
     })
 	$('#all').bootstrapTable({
 	    url: 'index/Allnotice.action',

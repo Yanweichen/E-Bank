@@ -167,5 +167,9 @@
 	<![CDATA[  
 		CALL AddEnrtyToAddLabel(#{0},#{1})
 	]]>  
-  </select>  
+  </select>
+  <!-- 查询所有标签 -->
+  <select id="selectAllLabel" resultType="com.bank.model.index.LabelModel">
+  	SELECT * FROM entry_label;
+  </select>
 </mapper>

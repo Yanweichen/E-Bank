@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bank.base.BaseService;
 import com.bank.dao.index.IndexDAO;
 import com.bank.model.index.IndexModel;
+import com.bank.model.index.LabelModel;
 import com.bank.model.other.Page;
 
 /**
@@ -87,6 +88,10 @@ public class IndexService implements BaseService<IndexModel> {
 			}
 			return indexdao.selectAboutByLabel(labelssb.substring(0,labelssb.length()-1).toString(), num);
 		}
+	}
+	
+	public List<LabelModel> findAllLabel(){
+		return indexdao.selectAllLabel();
 	}
 	
 	@Override
