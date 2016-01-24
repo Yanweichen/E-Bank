@@ -70,6 +70,24 @@ public class IndexService implements BaseService<IndexModel> {
 		return indexdao.updateHitsNum(indexdao.seletHitsNumById(id), id);
 	}
 	
+	/**
+	 * 根据标签查询相关文章
+	 * @param label
+	 * @param num
+	 * @return
+	 */
+	public List<IndexModel> findAboutByLabel(String label,int num){
+		if (label==null||"".equals(label)) {
+			return indexdao.selectAboutByLabel("NULL", num);
+		} else {
+			String [] labels = label.split(",");
+			StringBuilder labelssb = new StringBuilder();
+			for (String string : labels) {
+				labelssb.append("\""+string+"\",");
+			}
+			return indexdao.selectAboutByLabel(labelssb.substring(0,labelssb.length()-1).toString(), num);
+		}
+	}
 	
 	@Override
 	public int add(IndexModel model) {

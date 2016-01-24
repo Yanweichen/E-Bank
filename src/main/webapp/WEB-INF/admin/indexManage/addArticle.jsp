@@ -280,7 +280,8 @@ function initToolbarBootstrapBindings() {
 		engine.initialize();
 
 		$('#label').tokenfield({
-		  typeahead: [null, { source: engine.ttAdapter() }]
+		  typeahead: [null, { source: engine.ttAdapter() }],
+		  beautify:false
 		});
 		
 	$("#fromself").click(function() {

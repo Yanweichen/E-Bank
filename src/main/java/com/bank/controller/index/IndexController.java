@@ -70,6 +70,20 @@ public class IndexController {
 		return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),"MM/dd");
 	}
 	
+	/**
+	 * 根据标签获得相关的文章
+	 * @param label
+	 * @param num
+	 * @return
+	 * @throws ParseException
+	 */
+	@ResponseBody
+	@RequestMapping("/aboutnotice")
+	public JSONObject getNoticeAboutByLabel(String label,int num) throws ParseException{
+		List<IndexModel> list = is.findAboutByLabel(label, num);
+		return JsonUtil.getNotice(list,num,"MM/dd");
+	}
+	
 	@ResponseBody
 	@RequestMapping("/addnotice")
 	public JSONObject addNewNotice(IndexModel im,HttpServletRequest req){
