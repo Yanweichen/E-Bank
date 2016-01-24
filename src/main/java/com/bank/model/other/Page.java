@@ -10,7 +10,14 @@ public class Page {
 	private String tableName;
 	private String startTime;
 	private String endTime;
+	private String timefmt;
 	
+	public String getTimefmt() {
+		return timefmt;
+	}
+	public void setTimefmt(String timefmt) {
+		this.timefmt = timefmt;
+	}
 	public String getStartTime() {
 		return startTime;
 	}

@@ -39,9 +39,12 @@ public class IndexController {
 		if ("index_uptime_format".equals(page.getSort())) {
 			page.setSort("index_uptime");
 		}
+		if (page.getTimefmt()==null || "".equals(page.getTimefmt())) {
+			page.setTimefmt("yyyy-MM-dd HH:mm:ss");
+		}
 		page.setTableName("index_entry");
 		List<IndexModel> list = is.findeByPage(page);
-			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry"),"yyyy-MM-dd HH:mm:ss");
+			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry"),page.getTimefmt());
 	}
 
 	@ResponseBody
@@ -50,26 +53,12 @@ public class IndexController {
 		if ("index_uptime_format".equals(page.getSort())) {
 			page.setSort("index_uptime");
 		}
+		if (page.getTimefmt()==null || "".equals(page.getTimefmt())) {
+			page.setTimefmt("yyyy-MM-dd HH:mm:ss");
+		}
 		page.setTableName("index_entry_view");
 		List<IndexModel> list = is.findeByPage(page);
-			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),"yyyy-MM-dd HH:mm:ss");
-	}
-	/**
-	 * 获取首页公告或活动
-	 * @param type 0 全部 1公告 2活动
-	 * @param req
-	 * @return
-	 * @throws ParseException 
-	 */
-	@ResponseBody
-	@RequestMapping("/indexnotice")
-	public JSONObject getNoticeByTypeForIndex(@RequestParam("type")Integer type,HttpServletRequest req) throws ParseException{
-		if (type==0) {
-			List<IndexModel> list = is.findAll();
-			return JsonUtil.getNotice(list, is.findCountByTableName("index_entry_view"),"yyyy-MM-dd HH:mm:ss");
-		}
-		List<IndexModel> list = is.findeByTypeForIndex(type);
-		return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),"MM/dd");
+			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),page.getTimefmt());
 	}
 	
 	/**

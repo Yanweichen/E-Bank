@@ -144,7 +144,8 @@ cursor:pointer
 				limit:10,
 				offset:0,
 				startTime:stime,
-				endTime:etime
+				endTime:etime,
+				timefmt:"yyyy-MM-dd HH:mm:ss"
 		}
 	}
 	$("#viewall").click(function(){
@@ -322,6 +323,8 @@ cursor:pointer
 	    				$.post("index/updateNoticeState.action",{"row":JSON.stringify(row),state:updatestate},function(result){
 			    			if (result.error==200) {
 					    		e.target.setAttribute("class", "glyphicon glyphicon-arrow-up");
+					    		row.index_state = updatestate;
+			    				$('#isputaway').bootstrapTable('updateRow', {index: index, row: row});
 							} else {
 								showMsg("置顶失败")
 							}
@@ -355,6 +358,8 @@ cursor:pointer
 	    		$.post("index/updateNoticeState.action",{"row":JSON.stringify(row),state:updatestate},function(result){
 	    			if (result.error==200) {
 	    				e.target.setAttribute("class", "glyphicon glyphicon-arrow-down");
+	    				row.index_state = updatestate;
+	    				$('#isputaway').bootstrapTable('updateRow', {index: index, row: row});
 					} else {
 						showMsg("取消置顶失败")
 					}
@@ -371,7 +376,7 @@ cursor:pointer
 					updatestate="01"
 					break;
 				case 1:
-					updatestate="01"
+					updatestate="11"
 					break;
 				case 10:
 					updatestate="11"
@@ -385,6 +390,8 @@ cursor:pointer
 	    		$.post("index/updateNoticeState.action",{"row":JSON.stringify(row),state:updatestate},function(result){
 	    			if (result.error==200) {
 	    				e.target.setAttribute("class", "glyphicon glyphicon-star");
+	    				row.index_state = updatestate;
+	    				$('#isputaway').bootstrapTable('updateRow', {index: index, row: row});
 					} else {
 						showMsg("取消置顶失败")
 					}
@@ -410,6 +417,8 @@ cursor:pointer
 	    		$.post("index/updateNoticeState.action",{"row":JSON.stringify(row),state:updatestate},function(result){
 	    			if (result.error==200) {
 	    				e.target.setAttribute("class", "glyphicon glyphicon-star-empty");
+	    				row.index_state = updatestate;
+	    				$('#isputaway').bootstrapTable('updateRow', {index: index, row: row});
 					} else {
 						showMsg("取消失败")
 					}

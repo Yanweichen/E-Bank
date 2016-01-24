@@ -51,10 +51,6 @@ public class IndexService implements BaseService<IndexModel> {
 		return indexdao.selectByPage(page);
 	}
 	
-	public List<IndexModel> findeByTypeForIndex(Integer type){
-		return indexdao.selectByTypeForIndex(type);
-	}
-	
 	public int findNumByState(Integer state){
 		return indexdao.selectNumByState(state);
 	}

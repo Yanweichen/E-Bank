@@ -81,14 +81,6 @@
 	</choose>) GROUP BY entry_id ORDER BY num DESC LIMIT 0,#{num};
   </select>
   
-  <!-- 根据类型查询首页内容 -->
-  <select id="selectByTypeForIndex" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    SELECT  
-    <include refid="Base_Column_List" />
-	FROM index_entry_view ent,index_type typ,admin ad 
-	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` AND index_pid = #{type};
-  </select>
-  
   <!-- 查询所有 -->
   <select id="selectAll" resultMap="BaseResultMap" >
     SELECT  

@@ -17,7 +17,6 @@ import com.bank.model.other.Page;
 public interface IndexDAO extends BaseDAO<IndexModel>{
 	
 	public List<IndexModel> selectByPage(Page page);
-	public List<IndexModel> selectByTypeForIndex(Integer type);
 	public int selectCountByTableName(String name);
 	public int selectNumByState(Integer state); 
 	public int insertView(int id);

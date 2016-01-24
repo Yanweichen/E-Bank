@@ -368,7 +368,7 @@ ul.news li p{float:right; color:#000000}
 						<div class="row" style="margin-left: 3px">
 							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">重要公告</h5></div>
 							
-							<div class="col-sm-3 col-sm-offset-5"><h5>更多>></h5></div>
+							<div class="col-sm-3 col-sm-offset-5"><h5><a target="_blank" href="<%=basePath%>page/article/articlelist.jsp?type='GONGGAO'">更多>></a></h5></div>
 						</div>
 						<div class="overstep" >
 							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indextopicon.png">
@@ -386,7 +386,7 @@ ul.news li p{float:right; color:#000000}
 						<div class="row" style="margin-left: 0px">
 							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">近期活动</h5></div>
 							
-							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px">更多>></h5></div>
+							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px"><a target="_blank" href="<%=basePath%>page/article/articlelist.jsp?type='HUODONG'">更多>></a></h5></div>
 						</div>
 						<div class="overstep" >
 							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indextopicon.png">
@@ -489,8 +489,17 @@ ul.news li p{float:right; color:#000000}
 	<script src="<%=basePath%>page/assets/js/bootstrapValidator.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
+	function queryParams(type,tbname){
+		return {
+			    search:type,
+				limit:5,
+				offset:0,
+				tableName:tbname,
+				timefmt:"MM/dd"
+		}
+	}
 	//获取公告
-		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 1 }, function(json){
+		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams("GONGGAO","index_entry_view"), function(json){
 			$.each(json.rows,function(i,jo){
 				var title = jo.index_title;
 				if (jo.index_state=="10"||jo.index_state=="11") {
@@ -508,7 +517,7 @@ ul.news li p{float:right; color:#000000}
 			});
 		});
 	//获取活动
-		$.getJSON("<%=basePath%>/index/indexnotice.action", { type: 2 }, function(json){
+		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams("HUODONG","index_entry_view"), function(json){
 			$.each(json.rows,function(i,jo){
 				var title = jo.index_title;
 				if (jo.index_state=="10"||jo.index_state=="11") {

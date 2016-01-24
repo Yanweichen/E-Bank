@@ -88,8 +88,7 @@ div.hotdiv:hover{
 			<div class="col-sm-7">
 				<div id="title" align="center"><h2>${article.index_title}</h2></div>
 				<div class="row top20">
-					<div class="col-sm-1 "></div>
-					<div class="col-sm-4 " style="color: #777777">
+					<div class="col-sm-3 col-sm-offset-1" style="color: #777777">
 					<img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-calendar.png'>
 					<h5 class="nosingline titlewenzizhidi" style="text-align:center;">${article.index_uptime_format}</h5></div>
 					<div class="col-sm-3" style="color: #777777">
@@ -150,7 +149,7 @@ div.hotdiv:hover{
 							<h4 class="nosingline wenzizhidi" style="color: #666666">相关文章</h4>
 						</div>
 					</div>
-					<div class="row top10">
+					<div class="row top10" id="aboutlist">
 						<div class="col-sm-5" id="aboutlistleft">
 <!-- 							<div class="overstep top5" > -->
 <%-- 								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png"> --%>
@@ -334,6 +333,11 @@ div.hotdiv:hover{
 				});
 			});
 			$.getJSON("index/aboutnotice.action", {label:articlelabel,num:6}, function(json){
+				if (json.rows.length==0) {
+					$("#aboutlistleft").css("display","none");
+					$("#aboutlistright").css("display","none");
+					$("#aboutlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有相关文章哦~</h4></div></div>");
+				}
 				$.each(json.rows,function(i,jo){
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
