@@ -39,8 +39,8 @@ public class IndexService implements BaseService<IndexModel> {
 		return indexdao.insertView(id);
 	}
 	
-	public int findCountByType(Integer pid){
-		return indexdao.selectCountByType(pid);
+	public int findCountByType(Integer pid,String isView){
+		return indexdao.selectCountByType(pid,isView);
 	}
 	/**
 	 * 分页

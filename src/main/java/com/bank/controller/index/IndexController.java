@@ -45,7 +45,13 @@ public class IndexController {
 		List<IndexModel> list = is.findeByPage(page);
 		IndexModel im = is.findTopByState(page.getIndex_pid());//获取置顶
 		Integer pid = page.getIndex_pid();
-		return JsonUtil.getNotice(list,im,page.getSearch()!=null?list.size():is.findCountByType(pid==null?-1:pid),page.getTimefmt());
+		int count = 0;
+		if (page.getSearch()==null||"".equals(page.getSearch())) {
+			count = is.findCountByType(pid==null?-1:pid,page.getIsView());
+		}else{
+			count = list.size();
+		}
+		return JsonUtil.getNotice(list,im,count,page.getTimefmt());
 	}
 
 	/**

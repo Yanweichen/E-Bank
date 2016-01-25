@@ -23,16 +23,22 @@
   </sql>
   
   <!-- 根据表类型查询总数 -->
-  <select id="selectCountByType" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-	  SELECT COUNT(*) FROM index_entry 
-	  <choose> 
-		<when test="_parameter != -1">
-		   WHERE index_pid = #{_parameter};
-		</when>
-       <otherwise> 
-           WHERE index_isindex = TRUE;
-       </otherwise> 
-   	</choose>
+  <select id="selectCountByType" resultType="java.lang.Integer">
+	  SELECT COUNT(*) FROM index_entry WHERE 1=1
+	  <if test="isView == 'view'">
+		AND index_isindex = TRUE
+	  </if>
+	  <if test="pid != -1">
+	  	AND index_pid = #{pid};
+	  </if>
+<!-- 	  <choose>  -->
+<!-- 		<when test="_parameter != -1"> -->
+		  
+<!-- 		</when> -->
+<!--        <otherwise>  -->
+<!--             -->
+<!--        </otherwise>  -->
+<!--    	</choose> -->
   </select>
   
   <!-- 首页分页 -->

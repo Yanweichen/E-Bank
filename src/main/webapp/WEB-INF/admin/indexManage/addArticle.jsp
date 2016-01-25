@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="page/assets/css/bootstrap-wysiwyg.css">
 <link rel="stylesheet" href="page/assets/css/tokenfield-typeahead.css">
 <link rel="stylesheet" href="page/assets/css/bootstrap-tokenfield.css">
+<link rel="stylesheet" href="page/assets/css/cropper.css">
 
 <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
@@ -97,6 +98,9 @@
 		    </div><!-- /input-group -->
 	    </div>
 		</div><!-- /.col-lg-6 -->
+	  </div>
+	  <div class="form-group">
+			<img id="headimage" class="img-rounded" src="page/assets/img/touxiang_zhushou.jpg">
 	  </div>
 	<!-- 富文本编辑器 -->
 	<div class="row">
@@ -187,12 +191,33 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="inputimage" class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">上传预览图</h4>
+		      </div>
+		      <div class="modal-body">
+			      <div class="row" style="height: 300px;width: 300px">
+			      	<img id="headimageedit"  src="page/assets/img/touxiang_zhushou.jpg">
+			      </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 <script src="page/assets/js/jquery-1.8.1.min.js"></script>
 <script src="page/assets/js/bootstrap.min.js"></script>
 <script src="page/assets/js/bootstrap-wysiwyg.js"></script>
 <script src="page/assets/js/jquery.hotkeys.js"></script>
 <script src="page/assets/js/bootstrap-tokenfield.js"></script>
 <script src="page/assets/js/typeahead.bundle.js"></script>
+<script src="page/assets/js/cropper.js"></script>
 <script type="text/javascript">
 function initToolbarBootstrapBindings() {
     var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
@@ -284,12 +309,17 @@ function initToolbarBootstrapBindings() {
 					  beautify:false
 				});
 		});
+		
 	})
-	//标签js
-
-
-		
-		
+	$('#headimageedit').cropper({
+	  aspectRatio: 16 / 9,
+	  crop: function(data) {
+	    // 出来裁切后的图片数据.
+	  }
+	});		
+	$("#headimage").click(function() {
+		$("#inputimage").modal(); 
+	})	
 	$("#fromself").click(function() {
 		$("#frombtn").empty();
 		$("#frombtn").append("原创");
