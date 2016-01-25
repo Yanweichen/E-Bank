@@ -136,7 +136,7 @@ div.hotdiv:hover{
 							<c:set value="${fn:split(article.index_label,',')}" var="labels" />
 							<c:forEach var="lb" items="${labels}">
 								<div class="well well-sm hotdiv nosingline hand" style="margin-right: 5px">
-								<a>${lb}</a></div>
+								<a class="hota" href='page/article/articlelist.jsp?search="+${lb}+"'>${lb}</a></div>
 							</c:forEach>
 						</div>
 					</div>
@@ -265,7 +265,7 @@ div.hotdiv:hover{
 			</div>
 			<!-- 右侧部分 -->
 			<div class="col-sm-4 col-sm-offset-1">
-				<div class="list-group" >
+				<div class="list-group">
 					<a href="#" class="list-group-item touming active"style="background-color: #3f316d">
 						<h4 class="list-group-item-heading" style="margin-top: 5px" >热门文章</h4>
 					</a>
@@ -281,8 +281,14 @@ div.hotdiv:hover{
 <!-- 						</div> -->
 					</div>
 				</div>
-			</div>
-		</div>
+				
+				<div id="hotlabelpanel" class="panel panel-default"  style="background-color:rgba(0,0,0,0.1);">
+				  <div class="panel-heading" style="background-color: #3f316d;color: white">
+				  	<h4>热门标签</h4>
+				  </div>
+				  <div id="hotlabels" class="panel-body" style="line-height: 50px">
+				  </div>
+			   </div>
 	</div>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
@@ -294,9 +300,10 @@ div.hotdiv:hover{
 		document.title = articletitle;
 		var articleid = ${article.index_id};
 		var articlelabel = "${article.index_label}";
-		function queryParams(sort,order){
+		function queryParams(search,limit,sort,order){
 			return {
-					limit:10,
+					search:search,
+					limit:limit,
 					offset:0,
 					sort:sort,
 					order:order,
@@ -321,7 +328,7 @@ div.hotdiv:hover{
 				}
 				$("#afterarticle").attr("href","index/articledetail.action?id="+(json.index_id));
 			});
-			$.getJSON("index/Allnotice.action", queryParams("index_hitsnum",null), function(json){
+			$.getJSON("index/Allnotice.action", queryParams(null,10,"index_hitsnum",null), function(json){
 				$.each(json.rows,function(i,jo){
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
@@ -332,7 +339,7 @@ div.hotdiv:hover{
 					$("#hotlist").append("<div class='row hotdiv top10'><div class='col-sm-10 overstep' style='z-index: 10'><img alt='' style='height: 25px; width: 25px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' style='margin-left: 5px;font-size: 18px' class='hota hand textbottom'>"+jo.index_title+"</a> </div> <div class='col-sm-1 timestyle' style='padding-left: 0px;z-index: 9'><span class='badge'>"+jo.index_hitsnum+"</span></div></div>");
 				});
 			});
-			$.getJSON("index/aboutnotice.action", {label:articlelabel,num:6}, function(json){
+			$.getJSON("index/aboutnotice.action", queryParams(articlelabel,6,null,null), function(json){
 				if (json.rows.length==0) {
 					$("#aboutlistleft").css("display","none");
 					$("#aboutlistright").css("display","none");
@@ -350,6 +357,11 @@ div.hotdiv:hover{
 					}else if(jo.index_id!=articleid){
 						$("#aboutlistright").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
 					}
+				});
+			});
+			$.getJSON("index/getHotLabel.action", {num:15}, function(json){
+				$.each(json,function(i,jo){
+					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 10px;background-color:rgba(255,255,255,0.5);margin-right: 5px;' class='hotdiv hota'>"+jo.value+"</a>");
 				});
 			});
 		})

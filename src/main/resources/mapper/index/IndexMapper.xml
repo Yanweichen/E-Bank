@@ -82,13 +82,28 @@
   	FROM index_entry ent,entry_relation_label erl,index_type typ,admin ad
 	WHERE ent.`index_id`=erl.`entry_id` AND ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`
 	AND label_name IN(<choose>
-		<when test="label == 'NULL'">
+		<when test="labels == 'NULL'">
 			NULL
 		</when>
 		<otherwise>
-			${label}
+			${labels}
 		</otherwise>
-	</choose>) GROUP BY entry_id ORDER BY num DESC LIMIT 0,#{num};
+	</choose>) GROUP BY entry_id ORDER BY num DESC LIMIT #{page.offset},#{page.limit};
+  </select>
+  <!-- 根据标签获取相关文章的总数 -->
+  <select id="selectAboutByLabelCount" resultType="java.lang.Integer" >
+	SELECT COUNT(*) FROM(
+  	SELECT COUNT(*) num 
+  	FROM index_entry ent,entry_relation_label erl,index_type typ,admin ad
+	WHERE ent.`index_id`=erl.`entry_id` AND ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`
+	AND label_name IN(<choose>
+		<when test="_parameter == 'NULL'">
+			NULL
+		</when>
+		<otherwise>
+			${_parameter}
+		</otherwise>
+	</choose>) GROUP BY entry_id ORDER BY num DESC) T
   </select>
   
   <!-- 查询所有 -->
@@ -166,5 +181,9 @@
   <!-- 查询所有标签 -->
   <select id="selectAllLabel" resultType="com.bank.model.index.LabelModel">
   	SELECT * FROM entry_label;
+  </select>
+  <!-- 查询热门标签 -->
+  <select id="selectHotLabel" resultType="com.bank.model.index.LabelModel" parameterType="java.lang.Integer">
+  	SELECT label_name,COUNT(*) num FROM entry_relation_label GROUP BY label_name ORDER BY num DESC LIMIT 0,#{_parameter};
   </select>
 </mapper>

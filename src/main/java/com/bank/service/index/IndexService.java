@@ -73,21 +73,43 @@ public class IndexService implements BaseService<IndexModel> {
 	 * @param num
 	 * @return
 	 */
-	public List<IndexModel> findAboutByLabel(String label,int num){
-		if (label==null||"".equals(label)) {
-			return indexdao.selectAboutByLabel("NULL", num);
+	public List<IndexModel> findAboutByLabel(Page page){
+		if (page.getSearch()==null||"".equals(page.getSearch())) {
+			return indexdao.selectAboutByLabel(page,"NULL");
 		} else {
-			String [] labels = label.split(",");
+			String [] labels = page.getSearch().split(",");
 			StringBuilder labelssb = new StringBuilder();
 			for (String string : labels) {
-				labelssb.append("\""+string+"\",");
+				labelssb.append("'"+string+"',");
 			}
-			return indexdao.selectAboutByLabel(labelssb.substring(0,labelssb.length()-1).toString(), num);
+			return indexdao.selectAboutByLabel(page,labelssb.substring(0,labelssb.length()-1).toString());
+		}
+	}
+	/**
+	 * 根据标签查询相关文章
+	 * @param label
+	 * @param num
+	 * @return
+	 */
+	public int findAboutByLabelCount(Page page){
+		if (page.getSearch()==null||"".equals(page.getSearch())) {
+			page.setSearch("NULL");
+			return indexdao.selectAboutByLabelCount(page.getSearch());
+		} else {
+			String [] labels = page.getSearch().split(",");
+			StringBuilder labelssb = new StringBuilder();
+			for (String string : labels) {
+				labelssb.append("'"+string+"',");
+			}
+			return indexdao.selectAboutByLabelCount(labelssb.substring(0,labelssb.length()-1).toString());
 		}
 	}
 	
 	public List<LabelModel> findAllLabel(){
 		return indexdao.selectAllLabel();
+	}
+	public List<LabelModel> findeHotLabel(Integer num){
+		return indexdao.selectHotLabel(num);
 	}
 	
 	@Override

@@ -79,10 +79,10 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				<!-- 主体列表 -->
 				<div class="panel panel-default" style="border-radius: 10px 10px 10px 10px;;background-color: rgba(255,255,255,0.5);padding: 10px">
 				<div class="panel-heading">
-					<div class="top5"> 
+					<div id="nowlabel" class="top5" style="display: none;"> 
 							<img  alt='' style='height: 30px;width: 30px;' src='page/assets/img/circle-shop.png'>
 							<h4 class="nosingline wenzizhidi " style="color: #666666">当前标签</h4>
-		  					<div class="well well-sm nosingline hotdiv hand top5" style="margin-left: 90px;position: relative;">Win10</div>
+		  					<div class="well well-sm nosingline hotdiv hand top5" style="margin-left: 90px;position: relative;"><% out.print(request.getParameter("search")); %></div>
 		  			</div>
 					<div class="top15">
 						<ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
@@ -145,6 +145,13 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 						<div id="hotlist" class='list-group-item ' style="background-color:rgba(0,0,0,0.1);">
 						</div>
 				</div>
+				<div id="hotlabelpanel" class="panel panel-default"  style="background-color:rgba(0,0,0,0.1);">
+				  <div class="panel-heading" style="background-color: #3f316d;color: white">
+				  	<h4>热门标签</h4>
+				  </div>
+				  <div id="hotlabels" class="panel-body" style="line-height: 50px">
+				  </div>
+			   </div>
 			</div>
 			
 		</div>
@@ -172,15 +179,15 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 		return str.replace(/<[^>]+>/g,"");//去掉所有的html标记
 	}
 	var first = true;
-	function init(page){
+	function init(page,url){
 		$(".fakeloader").fakeLoader({
             spinner:"spinner2",
             show:true
         });
 		$.ajaxSettings.async = false;//为了获取总条数修改为同步
-		$.getJSON("index/Allnotice.action", queryParams(null,page,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
+		$.getJSON(url, queryParams("<% out.print(request.getParameter("search")); %>",page,<% out.print(request.getParameter("pid")==null?-1:request.getParameter("pid")); %>,null,null),function(json){
 			var after =	"</div></div></div></div>";
-			if (first) {
+			if (first && json.top!=null) {
 				var top = json.top;
 				first = false;
 				$("#topdiv").css("display","inline");
@@ -189,7 +196,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			  	var labels = "";
 			  	if(top.index_label!=null){
 	  				$.each(top.index_label.split(","),function(i,label){
-						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>"+label+"</div>";
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
 	  				})
 			  	}
   				$("#topdiv").append(begin+labels+after);
@@ -207,7 +214,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			  	var labels="";
 			  	if(jo.index_label!=null){
 	  				$.each(jo.index_label.split(","),function(i,label){
-						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>"+label+"</div>";
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
 	  				})
 			  	}
   				$("#list").append(begin+labels+after);
@@ -221,7 +228,12 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	
 	$(document).ready(function(){
 		document.title = "${type}";
-		$.getJSON("index/Allnotice.action", queryParams(null,1,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
+		var url = "index/Allnotice.action";
+		if (eval("<% out.print(request.getParameter("search")!=null?true:false); %>")) {
+			$("#nowlabel").css("display","inline-block");
+			url = "index/aboutnotice.action";
+		}
+		$.getJSON(url, queryParams("<% out.print(request.getParameter("search")); %>",1,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
 			console.log(json.total)
 			 $('.sync-pagination').twbsPagination({
 			        totalPages: Math.ceil(json.total/10),
@@ -231,7 +243,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			 		next:"后一页",
 			 		last:"尾页",
 			        onPageClick: function (event, page) {
-			        	init(page);
+			        	init(page,url);
 			        }
 			  });
 		});
@@ -244,6 +256,11 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 					src = 'indexnomalicon.png';
 				}
 				$("#hotlist").append("<div class='row hotdiv top10'><div class='col-sm-10 overstep' style='z-index: 10'><img alt='' style='height: 25px; width: 25px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' style='margin-left: 5px;font-size: 18px' class='hota hand textbottom'>"+jo.index_title+"</a> </div> <div class='col-sm-1 timestyle' style='padding-left: 0px;z-index: 9'><span class='badge'>"+jo.index_hitsnum+"</span></div></div>");
+			});
+		});
+		$.getJSON("index/getHotLabel.action", {num:15}, function(json){
+			$.each(json,function(i,jo){
+				$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 10px;background-color:rgba(255,255,255,0.5);margin-right: 5px;' class='hotdiv hota'>"+jo.value+"</a>");
 			});
 		});
 	})

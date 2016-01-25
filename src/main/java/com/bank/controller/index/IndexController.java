@@ -57,14 +57,20 @@ public class IndexController {
 	 */
 	@ResponseBody
 	@RequestMapping("/aboutnotice")
-	public JSONObject getNoticeAboutByLabel(String label,int num) throws ParseException{
-		List<IndexModel> list = is.findAboutByLabel(label, num);
-		return JsonUtil.getNotice(list,null,num,"MM/dd");
+	public JSONObject getNoticeAboutByLabel(Page page) throws ParseException{
+		List<IndexModel> list = is.findAboutByLabel(page);
+		return JsonUtil.getNotice(list,null,is.findAboutByLabelCount(page),"MM/dd");
 	}
 	@ResponseBody
 	@RequestMapping("/getAllLabel")
 	public JSONArray getAllLabel() throws ParseException{
 		List<LabelModel> list = is.findAllLabel();
+		return JsonUtil.getAllLabel(list);
+	}
+	@ResponseBody
+	@RequestMapping("/getHotLabel")
+	public JSONArray getHotLabel(int num) throws ParseException{
+		List<LabelModel> list = is.findeHotLabel(num);
 		return JsonUtil.getAllLabel(list);
 	}
 	
