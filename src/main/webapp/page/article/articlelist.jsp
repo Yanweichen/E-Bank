@@ -145,6 +145,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 						</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	<div class="fakeloader"></div>
@@ -155,19 +156,13 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script type="text/javascript">
-	function queryParams(type,tbname,page){
+	function queryParams(type,page,pid,sort,order){
 		return {
 			    search:type,
 				limit:10,
 				offset:(page-1)*10,
-				tableName:tbname,
 				timefmt:"MM/dd",
-		}
-	}
-	function hotqueryParams(sort,order){
-		return {
-				limit:10,
-				offset:0,
+				index_pid:pid,
 				sort:sort,
 				order:order,
 		}
@@ -181,55 +176,53 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
             spinner:"spinner2",
             show:true
         });
-		var type = "${type}";
-		document.title = "${type}";
-		$.ajaxSettings.async = false;
-		$.getJSON("index/Allnotice.action", queryParams(type,"index_entry",page),function(json){
+		$.ajaxSettings.async = false;//为了获取总条数修改为同步
+		$.getJSON("index/Allnotice.action", queryParams(null,page,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
+			if (first) {
+				var top = json.top;
+				first = false;
+				$("#topdiv").css("display","inline");
+				var content = delHtmlTag(top.index_content);
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+top.index_id+"' style='color: #B22222;'>"+top.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+top.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+			  	var labels = "";
+			  	if(top.index_label!=null){
+	  				$.each(top.index_label.split(","),function(i,label){
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>Win10</div>";
+	  				})
+			  	}
+  				$("#topdiv").append(begin+labels+after);
+			}
 			var after =	"</div></div></div></div>";
 			$("#list").empty();
 			$.each(json.rows,function(i,jo){
-				if (first&&(jo.index_state=="10"||jo.index_state=="11")) {
-					first = false;
-					$("#topdiv").css("display","inline");
-					var content = delHtmlTag(jo.index_content);
-					var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"' style='color: #B22222;'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
-				  	var labels = "";
-				  	if(jo.index_label!=null){
-		  				$.each(jo.index_label.split(","),function(i,label){
-							labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>Win10</div>";
-		  				})
-				  	}
-	  				$("#topdiv").append(begin+labels+after);
-				}else{
-					var src;
-					if (jo.index_state=="01"||jo.index_state=="11") {
-						src = 'indexhoticon.png';
-					} else {
-						src = 'indexnomalicon.png';
-					}
-					var content = delHtmlTag(jo.index_content);
-					var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
-				  	var labels="";
-				  	if(jo.index_label!=null){
-		  				$.each(jo.index_label.split(","),function(i,label){
-							labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>"+label+"</div>";
-		  				})
-				  	}
-	  				$("#list").append(begin+labels+after);
-	  				$(".fakeloader").fakeLoader({
-	  		            spinner:"spinner2",
-	  		            show:false
-	  		        });
+				var src;
+				if (jo.index_state=="01"||jo.index_state=="11") {
+					src = 'indexhoticon.png';
+				} else {
+					src = 'indexnomalicon.png';
 				}
+				var content = delHtmlTag(jo.index_content);
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+			  	var labels="";
+			  	if(jo.index_label!=null){
+	  				$.each(jo.index_label.split(","),function(i,label){
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>"+label+"</div>";
+	  				})
+			  	}
+  				$("#list").append(begin+labels+after);
+  				$(".fakeloader").fakeLoader({
+  		            spinner:"spinner2",
+  		            show:false
+  		        });
 			});
 		});
 	}
 	
-	
 	$(document).ready(function(){
-		$.getJSON("index/Allnotice.action", queryParams("HUODONG","index_entry",1),function(json){
+		document.title = "${type}";
+		$.getJSON("index/Allnotice.action", queryParams(null,1,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
 			 $('.sync-pagination').twbsPagination({
-			        totalPages: json.total/10,
+			        totalPages: Math.ceil(json.total/10),
 			        visiblePages: 7,
 			        first:"首页",
 			        prev:"前一页",
@@ -240,7 +233,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			        }
 			  });
 		});
-		$.getJSON("index/Allnotice.action", hotqueryParams("index_hitsnum","desc"), function(json){
+		$.getJSON("index/Allnotice.action",queryParams(null,1,null,"index_hitsnum","desc"), function(json){
 			$.each(json.rows,function(i,jo){
 				var src;
 				if (jo.index_state=="01"||jo.index_state=="11") {

@@ -18,7 +18,7 @@ public interface IndexDAO extends BaseDAO<IndexModel>{
 	
 	public List<IndexModel> selectByPage(Page page);
 	public int selectCountByTableName(String name);
-	public int selectNumByState(Integer state); 
+	public IndexModel selectTopByState(Integer state); 
 	public int insertView(int id);
 	public int deleteByIdView(int id);
 	public int seletHitsNumById(int id);

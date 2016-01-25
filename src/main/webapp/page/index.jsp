@@ -368,7 +368,7 @@ ul.news li p{float:right; color:#000000}
 						<div class="row" style="margin-left: 3px">
 							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">重要公告</h5></div>
 							
-							<div class="col-sm-3 col-sm-offset-5"><h5><a target="_blank" href="<%=basePath%>page/article/articlelist.jsp?type='GONGGAO'">更多>></a></h5></div>
+							<div class="col-sm-3 col-sm-offset-5"><h5><a target="_blank" href="<%=basePath%>page/article/articlelist.jsp?pid=1">更多>></a></h5></div>
 						</div>
 						<div class="overstep" >
 							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indextopicon.png">
@@ -386,7 +386,7 @@ ul.news li p{float:right; color:#000000}
 						<div class="row" style="margin-left: 0px">
 							<div class="col-sm-4"><h5 style="font-weight: bold; letter-spacing: 2px;">近期活动</h5></div>
 							
-							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px"><a target="_blank" href="<%=basePath%>page/article/articlelist.jsp?type='HUODONG'">更多>></a></h5></div>
+							<div class="col-sm-3 col-sm-offset-5"><h5 style="float:right; margin-right: 10px"><a target="_blank" href="<%=basePath%>page/article/articlelist.jsp?pid=2">更多>></a></h5></div>
 						</div>
 						<div class="overstep" >
 							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indextopicon.png">
@@ -489,9 +489,10 @@ ul.news li p{float:right; color:#000000}
 	<script src="<%=basePath%>page/assets/js/bootstrapValidator.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
-	function queryParams(type,tbname){
+	function queryParams(type,tbname,pid){
 		return {
 			    search:type,
+			    index_pid:pid,
 				limit:5,
 				offset:0,
 				tableName:tbname,
@@ -499,13 +500,12 @@ ul.news li p{float:right; color:#000000}
 		}
 	}
 	//获取公告
-		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams("GONGGAO","index_entry_view"), function(json){
+		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams(null,"index_entry_view",1), function(json){
+			var top = json.top;
+			$("#topnoticeA").append(top.index_title)
+			$("#topnoticeA").attr("href","<%=basePath%>index/articledetail.action?id="+top.index_id);
 			$.each(json.rows,function(i,jo){
 				var title = jo.index_title;
-				if (jo.index_state=="10"||jo.index_state=="11") {
-					$("#topnoticeA").append(title)
-					$("#topnoticeA").attr("href","<%=basePath%>index/articledetail.action?id="+jo.index_id);
-				}else{
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
 						src = 'indexhoticon.png';
@@ -513,25 +513,22 @@ ul.news li p{float:right; color:#000000}
 						src = 'indexnomalicon.png';
 					}
 					$("#notice").append("<div class='row' > <div class='col-sm-10 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
-				}
 			});
 		});
 	//获取活动
-		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams("HUODONG","index_entry_view"), function(json){
+		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams(null,"index_entry_view",2), function(json){
+			var top = json.top;
+			$("#topactivityA").append(top.index_title)
+			$("#topactivityA").attr("href","<%=basePath%>index/articledetail.action?id="+top.index_id);
 			$.each(json.rows,function(i,jo){
 				var title = jo.index_title;
-				if (jo.index_state=="10"||jo.index_state=="11") {
-					$("#topactivityA").append(title)
-					$("#topactivityA").attr("href","<%=basePath%>index/articledetail.action?id="+jo.index_id);
-				}else{
-					var src;
-					if (jo.index_state=="01"||jo.index_state=="11") {
-						src = 'indexhoticon.png';
-					} else {
-						src = 'indexnomalicon.png';
-					}
-					$("#activity").append("<div class='row' > <div class='col-sm-11 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
+				var src;
+				if (jo.index_state=="01"||jo.index_state=="11") {
+					src = 'indexhoticon.png';
+				} else {
+					src = 'indexnomalicon.png';
 				}
+				$("#activity").append("<div class='row' > <div class='col-sm-11 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
 			});
 		});
 		$(document).ready(function() {
@@ -632,88 +629,82 @@ ul.news li p{float:right; color:#000000}
 		})
 		
 		
-		$(document)
-				.ready(
-						function() {
-							$('#loginfrom')
-									.bootstrapValidator(
-											{
-												message : 'This value is not valid',
-												submitButtons : 'button[type="submit"]',
-												feedbackIcons : {
-													valid : 'glyphicon glyphicon-ok',
-													validating : 'glyphicon glyphicon-refresh'
-												},
-												fields : {
-													user_account : {
-														validators : {
-															notEmpty : {
-																message : '用户名不能为空'
-															},
-														}
-													},
-													user_password : {
-														validators : {
-															notEmpty : {
-																message : '密码不能为空'
-															},
-														}
-													},
-													user_code : {
-														threshold : 5,
-														validators : {
-															notEmpty : {
-																message : '验证码不能为空'
-															},
-															remote : {
-																url : '<%=basePath%>user/verifyCode.action',
-																type : "post",
-																async : true,
-																data : {
-																	user_account : function(
-																			validator) {
-																		return $(
-																				'#loginfrom :input[name="user_code"]')
-																				.val();
-																	},
-																},
-															},
-														}
-													},
-
-												}
-											})
-									.on(
-											'success.form.bv',
-											function(e) {
-												// Prevent form submission
-												e.preventDefault();
-
-												// Get the form instance
-												var $form = $(e.target);
-
-												// Get the BootstrapValidator instance
-												var bv = $form
-														.data('bootstrapValidator');
-												$(".fakeloader").fakeLoader({
-									                spinner:"spinner2",
-									                show:true
-									            });
-												// Use Ajax to submit form data
-												$.post($form.attr('action'),$form.serialize(),
-																function(result) {
-																	$(".fakeloader").fakeLoader({
-														                spinner:"spinner2",
-														                show:false
-														            });
-																	if (result.error == 203) {
-																		alert(result.msg)
-																	} else {
-																		$('#loginModal').modal('hide')
-																		$.Velocity.RunSequence(seqLogin);
-																		$("#login_user_name").append("Hello,"+ result.msg)
-																	}
-																}, 'json');});
+		$(document).ready(function() {$('#loginfrom').bootstrapValidator({
+			message : 'This value is not valid',
+			submitButtons : 'button[type="submit"]',
+			feedbackIcons : {
+				valid : 'glyphicon glyphicon-ok',
+				validating : 'glyphicon glyphicon-refresh'
+			},
+			fields : {
+				user_account : {
+					validators : {
+						notEmpty : {
+							message : '用户名不能为空'
+						},
+					}
+				},
+				user_password : {
+					validators : {
+						notEmpty : {
+							message : '密码不能为空'
+						},
+					}
+				},
+				user_code : {
+					threshold : 5,
+					validators : {
+						notEmpty : {
+							message : '验证码不能为空'
+						},
+						remote : {
+							url : '<%=basePath%>user/verifyCode.action',
+								type : "post",
+								async : true,
+								data : {
+									user_account : function(
+											validator) {
+										return $(
+												'#loginfrom :input[name="user_code"]')
+												.val();
+									},
+								},
+							},
+						}
+					},
+	
+				}
+			}).on(
+			'success.form.bv',
+			function(e) {
+				// Prevent form submission
+				e.preventDefault();
+	
+				// Get the form instance
+				var $form = $(e.target);
+	
+				// Get the BootstrapValidator instance
+				var bv = $form
+						.data('bootstrapValidator');
+				$(".fakeloader").fakeLoader({
+	                spinner:"spinner2",
+	                show:true
+	            });
+				// Use Ajax to submit form data
+				$.post($form.attr('action'),$form.serialize(),
+								function(result) {
+									$(".fakeloader").fakeLoader({
+						                spinner:"spinner2",
+						                show:false
+						            });
+									if (result.error == 203) {
+										alert(result.msg)
+									} else {
+										$('#loginModal').modal('hide')
+										$.Velocity.RunSequence(seqLogin);
+										$("#login_user_name").append("Hello,"+ result.msg)
+									}
+								}, 'json');});
 							});
 		$("#adminlogin").click(function() {
 			window.open('<%=basePath%>page/admin_login.jsp') 

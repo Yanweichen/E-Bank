@@ -51,8 +51,8 @@ public class IndexService implements BaseService<IndexModel> {
 		return indexdao.selectByPage(page);
 	}
 	
-	public int findNumByState(Integer state){
-		return indexdao.selectNumByState(state);
+	public IndexModel findTopByState(Integer state){
+		return indexdao.selectTopByState(state);
 	}
 	
 	public IndexModel findByBoA(String ba,int id){

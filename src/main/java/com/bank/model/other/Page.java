@@ -11,7 +11,14 @@ public class Page {
 	private String startTime;
 	private String endTime;
 	private String timefmt;
+	private Integer index_pid;//分类id
 	
+	public Integer getIndex_pid() {
+		return index_pid;
+	}
+	public void setIndex_pid(Integer index_pid) {
+		this.index_pid = index_pid;
+	}
 	public String getTimefmt() {
 		return timefmt;
 	}

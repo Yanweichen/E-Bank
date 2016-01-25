@@ -4,9 +4,11 @@
   <resultMap id="BaseResultMap" type="com.bank.model.index.IndexModel" >
     <id column="index_id" property="index_id" jdbcType="INTEGER" />
     <result column="index_type" property="index_type" jdbcType="VARCHAR" />
+    <result column="index_pid" property="index_pid" jdbcType="INTEGER" />
     <result column="index_title" property="index_title" jdbcType="VARCHAR" />
     <result column="index_content" property="index_content" jdbcType="VARCHAR" />
     <result column="index_uptime" property="index_uptime" jdbcType="TIMESTAMP" />
+    <result column="index_aid" property="index_aid" jdbcType="INTEGER" />
     <result column="admin_name" property="upfrom" jdbcType="VARCHAR" />
     <result column="index_state" property="index_state" jdbcType="VARCHAR" />
     <result column="index_isindex" property="index_isindex" jdbcType="TINYINT" />
@@ -17,7 +19,7 @@
   </resultMap>
   
   <sql id="Base_Column_List" >
-    index_id,index_type,index_title,index_content,index_uptime,admin_name,index_state,index_isindex,index_hitsnum,index_label,index_from,index_href
+    index_id,index_pid,index_type,index_title,index_content,index_uptime,index_aid,admin_name,index_state,index_isindex,index_hitsnum,index_label,index_from,index_href
   </sql>
   
   <!-- 根据表名称查询总数 -->
@@ -31,25 +33,20 @@
     <include refid="Base_Column_List" />
 	FROM ${tableName} ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` 
-	<if test="search != null">
-		<choose> 
-        <when test="search =='GONGGAO'"> 
-            AND index_pid = 1
-        </when> 
-        <when test="search =='HUODONG'"> 
-            AND index_pid = 2 
-        </when>
-         <when test="search =='TIME'"> 
-	            AND index_uptime BETWEEN DATE_FORMAT(#{startTime}, '%Y%m%d') AND DATE_FORMAT(#{endTime}, '%Y%m%d%H%i%s')
-        </when>  
-        <otherwise> 
-            AND index_title LIKE '%${search}%'
-        </otherwise> 
-    	</choose>
-	</if>
+	<choose> 
+	<when test="index_pid != null || index_pid == ''">
+		AND index_pid = #{index_pid}
+	</when>
+        <when test="search =='TIME'"> 
+            AND index_uptime BETWEEN DATE_FORMAT(#{startTime}, '%Y%m%d') AND DATE_FORMAT(#{endTime}, '%Y%m%d%H%i%s')
+       </when>  
+       <otherwise> 
+           AND index_title LIKE '%${search}%'
+       </otherwise> 
+   	</choose>
 	ORDER BY 
 	<choose>
-		<when test="sort == null">
+		<when test="sort == null || sort == ''">
 			index_id
 		</when>
 		<otherwise>
@@ -100,7 +97,6 @@
   	INSERT INTO index_entry VALUES(null,#{index_type},#{index_title},#{index_content},
   	#{index_uptime},#{upfrom},#{index_state},#{index_isindex},0,#{index_label},#{index_from},#{index_href});
   </insert>
-  
   <!-- 添加视图文章 -->
   <update id="insertView" parameterType="java.lang.Integer">
   	UPDATE index_entry SET index_isindex = TRUE WHERE index_id = #{_parameter};
@@ -119,18 +115,12 @@
   	WHERE index_id = #{index_id};
   </update>
   
-  <select id="selectNumByState" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-  	SELECT COUNT(*) FROM index_entry_view
-  	WHERE 
-  	<choose>
-		<when test="_parameter == 1">
-			index_pid = 1
-		</when>
-		<otherwise>
-			index_pid = 2 
-		</otherwise>
-	</choose>
-  	AND (index_state = '10' OR index_state = '11');
+  <select id="selectTopByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	SELECT
+  	<include refid="Base_Column_List" />
+  	FROM index_entry_view ent,index_type typ,admin ad 
+	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`
+  	AND index_pid = #{_parameter} AND (index_state = '10' OR index_state = '11');
   </select>
   
   <delete id="deleteById" parameterType="java.lang.Integer">

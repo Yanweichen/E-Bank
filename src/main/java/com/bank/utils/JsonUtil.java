@@ -31,49 +31,32 @@ public class JsonUtil {
 	 * @throws ParseException 
 	 */
 	public static JSONObject getSingleNotice(IndexModel im,String format) throws ParseException{
-//		JSONObject jo = new JSONObject();
-//		jo.put("index_id", im.getIndex_id());
-//		jo.put("index_type", im.getIndex_type());
-//		jo.put("index_title", im.getIndex_title());
-//		jo.put("index_content", im.getIndex_content());
-//		jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
-//		jo.put("upfrom", im.getUpfrom());
-//		jo.put("index_state", im.getIndex_state());
-//		jo.put("index_hitsnum", im.getIndex_hitsnum());
-//		jo.put("index_label", im.getIndex_label());
 		im.setIndex_uptime_format(TimeUtil.Date2String(im.getIndex_uptime(), format));
 		return (JSONObject) JSON.toJSON(im);
 	}
 	
 	/**
-	 * 获得多条公告
-	 * @param ilist
+	 * @param ilist 全部数据
+	 * @param top 置顶
+	 * @param total 总数
+	 * @param format 日期格式
 	 * @return
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
-	public static JSONObject getNotice(List<IndexModel> ilist,int total,String format) throws ParseException{
+	public static JSONObject getNotice(List<IndexModel> ilist,IndexModel top,int total,String format) throws ParseException{
 		JSONObject jarr =  new JSONObject();
 		jarr.put("total", total);
+		if (top!=null) {
+			jarr.put("top", getSingleNotice(top,format));
+		}
 		JSONArray row =  new JSONArray();
 		for (IndexModel im : ilist) {
-//			JSONObject jo = new JSONObject();
-//			jo.put("index_id", im.getIndex_id());
-//			jo.put("index_type", im.getIndex_type());
-//			jo.put("index_title", im.getIndex_title());
-//			jo.put("index_content", im.getIndex_content());
-//			jo.put("index_uptime_format", TimeUtil.Date2String(im.getIndex_uptime(), format));
-//			jo.put("upfrom", im.getUpfrom());
-//			jo.put("index_state", im.getIndex_state());
-//			jo.put("index_hitsnum", im.getIndex_hitsnum());
-//			jo.put("index_label", im.getIndex_label());
-//			row.add(jo);
 			im.setIndex_uptime_format(TimeUtil.Date2String(im.getIndex_uptime(), format));
 			row.add(JSON.toJSON(im));
 		}
 		jarr.put("rows", row);
 		return jarr;
 	}
-	
 	public static JSONArray getAllLabel(List<LabelModel> list){
 		JSONArray jarr = new JSONArray();
 		for (LabelModel labelModel : list) {

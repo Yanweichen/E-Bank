@@ -44,7 +44,8 @@ public class IndexController {
 		}
 		page.setTableName("index_entry");
 		List<IndexModel> list = is.findeByPage(page);
-			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry"),page.getTimefmt());
+		IndexModel im = is.findTopByState(page.getIndex_pid());//获取置顶
+			return JsonUtil.getNotice(list,im,is.findCountByTableName("index_entry"),page.getTimefmt());
 	}
 
 	@ResponseBody
@@ -58,7 +59,8 @@ public class IndexController {
 		}
 		page.setTableName("index_entry_view");
 		List<IndexModel> list = is.findeByPage(page);
-			return JsonUtil.getNotice(list,is.findCountByTableName("index_entry_view"),page.getTimefmt());
+		IndexModel im = is.findTopByState(page.getIndex_pid());//获取置顶
+			return JsonUtil.getNotice(list,im,is.findCountByTableName("index_entry_view"),page.getTimefmt());
 	}
 	
 	/**
@@ -72,7 +74,7 @@ public class IndexController {
 	@RequestMapping("/aboutnotice")
 	public JSONObject getNoticeAboutByLabel(String label,int num) throws ParseException{
 		List<IndexModel> list = is.findAboutByLabel(label, num);
-		return JsonUtil.getNotice(list,num,"MM/dd");
+		return JsonUtil.getNotice(list,null,num,"MM/dd");
 	}
 	@ResponseBody
 	@RequestMapping("/getAllLabel")
@@ -149,12 +151,17 @@ public class IndexController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/getCountByState")
-	public JSONObject getCountByState(Integer type){
+	@RequestMapping("/getTopByState")
+	public JSONObject getCountByState(Integer type,String fmt) throws ParseException{
 		JSONObject jo = new JSONObject();//返回给页面的json
-		int count = is.findNumByState(type);
-		jo.put("error", "200");
-		jo.put("count", count);
+		IndexModel im = is.findTopByState(type);
+		if (im==null) {
+			jo.put("error", "203");
+			jo.put("msg", "没有置顶项");
+		}else{
+			jo.put("error", "200");
+			jo.put("top", JsonUtil.getSingleNotice(im, fmt));
+		}
 		return jo;
 	}
 

@@ -9,10 +9,12 @@ public class IndexModel {
 
 	private Integer index_id;//主键
 	private String index_type;//分类
+	private Integer index_pid;//分类id
 	private String index_title;//标题
 	private String index_content;//内容
 	private Date index_uptime;//上传时间
 	private String upfrom;//上传者
+	private Integer index_aid;//上传者id
 	private String index_state;//文章状态
 	private String index_label;//文章标签
 	private String index_from;//文章来源
@@ -22,6 +24,18 @@ public class IndexModel {
 	
 	private String index_uptime_format;//格式化后的时间
 	
+	public Integer getIndex_pid() {
+		return index_pid;
+	}
+	public void setIndex_pid(Integer index_pid) {
+		this.index_pid = index_pid;
+	}
+	public Integer getIndex_aid() {
+		return index_aid;
+	}
+	public void setIndex_aid(Integer index_aid) {
+		this.index_aid = index_aid;
+	}
 	public String getIndex_from() {
 		return index_from;
 	}

@@ -318,8 +318,8 @@ cursor:pointer
 				default:
 					break;
 				}
-	    		$.post("index/getCountByState.action",{type:type},function(result){
-	    			if (result.count==0) {
+	    		$.post("index/getTopByState.action",{type:type,fmt:"MM/dd"},function(result){
+	    			if (result.error!=200) {
 	    				$.post("index/updateNoticeState.action",{"row":JSON.stringify(row),state:updatestate},function(result){
 			    			if (result.error==200) {
 					    		e.target.setAttribute("class", "glyphicon glyphicon-arrow-up");
