@@ -15,6 +15,8 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="page/assets//img/tubiao.ico" />
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
+<link rel="stylesheet" href="page/assets/css/tokenfield-typeahead.css">
+<link rel="stylesheet" href="page/assets/css/bootstrap-tokenfield.css">
 <style type="text/css">
 .top20{
 	margin-top: 20px
@@ -51,7 +53,7 @@ div.hotdiv:hover{
 }
 .wenzizhidi{
 	position:absolute;
-	margin:5px 0px 5px 5px
+	margin:6px 0px 5px 5px
 }
 .moretextoverstep{
 	height:60px;
@@ -79,10 +81,14 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				<!-- 主体列表 -->
 				<div class="panel panel-default" style="border-radius: 10px 10px 10px 10px;;background-color: rgba(255,255,255,0.5);padding: 10px">
 				<div class="panel-heading">
-					<div id="nowlabel" class="top5" style="display: none;"> 
-							<img  alt='' style='height: 30px;width: 30px;' src='page/assets/img/circle-shop.png'>
-							<h4 class="nosingline wenzizhidi " style="color: #666666">当前标签</h4>
-		  					<div class="well well-sm nosingline hotdiv hand top5" style="margin-left: 90px;position: relative;"><% out.print(request.getParameter("search")); %></div>
+					<div id="nowlabel" class="top5 row"> 
+						<div class="col-sm-3">
+								<img  alt='' style='height: 30px;width: 30px;' src='page/assets/img/circle-shop.png'>
+								<h4 class="nosingline wenzizhidi " style="color: #666666">当前标签</h4>
+						</div>
+						<div class="col-sm-9">
+			  					<input type="text" class="form-control" id="label" value="<% out.print(request.getParameter("search")==null?"":request.getParameter("search")); %>" placeholder="请输入你想搜索的标签~"/>
+						</div>
 		  			</div>
 					<div class="top15">
 						<ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
@@ -161,6 +167,8 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script src="page/assets/js/jquery.twbsPagination.js"></script>
 	<script src="page/assets/js/fakeloader.js"></script>
+	<script src="page/assets/js/bootstrap-tokenfield.js"></script>
+	<script src="page/assets/js/typeahead.bundle.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script type="text/javascript">
@@ -225,16 +233,14 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			});
 		});
 	}
-	
+	var isSearch = true;
 	$(document).ready(function(){
 		document.title = "${type}";
 		var url = "index/Allnotice.action";
 		if (eval("<% out.print(request.getParameter("search")!=null?true:false); %>")) {
-			$("#nowlabel").css("display","inline-block");
 			url = "index/aboutnotice.action";
 		}
 		$.getJSON(url, queryParams("<% out.print(request.getParameter("search")==null?"":request.getParameter("search"));%>",1,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
-			console.log(json.total)
 			 $('.sync-pagination').twbsPagination({
 			        totalPages: Math.ceil(json.total/10),
 			        visiblePages: 7,
@@ -243,7 +249,11 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			 		next:"后一页",
 			 		last:"尾页",
 			        onPageClick: function (event, page) {
-			        	init(page,url);
+			        	if (isSearch) {
+				        	init(page,url);
+						}else{
+							labelsearch(page,"");
+						}
 			        }
 			  });
 		});
@@ -263,7 +273,81 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota '>"+jo.value+"</a>");
 			});
 		});
+		$.getJSON("index/getAllLabel.action", function(json){
+			var engine = new Bloodhound({
+				  local: json,
+				  datumTokenizer: function(d) {
+				    return Bloodhound.tokenizers.whitespace(d.value);
+				  },
+				  queryTokenizer: Bloodhound.tokenizers.whitespace
+				});
+
+				engine.initialize();
+				$('#label').tokenfield({
+					  typeahead: [null, { source: engine.ttAdapter() }],
+					  beautify:false
+				}).on('tokenfield:createdtoken', function (e) {
+					//回车时触发
+					labelsearch(1,e.attrs.value);
+					isSearch = false;
+			  	}).on('tokenfield:removedtoken', function (e) {
+				 	//删除后触发
+				 	if ($('#label').val()=="") {
+				 		console.log($('#label').val())
+				 		isSearch = true;
+				 		init(1,url)
+					}else{
+					  	labelsearch(1,"");
+					}
+			  	});
+		});
 	})
+	
+	function labelsearch(page,slabel) {
+		var labels = $('#label').val();
+		if ($('#label').val()=="") {
+			labels = slabel;
+		}
+		$.getJSON("index/aboutnotice.action", queryParams(labels,page,null,null,null), function(json){
+			var after =	"</div></div></div></div>";
+			if (first && json.top!=null) {
+				var top = json.top;
+				first = false;
+				$("#topdiv").css("display","inline");
+				var content = delHtmlTag(top.index_content);
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+top.index_id+"' style='color: #B22222;'>"+top.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+top.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+			  	var labels = "";
+			  	if(top.index_label!=null){
+	  				$.each(top.index_label.split(","),function(i,label){
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
+	  				})
+			  	}
+  				$("#topdiv").append(begin+labels+after);
+			}
+			$("#list").empty();
+			$.each(json.rows,function(i,jo){
+				var src;
+				if (jo.index_state=="01"||jo.index_state=="11") {
+					src = 'indexhoticon.png';
+				} else {
+					src = 'indexnomalicon.png';
+				}
+				var content = delHtmlTag(jo.index_content);
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+			  	var labels="";
+			  	if(jo.index_label!=null){
+	  				$.each(jo.index_label.split(","),function(i,label){
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
+	  				})
+			  	}
+  				$("#list").append(begin+labels+after);
+  				$(".fakeloader").fakeLoader({
+  		            spinner:"spinner2",
+  		            show:false
+  		        });
+			});
+		});
+	}
 	if (!(document.documentElement.clientHeight < document.documentElement.offsetHeight-4)) {
 		$("#foot").removeClass("navbar-fixed-bottom");
 	}
