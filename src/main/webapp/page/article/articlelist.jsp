@@ -149,7 +149,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				  <div class="panel-heading" style="background-color: #3f316d;color: white">
 				  	<h4>热门标签</h4>
 				  </div>
-				  <div id="hotlabels" class="panel-body" style="line-height: 50px">
+				  <div id="hotlabels" class="panel-body" style="line-height: 25px">
 				  </div>
 			   </div>
 			</div>
@@ -260,7 +260,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 		});
 		$.getJSON("index/getHotLabel.action", {num:15}, function(json){
 			$.each(json,function(i,jo){
-				$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.5);' class='hotdiv hota'>"+jo.value+"</a>");
+				$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota '>"+jo.value+"</a>");
 			});
 		});
 	})
