@@ -79,10 +79,13 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				<!-- 主体列表 -->
 				<div class="panel panel-default" style="border-radius: 10px 10px 10px 10px;;background-color: rgba(255,255,255,0.5);padding: 10px">
 				<div class="panel-heading">
-					<div class="row">
-						<div class="col-sm-12" style="padding-left: 0px;">
-							 <ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
-						</div>
+					<div class="top5"> 
+							<img  alt='' style='height: 30px;width: 30px;' src='page/assets/img/circle-shop.png'>
+							<h4 class="nosingline wenzizhidi " style="color: #666666">当前标签</h4>
+		  					<div class="well well-sm nosingline hotdiv hand top5" style="margin-left: 90px;position: relative;">Win10</div>
+		  			</div>
+					<div class="top15">
+						<ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
 					</div>
 					<div id="topdiv" style="display: none;">
 				  	
@@ -127,10 +130,8 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 <!-- 				  	</div> -->
 				  </div>
 				  <div class="panel-footer">
-			 		<div class="row">
-						<div class="col-sm-12" style="padding-left: 0px;">
-							 <ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
-						</div>
+			 		<div class="top15">
+						<ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
 					</div>
 				  </div>
 				</div>
@@ -178,6 +179,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
         });
 		$.ajaxSettings.async = false;//为了获取总条数修改为同步
 		$.getJSON("index/Allnotice.action", queryParams(null,page,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
+			var after =	"</div></div></div></div>";
 			if (first) {
 				var top = json.top;
 				first = false;
@@ -187,12 +189,11 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			  	var labels = "";
 			  	if(top.index_label!=null){
 	  				$.each(top.index_label.split(","),function(i,label){
-						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>Win10</div>";
+						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'>"+label+"</div>";
 	  				})
 			  	}
   				$("#topdiv").append(begin+labels+after);
 			}
-			var after =	"</div></div></div></div>";
 			$("#list").empty();
 			$.each(json.rows,function(i,jo){
 				var src;
@@ -221,6 +222,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	$(document).ready(function(){
 		document.title = "${type}";
 		$.getJSON("index/Allnotice.action", queryParams(null,1,<% out.print(request.getParameter("pid")); %>,null,null),function(json){
+			console.log(json.total)
 			 $('.sync-pagination').twbsPagination({
 			        totalPages: Math.ceil(json.total/10),
 			        visiblePages: 7,
@@ -233,7 +235,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			        }
 			  });
 		});
-		$.getJSON("index/Allnotice.action",queryParams(null,1,null,"index_hitsnum","desc"), function(json){
+		$.getJSON("index/Allnotice.action",queryParams(null,1,-1,"index_hitsnum",null), function(json){
 			$.each(json.rows,function(i,jo){
 				var src;
 				if (jo.index_state=="01"||jo.index_state=="11") {

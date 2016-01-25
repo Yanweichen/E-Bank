@@ -138,14 +138,16 @@ cursor:pointer
         $("#msg").append(msg)
 		$("#isSuc").modal(); 
 	}
-	function queryParams(type,stime,etime){
+	function queryParams(type,stime,etime,pid,tb){
 		return {
 			    search:type,
 				limit:10,
 				offset:0,
 				startTime:stime,
 				endTime:etime,
-				timefmt:"yyyy-MM-dd HH:mm:ss"
+				timefmt:"yyyy-MM-dd HH:mm:ss",
+				index_pid:pid,
+				isView:tb
 		}
 	}
 	$("#viewall").click(function(){
@@ -158,7 +160,7 @@ cursor:pointer
 		$("#viewactivity").addClass("active")
 		$("#viewall").removeClass("active");
 		$("#viewnotice").removeClass("active");
-		$.getJSON("index/Viewnotice.action", queryParams("HUODONG"), function(json){
+		$.getJSON("index/Allnotice.action", queryParams(null,null,null,2,null,"view"), function(json){
 			$('#isputaway').bootstrapTable('load', json);
 		});
 	})
@@ -166,7 +168,7 @@ cursor:pointer
 		$("#viewnotice").addClass("active")
 		$("#viewall").removeClass("active");
 		$("#viewactivity").removeClass("active");
-		$.getJSON("index/Viewnotice.action", queryParams("GONGGAO"), function(json){
+		$.getJSON("index/Allnotice.action", queryParams(null,null,null,1,null,"view"), function(json){
 			$('#isputaway').bootstrapTable('load', json);
 		});
 	})
@@ -181,7 +183,7 @@ cursor:pointer
 		$("#allactivity").addClass("active")
 		$("#allall").removeClass("active");
 		$("#allnotice").removeClass("active");
-		$.getJSON("index/Allnotice.action", queryParams("HUODONG"), function(json){
+		$.getJSON("index/Allnotice.action", queryParams(null,null,null,2,false), function(json){
 			$('#all').bootstrapTable('load', json);
 		});
 	})
@@ -189,7 +191,7 @@ cursor:pointer
 		$("#allnotice").addClass("active")
 		$("#allall").removeClass("active");
 		$("#allactivity").removeClass("active");
-		$.getJSON("index/Allnotice.action", queryParams("GONGGAO"), function(json){
+		$.getJSON("index/Allnotice.action", queryParams(null,null,null,1,false), function(json){
 			$('#all').bootstrapTable('load', json);
 		});
 	})
@@ -203,7 +205,7 @@ cursor:pointer
 	    todayHighlight:true,
 	}).on('changeDate', function(ev){
 		//ev.date.valueOf()
-		$.getJSON("index/Viewnotice.action", queryParams("TIME",$("#viewstarttime").val(),$("#viewendtime").val()), function(json){
+		$.getJSON("index/Allnotice.action", queryParams("TIME",$("#viewstarttime").val(),$("#viewendtime").val(),-1,"view"), function(json){
 			$('#isputaway').bootstrapTable('load', json);
 		});
 	});
@@ -215,7 +217,7 @@ cursor:pointer
 	    keyboardNavigation:true,
 	    todayHighlight:true,
 	}).on('changeDate', function(ev){
-		$.getJSON("index/Allnotice.action", queryParams("TIME",$("#allstarttime").val(),$("#allendtime").val()), function(json){
+		$.getJSON("index/Allnotice.action", queryParams("TIME",$("#allstarttime").val(),$("#allendtime").val(),-1,false), function(json){
 			$('#all').bootstrapTable('load', json);
 		});
 	});
@@ -223,7 +225,7 @@ cursor:pointer
 	//初始化表格
 	$.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
 	$('#isputaway').bootstrapTable({
-	    url: 'index/Viewnotice.action',
+	    url: "index/Allnotice.action?isView=view",
 	}).on('load-success.bs.table', function (e, name, args) {
     })
 	$('#all').bootstrapTable({

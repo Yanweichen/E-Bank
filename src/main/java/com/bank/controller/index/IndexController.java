@@ -42,27 +42,12 @@ public class IndexController {
 		if (page.getTimefmt()==null || "".equals(page.getTimefmt())) {
 			page.setTimefmt("yyyy-MM-dd HH:mm:ss");
 		}
-		page.setTableName("index_entry");
 		List<IndexModel> list = is.findeByPage(page);
 		IndexModel im = is.findTopByState(page.getIndex_pid());//获取置顶
-			return JsonUtil.getNotice(list,im,is.findCountByTableName("index_entry"),page.getTimefmt());
+		Integer pid = page.getIndex_pid();
+		return JsonUtil.getNotice(list,im,page.getSearch()!=null?list.size():is.findCountByType(pid==null?-1:pid),page.getTimefmt());
 	}
 
-	@ResponseBody
-	@RequestMapping("/Viewnotice")
-	public JSONObject getViewNotice(Page page,HttpServletRequest req) throws ParseException{
-		if ("index_uptime_format".equals(page.getSort())) {
-			page.setSort("index_uptime");
-		}
-		if (page.getTimefmt()==null || "".equals(page.getTimefmt())) {
-			page.setTimefmt("yyyy-MM-dd HH:mm:ss");
-		}
-		page.setTableName("index_entry_view");
-		List<IndexModel> list = is.findeByPage(page);
-		IndexModel im = is.findTopByState(page.getIndex_pid());//获取置顶
-			return JsonUtil.getNotice(list,im,is.findCountByTableName("index_entry_view"),page.getTimefmt());
-	}
-	
 	/**
 	 * 根据标签获得相关的文章
 	 * @param label

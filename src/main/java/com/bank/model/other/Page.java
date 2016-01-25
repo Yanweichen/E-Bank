@@ -7,7 +7,7 @@ public class Page {
 	private String order;
 	private String sort;
 	private String search;
-	private String tableName;
+	private String isView;
 	private String startTime;
 	private String endTime;
 	private String timefmt;
@@ -37,11 +37,11 @@ public class Page {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime+" 23:59:59";
 	}
-	public String getTableName() {
-		return tableName;
+	public String getIsView() {
+		return isView;
 	}
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
+	public void setIsView(String isView) {
+		this.isView = isView;
 	}
 	public String getSearch() {
 		return search;

@@ -22,20 +22,33 @@
     index_id,index_pid,index_type,index_title,index_content,index_uptime,index_aid,admin_name,index_state,index_isindex,index_hitsnum,index_label,index_from,index_href
   </sql>
   
-  <!-- 根据表名称查询总数 -->
-  <select id="selectCountByTableName" resultType="java.lang.Integer" statementType="STATEMENT">
-	  SELECT COUNT(*) FROM ${_parameter};
+  <!-- 根据表类型查询总数 -->
+  <select id="selectCountByType" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+	  SELECT COUNT(*) FROM index_entry 
+	  <choose> 
+		<when test="_parameter != -1">
+		   WHERE index_pid = #{_parameter};
+		</when>
+       <otherwise> 
+           WHERE index_isindex = TRUE;
+       </otherwise> 
+   	</choose>
   </select>
   
   <!-- 首页分页 -->
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.bank.model.other.Page" >
     SELECT  
     <include refid="Base_Column_List" />
-	FROM ${tableName} ent,index_type typ,admin ad 
+	FROM index_entry ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid` 
+	<if test="isView == 'view'">
+		AND index_isindex = TRUE
+	</if>
 	<choose> 
 	<when test="index_pid != null || index_pid == ''">
-		AND index_pid = #{index_pid}
+		<if test="index_pid != -1">
+			AND index_pid = #{index_pid}
+		</if>
 	</when>
         <when test="search =='TIME'"> 
             AND index_uptime BETWEEN DATE_FORMAT(#{startTime}, '%Y%m%d') AND DATE_FORMAT(#{endTime}, '%Y%m%d%H%i%s')
@@ -47,14 +60,14 @@
 	ORDER BY 
 	<choose>
 		<when test="sort == null || sort == ''">
-			index_id
+			index_uptime
 		</when>
 		<otherwise>
 			${sort}
 		</otherwise>
 	</choose>
 	<choose>
-		<when test="order == 'desc'">
+		<when test="order == null || order==''">
 			DESC
 		</when>
 		<otherwise>
@@ -118,7 +131,7 @@
   <select id="selectTopByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	SELECT
   	<include refid="Base_Column_List" />
-  	FROM index_entry_view ent,index_type typ,admin ad 
+  	FROM index_entry ent,index_type typ,admin ad 
 	WHERE ent.`index_pid` = typ.`index_type_id` AND ad.`admin_id` = ent.`index_aid`
   	AND index_pid = #{_parameter} AND (index_state = '10' OR index_state = '11');
   </select>

@@ -321,7 +321,7 @@ div.hotdiv:hover{
 				}
 				$("#afterarticle").attr("href","index/articledetail.action?id="+(json.index_id));
 			});
-			$.getJSON("index/Allnotice.action", queryParams("index_hitsnum","desc"), function(json){
+			$.getJSON("index/Allnotice.action", queryParams("index_hitsnum",null), function(json){
 				$.each(json.rows,function(i,jo){
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {

@@ -500,7 +500,7 @@ ul.news li p{float:right; color:#000000}
 		}
 	}
 	//获取公告
-		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams(null,"index_entry_view",1), function(json){
+		$.getJSON("<%=basePath%>/index/Allnotice.action", queryParams(null,"index_entry_view",1), function(json){
 			var top = json.top;
 			$("#topnoticeA").append(top.index_title)
 			$("#topnoticeA").attr("href","<%=basePath%>index/articledetail.action?id="+top.index_id);
@@ -516,7 +516,7 @@ ul.news li p{float:right; color:#000000}
 			});
 		});
 	//获取活动
-		$.getJSON("<%=basePath%>/index/Viewnotice.action", queryParams(null,"index_entry_view",2), function(json){
+		$.getJSON("<%=basePath%>/index/Allnotice.action", queryParams(null,"index_entry_view",2), function(json){
 			var top = json.top;
 			$("#topactivityA").append(top.index_title)
 			$("#topactivityA").attr("href","<%=basePath%>index/articledetail.action?id="+top.index_id);
