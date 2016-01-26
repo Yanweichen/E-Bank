@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,16 +93,22 @@ public class IndexController {
 			jo.put("msg", "非法操作");
 			return jo;
 		}
+		
+		if (Base64.decodeBase64(im.getIndex_preview_image_url()).length>=307200) {
+			jo.put("error", "303");
+			jo.put("msg", "您上传的图片过大("+Base64.decodeBase64(im.getIndex_preview_image_url()).length/1024+"KB),请控制在300KB以内");
+			return jo;
+		}
 		im.setIndex_uptime(new Date());
 		im.setUpfrom(am.getAdmin_id());
 		im.setIndex_state("00");//设置初始状态
 		int isSuC = is.add(im);
 		if (isSuC!=-1) {
 			jo.put("error", "200");
-			jo.put("msg", "添加成功");
+			jo.put("msg", "上传成功");
 		}else{
 			jo.put("error", "203");
-			jo.put("msg", "添加失败");
+			jo.put("msg", "上传失败");
 		}
 		return jo;
 	}

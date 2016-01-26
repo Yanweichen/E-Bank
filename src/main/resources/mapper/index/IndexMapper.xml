@@ -16,10 +16,11 @@
     <result column="index_label" property="index_label" jdbcType="VARCHAR" />
     <result column="index_from" property="index_from" jdbcType="VARCHAR" />
     <result column="index_href" property="index_href" jdbcType="VARCHAR" />
+    <result column="index_preview_image_url" property="index_preview_image_url" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
-    index_id,index_pid,index_type,index_title,index_content,index_uptime,index_aid,admin_name,index_state,index_isindex,index_hitsnum,index_label,index_from,index_href
+    index_id,index_pid,index_type,index_title,index_content,index_uptime,index_aid,admin_name,index_state,index_isindex,index_hitsnum,index_label,index_from,index_href,index_preview_image_url
   </sql>
   
   <!-- 根据表类型查询总数 -->
@@ -129,7 +130,7 @@
   <!-- 插入新文章 总表 -->
    <insert id="insert" useGeneratedKeys="true" keyProperty="index_id" parameterType="com.bank.model.index.IndexModel">
   	INSERT INTO index_entry VALUES(null,#{index_type},#{index_title},#{index_content},
-  	#{index_uptime},#{upfrom},#{index_state},#{index_isindex},0,#{index_label},#{index_from},#{index_href});
+  	#{index_uptime},#{upfrom},#{index_state},#{index_isindex},0,#{index_label},#{index_from},#{index_href},#{index_preview_image_url});
   </insert>
   <!-- 添加视图文章 -->
   <update id="insertView" parameterType="java.lang.Integer">

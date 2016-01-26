@@ -505,6 +505,9 @@ ul.news li p{float:right; color:#000000}
 			$("#topnoticeA").append(top.index_title)
 			$("#topnoticeA").attr("href","<%=basePath%>index/articledetail.action?id="+top.index_id);
 			$.each(json.rows,function(i,jo){
+				if (jo.index_id==top.index_id) {
+					return;
+				}
 				var title = jo.index_title;
 					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
@@ -521,6 +524,9 @@ ul.news li p{float:right; color:#000000}
 			$("#topactivityA").append(top.index_title)
 			$("#topactivityA").attr("href","<%=basePath%>index/articledetail.action?id="+top.index_id);
 			$.each(json.rows,function(i,jo){
+				if (jo.index_id==top.index_id) {
+					return;
+				}
 				var title = jo.index_title;
 				var src;
 				if (jo.index_state=="01"||jo.index_state=="11") {

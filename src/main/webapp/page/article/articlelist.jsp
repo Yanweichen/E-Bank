@@ -200,7 +200,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				first = false;
 				$("#topdiv").css("display","inline");
 				var content = delHtmlTag(top.index_content);
-				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+top.index_id+"' style='color: #B22222;'>"+top.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+top.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='"+top.index_preview_image_url+"'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+top.index_id+"' style='color: #B22222;'>"+top.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+top.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
 			  	var labels = "";
 			  	if(top.index_label!=null){
 	  				$.each(top.index_label.split(","),function(i,label){
@@ -211,6 +211,9 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			}
 			$("#list").empty();
 			$.each(json.rows,function(i,jo){
+				if (jo.index_id==json.top.index_id) {
+					return;
+				}
 				var src;
 				if (jo.index_state=="01"||jo.index_state=="11") {
 					src = 'indexhoticon.png';
@@ -218,7 +221,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 					src = 'indexnomalicon.png';
 				}
 				var content = delHtmlTag(jo.index_content);
-				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
 			  	var labels="";
 			  	if(jo.index_label!=null){
 	  				$.each(jo.index_label.split(","),function(i,label){
@@ -315,7 +318,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 				first = false;
 				$("#topdiv").css("display","inline");
 				var content = delHtmlTag(top.index_content);
-				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+top.index_id+"' style='color: #B22222;'>"+top.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+top.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='"+top.index_preview_image_url+"'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/indextopicon.png'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+top.index_id+"' style='color: #B22222;'>"+top.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+top.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
 			  	var labels = "";
 			  	if(top.index_label!=null){
 	  				$.each(top.index_label.split(","),function(i,label){
@@ -326,6 +329,9 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			}
 			$("#list").empty();
 			$.each(json.rows,function(i,jo){
+				if (jo.index_id==json.top.index_id) {
+					return;
+				}
 				var src;
 				if (jo.index_state=="01"||jo.index_state=="11") {
 					src = 'indexhoticon.png';
@@ -333,7 +339,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 					src = 'indexnomalicon.png';
 				}
 				var content = delHtmlTag(jo.index_content);
-				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='page/assets/img/touxiang_zhushou.jpg'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
+				var begin =	"<div class='row hotdiv top10' style='background-color: rgba(255,255,255,0.8);padding: 15px'><div class='col-sm-2 top20' style='padding-left: 0px'><img  alt='' class='img-rounded' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'></div><div class='col-sm-10'><div class='row' ><div class='col-sm-1' ><img  alt='' class='img-rounded' style='height: 20px;width: 20px;margin-top:10px;' src='page/assets/img/"+src+"'></div><div class='col-sm-10' style='padding-left: 0px'><h4 class='overstep'><a target='_blank' class='hand hota' href='index/articledetail.action?id="+jo.index_id+"'>"+jo.index_title+"</a></h4></div><div class='col-sm-1' style='padding-left: 0px;padding-top: 10px;color: #444'>"+jo.index_uptime_format+"</div></div><div class='row top5'><div class='col-sm-12'><p style='color: #888;' class='moretextoverstep'>"+content+"</p></div></div><div class='row top5'><div class='col-sm-2' ><img  alt='' style='height: 20px;width: 20px;' src='page/assets/img/circle-shop.png'><h5 class='nosingline wenzizhidi ' style='color: #666666'>标签</h5></div><div class='col-sm-10' style='padding-left: 0px'>";
 			  	var labels="";
 			  	if(jo.index_label!=null){
 	  				$.each(jo.index_label.split(","),function(i,label){

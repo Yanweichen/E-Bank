@@ -21,9 +21,16 @@ public class IndexModel {
 	private String index_href;//文章来源链接
 	private boolean index_isindex;//是否在首页
 	private int index_hitsnum;//点击量
+	private String index_preview_image_url;//预览图
 	
 	private String index_uptime_format;//格式化后的时间
 	
+	public String getIndex_preview_image_url() {
+		return index_preview_image_url;
+	}
+	public void setIndex_preview_image_url(String index_preview_image_url) {
+		this.index_preview_image_url = index_preview_image_url;
+	}
 	public Integer getIndex_pid() {
 		return index_pid;
 	}

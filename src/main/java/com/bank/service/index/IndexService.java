@@ -1,10 +1,14 @@
 package com.bank.service.index;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.util.Base64;
 import com.bank.base.BaseService;
 import com.bank.dao.index.IndexDAO;
 import com.bank.model.index.IndexModel;
@@ -115,7 +119,15 @@ public class IndexService implements BaseService<IndexModel> {
 	@Override
 	public int add(IndexModel model) {
 		// TODO Auto-generated method stub
+//		FileOutputStream fos = null;
 		try {
+//			String baseURL = model.getIndex_preview_image_url();
+//			byte[] file = Base64.decodeFast(baseURL);
+//			String filname = "page/article/articleimg/"+UUID.randomUUID().toString()+".jpg";
+//			fos = new FileOutputStream(filname);
+//			fos.write(file);
+//			fos.close();
+//			model.setIndex_preview_image_url(filname);
 			int pk = indexdao.insert(model);
 			indexdao.insertLabel(model.getIndex_id(), model.getIndex_label());
 			return pk;

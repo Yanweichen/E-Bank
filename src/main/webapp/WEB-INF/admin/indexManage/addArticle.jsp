@@ -18,9 +18,40 @@
 <link rel="stylesheet" href="page/assets/css/tokenfield-typeahead.css">
 <link rel="stylesheet" href="page/assets/css/bootstrap-tokenfield.css">
 <link rel="stylesheet" href="page/assets/css/cropper.css">
-
+<link rel="stylesheet" href="page/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="page/assets/css/fakeloader.css">
+<!-- 编辑框需要的图表来源  必须是3.0.2版本 -->
 <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
+.docs-preview {
+  margin-right: -15px;
+  margin-bottom: 10px;
+}
+.img-preview {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.preview-lg {
+  width: 263px;
+  height: 148px;
+}
+
+.preview-md {
+  width: 139px;
+  height: 78px;
+}
+
+.preview-sm {
+  width: 69px;
+  height: 39px;
+}
+
+.preview-xs {
+  width: 35px;
+  height: 20px;
+  margin-right: 0;
+}
 </style>
 <title>添加文章</title>
 </head>
@@ -100,7 +131,10 @@
 		</div><!-- /.col-lg-6 -->
 	  </div>
 	  <div class="form-group">
-			<img id="headimage" class="img-rounded" src="page/assets/img/touxiang_zhushou.jpg">
+			<button id="headimage" type="button" class="btn btn-primary btn-lg btn-block">请选择预览图片</button>
+	  </div>
+	  <div class="form-group">	
+	  		<img id="selectedimg" class="img-rounded">
 	  </div>
 	<!-- 富文本编辑器 -->
 	<div class="row">
@@ -200,49 +234,101 @@
 		        <h4 class="modal-title">上传预览图</h4>
 		      </div>
 		      <div class="modal-body">
-			      <div class="row" style="height: 300px;width: 300px">
-			      	<img id="headimageedit"  src="page/assets/img/touxiang_zhushou.jpg">
-			      </div>
+		      <div align="center">
+		      	<img id="headimageedit" src="page/assets/img/touxiang_zhushou.jpg">
+			           <!-- Msg -->
+  						<div id="imagemsg" class="alert alert-danger docs-alert" style="display: none;"><span class="warning message"></span></div>
+					        <!-- button group begin -->
+					        <div class="btn-group" style="margin-top: 30px">
+					          <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+					            <input class="sr-only" id="inputImage" name="file" type="file" accept="image/*">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Import image with Blob URLs">
+					              <span class="fa fa-picture-o"></span>
+					            </span>
+					          </label>
+					          <button class="btn btn-primary" data-method="setDragMode" data-option="move" type="button" title="Move">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+					              <span class="fa fa-arrows"></span>
+					            </span>
+					          </button>
+					          <button class="btn btn-primary" data-method="setDragMode" data-option="crop" type="button" title="Crop">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
+					            	<span class="fa fa-crop"></span>
+					            </span>
+					          </button>
+					          <button class="btn btn-primary" data-method="zoom" data-option="0.1" type="button" title="Zoom In">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, 0.1)">
+					              <span class="fa fa-search-minus"></span>
+					            </span>
+					          </button>
+					          <button class="btn btn-primary" data-method="zoom" data-option="-0.1" type="button" title="Zoom Out">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, -0.1)">
+					              <span class="fa fa-search-plus"></span>
+					            </span>
+					          </button>
+					          <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button" title="Rotate Left">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;rotate&quot;, -45)">
+					              <span class="fa fa-mail-reply"></span>
+					            </span>
+					          </button>
+					          <button class="btn btn-primary" data-method="rotate" data-option="45" type="button" title="Rotate Right">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;rotate&quot;, 45)">
+					              <span class="fa fa-mail-forward"></span>
+					            </span>
+					          </button>
+					           <button class="btn btn-primary" data-method="reset" type="button" title="Reset">
+					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)">
+					              <span class="fa-spin fa fa-refresh"></span>
+					            </span>
+					          </button>
+							</div>
+							<!-- button group end -->
+		      
+		      </div>
+		       		
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        <button id="imagefinshbtn" type="button" class="btn btn-primary">完成</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-<script src="page/assets/js/jquery-1.8.1.min.js"></script>
-<script src="page/assets/js/bootstrap.min.js"></script>
-<script src="page/assets/js/bootstrap-wysiwyg.js"></script>
-<script src="page/assets/js/jquery.hotkeys.js"></script>
-<script src="page/assets/js/bootstrap-tokenfield.js"></script>
-<script src="page/assets/js/typeahead.bundle.js"></script>
-<script src="page/assets/js/cropper.js"></script>
-<script type="text/javascript">
-function initToolbarBootstrapBindings() {
-    var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
-          'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
-          'Times New Roman', 'Verdana'],
-          fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-    $.each(fonts, function (idx, fontName) {
-        fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
-    });
-    $('a[title]').tooltip({container:'body'});
-  	$('.dropdown-menu input').click(function() {return false;})
-		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
-      .keydown('esc', function () {this.value='';$(this).change();});
-
-    $('[data-role=magic-overlay]').each(function () { 
-      var overlay = $(this), target = $(overlay.data('target')); 
-      overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
-    });
-    if ("onwebkitspeechchange"  in document.createElement("input")) {
-      var editorOffset = $('#editor').offset();
-      $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
-    } else {
-      $('#voiceBtn').hide();
-    }
-	};
+		<div class="fakeloader"></div>
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/bootstrap-wysiwyg.js"></script>
+	<script src="page/assets/js/jquery.hotkeys.js"></script>
+	<script src="page/assets/js/bootstrap-tokenfield.js"></script>
+	<script src="page/assets/js/typeahead.bundle.js"></script>
+	<script src="page/assets/js/cropper.js"></script>
+	<script src="page/assets/js/cropper_custom.js"></script>
+	<script src="page/assets/js/fakeloader.js"></script>
+	<script type="text/javascript">
+	function initToolbarBootstrapBindings() {
+	    var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+	          'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+	          'Times New Roman', 'Verdana'],
+	          fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+	    $.each(fonts, function (idx, fontName) {
+	        fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
+	    });
+	    $('a[title]').tooltip({container:'body'});
+	  	$('.dropdown-menu input').click(function() {return false;})
+			    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+	      .keydown('esc', function () {this.value='';$(this).change();});
+	
+	    $('[data-role=magic-overlay]').each(function () { 
+	      var overlay = $(this), target = $(overlay.data('target')); 
+	      overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+	    });
+	    if ("onwebkitspeechchange"  in document.createElement("input")) {
+	      var editorOffset = $('#editor').offset();
+	      $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
+	    } else {
+	      $('#voiceBtn').hide();
+	    }
+		};
 	function showErrorAlert (reason, detail) {
 		var msg='';
 		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
@@ -273,20 +359,44 @@ function initToolbarBootstrapBindings() {
 			index_label : $("#label").val(),
 			index_from : $("#index_from").val(),
 			index_href : $("#index_href").val(),
+			index_preview_image_url:imageresult
 		}
 	}
 	$("#submit").click(function () {
+		$(".fakeloader").fakeLoader({
+	            spinner:"spinner2",
+	            show:true
+	        });
 		$.post("index/addnotice.action",from(),function(result){
+			$(".fakeloader").fakeLoader({
+		            spinner:"spinner2",
+		            show:false
+		        });
 			if (result.error==200) {
-				showMsg("上传成功");
+				showMsg(result.msg);
 			}else{
-				showMsg("上传失败");
+				showMsg(result.msg);
 			}
 		})
 	});
 	$("#previewbtn").click(function () {
 		$("#preview").empty();
 		$("#preview").html($("#editor").html());
+	});
+	var imageresult;
+	$("#imagefinshbtn").click(function () {
+		imageresult = $('#headimageedit').cropper("getCroppedCanvas"); 
+		$("#selectedimg").html(imageresult);
+		$("#selectedimg > canvas").addClass("img-rounded");
+		$("#selectedimg > canvas").css({
+			"max-width":'100px',
+			"max-height":'100px'
+		})
+		imageresult = imageresult.toDataURL(); 
+		$("#inputimage").modal('hide')
+		$("#headimage").removeClass("btn-default");
+		$("#headimage").addClass("btn-success");
+		$("#headimage").text("添加预览图成功")
 	});
 	function showMsg(msg) {
 		$("#msg").empty(); 
@@ -311,12 +421,7 @@ function initToolbarBootstrapBindings() {
 		});
 		
 	})
-	$('#headimageedit').cropper({
-	  aspectRatio: 16 / 9,
-	  crop: function(data) {
-	    // 出来裁切后的图片数据.
-	  }
-	});		
+	
 	$("#headimage").click(function() {
 		$("#inputimage").modal(); 
 	})	
