@@ -19,6 +19,31 @@
 	href="<%=basePath%>page/assets//img/tubiao.ico" />
 <title>注册</title>
 <style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;text-decoration:none;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";background:#E1E7E8;}
+/* imageFlow */
+#imageFlow{width:100%;height:100%;overflow:hidden;position:relative;margin:0px auto 0 auto;}
+#imageFlow .diapo{position:absolute;left:-1000px;cursor:pointer;overflow:hidden;}
+#imageFlow .bank{visibility:hidden;overflow:hidden;}
+#imageFlow ul{height:20px;margin:0 auto;width:100%;text-align:center;}
+#imageFlow ul li{color:#333;font-size:12px;text-align:left;height:20px;line-height:20px;overflow:hidden;width:100%;vertical-align:bottom;}
+#imageFlow .text{position:absolute;left:0px;width:80px;bottom:1%;text-align:center;color:#333;font-family:verdana, arial, Helvetica, sans-serif;z-index:1000;}
+#imageFlow .title{font-size:0.9em;font-weight:bold;}
+#imageFlow .legend{font-size:0.8em;}
+#imageFlow .scrollbar{position:absolute;left:10%;top:0;width:80%;height:16px;z-index:1;}
+#imageFlow .scrollbar img{cursor:pointer;}
+#imageFlow .track{position:absolute;left:-55px;width:950px;height:16px;top:0px;}
+#imageFlow .arrow-left{position:absolute;left:-105px;z-index:1;}
+#imageFlow .arrow-right{position:absolute;right:-105px;z-index:1;}
+#imageFlow .bar{position:absolute;height:16px;left:25px;top:0px;cursor:pointer;}
+#imageFlow .ProTi{color:#ff6600;font-weight:bold;}
+#imageFlow .ProRmb{font-weight:bold;}
+#imageFlow .ProMo{color:#ff6600;cursor:pointer;}
+
+
+
+
 .top20{
 	margin-top: 20px
 }
@@ -80,8 +105,29 @@ div.hotdiv:hover{
 </style>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
-	<!-- 头部导航 -->
-	<jsp:include page="../head_foot/head.html"></jsp:include>
+	<!-- 头部导航  -->
+	<nav class="navbar navbar-divider" style="background-image: url('page/assets/img/main-nav-bg2.png');"  id="section-4">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a class="navbar-brand" style="color: white;letter-spacing: 10px;" href="page/index.jsp">e-bank</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="搜&nbsp;索">
+					</div>
+					<button type="submit" class="btn btn-default btnwindth">搜&nbsp;索</button>
+				</form>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<!-- 头部导航end -->
 	<div class="container">
 		<div class="row" >
 		<!-- 左侧部分 -->
@@ -149,17 +195,33 @@ div.hotdiv:hover{
 							<h4 class="nosingline wenzizhidi" style="color: #666666">相关文章</h4>
 						</div>
 					</div>
-					<div class="row top10" id="aboutlist">
-						<div class="col-sm-5" id="aboutlistleft">
-<!-- 							<div class="overstep top5" > -->
-<%-- 								<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png"> --%>
-<!-- 								<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom"> -->
-<!-- 									Example page header Subtext for header -->
-<!-- 								</a> -->
+					<div class="row top10" >
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-sm-3"> -->
+<%-- 									<img class="img-rounded"  alt="" style="height: 100px;width: 100px" src="<%=basePath%>page/assets/img/indexnomalicon.png"> --%>
+<!-- 									<div class="overstep top5" > -->
+<%-- 										<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/indexnomalicon.png"> --%>
+<!-- 										<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom"> -->
+<!-- 											Example page header Subtext for header -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 <!-- 							</div> -->
-						</div>
-						<div class="col-sm-5 col-sm-offset-2" id="aboutlistright">
-						</div>
+						<div id="imageFlow">
+							<div class="bank" id="aboutlist">
+								<a rel='page/assets/img/circle-shop.png' href='#'>
+									<ul>
+										<li class="ProTi" >3000光学无线鼠标</li>
+									</ul>  
+								</a>
+							</div>
+							<div class="scrollbar">
+								<img class="arrow-left" src="page/assets/img/btn_Pro_show_left.png" alt="" />
+								<img class="arrow-right" src="page/assets/img/btn_Pro_show_right.png" alt="" />
+							</div>
+							
+						</div> 
+
 					</div>
 				</div>
 				<!-- 发表评论 -->
@@ -289,11 +351,15 @@ div.hotdiv:hover{
 				  <div id="hotlabels" class="panel-body" style="line-height:25px">
 				  </div>
 			   </div>
+			</div>
+		</div>
 	</div>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/Flow.js"></script>
 	
 	<script type="text/javascript">
 		var articletitle = "${article.index_title}";		
@@ -346,17 +412,18 @@ div.hotdiv:hover{
 					$("#aboutlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有相关文章哦~</h4></div></div>");
 				}
 				$.each(json.rows,function(i,jo){
-					var src;
-					if (jo.index_state=="01"||jo.index_state=="11") {
-						src = 'indexhoticon.png';
-					} else {
-						src = 'indexnomalicon.png';
-					}
-					if (i<3 && jo.index_id!=articleid) {
-						$("#aboutlistleft").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
-					}else if(jo.index_id!=articleid){
-						$("#aboutlistright").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
-					}
+// 					var src;
+// 					if (jo.index_state=="01"||jo.index_state=="11") {
+// 						src = 'indexhoticon.png';
+// 					} else {
+// 						src = 'indexnomalicon.png';
+// 					}
+// 					if (i<3 && jo.index_id!=articleid) {
+// 						$("#aboutlistleft").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
+// 					}else if(jo.index_id!=articleid){
+// 						$("#aboutlistright").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
+// 					}
+					$("#aboutlist").append("<a rel='page/assets/img/circle-shop.png' href='index/articledetail.action?id="+jo.index_id+"'><ul><li class='ProTi' >"+jo.index_title+"</li></ul> </a>");
 				});
 			});
 			$.getJSON("index/getHotLabel.action", {num:15}, function(json){
@@ -366,6 +433,8 @@ div.hotdiv:hover{
 			});
 		})
 		
+		/* ==== create imageFlow ==== */
+		imf.create("imageFlow", 1, 0.4, 0);
 	</script>
 </body>
 </html>
