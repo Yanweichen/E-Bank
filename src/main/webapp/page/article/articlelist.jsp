@@ -172,6 +172,10 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script type="text/javascript">
+	$(".fakeloader").fakeLoader({
+        spinner:"spinner2",
+        show:true
+    });
 	function queryParams(type,page,pid,sort,order){
 		return {
 			    search:type,
@@ -188,10 +192,6 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	}
 	var first = true;
 	function init(page,url){
-		$(".fakeloader").fakeLoader({
-            spinner:"spinner2",
-            show:true
-        });
 		$.ajaxSettings.async = false;//为了获取总条数修改为同步
 		$.getJSON(url, queryParams("<% out.print(request.getParameter("search")==null?"":request.getParameter("search")); %>",page,<% out.print(request.getParameter("pid")==null?-1:request.getParameter("pid")); %>,null,null),function(json){
 			var after =	"</div></div></div></div>";
