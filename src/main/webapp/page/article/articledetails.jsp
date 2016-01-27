@@ -211,18 +211,18 @@ div.hotdiv:hover{
 					</div>
 					<div class="row top10" >
 						<div class="col-sm-12" style="padding-left: 5px;">
-							<textarea style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea>
+							<textarea id="fbtextarea" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea>
 						</div>
 						
 					</div>
 					<div class="row top10">
 						<div class="col-sm-2 col-sm-offset-10" align="center">
-							<button type="button" class="btn btn-block" style="color:white;background-color: #3f316d">发布</button>
+							<button id="fbbtn" type="button" class="btn btn-block" style="color:white;background-color: #3f316d">发布</button>
 						</div>
 					</div>
 				</div>
 				<!-- 评论部分 -->
-				<div class="row top10">
+				<div id="first_comment_list" class="row top10">
 		
 					<div class="well col-sm-12" style="padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);">
 						<div class="col-sm-2" style="padding: 20px 0px 0px 0px;text-align: center;">
@@ -484,6 +484,66 @@ div.hotdiv:hover{
 				$(this).parent().parent().parent().find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
 			}
 			$("#hfdiv").css("display","none");
+		})
+		
+		
+		$("#fbbtn").click(function() {
+			var content = $("#fbtextarea").val();
+			$("#first_comment_list").prepend(
+				"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
+						"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
+							"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
+							"<h5 style='margin-top: 15px; color: #666666'>1楼</h5>"+
+						"</div>"+
+						"<div class='col-sm-10'>"+
+							"<div class='row'>"+
+								"<div class='col-sm-2' style='padding-left: 0px'>"+
+									"<h5 style='color: #2A6496'>yanweichen</h5>"+
+								"</div>"+
+								"<div class='col-sm-4 col-sm-offset-6'>"+
+									"<h5 style='color: #666666;'>2016年1月21日 14:25</h5>"+
+								"</div>"+
+							"</div>"+
+							"<div class='row top10'>"+
+								"<p style='color: #444444;padding-right: 15px;'>"+content
+								+"</p>"+
+							"</div>"+
+								"<!-- 二级评论 -->"+
+								"<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);'>"+
+									"<div class='secondhfdiv' style='margin-bottom: 10px'>"+
+										"<div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'>"+
+											"<div class='col-sm-1'>"+
+												"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' >"+
+											"</div>"+
+											"<div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' >"+
+												"<h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:"+
+											"</div>"+
+											"<div class='col-sm-8' style='padding-left: 0px;padding-right:30px'>"+
+											"<p style='color: #444444'>呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</p></div>"+
+										"</div>"+
+										"<div class='row'>"+
+											"<div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'>"+
+												"<h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5>"+
+												"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left: 5px'>回复</button>"+
+											"</div>"+
+										"</div>"+
+									"</div>"+
+									
+								"</div>"+
+								"<!-- 回复点赞 -->"+
+							"<div class='row'>"+
+								"<div class='col-sm-2 col-sm-offset-8' style='padding-right: 0px;padding-left: 0px'>"+
+									"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d'>我也说一句</button>"+
+								"</div>"+
+								"<div class='col-sm-2'>"+
+									"<div align='left' style='margin-top: 5px'>"+
+										"<img class='img-circle' src='page/assets/img/hand_thumbsup.png' alt='...' style='height: 20px;width: 20px' >"+
+										"<strong style='color: #5CACEE'>(32)</strong>"+
+									"</div>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+					"</div>")
 		})
 	</script>
 </body>

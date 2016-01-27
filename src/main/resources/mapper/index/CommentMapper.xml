@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.admin.AdminDAO" >
+  <resultMap id="BaseResultMap" type="com.bank.model.index.CommentModel" >
+    <id column="comment_id" property="comment_id" jdbcType="INTEGER" />
+    <result column="comment_content" property="comment_content" jdbcType="VARCHAR" />
+    <result column="comment_time" property="comment_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+    <result column="comment_user_id" property="comment_user_id" jdbcType="INTEGER" />
+    <result column="comment_praise" property="comment_praise"  jdbcType="INTEGER"/>
+    <result column="comment_second_id" property="comment_second_id" jdbcType="INTEGER" />
+    <result column="comment_second_user_id" property="comment_second_user_id" jdbcType="INTEGER" />
+  </resultMap>
+  <!-- 添加评论-->
+  <insert id="insert" parameterType="com.bank.model.index.CommentModel">
+  	INSERT INTO entry_comment VALUES(null,#{comment_content},#{comment_time},#{comment_user_id},
+  	#{comment_praise},#{comment_second_id},#{comment_second_user_id});
+  </insert>
+</mapper>
