@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bank.model.admin.AdminModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
-import com.bank.model.other.Page;
+import com.bank.model.other.IndexPage;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
 import com.bank.utils.TimeUtil;
@@ -36,23 +36,23 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/Allnotice")
-	public JSONObject getNotice(Page page,HttpServletRequest req) throws ParseException{
-		if ("index_uptime_format".equals(page.getSort())) {
-			page.setSort("index_uptime");
+	public JSONObject getNotice(IndexPage indexPage,HttpServletRequest req) throws ParseException{
+		if ("index_uptime_format".equals(indexPage.getSort())) {
+			indexPage.setSort("index_uptime");
 		}
-		if (page.getTimefmt()==null || "".equals(page.getTimefmt())) {
-			page.setTimefmt("yyyy-MM-dd HH:mm:ss");
+		if (indexPage.getTimefmt()==null || "".equals(indexPage.getTimefmt())) {
+			indexPage.setTimefmt("yyyy-MM-dd HH:mm:ss");
 		}
-		List<IndexModel> list = is.findeByPage(page);
-		IndexModel im = is.findTopByState(page.getIndex_pid());//获取置顶
-		Integer pid = page.getIndex_pid();
+		List<IndexModel> list = is.findeByPage(indexPage);
+		IndexModel im = is.findTopByState(indexPage.getIndex_pid());//获取置顶
+		Integer pid = indexPage.getIndex_pid();
 		int count = 0;
-		if (page.getSearch()==null||"".equals(page.getSearch())) {
-			count = is.findCountByType(pid==null?-1:pid,page.getIsView());
+		if (indexPage.getSearch()==null||"".equals(indexPage.getSearch())) {
+			count = is.findCountByType(pid==null?-1:pid,indexPage.getIsView());
 		}else{
 			count = list.size();
 		}
-		return JsonUtil.getNotice(list,im,count,page.getTimefmt());
+		return JsonUtil.getNotice(list,im,count,indexPage.getTimefmt());
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class IndexController {
 	 */
 	@ResponseBody
 	@RequestMapping("/aboutnotice")
-	public JSONObject getNoticeAboutByLabel(Page page) throws ParseException{
-		List<IndexModel> list = is.findAboutByLabel(page);
-		return JsonUtil.getNotice(list,null,is.findAboutByLabelCount(page),"MM/dd");
+	public JSONObject getNoticeAboutByLabel(IndexPage indexPage) throws ParseException{
+		List<IndexModel> list = is.findAboutByLabel(indexPage);
+		return JsonUtil.getNotice(list,null,is.findAboutByLabelCount(indexPage),"MM/dd");
 	}
 	@ResponseBody
 	@RequestMapping("/getAllLabel")
@@ -242,14 +242,14 @@ public class IndexController {
 		return "index";
 	}
 	
-	private Page getPage(String page,String rows){
+	private IndexPage getPage(String page,String rows){
 		//当前页  
         int intPage = Integer.parseInt((page == null || page == "0") ? "1":page);  
         //每页显示条数  
         int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);  
         //每页的开始记录  第一页为1  第二页为number +1   
         int start = (intPage-1)*number; 
-        Page p = new Page();
+        IndexPage p = new IndexPage();
         p.setLimit(start);
         p.setOffset(number);
         return p;

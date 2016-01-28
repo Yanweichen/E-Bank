@@ -192,11 +192,15 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	}
 	var first = true;
 	function init(page,url){
+		$(".fakeloader").fakeLoader({
+	        spinner:"spinner2",
+	        show:true
+	    });
 		$.ajaxSettings.async = false;//为了获取总条数修改为同步
 		$.getJSON(url, queryParams("<% out.print(request.getParameter("search")==null?"":request.getParameter("search")); %>",page,<% out.print(request.getParameter("pid")==null?-1:request.getParameter("pid")); %>,null,null),function(json){
 			var after =	"</div></div></div></div>";
-			if (first && json.top!=null) {
-				var top = json.top;
+			var top = json.top;
+			if (first && top!=null) {
 				first = false;
 				$("#topdiv").css("display","inline");
 				var content = delHtmlTag(top.index_content);
@@ -211,7 +215,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			}
 			$("#list").empty();
 			$.each(json.rows,function(i,jo){
-				if (jo.index_id==json.top.index_id) {
+				if (top!=null &&jo.index_id==top.index_id) {
 					return;
 				}
 				var src;
@@ -313,8 +317,8 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 		}
 		$.getJSON("index/aboutnotice.action", queryParams(labels,page,null,null,null), function(json){
 			var after =	"</div></div></div></div>";
-			if (first && json.top!=null) {
-				var top = json.top;
+			var top = json.top;
+			if (first && top!=null) {
 				first = false;
 				$("#topdiv").css("display","inline");
 				var content = delHtmlTag(top.index_content);
@@ -329,7 +333,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			}
 			$("#list").empty();
 			$.each(json.rows,function(i,jo){
-				if (jo.index_id==json.top.index_id) {
+				if (top!=null && jo.index_id==top.index_id) {
 					return;
 				}
 				var src;

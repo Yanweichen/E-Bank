@@ -1,19 +1,16 @@
 package com.bank.utils;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
-import com.bank.model.other.CityModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 public class JsonUtil {
 
@@ -48,6 +45,8 @@ public class JsonUtil {
 		jarr.put("total", total);
 		if (top!=null) {
 			jarr.put("top", getSingleNotice(top,format));
+		}else{
+			jarr.put("top", null);
 		}
 		JSONArray row =  new JSONArray();
 		for (IndexModel im : ilist) {
@@ -57,6 +56,12 @@ public class JsonUtil {
 		jarr.put("rows", row);
 		return jarr;
 	}
+	
+	/**
+	 * 获取所有标签
+	 * @param list
+	 * @return
+	 */
 	public static JSONArray getAllLabel(List<LabelModel> list){
 		JSONArray jarr = new JSONArray();
 		for (LabelModel labelModel : list) {
@@ -67,6 +72,25 @@ public class JsonUtil {
 		return jarr;
 	}
 
+	/**
+	 * 获取所有评论
+	 * @param list
+	 * @param total
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static JSONObject getComment(List<CommentModel> list,int total,String fmt) throws ParseException{
+		JSONObject jarr =  new JSONObject();
+		jarr.put("total", total);
+		JSONArray row =  new JSONArray();
+		for (CommentModel cm : list) {
+			cm.setComment_time_fmt(TimeUtil.Date2String(cm.getComment_time(), fmt));
+			row.add(JSON.toJSON(cm));
+		}
+		jarr.put("rows", row);
+		return jarr;
+	}
+	
 	/**
 	 * 解析省
 	 * @param coolWeatherDB

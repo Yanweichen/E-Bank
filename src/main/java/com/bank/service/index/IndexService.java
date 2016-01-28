@@ -13,7 +13,7 @@ import com.bank.base.BaseService;
 import com.bank.dao.index.IndexDAO;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
-import com.bank.model.other.Page;
+import com.bank.model.other.IndexPage;
 
 /**
  * @author yanwe
@@ -48,11 +48,11 @@ public class IndexService implements BaseService<IndexModel> {
 	}
 	/**
 	 * 分页
-	 * @param page
+	 * @param indexPage
 	 * @return
 	 */
-	public List<IndexModel> findeByPage(Page page){
-		return indexdao.selectByPage(page);
+	public List<IndexModel> findeByPage(IndexPage indexPage){
+		return indexdao.selectByPage(indexPage);
 	}
 	
 	public IndexModel findTopByState(Integer state){
@@ -77,16 +77,16 @@ public class IndexService implements BaseService<IndexModel> {
 	 * @param num
 	 * @return
 	 */
-	public List<IndexModel> findAboutByLabel(Page page){
-		if (page.getSearch()==null||"".equals(page.getSearch())) {
-			return indexdao.selectAboutByLabel(page,"NULL");
+	public List<IndexModel> findAboutByLabel(IndexPage indexPage){
+		if (indexPage.getSearch()==null||"".equals(indexPage.getSearch())) {
+			return indexdao.selectAboutByLabel(indexPage,"NULL");
 		} else {
-			String [] labels = page.getSearch().split(",");
+			String [] labels = indexPage.getSearch().split(",");
 			StringBuilder labelssb = new StringBuilder();
 			for (String string : labels) {
 				labelssb.append("'"+string+"',");
 			}
-			return indexdao.selectAboutByLabel(page,labelssb.substring(0,labelssb.length()-1).toString());
+			return indexdao.selectAboutByLabel(indexPage,labelssb.substring(0,labelssb.length()-1).toString());
 		}
 	}
 	/**
@@ -95,12 +95,12 @@ public class IndexService implements BaseService<IndexModel> {
 	 * @param num
 	 * @return
 	 */
-	public int findAboutByLabelCount(Page page){
-		if (page.getSearch()==null||"".equals(page.getSearch())) {
-			page.setSearch("NULL");
-			return indexdao.selectAboutByLabelCount(page.getSearch());
+	public int findAboutByLabelCount(IndexPage indexPage){
+		if (indexPage.getSearch()==null||"".equals(indexPage.getSearch())) {
+			indexPage.setSearch("NULL");
+			return indexdao.selectAboutByLabelCount(indexPage.getSearch());
 		} else {
-			String [] labels = page.getSearch().split(",");
+			String [] labels = indexPage.getSearch().split(",");
 			StringBuilder labelssb = new StringBuilder();
 			for (String string : labels) {
 				labelssb.append("'"+string+"',");

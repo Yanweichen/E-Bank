@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bank.dao.admin.AdminDAO" >
+<mapper namespace="com.bank.dao.index.CommentDAO" >
   <resultMap id="BaseResultMap" type="com.bank.model.index.CommentModel" >
     <id column="comment_id" property="comment_id" jdbcType="INTEGER" />
     <result column="comment_content" property="comment_content" jdbcType="VARCHAR" />
     <result column="comment_time" property="comment_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
     <result column="comment_user_id" property="comment_user_id" jdbcType="INTEGER" />
     <result column="comment_praise" property="comment_praise"  jdbcType="INTEGER"/>
-    <result column="comment_second_id" property="comment_second_id" jdbcType="INTEGER" />
-    <result column="comment_second_user_id" property="comment_second_user_id" jdbcType="INTEGER" />
+    <result column="comment_parent_id" property="comment_parent_id" jdbcType="INTEGER" />
+    <result column="comment_entry_id" property="comment_entry_id" jdbcType="INTEGER" />
+    <result column="user_name" property="user_name" jdbcType="VARCHAR" />
   </resultMap>
+  <sql id="Base_Column_List" >
+    comment_id,comment_content,comment_time,comment_user_id,comment_praise,comment_parent_id,comment_entry_id
+  </sql>
   <!-- 添加评论-->
   <insert id="insert" parameterType="com.bank.model.index.CommentModel">
   	INSERT INTO entry_comment VALUES(null,#{comment_content},#{comment_time},#{comment_user_id},
-  	#{comment_praise},#{comment_second_id},#{comment_second_user_id});
+  	#{comment_praise},#{comment_parent_id},#{comment_entry_id});
   </insert>
+  <!-- 查询评论 -->
+  <select id="selectComment" resultMap="BaseResultMap" parameterType="com.bank.model.other.CommentPage">
+	  SELECT 
+	  <include refid="Base_Column_List"/>,user_name 
+	  FROM entry_comment com,user_userinfo uif  
+	  WHERE com.`comment_user_id`=uif.`user_id` AND comment_entry_id = #{entry_id} AND comment_parent_id 
+	  <choose>
+	  	<when test="pid == null">
+		  IS NULL
+	  	</when>
+	  	<otherwise>
+	  		= #{pid}
+	  	</otherwise>
+	  </choose>
+	  ORDER BY comment_time LIMIT #{offset},#{limit};
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.bank.model.other.CommentPage">
+  SELECT
+  COUNT(*) 
+  FROM entry_comment WHERE comment_parent_id 
+  <choose>
+  	<when test="pid == null">
+	  IS NULL
+  	</when>
+  	<otherwise>
+  		= #{pid}
+  	</otherwise>
+  </choose>
+  AND comment_entry_id = #{entry_id};
+  </select>
 </mapper>

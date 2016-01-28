@@ -43,7 +43,7 @@
   </select>
   
   <!-- 首页分页 -->
-  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.bank.model.other.Page" >
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.bank.model.other.IndexPage" >
     SELECT  
     <include refid="Base_Column_List" />
 	FROM index_entry ent,index_type typ,admin ad 

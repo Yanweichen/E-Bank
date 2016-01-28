@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.bank.base.BaseDAO;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
-import com.bank.model.other.Page;
+import com.bank.model.other.IndexPage;
 
 /**
  * @author yanwe
@@ -16,7 +16,7 @@ import com.bank.model.other.Page;
  */
 public interface IndexDAO extends BaseDAO<IndexModel>{
 	
-	public List<IndexModel> selectByPage(Page page);
+	public List<IndexModel> selectByPage(IndexPage indexPage);
 	public int selectCountByType(@Param("pid")Integer pid,@Param("isView")String isView);
 	public IndexModel selectTopByState(Integer state); 
 	public int insertView(int id);
@@ -25,7 +25,7 @@ public interface IndexDAO extends BaseDAO<IndexModel>{
 	public int updateHitsNum(int num,int id);
 	public IndexModel selectOneByBeforeOrAfter(@Param("ba")String ba,@Param("id")int id);
 	public void insertLabel(int id,String label);
-	public List<IndexModel> selectAboutByLabel(@Param("page")Page page,@Param("labels")String labels);
+	public List<IndexModel> selectAboutByLabel(@Param("page")IndexPage indexPage,@Param("labels")String labels);
 	public List<LabelModel> selectAllLabel();
 	public int selectAboutByLabelCount(String label);
 	public List<LabelModel> selectHotLabel(Integer num);

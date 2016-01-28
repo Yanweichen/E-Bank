@@ -19,31 +19,6 @@
 	href="<%=basePath%>page/assets//img/tubiao.ico" />
 <title>注册</title>
 <style type="text/css">
-*{margin:0;padding:0;list-style-type:none;}
-a,img{border:0;text-decoration:none;}
-body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";background:#E1E7E8;}
-/* imageFlow */
-#imageFlow{width:100%;height:100%;overflow:hidden;position:relative;margin:0px auto 0 auto;}
-#imageFlow .diapo{position:absolute;left:-1000px;cursor:pointer;overflow:hidden;}
-#imageFlow .bank{visibility:hidden;overflow:hidden;}
-#imageFlow ul{height:20px;margin:0 auto;width:100%;text-align:center;}
-#imageFlow ul li{color:#333;font-size:12px;text-align:left;height:20px;line-height:20px;overflow:hidden;width:100%;vertical-align:bottom;}
-#imageFlow .text{position:absolute;left:0px;width:80px;bottom:1%;text-align:center;color:#333;font-family:verdana, arial, Helvetica, sans-serif;z-index:1000;}
-#imageFlow .title{font-size:0.9em;font-weight:bold;}
-#imageFlow .legend{font-size:0.8em;}
-#imageFlow .scrollbar{position:absolute;left:10%;top:0;width:80%;height:16px;z-index:1;}
-#imageFlow .scrollbar img{cursor:pointer;}
-#imageFlow .track{position:absolute;left:-55px;width:950px;height:16px;top:0px;}
-#imageFlow .arrow-left{position:absolute;left:-105px;z-index:1;}
-#imageFlow .arrow-right{position:absolute;right:-105px;z-index:1;}
-#imageFlow .bar{position:absolute;height:16px;left:25px;top:0px;cursor:pointer;}
-#imageFlow .ProTi{color:#ff6600;font-weight:bold;}
-#imageFlow .ProRmb{font-weight:bold;}
-#imageFlow .ProMo{color:#ff6600;cursor:pointer;}
-
-
-
-
 .top20{
 	margin-top: 20px
 }
@@ -224,132 +199,74 @@ div.hotdiv:hover{
 				<!-- 评论部分 -->
 				<div id="first_comment_list" class="row top10">
 		
-					<div class="well col-sm-12" style="padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);">
-						<div class="col-sm-2" style="padding: 20px 0px 0px 0px;text-align: center;">
-							<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 80px;width: 80px" >
-							<h5 style="margin-top: 15px; color: #666666">1楼</h5>
-						</div>
-						<div class="col-sm-10">
-							<div class="row">
-								<div class="col-sm-2" style="padding-left: 0px">
-									<h5 style="color: #2A6496">yanweichen</h5>
-								</div>
-								<div class="col-sm-4 col-sm-offset-6">
-									<h5 style="color: #666666;">2016年1月21日 14:25</h5>
-								</div>
-							</div>
-							<div class="row top10">
-								<p style="color: #444444;padding-right: 15px;">
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								</p>
-							</div>
-								<!-- 二级评论 -->
-								<div class="row well secondhflist"  style="margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);">
-									<div class="secondhfdiv" style="margin-bottom: 10px">
-										<div class="row" style="padding-left: 0px;padding-right: 0px;margin-bottom: 00px">
-											<div class="col-sm-1">
-												<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 30px;width: 30px" >
-											</div>
-											<div class="col-sm-3" style="padding-right: 0px;padding-left: 10px" >
-												<h5 class="nosingline" style="color: #2A6496">yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:
-											</div>
-											<div class="col-sm-8" style="padding-left: 0px;padding-right:30px">
-											<p style="color: #444444">呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</p></div>
-										</div>
-										<div class="row">
-											<div class="col-sm-5 col-sm-offset-7" style="padding-left: 0px">
-												<h5 class="nosingline" style="color: #666666">2016年1月27日 14:17</h5>
-												<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d;margin-left: 5px">回复</button>
-											</div>
-										</div>
-									</div>
+<!-- 					<div class="well col-sm-12" style="padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);"> -->
+<!-- 						<div class="col-sm-2" style="padding: 20px 0px 0px 0px;text-align: center;"> -->
+<!-- 							<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 80px;width: 80px" > -->
+<!-- 							<h5 style="margin-top: 15px; color: #666666">1楼</h5> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-sm-10"> -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-sm-2" style="padding-left: 0px"> -->
+<!-- 									<h5 style="color: #2A6496">yanweichen</h5> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-sm-4 col-sm-offset-6"> -->
+<!-- 									<h5 style="color: #666666;">2016年1月21日 14:25</h5> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="row top10"> -->
+<!-- 								<p style="color: #444444;padding-right: 15px;"> -->
+<!-- 								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！ -->
+<!-- 								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！ -->
+<!-- 								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！ -->
+<!-- 								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！ -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 								二级评论 -->
+<!-- 								<div class="row well secondhflist"  style="margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);"> -->
+<!-- 									<div class="secondhfdiv" style="margin-bottom: 10px"> -->
+<!-- 										<div class="row" style="padding-left: 0px;padding-right: 0px;margin-bottom: 00px"> -->
+<!-- 											<div class="col-sm-1"> -->
+<!-- 												<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 30px;width: 30px" > -->
+<!-- 											</div> -->
+<!-- 											<div class="col-sm-3" style="padding-right: 0px;padding-left: 10px" > -->
+<!-- 												<h5 class="nosingline" style="color: #2A6496">yadaye</h5>&nbsp;回复说&nbsp;&nbsp;: -->
+<!-- 											</div> -->
+<!-- 											<div class="col-sm-8" style="padding-left: 0px;padding-right:30px"> -->
+<!-- 											<p style="color: #444444">呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</p></div> -->
+<!-- 										</div> -->
+<!-- 										<div class="row"> -->
+<!-- 											<div class="col-sm-5 col-sm-offset-7" style="padding-left: 0px"> -->
+<!-- 												<h5 class="nosingline" style="color: #666666">2016年1月27日 14:17</h5> -->
+<!-- 												<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d;margin-left: 5px">回复</button> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									
-								</div>
-								<!-- 回复点赞 -->
-							<div class="row">
-								<div class="col-sm-2 col-sm-offset-8" style="padding-right: 0px;padding-left: 0px">
-									<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d">我也说一句</button>
-								</div>
-								<div class="col-sm-2">
-									<div align="left" style="margin-top: 5px">
-										<img class="img-circle" src="page/assets/img/hand_thumbsup.png" alt="..." style="height: 20px;width: 20px" >
-										<strong style="color: #5CACEE">(32)</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="well col-sm-12" style="padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);">
-						<div class="col-sm-2" style="padding: 20px 0px 0px 0px;text-align: center;">
-							<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 80px;width: 80px" >
-							<h5 style="margin-top: 15px; color: #666666">1楼</h5>
-						</div>
-						<div class="col-sm-10">
-							<div class="row">
-								<div class="col-sm-2" style="padding-left: 0px">
-									<h5 style="color: #2A6496">yanweichen</h5>
-								</div>
-								<div class="col-sm-4 col-sm-offset-6">
-									<h5 style="color: #666666;">2016年1月21日 14:25</h5>
-								</div>
-							</div>
-							<div class="row top10">
-								<p style="color: #444444;padding-right: 15px;">
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！
-								</p>
-							</div>
-								<!-- 二级评论 -->
-								<div class="row well secondhflist"  style="margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);">
-									<div class="secondhfdiv" style="margin-bottom: 10px">
-										<div class="row" style="padding-left: 0px;padding-right: 0px;margin-bottom: 00px">
-											<div class="col-sm-1">
-												<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 30px;width: 30px" >
-											</div>
-											<div class="col-sm-3" style="padding-right: 0px;padding-left: 10px" >
-												<h5 class="nosingline" style="color: #2A6496">yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:
-											</div>
-											<div class="col-sm-8" style="padding-left: 0px;padding-right:30px">
-											<p style="color: #444444">呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</p></div>
-										</div>
-										<div class="row">
-											<div class="col-sm-5 col-sm-offset-7" style="padding-left: 0px">
-												<h5 class="nosingline" style="color: #666666">2016年1月27日 14:17</h5>
-												<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d;margin-left: 5px">回复</button>
-											</div>
-										</div>
-									</div>
-									
-								</div>
-								<!-- 回复点赞 -->
-							<div class="row">
-								<div class="col-sm-2 col-sm-offset-8" style="padding-right: 0px;padding-left: 0px">
-									<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d">我也说一句</button>
-								</div>
-								<div class="col-sm-2">
-									<div align="left" style="margin-top: 5px">
-										<img class="img-circle" src="page/assets/img/hand_thumbsup.png" alt="..." style="height: 20px;width: 20px" >
-										<strong style="color: #5CACEE">(32)</strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+<!-- 								</div> -->
+<!-- 								回复点赞 -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-sm-2 col-sm-offset-8" style="padding-right: 0px;padding-left: 0px"> -->
+<!-- 									<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d">我也说一句</button> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-sm-2"> -->
+<!-- 									<div align="left" style="margin-top: 5px"> -->
+<!-- 										<img class="img-circle" src="page/assets/img/hand_thumbsup.png" alt="..." style="height: 20px;width: 20px" > -->
+<!-- 										<strong style="color: #5CACEE">(32)</strong> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<!-- 回复框 -->
-					<div id="hfdiv" class="row top10" style="display: none;margin-left: 10px;margin-bottom: 10px;">
-						<div class="col-sm-10" style="padding-left: 0px;padding-right: 0px">
-							<textarea id="hfconent" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea>
-						</div>
-						<div class="col-sm-2">
-							<button id="canclehf" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">取消</button>
-							<button id="submithfbtn" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">回复</button>
-						</div>
-					</div>
+<!-- 					<div id="hfdiv" class="row top10" style="display: none;margin-left: 10px;margin-bottom: 10px;"> -->
+<!-- 						<div class="col-sm-10" style="padding-left: 0px;padding-right: 0px"> -->
+<!-- 							<textarea id="hfconent" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-sm-2"> -->
+<!-- 							<button id="canclehf" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">取消</button> -->
+<!-- 							<button id="submithfbtn" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">回复</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 			<!-- 右侧部分 -->
@@ -393,6 +310,8 @@ div.hotdiv:hover{
 		document.title = articletitle;
 		var articleid = ${article.index_id};
 		var articlelabel = "${article.index_label}";
+		var userid = "${user.user_id}";
+		var username = "${user.user_name}";
 		function queryParams(search,limit,sort,order){
 			return {
 					search:search,
@@ -462,89 +381,141 @@ div.hotdiv:hover{
 					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
 				});
 			});
+			refreshFirstComment(null,0,10);
 		})
+		
 		//点击恢复显示回复框      不知道为毛？？？莫名其妙就实现了效果？？？？？
-		$(".hfbtn").live('click',function() {
-// 			$("#hfdiv").css({ "top": $(this).offset().top - 30, "display": "block" });
-			if ($("#hfdiv").css("display")!="inline") {
-				$("#hfconent").val("")
-				$("#hfdiv").fadeIn()
-				$(this).parent().parent().parent().append($("#hfdiv"));
+				$(".hfbtn").on('click',function() {
+//		 			$("#hfdiv").css({ "top": $(this).offset().top - 30, "display": "block" });
+// 					alert($("#hfdiv").css("display"))
+// 					if ($("#hfdiv").css("display")!="inline") {
+// 						$("#hfconent").val("")
+// 						$("#hfdiv").fadeIn()
+// 					}
+						$(this).parent().parent().parent().append("<div id='hfdiv' class='row top10' style='margin-left: 10px;margin-bottom: 10px;'><div class='col-sm-10' style='padding-left: 0px;padding-right: 0px'><textarea id='hfconent' style='border-radius: 10px 10px 10px 10px;' class='form-control' rows='3' placeholder='说点什么~'></textarea></div><div class='col-sm-2'><button id='canclehf' type='button' class='btn btn-sm' style='color:white;background-color: #3f316d;margin-top: 10px'>取消</button><button id='submithfbtn' type='button' class='btn btn-sm' style='color:white;background-color: #3f316d;margin-top: 10px'>回复</button></div></div>");
+				})
+// 				//取消回复
+				$("#canclehf").live('click',function() {
+					$("#hfdiv").fadeOut()
+				})
+				$("#submithfbtn").live('click',function() {
+					var conent = $("#hfconent").val();
+					if ($(this).parent().parent().parent().find(".secondhflist").length==0) {//回复二级评论
+						$(this).parent().parent().parent().append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+					} else {//回复一级评论
+						$(this).parent().parent().parent().find(".secondhflist").fadeIn();
+						$(this).parent().parent().parent().find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+					}
+					$("#hfdiv").css("display","none");
+				})
+				
+		function queryParmer(pid,offset,limit){
+			return {
+				entry_id:articleid,
+				pid:pid,
+				offset:offset,
+				limit:limit,
 			}
-		})
-		//取消回复
-		$("#canclehf").click(function() {
-			$("#hfdiv").fadeOut()
-		})
-		$("#submithfbtn").click(function() {
-			var conent = $("#hfconent").val();
-			if ($(this).parent().parent().parent().find(".secondhflist").length==0) {//回复二级评论
-				$(this).parent().parent().parent().append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
-			} else {//回复一级评论
-				$(this).parent().parent().parent().find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+		}
+		function commitParmer(content,uid,pid){
+			return {
+				comment_content:content,
+				comment_user_id:uid,
+				comment_parent_id:pid,
+				comment_entry_id:articleid,
 			}
-			$("#hfdiv").css("display","none");
-		})
+		}
+		function refreshFirstComment(pid,offset,limit){
+			$.getJSON("comment/getcomment.action",queryParmer(pid,offset,limit),function(json){
+				$("#first_comment_list").empty();
+				$.each(json.rows,function(i,jo){
+					$("#first_comment_list").prepend(
+							"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
+									"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
+										"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
+										"<h5 style='margin-top: 15px; color: #666666'>"+(i+1)+"楼</h5>"+
+									"</div>"+
+									"<div class='col-sm-10'>"+
+										"<div class='row'>"+
+											"<div class='col-sm-2' style='padding-left: 0px'>"+
+												"<h5 style='color: #2A6496'>"+jo.user_name+"</h5>"+
+											"</div>"+
+											"<div class='col-sm-4 col-sm-offset-6'>"+
+												"<h5 style='color: #666666;'>"+jo.comment_time_fmt+"</h5>"+
+											"</div>"+
+										"</div>"+
+										"<div class='row top10'>"+
+											"<p style='color: #444444;padding-right: 15px;min-height:50px;'>"+jo.comment_content+"</p>"+
+										"</div>"+
+											"<!-- 二级评论 -->"+
+											"<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);display:none;'>"+
+											"</div>"+
+											"<!-- 回复点赞 -->"+
+										"<div class='row'>"+
+											"<div class='col-sm-2 col-sm-offset-8' style='padding-right: 0px;padding-left: 0px'>"+
+												"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d'>我也说一句</button>"+
+											"</div>"+
+											"<div class='col-sm-2'>"+
+												"<div align='left' style='margin-top: 5px'>"+
+													"<img class='img-circle' src='page/assets/img/hand_thumbsup.png' alt='...' style='height: 20px;width: 20px' >"+
+													"<strong style='color: #5CACEE'>(0)</strong>"+
+												"</div>"+
+											"</div>"+
+										"</div>"+
+									"</div>"+
+								"</div>")		
+				});
+			})
+		}
 		
 		
 		$("#fbbtn").click(function() {
 			var content = $("#fbtextarea").val();
-			$("#first_comment_list").prepend(
-				"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
-						"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
-							"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
-							"<h5 style='margin-top: 15px; color: #666666'>1楼</h5>"+
-						"</div>"+
-						"<div class='col-sm-10'>"+
-							"<div class='row'>"+
-								"<div class='col-sm-2' style='padding-left: 0px'>"+
-									"<h5 style='color: #2A6496'>yanweichen</h5>"+
-								"</div>"+
-								"<div class='col-sm-4 col-sm-offset-6'>"+
-									"<h5 style='color: #666666;'>2016年1月21日 14:25</h5>"+
-								"</div>"+
-							"</div>"+
-							"<div class='row top10'>"+
-								"<p style='color: #444444;padding-right: 15px;'>"+content
-								+"</p>"+
-							"</div>"+
-								"<!-- 二级评论 -->"+
-								"<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);'>"+
-									"<div class='secondhfdiv' style='margin-bottom: 10px'>"+
-										"<div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'>"+
-											"<div class='col-sm-1'>"+
-												"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' >"+
-											"</div>"+
-											"<div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' >"+
-												"<h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:"+
-											"</div>"+
-											"<div class='col-sm-8' style='padding-left: 0px;padding-right:30px'>"+
-											"<p style='color: #444444'>呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</p></div>"+
-										"</div>"+
-										"<div class='row'>"+
-											"<div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'>"+
-												"<h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5>"+
-												"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left: 5px'>回复</button>"+
-											"</div>"+
-										"</div>"+
-									"</div>"+
-									
-								"</div>"+
-								"<!-- 回复点赞 -->"+
-							"<div class='row'>"+
-								"<div class='col-sm-2 col-sm-offset-8' style='padding-right: 0px;padding-left: 0px'>"+
-									"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d'>我也说一句</button>"+
-								"</div>"+
-								"<div class='col-sm-2'>"+
-									"<div align='left' style='margin-top: 5px'>"+
-										"<img class='img-circle' src='page/assets/img/hand_thumbsup.png' alt='...' style='height: 20px;width: 20px' >"+
-										"<strong style='color: #5CACEE'>(32)</strong>"+
-									"</div>"+
-								"</div>"+
-							"</div>"+
-						"</div>"+
-					"</div>")
-		})
+			var d = new Date(); 
+			$.post("comment/addcomment.action",commitParmer(content,userid,null),function(result){
+				if (result.error==200) {
+					refreshFirstComment(null,0,30);
+// 					$("#first_comment_list").prepend(
+// 						"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
+// 								"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
+// 									"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
+// 									"<h5 style='margin-top: 15px; color: #666666'>1楼</h5>"+
+// 								"</div>"+
+// 								"<div class='col-sm-10'>"+
+// 									"<div class='row'>"+
+// 										"<div class='col-sm-2' style='padding-left: 0px'>"+
+// 											"<h5 style='color: #2A6496'>"+username+"</h5>"+
+// 										"</div>"+
+// 										"<div class='col-sm-4 col-sm-offset-6'>"+
+// 											"<h5 style='color: #666666;'>"+d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日 "+d.getHours()+":"+d.getMinutes()+"</h5>"+
+// 										"</div>"+
+// 									"</div>"+
+// 									"<div class='row top10'>"+
+// 										"<p style='color: #444444;padding-right: 15px;min-height:50px;'>"+content
+// 										+"</p>"+
+// 									"</div>"+
+// 										"<!-- 二级评论 -->"+
+// 										"<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);display:none;'>"+
+// 										"</div>"+
+// 										"<!-- 回复点赞 -->"+
+// 									"<div class='row'>"+
+// 										"<div class='col-sm-2 col-sm-offset-8' style='padding-right: 0px;padding-left: 0px'>"+
+// 											"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d'>我也说一句</button>"+
+// 										"</div>"+
+// 										"<div class='col-sm-2'>"+
+// 											"<div align='left' style='margin-top: 5px'>"+
+// 												"<img class='img-circle' src='page/assets/img/hand_thumbsup.png' alt='...' style='height: 20px;width: 20px' >"+
+// 												"<strong style='color: #5CACEE'>(0)</strong>"+
+// 											"</div>"+
+// 										"</div>"+
+// 									"</div>"+
+// 								"</div>"+
+// 							"</div>")		
+						}else{
+							alert("回复失败！");
+						}
+				})
+		});
 	</script>
 </body>
 </html>

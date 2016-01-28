@@ -1,6 +1,6 @@
 package com.bank.model.other;
 
-public class Page {
+public class IndexPage {
 
 	private int limit;
 	private int offset;
