@@ -25,8 +25,8 @@ public class CommentController {
 	@ResponseBody
 	@RequestMapping("/getcomment")
 	public JSONObject getCommentController(CommentPage cp) throws ParseException{
-		List<CommentModel> list = cs.findComment(cp);
-		return JsonUtil.getComment(list, cs.selectCount(cp),"yyyy年MM月dd日 HH:mm");
+		List<CommentModel> list = cs.findAllComment(cp);
+		return JsonUtil.getComment(list, cs.selectCount(cp));
 	}
 	
 	@ResponseBody

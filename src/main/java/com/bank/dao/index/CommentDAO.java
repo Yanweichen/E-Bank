@@ -9,5 +9,6 @@ import com.bank.model.other.CommentPage;
 public interface CommentDAO extends BaseDAO<CommentModel> {
 
 	public List<CommentModel> selectComment(CommentPage cp);
+	public List<CommentModel> selectAllComment(CommentPage cp);
 	public int selectCount(CommentPage cp);
 }

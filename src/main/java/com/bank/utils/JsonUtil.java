@@ -79,15 +79,10 @@ public class JsonUtil {
 	 * @return
 	 * @throws ParseException 
 	 */
-	public static JSONObject getComment(List<CommentModel> list,int total,String fmt) throws ParseException{
+	public static JSONObject getComment(List<CommentModel> list,int total) throws ParseException{
 		JSONObject jarr =  new JSONObject();
 		jarr.put("total", total);
-		JSONArray row =  new JSONArray();
-		for (CommentModel cm : list) {
-			cm.setComment_time_fmt(TimeUtil.Date2String(cm.getComment_time(), fmt));
-			row.add(JSON.toJSON(cm));
-		}
-		jarr.put("rows", row);
+		jarr.put("rows", JSON.toJSON(list));
 		return jarr;
 	}
 	

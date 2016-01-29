@@ -221,17 +221,17 @@ div.hotdiv:hover{
 <!-- 								从天到地，从地到天，万事万物多么神奇！多么神奇，啦啦啦啦啦！ -->
 <!-- 								</p> -->
 <!-- 							</div> -->
-<!-- 								二级评论 -->
+<!-- 							二级评论 -->
 <!-- 								<div class="row well secondhflist"  style="margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);"> -->
 <!-- 									<div class="secondhfdiv" style="margin-bottom: 10px"> -->
 <!-- 										<div class="row" style="padding-left: 0px;padding-right: 0px;margin-bottom: 00px"> -->
 <!-- 											<div class="col-sm-1"> -->
 <!-- 												<img class="img-circle" src="page/assets/img/touxiang_zhushou.jpg" alt="..." style="height: 30px;width: 30px" > -->
 <!-- 											</div> -->
-<!-- 											<div class="col-sm-3" style="padding-right: 0px;padding-left: 10px" > -->
+<!-- 											<div class="col-sm-1" style="padding-right: 0px;padding-left: 10px" > -->
 <!-- 												<h5 class="nosingline" style="color: #2A6496">yadaye</h5>&nbsp;回复说&nbsp;&nbsp;: -->
 <!-- 											</div> -->
-<!-- 											<div class="col-sm-8" style="padding-left: 0px;padding-right:30px"> -->
+<!-- 											<div class="col-sm-10" style="padding-left: 0px;padding-right:30px"> -->
 <!-- 											<p style="color: #444444">呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</p></div> -->
 <!-- 										</div> -->
 <!-- 										<div class="row"> -->
@@ -243,7 +243,7 @@ div.hotdiv:hover{
 <!-- 									</div> -->
 									
 <!-- 								</div> -->
-<!-- 								回复点赞 -->
+<!-- 							回复点赞 -->
 <!-- 							<div class="row"> -->
 <!-- 								<div class="col-sm-2 col-sm-offset-8" style="padding-right: 0px;padding-left: 0px"> -->
 <!-- 									<button type="button" class="btn btn-sm hfbtn" style="color:white;background-color: #3f316d">我也说一句</button> -->
@@ -257,18 +257,19 @@ div.hotdiv:hover{
 <!-- 							</div> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-					<!-- 回复框 -->
-<!-- 					<div id="hfdiv" class="row top10" style="display: none;margin-left: 10px;margin-bottom: 10px;"> -->
-<!-- 						<div class="col-sm-10" style="padding-left: 0px;padding-right: 0px"> -->
-<!-- 							<textarea id="hfconent" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-sm-2"> -->
-<!-- 							<button id="canclehf" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">取消</button> -->
-<!-- 							<button id="submithfbtn" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">回复</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+				</div>
+			<!--回复框 -->
+			<div id="hfdiv" class="row top10" style="display: none;margin-left: 10px;margin-bottom: 10px;">
+				<div class="col-sm-10" style="padding-left: 0px;padding-right: 0px">
+					<textarea id="hfconent" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea>
+				</div>
+				<div class="col-sm-2">
+					<button id="canclehf"  type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">取消</button>
+					<button id="submithfbtn" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">回复</button>
 				</div>
 			</div>
+			</div>
+			
 			<!-- 右侧部分 -->
 			<div class="col-sm-4 col-sm-offset-1">
 				<div class="list-group">
@@ -381,18 +382,19 @@ div.hotdiv:hover{
 					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
 				});
 			});
-			refreshFirstComment(null,0,10);
+			refreshFirstComment(null,0,30);
 		})
 		
-		//点击恢复显示回复框      不知道为毛？？？莫名其妙就实现了效果？？？？？
-				$(".hfbtn").on('click',function() {
+		//点击恢复显示回复框     
+				$(".hfbtn").live('click',function() {
 //		 			$("#hfdiv").css({ "top": $(this).offset().top - 30, "display": "block" });
 // 					alert($("#hfdiv").css("display"))
-// 					if ($("#hfdiv").css("display")!="inline") {
-// 						$("#hfconent").val("")
-// 						$("#hfdiv").fadeIn()
-// 					}
-						$(this).parent().parent().parent().append("<div id='hfdiv' class='row top10' style='margin-left: 10px;margin-bottom: 10px;'><div class='col-sm-10' style='padding-left: 0px;padding-right: 0px'><textarea id='hfconent' style='border-radius: 10px 10px 10px 10px;' class='form-control' rows='3' placeholder='说点什么~'></textarea></div><div class='col-sm-2'><button id='canclehf' type='button' class='btn btn-sm' style='color:white;background-color: #3f316d;margin-top: 10px'>取消</button><button id='submithfbtn' type='button' class='btn btn-sm' style='color:white;background-color: #3f316d;margin-top: 10px'>回复</button></div></div>");
+					if ($("#hfdiv").css("display")!="inline") {
+						$("#hfconent").val("")
+						$("#hfdiv").fadeIn()
+						$(this).parent().parent().parent().append($("#hfdiv"))
+					}
+// 						$(this).parent().parent().parent().append("<div id='hfdiv' class='row top10' style='margin-left: 10px;margin-bottom: 10px;'><div class='col-sm-10' style='padding-left: 0px;padding-right: 0px'><textarea id='hfconent' style='border-radius: 10px 10px 10px 10px;' class='form-control' rows='3' placeholder='说点什么~'></textarea></div><div class='col-sm-2'><button id='canclehf' type='button' class='btn btn-sm' style='color:white;background-color: #3f316d;margin-top: 10px'>取消</button><button id='submithfbtn' type='button' class='btn btn-sm' style='color:white;background-color: #3f316d;margin-top: 10px'>回复</button></div></div>");
 				})
 // 				//取消回复
 				$("#canclehf").live('click',function() {
@@ -400,11 +402,29 @@ div.hotdiv:hover{
 				})
 				$("#submithfbtn").live('click',function() {
 					var conent = $("#hfconent").val();
-					if ($(this).parent().parent().parent().find(".secondhflist").length==0) {//回复二级评论
-						$(this).parent().parent().parent().append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
-					} else {//回复一级评论
-						$(this).parent().parent().parent().find(".secondhflist").fadeIn();
-						$(this).parent().parent().parent().find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-3' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>yadaye</h5>&nbsp;回复说&nbsp;&nbsp;:</div><div class='col-sm-8' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>2016年1月27日 14:17</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+					if (typeof($(this).parent().parent().parent().attr("id")) != "undefined") {//回复一级评论
+						var colsm10 = $(this).parent().parent().parent()//放置id的元素
+						var pid = colsm10.attr("id")
+						$.post("comment/addcomment.action",commitParmer("&nbsp;回复说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
+							if (result.error==200) {
+								colsm10.find(".secondhflist").fadeIn();
+								colsm10.find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+							}else{
+								alert("回复失败")
+							}
+						})
+					} else {//回复二级评论
+						var colsm10 = $(this).parent().parent().parent().parent().parent();//放置id的元素
+						var pid = colsm10.attr("id")
+						var secondlist = $(this).parent().parent().parent();
+						var hfname = secondlist.find(".col-sm-2 > h5").text()	;
+						$.post("comment/addcomment.action",commitParmer("&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
+							if (result.error==200) {
+								secondlist.append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+							}else{
+								alert("回复失败")
+							}
+						})
 					}
 					$("#hfdiv").css("display","none");
 				})
@@ -425,31 +445,52 @@ div.hotdiv:hover{
 				comment_entry_id:articleid,
 			}
 		}
+		//日期转换
+		function   formatDate(now)   {   
+	         var   year=now.getUTCFullYear();   
+	         var   month=now.getUTCMonth()+1;   
+	         var   date=now.getUTCDate();   
+	         var   hour=now.getHours();   
+	         var   minute=now.getMinutes();   
+	         var   second=now.getUTCSeconds();
+	         if (minute/10<1) {
+	        	 minute = "0"+minute;
+			}
+	         return   year+"年"+month+"月"+date+"日  "+hour+":"+minute;   
+		}   
+	    
 		function refreshFirstComment(pid,offset,limit){
 			$.getJSON("comment/getcomment.action",queryParmer(pid,offset,limit),function(json){
 				$("#first_comment_list").empty();
+				
 				$.each(json.rows,function(i,jo){
+					var secondlist = "";
+					$.each(jo.secondCommentList,function(i,sjo){
+						secondlist +="<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+sjo.user_name+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+sjo.comment_content+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date(sjo.comment_time))+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>";
+					})
+					if (secondlist!="") {
+						secondlist = "<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);'>"+secondlist+"</div>";
+					}else{
+						secondlist = "<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);display:none;'></div>";
+					}
 					$("#first_comment_list").prepend(
 							"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
 									"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
 										"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
 										"<h5 style='margin-top: 15px; color: #666666'>"+(i+1)+"楼</h5>"+
 									"</div>"+
-									"<div class='col-sm-10'>"+
+									"<div class='col-sm-10' id="+jo.comment_id+">"+
 										"<div class='row'>"+
 											"<div class='col-sm-2' style='padding-left: 0px'>"+
 												"<h5 style='color: #2A6496'>"+jo.user_name+"</h5>"+
 											"</div>"+
 											"<div class='col-sm-4 col-sm-offset-6'>"+
-												"<h5 style='color: #666666;'>"+jo.comment_time_fmt+"</h5>"+
+												"<h5 style='color: #666666;'>"+formatDate(new Date(jo.comment_time))+"</h5>"+
 											"</div>"+
 										"</div>"+
 										"<div class='row top10'>"+
 											"<p style='color: #444444;padding-right: 15px;min-height:50px;'>"+jo.comment_content+"</p>"+
-										"</div>"+
-											"<!-- 二级评论 -->"+
-											"<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);display:none;'>"+
-											"</div>"+
+										"</div>"+secondlist+
 											"<!-- 回复点赞 -->"+
 										"<div class='row'>"+
 											"<div class='col-sm-2 col-sm-offset-8' style='padding-right: 0px;padding-left: 0px'>"+

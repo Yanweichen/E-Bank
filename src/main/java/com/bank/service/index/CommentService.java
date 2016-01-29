@@ -19,6 +19,9 @@ public class CommentService implements BaseService<CommentModel>{
 	public List<CommentModel> findComment(CommentPage cp){
 		return cdao.selectComment(cp); 
 	}
+	public List<CommentModel> findAllComment(CommentPage cp){
+		return cdao.selectAllComment(cp); 
+	}
 	
 	public int selectCount(CommentPage cp){
 		return cdao.selectCount(cp);

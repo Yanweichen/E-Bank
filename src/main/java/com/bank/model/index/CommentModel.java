@@ -1,6 +1,7 @@
 package com.bank.model.index;
 
 import java.util.Date;
+import java.util.List;
 
 public class CommentModel {
 
@@ -12,8 +13,15 @@ public class CommentModel {
 	private Integer comment_parent_id;
 	private Integer comment_entry_id;
 	private String user_name;
+	private List<CommentModel> secondCommentList;
 	
-	private String comment_time_fmt;
+	public List<CommentModel> getSecondCommentList() {
+		return secondCommentList;
+	}
+
+	public void setSecondCommentList(List<CommentModel> secondCommentList) {
+		this.secondCommentList = secondCommentList;
+	}
 
 	public Integer getComment_id() {
 		return comment_id;
@@ -78,13 +86,4 @@ public class CommentModel {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
-
-	public String getComment_time_fmt() {
-		return comment_time_fmt;
-	}
-
-	public void setComment_time_fmt(String comment_time_fmt) {
-		this.comment_time_fmt = comment_time_fmt;
-	}
-	
 }
