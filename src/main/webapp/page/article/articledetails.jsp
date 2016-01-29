@@ -16,7 +16,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon"
-	href="<%=basePath%>page/assets//img/tubiao.ico" />
+	href="page/assets//img/tubiao.ico" />
+<link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <title>注册</title>
 <style type="text/css">
 .top20{
@@ -77,6 +78,11 @@ div.hotdiv:hover{
 .hotdiv{
 	border-radius: 10px 10px 10px 10px;
 }
+.btncolor {
+	background-color: #3f316d;
+	border-color: #3f316d;
+	margin-right: 10px;
+}
 </style>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
@@ -115,13 +121,13 @@ div.hotdiv:hover{
 				<div class="row top20">
 					<div class="col-sm-4 overstep" style="padding-left: 0px">
 						<div class="overstep" >
-							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/circle-arrow-up.png">
+							<img  alt="" style="height: 20px;width: 20px" src="page/assets/img/circle-arrow-up.png">
 							<a target='_blank' id="beforearticle"style='margin-left: 3px;' class="hand textbottom"></a>
 						</div>
 					</div>
 					<div class="col-sm-4 col-sm-offset-4 overstep">
 						<div class="overstep" >
-							<img  alt="" style="height: 20px;width: 20px" src="<%=basePath%>page/assets/img/circle-arrow-down.png">
+							<img  alt="" style="height: 20px;width: 20px" src="page/assets/img/circle-arrow-down.png">
 							<a target='_blank' id="afterarticle"style='margin-left: 3px;' class="hand textbottom"></a>
 						</div>
 					</div>
@@ -196,6 +202,9 @@ div.hotdiv:hover{
 						</div>
 					</div>
 				</div>
+				<div class="top15">
+						<ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
+				</div>
 				<!-- 评论部分 -->
 				<div id="first_comment_list" class="row top10">
 		
@@ -268,6 +277,9 @@ div.hotdiv:hover{
 					<button id="submithfbtn" type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">回复</button>
 				</div>
 			</div>
+			<div class="top15">
+						<ul class="sync-pagination pagination-sm" style="margin: 0px"></ul>
+				</div>
 			</div>
 			
 			<!-- 右侧部分 -->
@@ -299,13 +311,78 @@ div.hotdiv:hover{
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- 提示登陆框 -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="exampleModalLabel">登陆</h4>
+				</div>
+				<form id="loginfrom" action="/user/login.action"
+					method="post">
+					<div class="modal-body">
+						<div class="container">
+							<div class="row">
+								<div class="form-group">
+									<label for="recipient-name" class="control-label">电话/身份证号/邮箱:</label>
+									<div class="input-group col-sm-5">
+										<input type="text" class="form-control" name="user_account">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="control-label">密码:</label>
+									<div class="input-group col-sm-5">
+										<input type="password" class="form-control"
+											name="user_password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="control-label">验证码:</label>
+									<div class="row">
+										<div class="col-sm-3">
+											<input type="text" class="form-control" id="user_code"
+												name="user_code" placeholder="验证码">
+										</div>
+										<div class="col-sm-3">
+											<img src="Kaptcha.jpg" id="codeimg" alt="..."
+												class="img-rounded" style="height: 33px; width: 130px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="z-index: -1;text-align: center;">
+						<div class="col-sm-6">
+							<button type="button" class="btn btn-primary btncolor btn-block"
+							onclick="window.location='page/regist/regist_1.jsp'">注册</button>
+						</div>
+						<div class="col-sm-6">
+							<button type="submit" id="btn_login"
+								class="btn btn-primary btncolor btn-block">登陆</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="fakeloader"></div>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script src="page/assets/js/Flow.js"></script>
-	
+	<script src="page/assets/js/bootstrapValidator.min.js"></script>
+	<script src="page/assets/js/fakeloader.js"></script>
+	<script src="page/assets/js/jquery.twbsPagination.js"></script>
 	<script type="text/javascript">
 		var articletitle = "${article.index_title}";		
 		document.title = articletitle;
@@ -313,6 +390,11 @@ div.hotdiv:hover{
 		var articlelabel = "${article.index_label}";
 		var userid = "${user.user_id}";
 		var username = "${user.user_name}";
+		//刷新验证码
+		$("#codeimg").click( function () {
+			$(this).attr("src","<%=basePath%>Kaptcha.jpg?r=" + new Date());
+			;
+		});
 		function queryParams(search,limit,sort,order){
 			return {
 					search:search,
@@ -357,24 +439,15 @@ div.hotdiv:hover{
 					$("#aboutlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有相关文章哦~</h4></div></div>");
 				}
 				$.each(json.rows,function(i,jo){
-// 					var src;
+					var src;
 					if (jo.index_state=="01"||jo.index_state=="11") {
 						src = 'indexhoticon.png';
 					} else {
 						src = 'indexnomalicon.png';
 					}
-// 					if (i<3 && jo.index_id!=articleid) {
-// 						$("#aboutlistleft").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
-// 					}else if(jo.index_id!=articleid){
-// 						$("#aboutlistright").append("<div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a> </div>");
-// 					}
 					if (jo.index_id!=articleid) {
 						$("#aboutlist").append("<div class='col-sm-3' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>");
 					}
-
-// 					$("#aboutlist").append("<a rel='page/assets/img/circle-shop.png' href='index/articledetail.action?id="+jo.index_id+"'><ul><li class='ProTi' >"+jo.index_title+"</li></ul> </a>");
-// 					/* ==== create imageFlow ==== */
-// 					imf.create("imageFlow", 1, 0.4, 0);
 				});
 			});
 			$.getJSON("index/getHotLabel.action", {num:15}, function(json){
@@ -382,7 +455,94 @@ div.hotdiv:hover{
 					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
 				});
 			});
-			refreshFirstComment(null,0,30);
+			$('#loginfrom').bootstrapValidator({
+				message : 'This value is not valid',
+				submitButtons : 'button[type="submit"]',
+				feedbackIcons : {
+					valid : 'glyphicon glyphicon-ok',
+					validating : 'glyphicon glyphicon-refresh'
+				},
+				fields : {
+					user_account : {
+						validators : {
+							notEmpty : {
+								message : '用户名不能为空'
+							},
+						}
+					},
+					user_password : {
+						validators : {
+							notEmpty : {
+								message : '密码不能为空'
+							},
+						}
+					},
+					user_code : {
+						threshold : 5,
+						validators : {
+							notEmpty : {
+								message : '验证码不能为空'
+							},
+							remote : {
+								url : 'user/verifyCode.action',
+									type : "post",
+									async : true,
+									data : {
+										user_account : function(
+												validator) {
+											return $(
+													'#loginfrom :input[name="user_code"]')
+													.val();
+										},
+									},
+								},
+							}
+						},
+		
+					}
+				}).on(
+				'success.form.bv',
+				function(e) {
+					// Prevent form submission
+					e.preventDefault();
+		
+					// Get the form instance
+					var $form = $(e.target);
+		
+					// Get the BootstrapValidator instance
+					var bv = $form
+							.data('bootstrapValidator');
+					$(".fakeloader").fakeLoader({
+		                spinner:"spinner2",
+		                show:true
+		            });
+					// Use Ajax to submit form data
+					$.post($form.attr('action'),$form.serialize(),
+									function(result) {
+										$(".fakeloader").fakeLoader({
+							                spinner:"spinner2",
+							                show:false
+							            });
+										if (result.error == 203) {
+											alert(result.msg)
+										} else {
+											$('#loginModal').modal('hide');
+											window.location.reload();
+										}
+									}, 'json');});
+			$.getJSON("comment/getCount.action", queryCommentParmer(null,null,null),function(json){
+				$('.sync-pagination').twbsPagination({
+			        totalPages: Math.ceil(json.total/10),
+			        visiblePages: 7,
+			        first:"首页",
+			        prev:"前一页",
+			 		next:"后一页",
+			 		last:"尾页",
+			        onPageClick: function (event, page) {
+			        	refreshFirstComment(null,page,10);
+			        }
+			  });
+			})
 		})
 		
 		//点击恢复显示回复框     
@@ -410,7 +570,11 @@ div.hotdiv:hover{
 								colsm10.find(".secondhflist").fadeIn();
 								colsm10.find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
 							}else{
-								alert("回复失败")
+								if (result.indexOf("<script")==-1?false:true) {
+									$('#loginModal').modal('show')
+								} else {
+									alert("回复失败！");
+								}
 							}
 						})
 					} else {//回复二级评论
@@ -422,18 +586,22 @@ div.hotdiv:hover{
 							if (result.error==200) {
 								secondlist.append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
 							}else{
-								alert("回复失败")
+								if (result.indexOf("<script")==-1?false:true) {
+									$('#loginModal').modal('show')
+								} else {
+									alert("回复失败！");
+								}
 							}
 						})
 					}
 					$("#hfdiv").css("display","none");
 				})
 				
-		function queryParmer(pid,offset,limit){
+		function queryCommentParmer(pid,page,limit){
 			return {
 				entry_id:articleid,
 				pid:pid,
-				offset:offset,
+				offset:(page-1)*10,
 				limit:limit,
 			}
 		}
@@ -458,9 +626,8 @@ div.hotdiv:hover{
 			}
 	         return   year+"年"+month+"月"+date+"日  "+hour+":"+minute;   
 		}   
-	    
 		function refreshFirstComment(pid,offset,limit){
-			$.getJSON("comment/getcomment.action",queryParmer(pid,offset,limit),function(json){
+			$.getJSON("comment/getcomment.action",queryCommentParmer(pid,offset,limit),function(json){
 				$("#first_comment_list").empty();
 				
 				$.each(json.rows,function(i,jo){
@@ -468,12 +635,14 @@ div.hotdiv:hover{
 					$.each(jo.secondCommentList,function(i,sjo){
 						secondlist +="<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+sjo.user_name+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+sjo.comment_content+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date(sjo.comment_time))+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>";
 					})
+					
 					if (secondlist!="") {
 						secondlist = "<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);'>"+secondlist+"</div>";
 					}else{
 						secondlist = "<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);display:none;'></div>";
 					}
-					$("#first_comment_list").prepend(
+						
+					$("#first_comment_list").append(
 							"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
 									"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
 										"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
@@ -515,47 +684,16 @@ div.hotdiv:hover{
 			var d = new Date(); 
 			$.post("comment/addcomment.action",commitParmer(content,userid,null),function(result){
 				if (result.error==200) {
-					refreshFirstComment(null,0,30);
-// 					$("#first_comment_list").prepend(
-// 						"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
-// 								"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
-// 									"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
-// 									"<h5 style='margin-top: 15px; color: #666666'>1楼</h5>"+
-// 								"</div>"+
-// 								"<div class='col-sm-10'>"+
-// 									"<div class='row'>"+
-// 										"<div class='col-sm-2' style='padding-left: 0px'>"+
-// 											"<h5 style='color: #2A6496'>"+username+"</h5>"+
-// 										"</div>"+
-// 										"<div class='col-sm-4 col-sm-offset-6'>"+
-// 											"<h5 style='color: #666666;'>"+d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日 "+d.getHours()+":"+d.getMinutes()+"</h5>"+
-// 										"</div>"+
-// 									"</div>"+
-// 									"<div class='row top10'>"+
-// 										"<p style='color: #444444;padding-right: 15px;min-height:50px;'>"+content
-// 										+"</p>"+
-// 									"</div>"+
-// 										"<!-- 二级评论 -->"+
-// 										"<div class='row well secondhflist'  style='margin-right:10px;padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.7);display:none;'>"+
-// 										"</div>"+
-// 										"<!-- 回复点赞 -->"+
-// 									"<div class='row'>"+
-// 										"<div class='col-sm-2 col-sm-offset-8' style='padding-right: 0px;padding-left: 0px'>"+
-// 											"<button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d'>我也说一句</button>"+
-// 										"</div>"+
-// 										"<div class='col-sm-2'>"+
-// 											"<div align='left' style='margin-top: 5px'>"+
-// 												"<img class='img-circle' src='page/assets/img/hand_thumbsup.png' alt='...' style='height: 20px;width: 20px' >"+
-// 												"<strong style='color: #5CACEE'>(0)</strong>"+
-// 											"</div>"+
-// 										"</div>"+
-// 									"</div>"+
-// 								"</div>"+
-// 							"</div>")		
-						}else{
-							alert("回复失败！");
-						}
-				})
+// 					refreshFirstComment(null,1,10);
+					window.location.reload()
+				}else{
+					if (result.indexOf("<script")==-1?false:true) {
+						$('#loginModal').modal('show')
+					} else {
+						alert("回复失败！");
+					}
+				}
+			})
 		});
 	</script>
 </body>

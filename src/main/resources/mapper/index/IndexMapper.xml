@@ -51,12 +51,12 @@
 	<if test="isView == 'view'">
 		AND index_isindex = TRUE
 	</if>
-	<choose> 
-	<when test="index_pid != null || index_pid == ''">
+	<if test="index_pid != null || index_pid == ''">
 		<if test="index_pid != -1">
 			AND index_pid = #{index_pid}
 		</if>
-	</when>
+	</if>
+	<choose> 
         <when test="search =='TIME'"> 
             AND index_uptime BETWEEN DATE_FORMAT(#{startTime}, '%Y%m%d') AND DATE_FORMAT(#{endTime}, '%Y%m%d%H%i%s')
        </when>  

@@ -44,4 +44,13 @@ public class CommentController {
 		}
 		return jo;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getCount")
+	public JSONObject getCount(CommentPage cp){
+		JSONObject jo = new JSONObject();
+		jo.put("error", "200");
+		jo.put("total", cs.selectCount(cp));
+		return jo;
+	}
 }

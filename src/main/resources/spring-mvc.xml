@@ -68,7 +68,8 @@
             <mvc:exclude-mapping path="/user/**"/>
             <mvc:exclude-mapping path="/index/**"/>
             <mvc:exclude-mapping path="/admin/**"/>
-            <mvc:exclude-mapping path="/comment/**"/>
+            <mvc:exclude-mapping path="/comment/getcomment.action"/>
+            <mvc:exclude-mapping path="/comment/getCount.action"/>
             <bean class="com.bank.filter.SessionFilter"/>  
         </mvc:interceptor>
         <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->   

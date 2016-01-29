@@ -41,7 +41,7 @@
 	  <include refid="Base_Column_List"/>,user_name 
 	  FROM entry_comment com,user_userinfo uif  
 	  WHERE com.`comment_user_id`=uif.`user_id` AND comment_parent_id = #{comment_id}
-	  ORDER BY comment_time LIMIT 0,5;
+	  ORDER BY comment_time;
   </select>
   
    <!-- 添加评论-->
