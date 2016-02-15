@@ -68,6 +68,7 @@
             <mvc:exclude-mapping path="/user/**"/>
             <mvc:exclude-mapping path="/index/**"/>
             <mvc:exclude-mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/myAccount/**"/>
             <mvc:exclude-mapping path="/comment/getcomment.action"/>
             <mvc:exclude-mapping path="/comment/getCount.action"/>
             <bean class="com.bank.filter.SessionFilter"/>  

@@ -18,6 +18,7 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="page/assets//img/tubiao.ico" />
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 <title>注册</title>
 <style type="text/css">
 .top20{
@@ -623,7 +624,10 @@ div.hotdiv:hover{
 	         var   second=now.getUTCSeconds();
 	         if (minute/10<1) {
 	        	 minute = "0"+minute;
-			}
+			 }
+	         if (date/10<1) {
+	        	 date = "0"+date;
+			 }
 	         return   year+"年"+month+"月"+date+"日  "+hour+":"+minute;   
 		}   
 		function refreshFirstComment(pid,offset,limit){
