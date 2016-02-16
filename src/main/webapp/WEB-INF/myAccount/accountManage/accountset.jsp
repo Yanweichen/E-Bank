@@ -93,5 +93,8 @@
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	$("#foot").removeClass("navbar-fixed-bottom");
+	</script>
 </body>
 </html>

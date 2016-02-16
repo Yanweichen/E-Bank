@@ -194,7 +194,7 @@ ul.news li p{float:right; color:#000000}
 							<c:if test="${!empty user}">Hello,${user.user_name}</c:if>
 						</h3>
 						<p align="center">
-							<a href="<%=basePath%>index/myBank.action" target="_blank"
+							<a href="<%=basePath%>myAccount/mybank.action" target="_blank"
 								class="btn btn-primary btncolor" onfocus=this.blur()
 								role="button">我的银行</a> <a href="#" id="btn_out"
 								class="btn btn-default" role="button">退出</a>

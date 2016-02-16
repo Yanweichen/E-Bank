@@ -125,6 +125,7 @@
 	<script src="page/assets/js/cropper_custom.js"></script>
 	<script src="page/assets/js/jquery.form.js"></script>
 	<script type="text/javascript">
+	$("#foot").removeClass("navbar-fixed-bottom");
 		$("#saveimg").click(function(){
 			var imageresult = $('#headimageedit').cropper("getCroppedCanvas");
 			imageresult = imageresult.toDataURL();

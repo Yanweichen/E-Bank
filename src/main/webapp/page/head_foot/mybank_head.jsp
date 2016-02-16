@@ -24,7 +24,7 @@
 	<div style="background-color: #3f314d;height: 150px;position: relative;z-index: 2" >
 		<ul>
 			<li class="blackpurple">
-				<h4 class="daohang"><a href="#">我的E-Bank</a></h4>
+				<h4 class="daohang"><a href="myAccount/mybank.action">我的E-Bank</a></h4>
 				<div class="subtext">
 					<div class="list-group">
 						<a class="list-group-item" style="color: white;"> 账户设置 </a>
@@ -44,7 +44,7 @@
 				</div>
 			</li>
 			<li class="blackpurple" id="userinfo">
-				<img class="img-circle" style="width: 100px;height: 100px;margin-top: 20px" src="${user.user_face}">
+				<img id="userface" class="img-circle hand" style="width: 100px;height: 100px;margin-top: 20px" src="${user.user_face}">
 				<div class="subtext">
 					<div class="row">
 						<h5 class="colgb">阎伟晨</h5>
@@ -105,7 +105,6 @@
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/animated-menu.js"></script>
 	<script type="text/javascript">
-	 $("#foot").removeClass("navbar-fixed-bottom");
      $(function(){
          $("[rel=relname]").popover({
              trigger:'manual',
@@ -198,5 +197,7 @@
                      }, 100);
                  });
      });
-     
+     $("#userface").click(function(){
+    	 window.location="myAccount/faceSet.action"
+     })
 	</script>
