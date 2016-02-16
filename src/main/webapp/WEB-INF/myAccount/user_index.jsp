@@ -15,144 +15,21 @@
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon"
 	href="page/assets//img/tubiao.ico" />
+<link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="page/assets/css/bootstrap-table.css">
+<link rel="stylesheet" href="page/assets/css/mybankbase.css">
 <style type="text/css">
-.noborderradius{
-	border-radius: 0px 0px 0px 0px;
+#transaction td{
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 1px solid #cccccc;
 }
-.list-group-item{
-	border:0;
-	background-color: #3f314d;
-	cursor:pointer;
-}
-.hand{
-	cursor:pointer;
-}
-.colgb{
-	color: #bbbbbb;
-}
-.nosingline{
-	display: inline;
-}
-.top20{
-	margin-top: 20px
-}
-.top10{
-	margin-top: 10px
-}
-.top5{
-	margin-top: 5px
-}
-.btncolor {
-	background-color: #3f316d;
-	border-color: #3f316d;
-}
-.bordera{border-right: 1px solid #2d2d3d;border-bottom: 1px solid #2d2d3d;} 
-.borderb{border-bottom: 1px solid #2d2d3d;} 
-.borderc{border-right: 1px solid #2d2d3d;} 
-
-a.list-group-item:hover{
-	background-color: #3f313d;
-}
-a:hover {text-decoration: none;}		/* 鼠标移动到链接上 */
 </style>
 <title>我的E-Bank</title>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
-	<canvas id="cas" style="position: absolute;z-index: -999"></canvas>
-	<script src="page/assets/js/pointbg.js"></script>
-	<!-- 头部导航 -->
-		<nav class="navbar navbar-divider noborderradius" style="background-color:#3f314d;margin-bottom: 0px;min-height: 30px">
-			<div class="container" style="padding-top: 5px;">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<a style="color: white;letter-spacing: 10px;" href="page/index.jsp">e-bank</a>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
-	<!-- 头部导航end -->
-	<hr width="100%" style="border:1px solid #3f315d;margin: 0;"/>
-	<div style="background-color: #3f314d;height: 150px;position: relative;z-index: 2" >
-		<ul>
-			<li class="blackpurple">
-				<h4 class="daohang"><a href="#">我的E-Bank</a></h4>
-				<div class="subtext">
-					<div class="list-group">
-						<a class="list-group-item" style="color: white;"> 账户设置 </a>
-						<a class="list-group-item" style="color: white;"> 我的账单 </a>
-						<a class="list-group-item" style="color: white;"> 对账单 </a>
-					</div>
-				</div>
-			</li>
-			<li class="blackpurple">
-				<h4 class="daohang">财富中心</h4>
-				<div class="subtext">
-					<div class="list-group">
-						<a class="list-group-item" style="color: white;"> 账户设置 </a>
-						<a class="list-group-item" style="color: white;"> 我的账单 </a>
-						<a class="list-group-item" style="color: white;"> 对账单 </a>
-					</div>
-				</div>
-			</li>
-			<li class="blackpurple" id="userinfo">
-				<img class="img-circle" style="width: 100px;height: 100px;margin-top: 20px" src="page/assets/img/touxiang_zhushou.jpg">
-				<div class="subtext">
-					<div class="row">
-						<h5 class="colgb">阎伟晨</h5>
-					</div>
-					<div class="row">
-						<h5 class="colgb">13279379235</h5>
-					</div>
-					<div class="row" style="margin: 10px 20px 0 20px;">
-						<div class="col-sm-3"><a href="#" rel="relname"><img id="usercheck" src="page/assets/img/circle-profle.png" style="height: 20px;width: 20px;"></a></div>
-						<div class="col-sm-3"><a href="#" rel="phone"><img src="page/assets/img/circle-smartphone.png" style="height: 20px;width: 20px;"></a></div>
-						<div class="col-sm-3"><a href="#" rel="safe"><img src="page/assets/img/circle-security.png" style="height: 20px;width: 20px;"></a></div>
-						<div class="col-sm-3"><a href="#" rel="setting"><img src="page/assets/img/circle-locked.png" style="height: 20px;width: 20px;"></a></div>
-					</div>
-					<div class="row" style="margin: 10px 20px 0 20px;">
-						<div class="col-sm-6 bordera">
-							<h5 class="colgb">银行卡</h5>
-							<h5 class="colgb">3</h5>
-						</div>
-						<div class="col-sm-6 borderb">
-							<h5 class="colgb">银行卡</h5>
-							<h5 class="colgb">3</h5>
-						</div>
-					</div>
-					<div class="row" style="margin: 0px 20px 0 20px;">
-						<div class="col-sm-6 borderc">
-							<h5 class="colgb">银行卡</h5>
-							<h5 class="colgb">3</h5>
-						</div>
-						<div class="col-sm-6">
-							<h5 class="colgb">银行卡</h5>
-							<h5 class="colgb">3</h5>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li class="blackpurple">
-				<h4 class="daohang">生活服务</h4>
-				<div class="subtext">
-					<div class="list-group">
-						<a class="list-group-item" style="color: white;"> 账户设置 </a>
-						<a class="list-group-item" style="color: white;"> 我的账单 </a>
-						<a class="list-group-item" style="color: white;"> 对账单 </a>
-					</div>
-				</div>
-			</li>
-			<li class="blackpurple">
-				<h4 class="daohang">账户管理</h4>
-				<div class="subtext" >
-					<div class="list-group">
-						<a class="list-group-item" style="color: white;"> 账户设置 </a>
-						<a class="list-group-item" style="color: white;"> 我的账单 </a>
-						<a class="list-group-item" style="color: white;"> 对账单 </a>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
+	<jsp:include page="../../page/head_foot/mybank_head.jsp"></jsp:include>
 	<div class="container" >
 		<div class="row top20" >
 			<div class="col-sm-6 " >
@@ -204,134 +81,80 @@ a:hover {text-decoration: none;}		/* 鼠标移动到链接上 */
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
 						<div class="row">
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<span class="glyphicon glyphicon-cloud" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
-								<span class="glyphicon glyphicon-cloud top5" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
+								<i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>办理银行卡</h5>
+								<i class="icon-mobile-phone" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>手机缴费充值</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<span class="glyphicon glyphicon-cloud" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
-								<span class="glyphicon glyphicon-cloud top5" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
+								<i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>转账到银行卡</h5>
+								<i class="icon-heart" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>爱心捐赠</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<span class="glyphicon glyphicon-cloud" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
-								<span class="glyphicon glyphicon-cloud top5" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
+								<i class="icon-money" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>信用卡还款</h5>
+								<i class="icon-desktop" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>有线电视缴费</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<span class="glyphicon glyphicon-cloud" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
-								<span class="glyphicon glyphicon-cloud top5" style="color: #3f316d;font-size: 50px;"></span>
-								<h5>转账到E-Bank</h5>
+								<i class="icon-tint" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>水电煤缴费</h5>
+								<i class="icon-plus-sign-alt" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>医院挂号</h5>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- 账单 -->
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="toolbar">
+					<h4 style="display: inline;">我的账单&nbsp;&nbsp;&nbsp;&nbsp;</h4><a class="hand">全部账单</a>
+				</div>
+				<table id="transaction"
+				   style="border-bottom: 1px solid #c3c9cc;border-top: 1px solid #c3c9cc;"
+				   data-toggle="table" 
+				   data-width="50px" 
+				   data-side-pagination="server"
+				   data-show-header="false"
+				   data-toolbar="#toolbar"
+			       data-show-refresh="true">
+				    <thead>
+				        <tr>
+				            <th data-field="index_id" data-align="center" data-sortable="true">交易类型</th>
+				            <th data-field="index_type" data-align="right">交易时间</th>
+				            <th data-width="40%" data-field="index_title" data-align="center">交易详情</th>
+				            <th data-field="index_uptime_format" data-align="" data-sortable="true">交易金额</th>
+				            <th data-field="upfrom" data-align="">交易状态</th>
+				            <th data-field="action" data-align="" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+				        </tr>
+				    </thead>
+				</table>			
+			</div>
+		</div>
 	</div>
 	<!-- foot -->
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<jsp:include page="../../page/head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
-	<script src="page/assets/js/jquery.easing.1.3.js"></script>
-	<script src="page/assets/js/animated-menu.js"></script>
+	<script src="page/assets/js/bootstrap-table.js"></script>
+	<script src="page/assets/js/bootstrap-table-zh-CN.js"></script>
 	<script type="text/javascript">
-	     $(function(){
-	         $("[rel=relname]").popover({
-	             trigger:'manual',
-	             placement : 'right', //placement of the popover. also can use top, bottom, left or right
-	             title : '<h5 class="colgb" style="width:120px;">已经通过实名认证</h5>', //this is the top title bar of the popover. add some basic css
-	             html: 'true', //needed to show html of course
-	             content : '<h5 class="colgb" align="center">查看详情</h5>', //this is the content of the html box. add the image here or anything you want really.
-	             animation: false
-	         }).on("mouseenter", function () {
-	                     var _this = this;
-	                     $(this).popover("show");
-	                     $(this).siblings(".popover").on("mouseleave", function () {
-	                         $(_this).popover('hide');
-	                     });
-	                 }).on("mouseleave", function () {
-	                     var _this = this;
-	                     setTimeout(function () {
-	                         if (!$(".popover:hover").length) {
-	                             $(_this).popover("hide")
-	                         }
-	                     }, 100);
-	                 });
-	     });
-	     $(function(){
-	         $("[rel=phone]").popover({
-	             trigger:'manual',
-	             placement : 'top', //placement of the popover. also can use top, bottom, left or right
-	             title : '<h5 class="colgb" style="width:120px;">已经通过实名认证</h5>', //this is the top title bar of the popover. add some basic css
-	             html: 'true', //needed to show html of course
-	             content : '<h5 class="colgb" align="center">查看详情</h5>', //this is the content of the html box. add the image here or anything you want really.
-	             animation: false
-	         }).on("mouseenter", function () {
-	                     var _this = this;
-	                     $(this).popover("show");
-	                     $(this).siblings(".popover").on("mouseleave", function () {
-	                         $(_this).popover('hide');
-	                     });
-	                 }).on("mouseleave", function () {
-	                     var _this = this;
-	                     setTimeout(function () {
-	                         if (!$(".popover:hover").length) {
-	                             $(_this).popover("hide")
-	                         }
-	                     }, 100);
-	                 });
-	     });
-	     $(function(){
-	         $("[rel=safe]").popover({
-	             trigger:'manual',
-	             placement : 'top', //placement of the popover. also can use top, bottom, left or right
-	             title : '<h5 class="colgb" style="width:120px;">已经通过实名认证</h5>', //this is the top title bar of the popover. add some basic css
-	             html: 'true', //needed to show html of course
-	             content : '<h5 class="colgb" align="center">查看详情</h5>', //this is the content of the html box. add the image here or anything you want really.
-	             animation: false
-	         }).on("mouseenter", function () {
-	                     var _this = this;
-	                     $(this).popover("show");
-	                     $(this).siblings(".popover").on("mouseleave", function () {
-	                         $(_this).popover('hide');
-	                     });
-	                 }).on("mouseleave", function () {
-	                     var _this = this;
-	                     setTimeout(function () {
-	                         if (!$(".popover:hover").length) {
-	                             $(_this).popover("hide")
-	                         }
-	                     }, 100);
-	                 });
-	     });
-	     $(function(){
-	         $("[rel=setting]").popover({
-	             trigger:'manual',
-	             placement : 'left', //placement of the popover. also can use top, bottom, left or right
-	             title : '<h5 class="colgb" style="width:120px;">已经通过实名认证</h5>', //this is the top title bar of the popover. add some basic css
-	             html: 'true', //needed to show html of course
-	             content : '<h5 class="colgb" align="center">查看详情</h5>', //this is the content of the html box. add the image here or anything you want really.
-	             animation: false
-	         }).on("mouseenter", function () {
-	                     var _this = this;
-	                     $(this).popover("show");
-	                     $(this).siblings(".popover").on("mouseleave", function () {
-	                         $(_this).popover('hide');
-	                     });
-	                 }).on("mouseleave", function () {
-	                     var _this = this;
-	                     setTimeout(function () {
-	                         if (!$(".popover:hover").length) {
-	                             $(_this).popover("hide")
-	                         }
-	                     }, 100);
-	                 });
-	     });
+	    $('#transaction').bootstrapTable({
+	 	    url: "index/Allnotice.action?isView=view&order=asc&limit=10&offset=0",
+	 	})
+	 	function actionFormatter(value, row, index) {
+	    	 return [
+				        '<a class="remove ml10" href="javascript:void(0)" title="删除">',
+				        '<i class="glyphicon glyphicon-remove"></i>',
+				        '</a>'
+				    ].join('');
+		}
 	</script>
 </body>
 </html>

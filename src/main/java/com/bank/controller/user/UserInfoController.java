@@ -28,8 +28,10 @@ import com.bank.utils.JsonUtil;
 import com.bank.utils.Mail;
 import com.bank.utils.MySessionContext;
 import com.bank.utils.PortUtil;
+import com.bank.utils.QclodImageUtil;
 import com.bank.utils.RegularUtil;
 import com.google.gson.JsonObject;
+import com.qcloud.UploadResult;
 
 /**
  * @author yanwe
@@ -329,7 +331,7 @@ public class UserInfoController {
 	@RequestMapping("/sendMail_Reg_Again")
 	public JSONObject sendMail_Reg_Again(HttpServletRequest req){
 		JSONObject jo = new JSONObject();
-		UserModel user = (UserModel) req.getSession().getAttribute("reguser");
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
 		if (user==null) {
 			jo.put("error", "401");
 			jo.put("msg", "非法操作！");
@@ -407,4 +409,13 @@ public class UserInfoController {
 		return "regist_success";
 	}
 	
+	public JSONObject upLoadFace(String url,HttpServletRequest req) throws Exception{
+		UploadResult ret = QclodImageUtil.upload(url);
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
+		sessionuser.setUser_face(ret.downloadUrl);
+		JSONObject jo = new JSONObject();
+		jo.put("error", "200");
+		jo.put("msg", "上传成功！");
+		return jo;
+	}
 }

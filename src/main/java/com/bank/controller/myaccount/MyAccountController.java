@@ -16,4 +16,14 @@ public class MyAccountController {
 	public String openMyBank(){
 		return "myAccount/user_index";
 	}
+	
+	@RequestMapping("/accountSet")
+	public String accountSet(){
+		return "myAccount/accountManage/accountset";
+	}
+	
+	@RequestMapping("/faceSet")
+	public String faceSet(){
+		return "myAccount/accountManage/faceset";
+	}
 }

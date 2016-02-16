@@ -1,0 +1,43 @@
+.noborderradius{
+	border-radius: 0px 0px 0px 0px;
+}
+.list-group-item{
+	border:0;
+	background-color: #3f314d;
+	cursor:pointer;
+}
+.hand{
+	cursor:pointer;
+}
+.colgb{
+	color: #bbbbbb;
+}
+.nosingline{
+	display: inline;
+}
+.top20{
+	margin-top: 20px
+}
+.top10{
+	margin-top: 10px
+}
+.top5{
+	margin-top: 5px
+}
+.btncolor {
+	background-color: #3f316d;
+	border-color: #3f316d;
+	color: white;
+}
+.touming6{
+	border-radius: 10px 10px 10px 10px;
+	background-color:rgba(255,255,255,0.6);
+}
+.bordera{border-right: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;} 
+.borderb{border-bottom: 1px solid #aaaaaa;} 
+.borderc{border-right: 1px solid #aaaaaa;} 
+
+a.list-group-item:hover{
+	background-color: #3f313d;
+}
+a:hover {text-decoration: none;}		/* 鼠标移动到链接上 */

@@ -18,10 +18,9 @@
 <link rel="stylesheet" href="page/assets/css/tokenfield-typeahead.css">
 <link rel="stylesheet" href="page/assets/css/bootstrap-tokenfield.css">
 <link rel="stylesheet" href="page/assets/css/cropper.css">
-<link rel="stylesheet" href="page/assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <!-- 编辑框需要的图表来源  必须是3.0.2版本 -->
-<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+<link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
 .docs-preview {
   margin-right: -15px;
@@ -243,42 +242,42 @@
 					          <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
 					            <input class="sr-only" id="inputImage" name="file" type="file" accept="image/*">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Import image with Blob URLs">
-					              <span class="fa fa-picture-o"></span>
+					              <span class="icon-picture"></span>
 					            </span>
 					          </label>
 					          <button class="btn btn-primary" data-method="setDragMode" data-option="move" type="button" title="Move">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
-					              <span class="fa fa-arrows"></span>
+					              <span class="icon-move"></span>
 					            </span>
 					          </button>
 					          <button class="btn btn-primary" data-method="setDragMode" data-option="crop" type="button" title="Crop">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
-					            	<span class="fa fa-crop"></span>
+					            	<span class="icon-fullscreen"></span>
 					            </span>
 					          </button>
 					          <button class="btn btn-primary" data-method="zoom" data-option="0.1" type="button" title="Zoom In">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, 0.1)">
-					              <span class="fa fa-search-minus"></span>
+					              <span class="icon-zoom-in"></span>
 					            </span>
 					          </button>
 					          <button class="btn btn-primary" data-method="zoom" data-option="-0.1" type="button" title="Zoom Out">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, -0.1)">
-					              <span class="fa fa-search-plus"></span>
+					              <span class="icon-zoom-out"></span>
 					            </span>
 					          </button>
 					          <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button" title="Rotate Left">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;rotate&quot;, -45)">
-					              <span class="fa fa-mail-reply"></span>
+					              <span class="icon-reply"></span>
 					            </span>
 					          </button>
 					          <button class="btn btn-primary" data-method="rotate" data-option="45" type="button" title="Rotate Right">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;rotate&quot;, 45)">
-					              <span class="fa fa-mail-forward"></span>
+					              <span class="icon-share-alt"></span>
 					            </span>
 					          </button>
 					           <button class="btn btn-primary" data-method="reset" type="button" title="Reset">
 					            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)">
-					              <span class="fa-spin fa fa-refresh"></span>
+					              <span class="icon-refresh"></span>
 					            </span>
 					          </button>
 							</div>

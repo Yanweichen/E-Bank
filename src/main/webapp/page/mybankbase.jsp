@@ -11,15 +11,22 @@
 <base href=" <%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="page/assets//img/tubiao.ico" />
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
-<title>注册</title>
+<link rel="stylesheet" href="page/assets/css/mybankbase.css">
+<link href="page/assets/css/animated-menu.css" rel="stylesheet">
+
+<link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+<title>账户设置</title>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
-	<jsp:include page="head_foot/head.html"></jsp:include>
+	<jsp:include page="../../../page/head_foot/mybank_head.jsp"></jsp:include>
 	<!-- foot -->
-	<jsp:include page="head_foot/foot.html"></jsp:include>
+	<jsp:include page="../../../page/head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
