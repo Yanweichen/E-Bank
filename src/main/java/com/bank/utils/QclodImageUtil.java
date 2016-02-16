@@ -32,9 +32,11 @@ public class QclodImageUtil {
 //	}
     
     public static UploadResult upload(String pic) throws Exception {
+    	pic=pic.split(",")[1];
         PicCloud pc = new PicCloud(APP_ID_V2, SECRET_ID_V2, SECRET_KEY_V2, BUCKET);
 	    ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(pic));
 	    UploadResult  ret = pc.upload(inputStream);
+	    System.out.println(pc.getError());
         return ret;
     }
 

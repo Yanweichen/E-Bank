@@ -128,7 +128,13 @@
 		$("#saveimg").click(function(){
 			var imageresult = $('#headimageedit').cropper("getCroppedCanvas");
 			imageresult = imageresult.toDataURL();
-			$.post("")
+			$.post("user/upLoadFace.action",{url:imageresult},function(json){
+				if (json.error==200) {
+					alert("success!")
+				} else {
+					alert(json.msg)
+				}
+			})
 // 			$.getJSON("other/getImageSignature.action", { type: "upload", fileid: null }, function(json){
 // 				var sign = json.sign,
 // 			    url = 'http://web.image.myqcloud.com/photos/v2/10021396/sourceimg/0/?sign=' + encodeURIComponent(sign);

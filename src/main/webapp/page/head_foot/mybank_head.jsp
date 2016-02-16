@@ -44,7 +44,7 @@
 				</div>
 			</li>
 			<li class="blackpurple" id="userinfo">
-				<img class="img-circle" style="width: 100px;height: 100px;margin-top: 20px" src="page/assets/img/touxiang_zhushou.jpg">
+				<img class="img-circle" style="width: 100px;height: 100px;margin-top: 20px" src="${user.user_face}">
 				<div class="subtext">
 					<div class="row">
 						<h5 class="colgb">阎伟晨</h5>

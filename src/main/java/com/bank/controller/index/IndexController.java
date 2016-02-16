@@ -241,17 +241,4 @@ public class IndexController {
 	public String gotoIndex(){
 		return "index";
 	}
-	
-	private IndexPage getPage(String page,String rows){
-		//当前页  
-        int intPage = Integer.parseInt((page == null || page == "0") ? "1":page);  
-        //每页显示条数  
-        int number = Integer.parseInt((rows == null || rows == "0") ? "10":rows);  
-        //每页的开始记录  第一页为1  第二页为number +1   
-        int start = (intPage-1)*number; 
-        IndexPage p = new IndexPage();
-        p.setLimit(start);
-        p.setOffset(number);
-        return p;
-	}
 }

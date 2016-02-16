@@ -187,8 +187,8 @@ ul.news li p{float:right; color:#000000}
 		<div class="row">
 			<div class="col-sm-3" id="login_box">
 				<div class="thumbnail yuanjiao" id="login_on">
-					<img src="<%=basePath%>page/assets/img/touxiang_zhushou.jpg"
-						class="img-circle touxiang" alt="...">
+					<img src="${user.user_face}"
+						class="img-circle touxiang" style="height: 220px;width: 220px;" alt="...">
 					<div class="caption">
 						<h3 class="text-center" id="login_user_name">
 							<c:if test="${!empty user}">Hello,${user.user_name}</c:if>

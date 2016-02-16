@@ -80,7 +80,7 @@ public class UserService implements BaseService<UserModel> {
 	@Override
 	public int alterById(UserModel model) {
 		// TODO Auto-generated method stub
-		return 0;
+		return ud.updateById(model);
 	}
 
 

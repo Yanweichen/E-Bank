@@ -409,11 +409,31 @@ public class UserInfoController {
 		return "regist_success";
 	}
 	
+	/**
+	 * @param url
+	 * @param req
+	 * @return
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping("/upLoadFace")
 	public JSONObject upLoadFace(String url,HttpServletRequest req) throws Exception{
-		UploadResult ret = QclodImageUtil.upload(url);
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
-		sessionuser.setUser_face(ret.downloadUrl);
 		JSONObject jo = new JSONObject();
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
+		if (sessionuser==null||sessionuser==null) {
+			jo.put("error", "403");
+			jo.put("msg", "非法操作");
+			return jo;
+		}
+		
+		if (Base64.decodeBase64(url).length>=307200) {
+			jo.put("error", "303");
+			jo.put("msg", "您上传的图片过大("+Base64.decodeBase64(url).length/1024+"KB),请控制在300KB以内");
+			return jo;
+		}
+		UploadResult ret = QclodImageUtil.upload(url);
+		sessionuser.setUser_face(ret.downloadUrl);
+		us.alterById(sessionuser);
 		jo.put("error", "200");
 		jo.put("msg", "上传成功！");
 		return jo;

@@ -24,6 +24,14 @@
   <update id="updateUserStateByIdcard">
   	UPDATE user_userinfo SET user_state = #{0} WHERE user_idcard = #{1};
   </update>
+  <!-- 更新用户信息 -->
+  <update id="updateById" parameterType="com.bank.model.user.UserModel">
+  	UPDATE user_userinfo SET user_name=#{user_name},user_pass=#{user_pass},user_paypass=#{user_paypass},
+	user_city=#{user_city},user_obligate_info=#{user_obligate_info},user_face=#{user_face},
+	user_idcard=#{user_idcard},user_phone=#{user_phone},user_email=#{user_email},user_state=#{user_state},
+	user_last_login_time=#{user_last_login_time},user_regist_time=#{user_regist_time} 
+	WHERE user_id=#{user_id};
+  </update>
   <!-- 根据账号查询用户 -->
   <select id="selectUserByAccount" parameterType="String" resultType="com.bank.model.user.UserModel">
   	SELECT * FROM user_userinfo WHERE user_idcard = #{account} OR user_phone = #{account} OR user_email = #{account};
