@@ -145,6 +145,7 @@
 	<script src="page/assets/js/bootstrap-table.js"></script>
 	<script src="page/assets/js/bootstrap-table-zh-CN.js"></script>
 	<script type="text/javascript">
+		$("#foot").removeClass("navbar-fixed-bottom");
 	    $('#transaction').bootstrapTable({
 	 	    url: "index/Allnotice.action?isView=view&order=asc&limit=10&offset=0",
 	 	})

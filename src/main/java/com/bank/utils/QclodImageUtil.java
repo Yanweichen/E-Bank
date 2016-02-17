@@ -32,11 +32,13 @@ public class QclodImageUtil {
 //	}
     
     public static UploadResult upload(String pic) throws Exception {
-    	pic=pic.split(",")[1];
+    	pic=pic.split(",")[1];//去掉前缀
         PicCloud pc = new PicCloud(APP_ID_V2, SECRET_ID_V2, SECRET_KEY_V2, BUCKET);
 	    ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(pic));
 	    UploadResult  ret = pc.upload(inputStream);
-	    System.out.println(pc.getError());
+	    if (pc.getErrno()!=0) {
+			return null;
+		}
         return ret;
     }
 
@@ -48,7 +50,7 @@ public class QclodImageUtil {
     
 	public static UploadResult picBase(PicCloud pc, String pic) throws Exception {
 		// 上传一张图片
-                //1. 直接指定图片文件名的方式
+        //1. 直接指定图片文件名的方式
 //		UploadResult result = pc.upload(pic);
 //        if(result != null){
 //            result.print(); 

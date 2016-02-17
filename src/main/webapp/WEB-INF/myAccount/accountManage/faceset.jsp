@@ -113,9 +113,6 @@
 			</div>
 		</div>
 	</div>
-	<form id="uploadForm">
-    	<input type="file" name="FileContent"></input>
-    </form> 
 	<!-- foot -->	
 	<jsp:include page="../../../page/head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
@@ -125,13 +122,12 @@
 	<script src="page/assets/js/cropper_custom.js"></script>
 	<script src="page/assets/js/jquery.form.js"></script>
 	<script type="text/javascript">
-	$("#foot").removeClass("navbar-fixed-bottom");
 		$("#saveimg").click(function(){
 			var imageresult = $('#headimageedit').cropper("getCroppedCanvas");
 			imageresult = imageresult.toDataURL();
 			$.post("user/upLoadFace.action",{url:imageresult},function(json){
 				if (json.error==200) {
-					alert("success!")
+					alert(json.msg)
 				} else {
 					alert(json.msg)
 				}

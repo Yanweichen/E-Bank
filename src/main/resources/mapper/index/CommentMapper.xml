@@ -30,7 +30,7 @@
   <!-- 查询所有评论 -->
   <select id="selectAllComment"  resultMap="AllResultMap" parameterType="com.bank.model.other.CommentPage">
   	  SELECT 
-	  <include refid="Base_Column_List"/>,user_name 
+	  <include refid="Base_Column_List"/>,user_name,user_face
 	  FROM entry_comment com,user_userinfo uif  
 	  WHERE com.`comment_user_id`=uif.`user_id` AND comment_entry_id = #{entry_id} AND comment_parent_id IS NULL 
 	  ORDER BY comment_time LIMIT #{offset},#{limit};
@@ -38,7 +38,7 @@
   <!-- 查询二级评论 -->
   <select id="selectSecondComment" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	  SELECT 
-	  <include refid="Base_Column_List"/>,user_name 
+	  <include refid="Base_Column_List"/>,user_name,user_face 
 	  FROM entry_comment com,user_userinfo uif  
 	  WHERE com.`comment_user_id`=uif.`user_id` AND comment_parent_id = #{comment_id}
 	  ORDER BY comment_time;

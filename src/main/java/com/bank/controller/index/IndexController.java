@@ -25,7 +25,9 @@ import com.bank.model.index.LabelModel;
 import com.bank.model.other.IndexPage;
 import com.bank.service.index.IndexService;
 import com.bank.utils.JsonUtil;
+import com.bank.utils.QclodImageUtil;
 import com.bank.utils.TimeUtil;
+import com.qcloud.UploadResult;
 
 @Controller
 @RequestMapping("/index")
@@ -84,7 +86,7 @@ public class IndexController {
 	
 	@ResponseBody
 	@RequestMapping("/addnotice")
-	public JSONObject addNewNotice(IndexModel im,HttpServletRequest req){
+	public JSONObject addNewNotice(IndexModel im,HttpServletRequest req) throws Exception{
 		HttpSession session = req.getSession();
 		AdminModel am = (AdminModel) session.getAttribute("admin");
 		JSONObject jo = new JSONObject();
@@ -93,12 +95,18 @@ public class IndexController {
 			jo.put("msg", "非法操作");
 			return jo;
 		}
-		
 		if (Base64.decodeBase64(im.getIndex_preview_image_url()).length>=307200) {
 			jo.put("error", "303");
 			jo.put("msg", "您上传的图片过大("+Base64.decodeBase64(im.getIndex_preview_image_url()).length/1024+"KB),请控制在300KB以内");
 			return jo;
 		}
+		UploadResult ret = QclodImageUtil.upload(im.getIndex_preview_image_url());//上传到腾讯云
+		if (ret==null) {
+			jo.put("error", "203");
+			jo.put("msg", "上传失败！");
+			return jo;
+		}
+		im.setIndex_preview_image_url(ret.downloadUrl);
 		im.setIndex_uptime(new Date());
 		im.setUpfrom(am.getAdmin_id());
 		im.setIndex_state("00");//设置初始状态
@@ -208,6 +216,13 @@ public class IndexController {
 		return jo;
 	}
 
+	/**
+	 * 查询前一条或者后一条
+	 * @param id
+	 * @param ba
+	 * @return
+	 * @throws ParseException
+	 */
 	@ResponseBody
 	@RequestMapping("/getArticleByBorA")
 	public JSONObject getArticleByBorA(int id,String ba) throws ParseException{

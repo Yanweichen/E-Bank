@@ -107,7 +107,8 @@ public class UserInfoController {
 			application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 			nowUser.setAttribute("user", um);
 			jo.put("error", "200");
-			jo.put("msg", um.getUser_name());
+			jo.put("name", um.getUser_name());
+			jo.put("face", um.getUser_face());
 		}else{
 			jo.put("error", "203");
 			jo.put("msg", "密码错误");
@@ -257,8 +258,9 @@ public class UserInfoController {
 	 */
 	@RequestMapping("/verifyAccount")
 	@ResponseBody
-	public JSONObject verifyUserIdCard(@RequestParam("user_account")String account,int accountType){
+	public JSONObject verifyUserIdCard(@RequestParam("user_account")String account,int accountType,HttpServletRequest req){
 		JSONObject jo = new JSONObject();
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
 		switch (accountType) {
 		case 0:
 			if (account.matches(RegularUtil.IdCardRegular)) {
@@ -281,7 +283,7 @@ public class UserInfoController {
 				jo.put("message", "邮箱格式不正确");
 				return jo;
 			}
-			if (us.findUserByAccoutn(account)!=null) {
+			if (us.findUserByAccoutn(account)!=null && !user.getUser_email().equals(account)) {
 				jo.put("valid",false);
 				jo.put("message","该邮箱已注册");
 			}else{
@@ -295,7 +297,7 @@ public class UserInfoController {
 				jo.put("message", "手机号码格式不正确");
 				return jo;
 			}
-			if (us.findUserByAccoutn(account)!=null) {
+			if (us.findUserByAccoutn(account)!=null && !user.getUser_phone().equals(account)) {
 				jo.put("valid",false);
 				jo.put("message","该号码已注册");
 			}else{
@@ -432,10 +434,34 @@ public class UserInfoController {
 			return jo;
 		}
 		UploadResult ret = QclodImageUtil.upload(url);
+		if (ret==null) {
+			jo.put("error", "203");
+			jo.put("msg", "上传失败！");
+			return jo;
+		}
 		sessionuser.setUser_face(ret.downloadUrl);
 		us.alterById(sessionuser);
 		jo.put("error", "200");
 		jo.put("msg", "上传成功！");
+		return jo;
+	}
+	
+	/**
+	 * 更新用户信息
+	 * @param um
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateuserinfo")
+	public JSONObject updateUserInfo(UserModel um,HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
+		sessionuser.setUser_email(um.getUser_email());
+		sessionuser.setUser_phone(um.getUser_phone());
+		sessionuser.setUser_obligate_info(um.getUser_obligate_info());
+		jo.put("error", "200");
+		jo.put("msg", "修改成功！");
 		return jo;
 	}
 }

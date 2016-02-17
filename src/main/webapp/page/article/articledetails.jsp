@@ -391,6 +391,7 @@ div.hotdiv:hover{
 		var articlelabel = "${article.index_label}";
 		var userid = "${user.user_id}";
 		var username = "${user.user_name}";
+		var userface = "${user.user_face}";
 		//刷新验证码
 		$("#codeimg").click( function () {
 			$(this).attr("src","<%=basePath%>Kaptcha.jpg?r=" + new Date());
@@ -569,7 +570,7 @@ div.hotdiv:hover{
 						$.post("comment/addcomment.action",commitParmer("&nbsp;回复说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
 							if (result.error==200) {
 								colsm10.find(".secondhflist").fadeIn();
-								colsm10.find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+								colsm10.find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+userface+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
 							}else{
 								if (result.indexOf("<script")==-1?false:true) {
 									$('#loginModal').modal('show')
@@ -585,7 +586,7 @@ div.hotdiv:hover{
 						var hfname = secondlist.find(".col-sm-2 > h5").text()	;
 						$.post("comment/addcomment.action",commitParmer("&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
 							if (result.error==200) {
-								secondlist.append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+								secondlist.append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+userface+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
 							}else{
 								if (result.indexOf("<script")==-1?false:true) {
 									$('#loginModal').modal('show')
@@ -637,7 +638,7 @@ div.hotdiv:hover{
 				$.each(json.rows,function(i,jo){
 					var secondlist = "";
 					$.each(jo.secondCommentList,function(i,sjo){
-						secondlist +="<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+sjo.user_name+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+sjo.comment_content+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date(sjo.comment_time))+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>";
+						secondlist +="<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+sjo.user_face+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+sjo.user_name+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+sjo.comment_content+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date(sjo.comment_time))+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>";
 					})
 					
 					if (secondlist!="") {
@@ -649,7 +650,7 @@ div.hotdiv:hover{
 					$("#first_comment_list").append(
 							"<div class='well col-sm-12' style='padding:15px 0px 10px 15px;border-radius: 10px 10px 10px 10px;background-color:rgba(255,255,255,0.6);'>"+
 									"<div class='col-sm-2' style='padding: 20px 0px 0px 0px;text-align: center;'>"+
-										"<img class='img-circle' src='page/assets/img/touxiang_zhushou.jpg' alt='...' style='height: 80px;width: 80px' >"+
+										"<img class='img-circle' src='"+jo.user_face+"' alt='...' style='height: 80px;width: 80px' >"+
 										"<h5 style='margin-top: 15px; color: #666666'>"+(i+1)+"楼</h5>"+
 									"</div>"+
 									"<div class='col-sm-10' id="+jo.comment_id+">"+

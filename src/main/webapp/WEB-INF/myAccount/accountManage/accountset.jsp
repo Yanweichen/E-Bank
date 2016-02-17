@@ -17,7 +17,7 @@
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/mybankbase.css">
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
-
+<link rel="stylesheet" href="page/assets/css/bootstrapValidator.min.css"/>
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
 #setlist .list-group-item{
@@ -54,7 +54,7 @@
 			<div class="col-sm-9">
 				<div class="panel panel-default touming6">
 				  <div class="panel-body">
-				    	<form>
+				    	<form id="userinfoform" action="user/updateuserinfo.action" method="post">
 							<div class="form-group ">
 		  						<label for="user_name">注册姓名</label>
 								<input class="form-control" type="text" placeholder="<c:if test="${!empty user}">${user.user_name}</c:if>" readonly>
@@ -65,7 +65,7 @@
 							</div>
 							<div class="form-group ">
 		  						<label for="user_name">预留信息</label>
-								<input class="form-control" type="text" value="<c:if test="${!empty user}">${user.user_obligate_info}</c:if>" >
+								<input class="form-control" name="user_obligate_info" type="text" value="<c:if test="${!empty user}">${user.user_obligate_info}</c:if>" >
 							</div>
 							<div class="form-group ">
 		  						<label for="user_name">身份证号码</label>
@@ -73,11 +73,11 @@
 							</div>
 							<div class="form-group ">
 		  						<label for="user_name">预留电话</label>
-								<input class="form-control" type="text" value="<c:if test="${!empty user}">${user.user_phone}</c:if>" >
+								<input class="form-control" name="user_phone" type="text" value="<c:if test="${!empty user}">${user.user_phone}</c:if>" >
 							</div>
 							<div class="form-group ">
 		  						<label for="user_name">预留信箱</label>
-								<input class="form-control" type="text" value="<c:if test="${!empty user}">${user.user_email}</c:if>" >
+								<input class="form-control" name="user_email" type="text" value="<c:if test="${!empty user}">${user.user_email}</c:if>" >
 							</div>
 							<div class="col-sm-4 col-sm-offset-4" >
 							 	<button type="submit" class="btn btncolor btn-default btn-block">保存</button>
@@ -93,8 +93,68 @@
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript">
-	$("#foot").removeClass("navbar-fixed-bottom");
+	$(document).ready(function() {
+	    $('#userinfoform').bootstrapValidator({
+	        message: 'This value is not valid',
+	        submitButtons: 'button[type="submit"]',
+	        feedbackIcons: {
+	            valid: 'glyphicon glyphicon-ok',
+	            invalid: 'glyphicon glyphicon-remove',
+	            validating: 'glyphicon glyphicon-refresh'
+	        },
+	        fields: {
+	        	user_obligate_info: {
+	                validators: {
+	                    notEmpty: {
+	                        message: '预留信息不能为空'
+	                    },
+	                }
+	            },user_phone: {
+	            	threshold:10,
+	                validators: {
+	                    notEmpty: {
+	                        message: '手机号码不能为空'
+	                    },
+	                    remote: {
+                            url: 'user/verifyAccount.action',
+                            type: "post",
+                            async: true,
+                            data:
+                            {
+                            	user_account: function(validator)
+                                {
+                                    return $('#userinfoform :input[name="user_phone"]').val();
+                                },
+                                accountType : 2
+                            },
+                        },
+	                }
+	            }, user_email:{
+	            	validators: {
+	                    notEmpty: {
+	                        message: '请输入邮箱'
+	                    },
+	                    remote: {
+                            url: 'user/verifyAccount.action',
+                            type: "post",
+                            async: true,
+                            data:
+                            {
+                            	user_account: function(validator)
+                                {
+                                    return $('#userinfoform :input[name="user_email"]').val();
+                                },
+                                accountType : 1
+                            },
+                        },
+	                }
+	            },
+
+	        }
+	    })
+	});
 	</script>
 </body>
 </html>

@@ -13,8 +13,17 @@ public class CommentModel {
 	private Integer comment_parent_id;
 	private Integer comment_entry_id;
 	private String user_name;
+	private String user_face;
 	private List<CommentModel> secondCommentList;
 	
+	public String getUser_face() {
+		return user_face;
+	}
+
+	public void setUser_face(String user_face) {
+		this.user_face = user_face;
+	}
+
 	public List<CommentModel> getSecondCommentList() {
 		return secondCommentList;
 	}
