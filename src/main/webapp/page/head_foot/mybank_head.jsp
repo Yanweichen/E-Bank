@@ -24,7 +24,7 @@
 	<div style="background-color: #3f314d;height: 150px;position: relative;z-index: 2" >
 		<ul>
 			<li class="blackpurple">
-				<h4 class="daohang"><a href="myAccount/mybank.action">我的E-Bank</a></h4>
+				<h4 class="daohang"><a style="color: white;" href="myAccount/mybank.action">我的E-Bank</a></h4>
 				<div class="subtext">
 					<div class="list-group">
 						<a class="list-group-item" style="color: white;"> 账户设置 </a>

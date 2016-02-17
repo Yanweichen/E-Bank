@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.card.UserCardDAO" >
+  <resultMap id="BaseResultMap" type="com.bank.model.card.UserCardModel" >
+    <id column="user_card_id" property="userCardId" jdbcType="INTEGER" />
+    <result column="user_card_num" property="userCardNum" jdbcType="VARCHAR" />
+    <result column="user_card_balance" property="userCardBalance" jdbcType="DOUBLE" />
+    <result column="user_card_state" property="userCardState" jdbcType="INTEGER" />
+    <result column="user_card_user_id" property="userCardUserId" jdbcType="INTEGER" />
+    <result column="user_card_type" property="userCardType" jdbcType="INTEGER" />
+    <result column="user_card_opentime" property="user_card_opentime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_card_id, user_card_num, user_card_balance, user_card_state, user_card_user_id, 
+    user_card_type,user_card_opentime
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_card
+    where user_card_id = #{userCardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from user_card
+    where user_card_id = #{userCardId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.model.card.UserCardModel" >
+    insert into user_card values (NULL, #{userCardNum,jdbcType=VARCHAR}, #{userCardBalance,jdbcType=INTEGER}, 
+      #{userCardState,jdbcType=INTEGER}, #{userCardUserId,jdbcType=INTEGER}, #{userCardType,jdbcType=INTEGER}
+      ,#{user_card_opentime})
+  </insert>
+  <update id="updateById" parameterType="com.bank.model.card.UserCardModel" >
+    update user_card
+    set user_card_num = #{userCardNum,jdbcType=VARCHAR},
+      user_card_balance = #{userCardBalance,jdbcType=INTEGER},
+      user_card_state = #{userCardState,jdbcType=INTEGER},
+      user_card_user_id = #{userCardUserId,jdbcType=INTEGER},
+      user_card_type = #{userCardType,jdbcType=INTEGER}
+      user_card_opentime = #{user_card_opentime}
+    where user_card_id = #{userCardId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -55,7 +55,7 @@
 					<div class="nav-item-inner nav-home">首页管理</div>
 				</li>
 				<li class="nav-item dl-selected">
-					<div class="nav-item-inner nav-order">转账汇款</div>
+					<div class="nav-item-inner nav-order">审核管理</div>
 				<li class="nav-item dl-selected">
 					<div class="nav-item-inner nav-order">存款贷款</div>
 				<li class="nav-item dl-selected">
@@ -88,46 +88,22 @@
 						id : '12',
 						text : '添加文章',
 						href : 'admin/AddIndex.action'
-					}, {
-						id : '3',
-						text : '账户查询',
-						href : 'page/message/sysInfo.html'
-					}, {
-						id : '4',
-						text : '申请账户',
-						href : 'page/dynamic/jobMng.html'
-					}, {
-						id : '6',
-						text : '挂失账户',
-						href : 'page/dynamic/commentMng.html'
-					}, {
-						id : '8',
-						text : '注销账户',
-						href : 'page/dynamic/dynamicMng.html'
-					} ]
+					}]
 				} ]
 			}, {
 				id : '7',
 				homePage : '9',
 				menu : [ {
-					text : '转账汇款',
+					text : '审核管理',
 					items : [ {
 						id : '9',
-						text : '注册账户转账',
-						href : 'page/enterprise/index.html'
+						text : '用户申请办卡审核',
+						href : 'card/checkcard.action'
 					}, {
 						id : '9',
-						text : '境内跨行转账',
+						text : '用户申请信用卡审核',
 						href : 'page/enterprise/index.html'
-					}, {
-						id : '9',
-						text : '转账汇款查询',
-						href : 'page/enterprise/index.html'
-					}, {
-						id : '9',
-						text : '缴费',
-						href : 'page/enterprise/index.html'
-					} ]
+					}]
 				} ]
 			}, {
 				id : '15',

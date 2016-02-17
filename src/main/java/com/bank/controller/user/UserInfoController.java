@@ -76,7 +76,8 @@ public class UserInfoController {
 				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 				nowUser.setAttribute("user", um);
 				jo.put("error", "200");
-				jo.put("msg", um.getUser_name());
+				jo.put("name", um.getUser_name());
+				jo.put("face", um.getUser_face());
 				return jo;
 			}
 			//查询是否存在登陆
@@ -93,7 +94,8 @@ public class UserInfoController {
 						application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 						nowUser.setAttribute("user", um);
 						jo.put("error", "200");
-						jo.put("msg", um.getUser_name());
+						jo.put("name", um.getUser_name());
+						jo.put("face", um.getUser_face());
 						return jo;
 					}
 					//已登陆(同一浏览器同时登陆)

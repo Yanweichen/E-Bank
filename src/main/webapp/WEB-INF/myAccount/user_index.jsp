@@ -81,7 +81,7 @@
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
 						<div class="row">
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i> 
+								<a href="myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a>
 								<h5>办理银行卡</h5>
 								<i class="icon-mobile-phone" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>手机缴费充值</h5>

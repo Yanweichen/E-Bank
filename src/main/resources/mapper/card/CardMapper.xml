@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.card.CardDAO" >
+  <resultMap id="BaseResultMap" type="com.bank.model.card.CardModel" >
+    <id column="card_id" property="card_id" jdbcType="INTEGER" />
+    <result column="card_name" property="card_name" jdbcType="VARCHAR" />
+    <result column="card_location" property="card_location" jdbcType="VARCHAR"/>
+    <result column="card_currency" property="card_currency" jdbcType="VARCHAR" />
+    <result column="card_face" property="card_face"  jdbcType="VARCHAR"/>
+    <result column="card_info" property="card_info" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+  	card_id,card_name,card_location,card_currency,card_face,card_info
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+	SELECT <include refid="Base_Column_List" /> FROM bank_card;
+  </select>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	SELECT <include refid="Base_Column_List" /> FROM bank_card WHERE card_id = #{id};
+  </select>
+</mapper>

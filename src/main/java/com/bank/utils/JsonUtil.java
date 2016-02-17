@@ -6,6 +6,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.card.CheckUserAndCardModel;
 import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
@@ -108,5 +109,27 @@ public class JsonUtil {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * 解析所有办卡带审核的数据
+	 * @param list
+	 * @param total
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static JSONObject getCardCheckList(List<CheckUserAndCardModel> list,int total) throws ParseException{
+		JSONObject jo =  new JSONObject();
+		jo.put("total", total);
+		JSONArray jarr = new JSONArray();
+		for (CheckUserAndCardModel checkUserAndCardModel : list) {
+			checkUserAndCardModel.setCard_face("<img class='cardface' src="+checkUserAndCardModel.getCard_face()+">");
+			checkUserAndCardModel.setUser_face("<img class='userface' src="+checkUserAndCardModel.getUser_face()+">");
+			checkUserAndCardModel.setUser_regist_time_fmt(TimeUtil.Date2String(checkUserAndCardModel.getUser_regist_time(),"yyyy-MM"));
+			checkUserAndCardModel.setCard_check_time_fmt(TimeUtil.Date2String(checkUserAndCardModel.getCard_check_time(),"yyyy-MM-dd HH:mm:ss"));
+			jarr.add(JSON.toJSON(checkUserAndCardModel));
+		}
+		jo.put("rows", jarr);
+		return jo;
 	}
 }
