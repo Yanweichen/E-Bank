@@ -24,7 +24,7 @@
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
-	<jsp:include page="../page/head_foot/head.html"></jsp:include>
+	<jsp:include page="../page/head_foot/head.jsp"></jsp:include>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-2 col-sm-offset-2">

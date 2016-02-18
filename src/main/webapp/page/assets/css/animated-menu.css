@@ -1,11 +1,11 @@
-ul{
+ul.headui{
 	margin:0 auto;
 	padding:0;
 	display:table;
 	list-style-type:none;
 }
 
-li{
+li.headui{
 	width: 250px;
 	height:150px;
 	float:left;

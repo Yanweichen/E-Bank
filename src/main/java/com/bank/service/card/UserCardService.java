@@ -20,6 +20,16 @@ public class UserCardService implements BaseService<UserCardModel> {
 		// TODO Auto-generated method stub
 		return ucd.insert(model);
 	}
+	
+	/**
+	 * 根据id修改卡的状态
+	 * @param id
+	 * @param state
+	 * @return
+	 */
+	public int alertCardStateById(Integer id,Integer state){
+		return ucd.updateCardStateById(id, state);
+	}
 
 	@Override
 	public int RemoveById(Integer id) {

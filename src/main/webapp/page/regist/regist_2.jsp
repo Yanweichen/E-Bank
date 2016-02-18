@@ -32,7 +32,7 @@ label{
 </head>
 <body onbeforeunload="checkLeave()" onunload="checkLeave()" style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
-	<jsp:include page="../head_foot/head.html"></jsp:include>
+	<jsp:include page="../head_foot/head.jsp"></jsp:include>
 	
 	<div class="container">
 		<ol class="breadcrumb">

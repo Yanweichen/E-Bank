@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.msg.MsgDAO" >
+  <resultMap id="BaseResultMap" type="com.bank.model.msg.MsgModel" >
+    <id column="msg_id" property="msgId" jdbcType="INTEGER" />
+    <result column="msg_title" property="msgTitle" jdbcType="VARCHAR" />
+    <result column="msg_type" property="msgType" jdbcType="INTEGER" />
+    <result column="msg_user_id" property="msgUserId" jdbcType="INTEGER" />
+    <result column="msg_state" property="msgState" jdbcType="BIT" />
+    <result column="msg_content" property="msgContent" jdbcType="LONGVARCHAR" />
+    <result column="msg_time" property="msgTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msg_id, msg_title, msg_type, msg_user_id, msg_state,msg_content,msg_time
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bank_msgbox
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from bank_msgbox
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.model.msg.MsgModel" >
+    insert into bank_msgbox (msg_id, msg_title, msg_type, 
+      msg_user_id, msg_state, msg_content
+      )
+    values (NULL, #{msgTitle,jdbcType=VARCHAR}, #{msgType,jdbcType=INTEGER}, 
+      #{msgUserId,jdbcType=INTEGER}, #{msgState,jdbcType=BIT}, #{msgContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateById" parameterType="com.bank.model.msg.MsgModel" >
+    update bank_msgbox
+    set msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      msg_user_id = #{msgUserId,jdbcType=INTEGER},
+      msg_state = #{msgState,jdbcType=BIT}
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 根据状态查询消息 -->
+  <select id="selectMsgByState" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM bank_msgbox
+  	<choose>
+  		<when test="_parameter == 'isview'">
+  			WHERE msg_state = TRUE;
+  		</when>
+  		<when test="_parameter == 'noview'">
+  			WHERE msg_state = FALSE;
+  		</when>
+  		<otherwise>
+  		
+  		</otherwise>
+  	</choose>
+  </select>
+  <select id="selectNumByState" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	SELECT COUNT(0) FROM bank_msgbox
+  	<choose>
+  		<when test="_parameter == 'isview'">
+  			WHERE msg_state = TRUE;
+  		</when>
+  		<when test="_parameter == 'noview'">
+  			WHERE msg_state = FALSE;
+  		</when>
+  		<otherwise>
+  		
+  		</otherwise>
+  	</choose>
+  </select>
+  <!-- 修改状态 -->
+  <update id="updateMsgState" parameterType="java.lang.Integer">
+  		UPDATE bank_msgbox SET msg_state = TRUE WHERE msg_id = #{id};
+  </update>
+</mapper>

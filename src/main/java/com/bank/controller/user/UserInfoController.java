@@ -380,7 +380,7 @@ public class UserInfoController {
 			e.printStackTrace();
 		}
 		ModelAndView mv = new ModelAndView();
-		if (user_idcard != null && modifyUserState(RegularUtil.normal,user_idcard)) {
+		if (user_idcard != null && modifyUserState(RegularUtil.NORMAL,user_idcard)) {
 			mv.addObject("isactivate", "激活成功！");
 		} else {
 			mv.addObject("isactivate", "激活失败！");

@@ -7,23 +7,11 @@
 %>
 <canvas id="cas" style="position: absolute;z-index: -999"></canvas>
 <script src="page/assets/js/pointbg.js"></script>
-<!-- 头部导航 -->
-		<nav class="navbar navbar-divider noborderradius" style="background-color:#3f314d;margin-bottom: 0px;min-height: 30px">
-			<div class="container" style="padding-top: 5px;">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<i class="icon-github-alt" style="font-size: 20px;color: white;"></i>&nbsp;&nbsp;
-				<a style="color: white;letter-spacing: 10px;" href="page/index.jsp">e-bank</a>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<!-- /.navbar-collapse -->
-				<h5 style="float: right; color: white;margin: 0px;">你好,<span>${user.user_name}</span>&nbsp;&nbsp;<a class="hand">退出</a></h5>
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
-	<!-- 头部导航end -->
+	<jsp:include page="head.jsp"></jsp:include>
 	<hr width="100%" style="border:1px solid #3f315d;margin: 0;"/>
 	<div style="background-color: #3f314d;height: 150px;position: relative;z-index: 2" >
-		<ul>
-			<li class="blackpurple">
+		<ul class="headui">
+			<li class="headui blackpurple">
 				<h4 class="daohang"><a style="color: white;" href="myAccount/mybank.action">我的E-Bank</a></h4>
 				<div class="subtext">
 					<div class="list-group">
@@ -33,7 +21,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="blackpurple">
+			<li class="headui blackpurple">
 				<h4 class="daohang">财富中心</h4>
 				<div class="subtext">
 					<div class="list-group">
@@ -43,7 +31,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="blackpurple" id="userinfo">
+			<li class="headui blackpurple" id="userinfo">
 				<img id="userface" class="img-circle hand" style="width: 100px;height: 100px;margin-top: 20px" src="${user.user_face}">
 				<div class="subtext">
 					<div class="row">
@@ -80,7 +68,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="blackpurple">
+			<li class="headui blackpurple">
 				<h4 class="daohang">生活服务</h4>
 				<div class="subtext">
 					<div class="list-group">
@@ -90,7 +78,7 @@
 					</div>
 				</div>
 			</li>
-			<li class="blackpurple">
+			<li class="headui blackpurple">
 				<h4 class="daohang">账户管理</h4>
 				<div class="subtext" >
 					<div class="list-group">
@@ -105,6 +93,7 @@
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/animated-menu.js"></script>
 	<script type="text/javascript">
+	$("#navhead").removeClass("navbar");//去掉下边距
      $(function(){
          $("[rel=relname]").popover({
              trigger:'manual',

@@ -22,14 +22,33 @@ public class RegularUtil {
 	public static Map<String,Integer> LoginCountMap = new HashMap<String,Integer>();
 	
 	//用户或卡状态
-	public static final int nonactivated = 0;//未激活
-	public static final int normal = 1;//正常
-	public static final int ban = 3;//禁封
-	public static final int freeze = 4;//冻结
-	public static final int loss = 5;//挂失
+	/**
+	 * 未激活
+	 */
+	public static final int NONACTIVATED = 0;//未激活
+	/**
+	 * 正常
+	 */
+	public static final int NORMAL = 1;//正常
+	/**
+	 * 禁封
+	 */
+	public static final int BAN = 2;//禁封
+	/**
+	 * 冻结
+	 */
+	public static final int FREEZE = 3;//冻结
+	/**
+	 * 挂失
+	 */
+	public static final int LOSS = 4;//挂失
+	/**
+	 * 审核
+	 */
+	public static final int CHECK = 5;//审核
 	
-	public static final int Stick = 1;//挂失
-	public static final int Star = 5;//挂失
+	public static final int STICK = 1;//挂失
+	public static final int STAR = 5;//挂失
 	
 	public static String getlocathost(){
 		String ip = "115.159.66.149";

@@ -41,4 +41,5 @@ public class MyAccountController {
 		mv.addObject("cardlist",cs.findAll());
 		return mv;
 	}
+	
 }

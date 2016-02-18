@@ -39,4 +39,9 @@
       user_card_opentime = #{user_card_opentime}
     where user_card_id = #{userCardId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 根据id修改卡状态 -->
+  <update id="updateCardStateById">
+  	UPDATE user_card SET user_card_state = #{1} WHERE user_card_id = #{0};
+  </update>
 </mapper>

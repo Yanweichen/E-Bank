@@ -30,7 +30,11 @@
 	background-color: rgba(255,255,255,0.9);
 	cursor:pointer;
 }
+.bottom20{
+	margin-bottom: 20px;
+}
 </style>
+
 <title>修改头像</title>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">

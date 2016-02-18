@@ -88,7 +88,7 @@ div.hotdiv:hover{
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航  -->
-	<jsp:include page="../head_foot/head.html"></jsp:include>
+	<jsp:include page="../head_foot/head.jsp"></jsp:include>
 	<div class="container">
 		<div class="row" >
 		<!-- 左侧部分 -->

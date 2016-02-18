@@ -155,34 +155,9 @@ ul.news li p{float:right; color:#000000}
 	<canvas id="cas"
 		style="position: absolute; z-index: -1; height: 100%; width: 100%;"></canvas>
 	<script src="<%=basePath%>page/assets/js/pointbg.js"></script>
-
-	<!-- 头部导航  -->
-	<nav class="navbar navbar-divider"
-		style="background-image: url('<%=basePath%>page/assets/img/main-nav-bg2.png');"
-		id="section-4">
-		<div class="container" id="section-4">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<a class="navbar-brand" style="color: white; letter-spacing: 10px;"
-					href="<%=basePath%>index/index.action">e-bank</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<form class="navbar-form navbar-right" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="搜&nbsp;索">
-					</div>
-					<button id="adminlogin" type="button" class="btn btn-default btnwindth">管理员入口</button>
-				</form>
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
-	</nav>
+	<jsp:include page="head_foot/head.jsp"></jsp:include>
+	<button id="adminlogin" type="button" class="btn btn-default btnwindth">管理员入口</button>
 	<!-- 头部 -->
-
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3" id="login_box">
@@ -709,7 +684,11 @@ ul.news li p{float:right; color:#000000}
 										$('#loginModal').modal('hide')
 										$.Velocity.RunSequence(seqLogin);
 										$("#login_user_name").append("Hello,"+ result.name);
+										$("#headloginusername").append(result.name);
 										$("#tx").attr("src",result.face);
+										$("#logintitle").css({
+											"display" : "inline-block"
+										})
 									}
 								}, 'json');});
 							});

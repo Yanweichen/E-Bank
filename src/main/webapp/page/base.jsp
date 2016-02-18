@@ -16,7 +16,7 @@
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
-	<jsp:include page="head_foot/head.html"></jsp:include>
+	<jsp:include page="head_foot/head.jsp"></jsp:include>
 	<!-- foot -->
 	<jsp:include page="head_foot/foot.html"></jsp:include>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
