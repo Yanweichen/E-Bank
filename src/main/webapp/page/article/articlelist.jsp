@@ -362,5 +362,6 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 		$("#foot").removeClass("navbar-fixed-bottom");
 	}
 	</script>
+	
 </body>
 </html>

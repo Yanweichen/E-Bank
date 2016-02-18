@@ -146,7 +146,7 @@ ul.news li p{float:right; color:#000000}
 	color: #666666;
 }
 .hand{
-	cursor:pointer
+	cursor:pointer;
 }
 </style>
 </head>

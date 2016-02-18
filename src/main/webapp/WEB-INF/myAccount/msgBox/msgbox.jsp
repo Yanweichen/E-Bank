@@ -196,5 +196,6 @@ color: #777777;
 	$('.modal').on('show.bs.modal', centerModals);
 	$(window).on('resize', centerModals);
   </script>
+
 </body>
 </html>

@@ -10,23 +10,26 @@
 <head>
 <base href=" <%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="page/assets/css/bootstrap.min1.css" rel="stylesheet">
-<link href="page/assets/css/fakeloader.css" rel="stylesheet">
+<link rel="stylesheet" href="page/assets/css/amaran.min.css">
+<link rel="stylesheet" href="page/assets/css/animate.min.css">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="fakeLoader"></div>
-<script src="<%=basePath%>page/assets/js/jquery.min.js"></script>
-<script src="<%=basePath%>page/assets/js/fakeloader.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-    $(".fakeloader").fakeLoader({
-        timeToHide:1200,
-        bgColor:"#e74c3c",
-        spinner:"spinner2"
-    });
-});
-
-</script>
+<button id="start">start</button>
 </body>
+<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+<script src="page/assets/js/jquery.amaran.js"></script>
+	<script type="text/javascript">
+		$('#start').on('click',function(){
+			$.amaran({
+			    content:{
+			        title:'My first funcy example!',
+			        message:'1.4 GB',
+			        info:'my_birthday.mp4',
+			        icon:'fa fa-download'
+			    },
+			    theme:'awesome ok'
+			});
+		});
+</script>
 </html>

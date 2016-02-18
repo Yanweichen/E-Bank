@@ -7,9 +7,11 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+	<link href="page/assets/css/sticky.full.css" rel="stylesheet">
 	<canvas id="cas" style="position: absolute;z-index: -1"></canvas>
 	<script src="page/assets/js/pointbg.js"></script>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/sticky.full.js"></script>
 	<!-- 头部导航 -->
 		<nav id="navhead" class="navbar navbar-divider noborderradius" style="background-color:#3f314d;min-height: 30px;border-radius: 0;">
 			<div class="container" style="padding-top: 5px;">
@@ -25,6 +27,7 @@
 			</div>
 			<!-- /.container-fluid -->
 		</nav>
+		
 	<!-- 头部导航end -->
 	<!-- 如果登陆 -->
 	<c:if test="${!empty user}">
@@ -32,5 +35,9 @@
 			$("#logintitle").css({
 				"display" : "inline-block"
 			})
+			$.sticky('Hello');
 		</script>
 	</c:if>
+
+
+
