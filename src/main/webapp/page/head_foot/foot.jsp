@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <div id="foot" class="container top20">
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
@@ -51,6 +53,7 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 			function showMsg(){
 				$.getJSON("msg/getNewMsg.action",function(json){
 					if (json.ishaveNew) {
+						$("#newmsg").fadeIn()
 						$.Velocity.RunSequence(msgIn);
 						$("#headmsg").empty();
 						$("#headmsg").append(json.msg.msgTitle);
@@ -60,5 +63,6 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 // 				$().toastmessage('showMailToast', '哈哈哈哈哈');
 			}
 			setInterval(showMsg, 15000);
+			
 		</script>
 	</c:if>

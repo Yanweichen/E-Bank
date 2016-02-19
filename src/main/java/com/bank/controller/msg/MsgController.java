@@ -1,5 +1,7 @@
 package com.bank.controller.msg;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.user.UserModel;
 import com.bank.service.msg.MsgService;
 import com.bank.utils.JsonUtil;
 
@@ -24,9 +27,10 @@ public class MsgController {
 	 * @return
 	 */
 	@RequestMapping("/msgBox")
-	public ModelAndView msgBox(@Param("state")String state){
+	public ModelAndView msgBox(@Param("state")String state,HttpServletRequest req){
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("msglist", ms.findMsgByState(state));
+		mv.addObject("msglist", ms.findMsgByState(state,Integer.valueOf(user.getUser_id())));
 		mv.setViewName("myAccount/msgBox/msgbox");
 		return mv;
 	}
@@ -48,10 +52,11 @@ public class MsgController {
 	
 	@ResponseBody
 	@RequestMapping("/getTotalByState")
-	public JSONObject getTotalByState(String state){
+	public JSONObject getTotalByState(String state,HttpServletRequest req){
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
 		JSONObject jo = new JSONObject();
 		jo.put("error", "200");
-		jo.put("msg", ms.findNumByState(state));
+		jo.put("msg", ms.findNumByState(state,Integer.valueOf(user.getUser_id())));
 		return jo;
 	}
 	

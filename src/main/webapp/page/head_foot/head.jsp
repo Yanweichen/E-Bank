@@ -36,8 +36,8 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<!-- /.navbar-collapse -->
 				<h5 id="logintitle" style="float: right; color: white;margin: 0px;display: none;">
-					你好,<span id="headloginusername">&nbsp;${user.user_name}</span>&nbsp;&nbsp;<a class="hand" style="color: white;">退出</a>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
-					<a style="color: white;" href="msg/msgBox.action?state=noview"><i class="icon-envelope"></i>&nbsp;消息</a>
+					你好,<span id="headloginusername">&nbsp;${user.user_name}</span>&nbsp;&nbsp;<a class="hand" style="color: white;">退出</a>&nbsp;&nbsp&nbsp;
+					<a style="color: white;" href="msg/msgBox.action?state=noview"><i class="icon-envelope"></i>&nbsp;消息&nbsp;<span id="newmsg" style="display: none;" class="badge">New</span></a>
 				</h5>
 			</div>
 			<!-- /.container-fluid -->

@@ -565,12 +565,14 @@ div.hotdiv:hover{
 				$("#submithfbtn").live('click',function() {
 					var conent = $("#hfconent").val();
 					if (typeof($(this).parent().parent().parent().attr("id")) != "undefined") {//回复一级评论
+						var commentuserid = $(this).parent().parent().parent().find(".row > .col-sm-2 > h5").attr("id")
 						var colsm10 = $(this).parent().parent().parent()//放置id的元素
 						var pid = colsm10.attr("id")
 						$.post("comment/addcomment.action",commitParmer("&nbsp;回复说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
 							if (result.error==200) {
 								colsm10.find(".secondhflist").fadeIn();
 								colsm10.find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+userface+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+								$.post("comment/sendNotice.action",{"content":username+" 对你说:"+conent,user_id:commentuserid})//发送通知
 							}else{
 								if (result.indexOf("<script")==-1?false:true) {
 									$('#loginModal').modal('show')
@@ -580,6 +582,7 @@ div.hotdiv:hover{
 							}
 						})
 					} else {//回复二级评论
+						var commentuserid = $(this).parent().parent().parent().find(".col-sm-2 > h5").attr("id")
 						var colsm10 = $(this).parent().parent().parent().parent().parent();//放置id的元素
 						var pid = colsm10.attr("id")
 						var secondlist = $(this).parent().parent().parent();
@@ -587,6 +590,7 @@ div.hotdiv:hover{
 						$.post("comment/addcomment.action",commitParmer("&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
 							if (result.error==200) {
 								secondlist.append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+userface+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
+								$.post("comment/sendNotice.action",{"content":username+" 对你说:"+conent,user_id:commentuserid})//发送通知
 							}else{
 								if (result.indexOf("<script")==-1?false:true) {
 									$('#loginModal').modal('show')
@@ -638,7 +642,7 @@ div.hotdiv:hover{
 				$.each(json.rows,function(i,jo){
 					var secondlist = "";
 					$.each(jo.secondCommentList,function(i,sjo){
-						secondlist +="<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+sjo.user_face+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+sjo.user_name+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+sjo.comment_content+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date(sjo.comment_time))+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>";
+						secondlist +="<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+sjo.user_face+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' id='"+sjo.comment_user_id+"' style='color: #2A6496'>"+sjo.user_name+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>"+sjo.comment_content+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date(sjo.comment_time))+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>";
 					})
 					
 					if (secondlist!="") {
@@ -656,7 +660,7 @@ div.hotdiv:hover{
 									"<div class='col-sm-10' id="+jo.comment_id+">"+
 										"<div class='row'>"+
 											"<div class='col-sm-2' style='padding-left: 0px'>"+
-												"<h5 style='color: #2A6496'>"+jo.user_name+"</h5>"+
+												"<h5 style='color: #2A6496' id='"+jo.comment_user_id+"'>"+jo.user_name+"</h5>"+
 											"</div>"+
 											"<div class='col-sm-4 col-sm-offset-6'>"+
 												"<h5 style='color: #666666;'>"+formatDate(new Date(jo.comment_time))+"</h5>"+

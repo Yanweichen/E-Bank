@@ -32,8 +32,8 @@ public class MsgService implements BaseService<MsgModel>{
 	 * @param state
 	 * @return
 	 */
-	public List<MsgModel> findMsgByState(String state){
-		return md.selectMsgByState(state);
+	public List<MsgModel> findMsgByState(String state,int uid){
+		return md.selectMsgByState(state,uid);
 	}
 	
 	/**
@@ -50,8 +50,8 @@ public class MsgService implements BaseService<MsgModel>{
 	 * @param state
 	 * @return
 	 */
-	public int findNumByState(String state){
-		return md.selectNumByState(state);
+	public int findNumByState(String state,int uid){
+		return md.selectNumByState(state,uid);
 	}
 	
 	/**

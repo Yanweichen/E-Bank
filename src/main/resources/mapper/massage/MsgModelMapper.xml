@@ -24,12 +24,7 @@
     where msg_id = #{msgId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bank.model.msg.MsgModel" >
-    insert into bank_msgbox (msg_id, msg_title, msg_type, 
-      msg_user_id, msg_state, msg_content
-      )
-    values (NULL, #{msgTitle,jdbcType=VARCHAR}, #{msgType,jdbcType=INTEGER}, 
-      #{msgUserId,jdbcType=INTEGER}, #{msgState,jdbcType=BIT}, #{msgContent,jdbcType=LONGVARCHAR}
-      )
+    INSERT INTO bank_msgbox VALUES (NULL,#{msgTitle},#{msgContent},#{msgType},#{msgUserId}, #{msgState},NOW());
   </insert>
   <update id="updateById" parameterType="com.bank.model.msg.MsgModel" >
     update bank_msgbox
@@ -46,28 +41,29 @@
   	<include refid="Base_Column_List" />
   	FROM bank_msgbox
   	<choose>
-  		<when test="_parameter == 'isview'">
-  			WHERE msg_state = TRUE;
+  		<when test="state == 'isview'">
+  			WHERE msg_state = TRUE
   		</when>
-  		<when test="_parameter == 'noview'">
-  			WHERE msg_state = FALSE;
+  		<when test="state == 'noview'">
+  			WHERE msg_state = FALSE
   		</when>
   		<otherwise>
-  		
+  			WHERE 1=1
   		</otherwise>
   	</choose>
+  	AND msg_user_id = #{uid} ORDER BY msg_time DESC;
   </select>
   <select id="selectNumByState" resultType="java.lang.Integer" parameterType="java.lang.String">
   	SELECT COUNT(0) FROM bank_msgbox
   	<choose>
-  		<when test="_parameter == 'isview'">
-  			WHERE msg_state = TRUE;
+  		<when test="state == 'isview'">
+  			WHERE msg_state = TRUE AND msg_user_id = #{uid};
   		</when>
-  		<when test="_parameter == 'noview'">
-  			WHERE msg_state = FALSE;
+  		<when test="state == 'noview'">
+  			WHERE msg_state = FALSE AND msg_user_id = #{uid};
   		</when>
   		<otherwise>
-  		
+  			WHERE msg_user_id = #{uid};
   		</otherwise>
   	</choose>
   </select>
