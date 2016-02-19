@@ -18,7 +18,7 @@
 	<!-- 头部导航 -->
 	<jsp:include page="head_foot/head.jsp"></jsp:include>
 	<!-- foot -->
-	<jsp:include page="head_foot/foot.html"></jsp:include>
+	<jsp:include page="head_foot/foot.jsp"></jsp:include>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 </body>

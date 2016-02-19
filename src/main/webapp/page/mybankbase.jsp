@@ -24,7 +24,7 @@
 	<!-- 头部导航 -->
 	<jsp:include page="../../../page/head_foot/mybank_head.jsp"></jsp:include>
 	<!-- foot -->
-	<jsp:include page="../../../page/head_foot/foot.html"></jsp:include>
+	<jsp:include page="../../../page/head_foot/foot.jsp"></jsp:include>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>

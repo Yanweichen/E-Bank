@@ -10,6 +10,7 @@ import com.bank.model.card.CheckUserAndCardModel;
 import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
+import com.bank.model.msg.MsgModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -130,6 +131,18 @@ public class JsonUtil {
 			jarr.add(JSON.toJSON(checkUserAndCardModel));
 		}
 		jo.put("rows", jarr);
+		return jo;
+	}
+	
+	public static JSONObject getNewMsgJSON(MsgModel mm){
+		JSONObject jo = new JSONObject();
+		if (mm==null) {
+			jo.put("ishaveNew", false);
+		}else{
+			jo.put("ishaveNew", true);
+			jo.put("msg", JSON.toJSON(mm));
+		}
+		
 		return jo;
 	}
 }

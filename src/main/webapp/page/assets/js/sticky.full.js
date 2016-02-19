@@ -18,7 +18,7 @@
 			{
 			'speed'			:	'fast',	 // animations: fast, slow, or integer
 			'duplicates'	:	true,  // true or false
-			'autoclose'		:	5000  // integer or false
+			'autoclose'		:	2000  // integer or false
 			};
 		
 		// Passing in the object instead of specifying a note

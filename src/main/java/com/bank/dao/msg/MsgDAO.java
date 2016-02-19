@@ -10,4 +10,5 @@ public interface MsgDAO extends BaseDAO<MsgModel> {
 	public List<MsgModel> selectMsgByState(String state);
 	public int updateMsgState(int id);
 	public int selectNumByState(String state);
+	public MsgModel selectNewMsg();
 }

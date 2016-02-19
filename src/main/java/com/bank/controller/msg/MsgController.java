@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bank.service.msg.MsgService;
+import com.bank.utils.JsonUtil;
 
 @RequestMapping("/msg")
 @Controller
@@ -52,5 +53,11 @@ public class MsgController {
 		jo.put("error", "200");
 		jo.put("msg", ms.findNumByState(state));
 		return jo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getNewMsg")
+	public JSONObject getNewMsg(){
+		return JsonUtil.getNewMsgJSON(ms.findNewMsg());
 	}
 }

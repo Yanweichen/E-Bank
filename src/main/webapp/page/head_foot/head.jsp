@@ -6,12 +6,27 @@
 	// 获得项目完全路径（假设你的项目叫MyApp，那么获得到的地址就是 http://localhost:8080/MyApp/）:
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<style>
+.msgboxclass{
+	height: 50px;
+	width: 300px;
+	background-color: #3f314d;
+	position: absolute;top: 40px;right: 20px;
+	display: none;
+	border: 2px solid #FFF;
+	border-radius: 10px 10px 10px 10px;
+	z-index: 999
+}
+.msgcontent{
+	position: relative;
+	top: 5px;
+	left: 20px;
+	color: white;
+}
+</style>
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
-	<link href="page/assets/css/sticky.full.css" rel="stylesheet">
 	<canvas id="cas" style="position: absolute;z-index: -1"></canvas>
 	<script src="page/assets/js/pointbg.js"></script>
-	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
-	<script src="page/assets/js/sticky.full.js"></script>
 	<!-- 头部导航 -->
 		<nav id="navhead" class="navbar navbar-divider noborderradius" style="background-color:#3f314d;min-height: 30px;border-radius: 0;">
 			<div class="container" style="padding-top: 5px;">
@@ -27,17 +42,10 @@
 			</div>
 			<!-- /.container-fluid -->
 		</nav>
-		
+		<div id="headmsgbox" class="msgboxclass">
+			<h5 class="msgcontent"><i class="icon-envelope"></i>&nbsp;&nbsp;<a id="headmsg" style="color: white;text-decoration: none;" href="msg/msgBox.action?state=noview"></a> </h5>
+		</div>
 	<!-- 头部导航end -->
-	<!-- 如果登陆 -->
-	<c:if test="${!empty user}">
-		<script type="text/javascript">
-			$("#logintitle").css({
-				"display" : "inline-block"
-			})
-			$.sticky('Hello');
-		</script>
-	</c:if>
 
 
 

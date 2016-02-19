@@ -170,7 +170,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	<script src="page/assets/js/bootstrap-tokenfield.js"></script>
 	<script src="page/assets/js/typeahead.bundle.js"></script>
 	<!-- foot -->
-	<jsp:include page="../head_foot/foot.html"></jsp:include>
+	<jsp:include page="../head_foot/foot.jsp"></jsp:include>
 	<script type="text/javascript">
 	$(".fakeloader").fakeLoader({
         spinner:"spinner2",

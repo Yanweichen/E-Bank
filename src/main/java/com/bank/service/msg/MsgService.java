@@ -54,6 +54,14 @@ public class MsgService implements BaseService<MsgModel>{
 		return md.selectNumByState(state);
 	}
 	
+	/**
+	 * 查询新消息
+	 * @return
+	 */
+	public MsgModel findNewMsg(){
+		return md.selectNewMsg();
+	}
+	
 	@Override
 	public int alterById(MsgModel model) {
 		// TODO Auto-generated method stub

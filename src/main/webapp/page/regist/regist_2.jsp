@@ -174,7 +174,7 @@ label{
 	
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
-	<jsp:include page="../head_foot/foot.html"></jsp:include>
+	<jsp:include page="../head_foot/foot.jsp"></jsp:include>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript" src="page/assets/js/jquery.validate-1.13.1.js"></script>
