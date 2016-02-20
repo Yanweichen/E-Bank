@@ -44,13 +44,15 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 			}];
 		})
 		
+		//判断是否隐藏个人信息入口
 			$("#logintitle").css({
 				"display" : "inline-block"
 			})
+			//隐藏msgbox
 			function closebox(){
 				$.Velocity.RunSequence(msgOut);
 			}
-			var id;
+			//循环查看消息
 			function showMsg(){
 				$.getJSON("msg/getNewMsg.action",function(json){
 					if (json.ishaveNew) {
@@ -61,9 +63,11 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 						setTimeout(closebox,10000);
 					}
 				})
-// 				$().toastmessage('showMailToast', '哈哈哈哈哈');
 			}
 			setInterval(showMsg, 15000);
-			
+			$(window).scroll(function(event){
+				var winPos = $(window).scrollTop();
+				$("#headmsgbox").css("top",winPos+40);
+		    });
 		</script>
 	</c:if>

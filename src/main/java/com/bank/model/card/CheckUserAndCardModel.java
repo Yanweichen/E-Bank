@@ -5,7 +5,6 @@ import java.util.Date;
 public class CheckUserAndCardModel {
 
 	private int user_id;
-	private int card_id;
 	private String user_name;
 	private String user_city;
 	private String user_face;
@@ -13,23 +12,24 @@ public class CheckUserAndCardModel {
 	private String user_state;
 	private Date user_regist_time;
 	private String user_regist_time_fmt;
+	private Integer cardCheckOpencardId;
 	private Date card_check_time;
 	private String card_check_time_fmt;
 	
 	private String card_name;
 	private String card_face;
 	
+	public Integer getCardCheckOpencardId() {
+		return cardCheckOpencardId;
+	}
+	public void setCardCheckOpencardId(Integer cardCheckOpencardId) {
+		this.cardCheckOpencardId = cardCheckOpencardId;
+	}
 	public int getUser_id() {
 		return user_id;
 	}
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
-	}
-	public int getCard_id() {
-		return card_id;
-	}
-	public void setCard_id(int card_id) {
-		this.card_id = card_id;
 	}
 	public Date getCard_check_time() {
 		return card_check_time;

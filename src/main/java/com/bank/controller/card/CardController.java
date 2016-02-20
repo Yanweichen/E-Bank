@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import com.bank.model.card.CardCheckModel;
 import com.bank.model.card.UserCardModel;
 import com.bank.model.msg.MsgModel;
 import com.bank.model.other.Page;
+import com.bank.model.user.UserModel;
 import com.bank.service.card.CardCheckService;
 import com.bank.service.card.CardService;
 import com.bank.service.card.UserCardService;
@@ -49,7 +52,6 @@ public class CardController {
 	
 	@RequestMapping("/opencardcheck")
 	public String goCheck(CardCheckModel ccm){
-		ccs.add(ccm);
 		UserCardModel ucm = new UserCardModel();
 		ucm.setUserCardBalance(50000.0000);//默认余额5W
 		ucm.setUserCardState(RegularUtil.CHECK);//设置卡的状态为审核中
@@ -57,7 +59,9 @@ public class CardController {
 		ucm.setUserCardUserId(ccm.getCardCheckUser());
 		ucm.setUser_card_opentime(new Date());
 		ucm.setUserCardNum(UUID.randomUUID().toString());
-		ucc.add(ucm);
+		ucc.add(ucm);//插入新卡
+		ccm.setCardCheckOpencardId(ucm.getUserCardId());//获取新卡id
+		ccs.add(ccm);//插入待审核列表
 		return "myAccount/cardManage/opencardchecking";
 	}
 	

@@ -24,7 +24,7 @@
     delete from user_card
     where user_card_id = #{userCardId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bank.model.card.UserCardModel" >
+  <insert id="insert" parameterType="com.bank.model.card.UserCardModel" useGeneratedKeys="true" keyProperty="userCardId">
     insert into user_card values (NULL, #{userCardNum,jdbcType=VARCHAR}, #{userCardBalance,jdbcType=INTEGER}, 
       #{userCardState,jdbcType=INTEGER}, #{userCardUserId,jdbcType=INTEGER}, #{userCardType,jdbcType=INTEGER}
       ,#{user_card_opentime})

@@ -10,9 +10,19 @@ public class CardCheckModel {
 
     private Integer cardCheckCardtype;
     
+    private Integer cardCheckOpencardId;
+    
     private Date card_check_time;
     
-    public Date getCard_check_time() {
+    public Integer getCardCheckOpencardId() {
+		return cardCheckOpencardId;
+	}
+
+	public void setCardCheckOpencardId(Integer cardCheckOpencardId) {
+		this.cardCheckOpencardId = cardCheckOpencardId;
+	}
+
+	public Date getCard_check_time() {
 		return card_check_time;
 	}
 

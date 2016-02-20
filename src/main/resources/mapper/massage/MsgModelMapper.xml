@@ -73,6 +73,6 @@
   </update>
   <!-- 查询新消息 -->
   <select id="selectNewMsg" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-  	SELECT *,MAX(msg_time) FROM bank_msgbox WHERE msg_state = FALSE AND msg_user_id = #{uid};
+  	SELECT * FROM bank_msgbox WHERE msg_state = FALSE AND msg_user_id = #{uid} ORDER BY msg_time DESC LIMIT 0,1;
   </select>
 </mapper>

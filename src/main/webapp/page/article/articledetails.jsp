@@ -19,7 +19,7 @@
 	href="page/assets//img/tubiao.ico" />
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-<title>注册</title>
+<title></title>
 <style type="text/css">
 .top20{
 	margin-top: 20px

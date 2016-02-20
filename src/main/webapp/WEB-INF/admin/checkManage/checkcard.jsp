@@ -38,7 +38,7 @@
 			    <thead>
 			        <tr>
 			            <th data-field="user_id" data-visible="false" data-align="center" >头像</th>
-			            <th data-field="card_id" data-visible="false" data-align="center" >头像</th>
+			            <th data-field="cardCheckOpencardId" data-visible="false" data-align="center" >头像</th>
 			            <th data-field="user_face" data-align="center" >头像</th>
 			            <th data-field="user_name" data-align="right">用户姓名</th>
 			            <th data-field="user_city" data-align="center">开户城市</th>
@@ -74,7 +74,7 @@
 		}
 		window.actionEvents = {
 		    'click .yes': function (e, value, row, index) {
-		    	$.post("card/opencard.action",{user_id:row.user_id,card_id:row.card_id},function(result){
+		    	$.post("card/opencard.action",{user_id:row.user_id,card_id:row.cardCheckOpencardId},function(result){
 		    		alert(result.msg)
 		    	});
 		    },
