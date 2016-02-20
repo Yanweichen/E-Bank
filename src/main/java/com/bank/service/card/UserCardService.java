@@ -34,7 +34,7 @@ public class UserCardService implements BaseService<UserCardModel> {
 	@Override
 	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return ucd.deleteById(id);
 	}
 
 	@Override

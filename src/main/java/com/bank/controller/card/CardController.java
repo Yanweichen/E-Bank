@@ -30,13 +30,13 @@ import com.bank.utils.RegularUtil;
 public class CardController {
 
 	@Autowired
-	private CardService cs;
+	private CardService cs;//卡片本身的操作
 	@Autowired
-	private CardCheckService ccs;
+	private CardCheckService ccs;//审核办卡的操作
 	@Autowired
-	private UserCardService ucc;
+	private UserCardService ucs;//用户所属卡的操作
 	@Autowired
-	private MsgService ms;
+	private MsgService ms;//消息操作
 	/**
 	 * 根据id获取卡片类型
 	 * @param id
@@ -59,7 +59,7 @@ public class CardController {
 		ucm.setUserCardUserId(ccm.getCardCheckUser());
 		ucm.setUser_card_opentime(new Date());
 		ucm.setUserCardNum(UUID.randomUUID().toString());
-		ucc.add(ucm);//插入新卡
+		ucs.add(ucm);//插入新卡
 		ccm.setCardCheckOpencardId(ucm.getUserCardId());//获取新卡id
 		ccs.add(ccm);//插入待审核列表
 		return "myAccount/cardManage/opencardchecking";
@@ -86,7 +86,7 @@ public class CardController {
 	@RequestMapping("/opencard")
 	public JSONObject opencard(int user_id,int card_id){
 		JSONObject jo = new JSONObject();
-		int suc = ucc.alertCardStateById(card_id,RegularUtil.NORMAL);//修改卡片为正常状态
+		int suc = ucs.alertCardStateById(card_id,RegularUtil.NORMAL);//修改卡片为正常状态
 		if (suc==1) {
 			MsgModel mm = new MsgModel();
 			mm.setMsgState(false);//未阅读消息
@@ -97,8 +97,15 @@ public class CardController {
 			mm.setMsgTime(new Date());
 			suc = ms.add(mm);
 			if (suc==1) {
-				jo.put("error", "200");
-				jo.put("msg", "办卡成功");
+				suc = ccs.RemoveById(card_id);
+				if (suc==1) {
+					jo.put("error", "200");
+					jo.put("msg", "办卡成功");
+				} else {
+					jo.put("error", "203");
+					jo.put("msg", "删除审核失败！");
+				}
+				
 			}else{
 				jo.put("error", "203");
 				jo.put("msg", "信息发送失败");
@@ -106,6 +113,49 @@ public class CardController {
 		}else{
 			jo.put("error", "203");
 			jo.put("msg", "办卡失败");
+		}
+		return jo;
+	}
+	
+	/**
+	 * 拒绝办卡 审核不通过
+	 * @param user_id
+	 * @param card_id
+	 * @param title
+	 * @param content
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/rejectOpenCard")
+	public JSONObject rejectOpenCard(int user_id,int card_id,String title,String content){
+		JSONObject jo = new JSONObject();
+		int suc = ccs.RemoveById(card_id);
+		if (suc==1) {
+			MsgModel mm = new MsgModel();
+			mm.setMsgState(false);//未阅读消息
+			mm.setMsgTitle(title);
+			mm.setMsgContent(content);
+			mm.setMsgType(3);//1 公告 2 活动 3 通知
+			mm.setMsgUserId(user_id);
+			mm.setMsgTime(new Date());
+			suc = ms.add(mm);
+			if (suc==1) {
+				suc = ucs.RemoveById(card_id);
+				if (suc==1) {
+					jo.put("error", "200");
+					jo.put("msg", "拒绝办卡成功");
+				}else{
+					jo.put("error", "200");
+					jo.put("msg", "删除卡片失败");
+				}
+			} else {
+				jo.put("error", "203");
+				jo.put("msg", "发送拒绝信息失败");
+			}
+			
+		} else {
+			jo.put("error", "203");
+			jo.put("msg", "删除审核失败！");
 		}
 		return jo;
 	}

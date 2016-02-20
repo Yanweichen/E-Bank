@@ -64,7 +64,7 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 					}
 				})
 			}
-			setInterval(showMsg, 15000);
+// 			setInterval(showMsg, 15000);
 			$(window).scroll(function(event){
 				var winPos = $(window).scrollTop();
 				$("#headmsgbox").css("top",winPos+40);

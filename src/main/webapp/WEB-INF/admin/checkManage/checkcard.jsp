@@ -38,7 +38,7 @@
 			    <thead>
 			        <tr>
 			            <th data-field="user_id" data-visible="false" data-align="center" >头像</th>
-			            <th data-field="cardCheckOpencardId" data-visible="false" data-align="center" >头像</th>
+			            <th data-field="cardCheckOpencardId" data-visible="false" data-align="center" ></th>
 			            <th data-field="user_face" data-align="center" >头像</th>
 			            <th data-field="user_name" data-align="right">用户姓名</th>
 			            <th data-field="user_city" data-align="center">开户城市</th>
@@ -54,6 +54,31 @@
 		</table>
 	</div>
 	
+	<div class="modal fade" id="msgbox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel" id="msgboxtitle">消息</h4>
+	      </div>
+	      <div class="modal-body">
+			  <div class="form-group">
+			    <label>消息标题</label>
+			    <input type="text" id="msgtitle" name="title" class="form-control" placeholder="消息标题">
+			  </div>
+			  <div class="form-group">
+			    <label>消息内容</label>
+			    <textarea class="form-control" id="msgcontent" name="content" rows="5" placeholder="审核不通过原因"></textarea>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default btncolor" data-dismiss="modal">取消</button>
+	        <button type="button" id="sendMsg" class="btn btn-primary btncolor">发送</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script src="page/assets/js/bootstrap-table.js"></script>
@@ -62,6 +87,7 @@
 		$('#all').bootstrapTable({
 		    url: 'card/getCheckCardList.action',
 		});
+		var roww;
 		function actionFormatter(value, row, index) {
 		return [
 		        '<a class="yes" href="javascript:void(0)" title="通过">',
@@ -75,13 +101,45 @@
 		window.actionEvents = {
 		    'click .yes': function (e, value, row, index) {
 		    	$.post("card/opencard.action",{user_id:row.user_id,card_id:row.cardCheckOpencardId},function(result){
-		    		alert(result.msg)
+		    		if (result.error==200) {
+						$('#all').bootstrapTable('remove', {field: 'cardCheckOpencardId', values: [row.cardCheckOpencardId]});
+					}else{
+			    		alert(result.msg)
+					}
 		    	});
 		    },
 		    'click .no': function (e, value, row, index) {
-		    	alert(row.user_id)
+		    	$('#msgbox').modal('show');
+		    	roww = row;
 		    },
 		}
+		$("#sendMsg").click(function(){
+			var title = $("#msgtitle").val()
+			var content = $("#msgcontent").val()
+			$.post("card/rejectOpenCard.action",{user_id:roww.user_id,card_id:roww.cardCheckOpencardId,title:title,content:content},function(result){
+				if (result.error==200) {
+					$('#msgbox').modal('hide');
+						$('#all').bootstrapTable('remove', {field: 'cardCheckOpencardId', values: [roww.cardCheckOpencardId]});
+				}else{
+					alert(result.msg);
+				}
+			})
+		})
+		//模态框居中
+		function centerModals() {
+			$('.modal').each(
+					function(i) {
+						var $clone = $(this).clone().css('display', 'block')
+								.appendTo('body');
+						var top = Math.round(($clone.height() - $clone.find(
+								'.modal-content').height()) / 3);
+						top = top > 0 ? top : 0;
+						$clone.remove();
+						$(this).find('.modal-content').css("margin-top", top);
+					});
+		}
+		$('.modal').on('show.bs.modal', centerModals);
+		$(window).on('resize', centerModals);
 	</script>
 </body>
 </html>
