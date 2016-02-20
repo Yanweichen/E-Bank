@@ -23,6 +23,13 @@
     delete from bank_msgbox
     where msg_id = #{msgId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByArray">
+  	DELETE FROM bank_msgbox 
+    WHERE msg_id IN
+   <foreach item="idItem" collection="ids" open="(" separator="," close=")">
+		#{idItem}
+	</foreach>
+  </delete>
   <insert id="insert" parameterType="com.bank.model.msg.MsgModel" >
     INSERT INTO bank_msgbox VALUES (NULL,#{msgTitle},#{msgContent},#{msgType},#{msgUserId}, #{msgState},NOW());
   </insert>
@@ -51,7 +58,7 @@
   			WHERE 1=1
   		</otherwise>
   	</choose>
-  	AND msg_user_id = #{uid} ORDER BY msg_time DESC;
+  	AND msg_user_id = #{uid} ORDER BY msg_time DESC LIMIT #{offset},#{limit};
   </select>
   <select id="selectNumByState" resultType="java.lang.Integer" parameterType="java.lang.String">
   	SELECT COUNT(0) FROM bank_msgbox

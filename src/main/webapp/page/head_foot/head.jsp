@@ -38,13 +38,13 @@
 				<h5 id="logintitle" style="float: right; color: white;margin: 0px;display: none;">
 					你好,<span id="headloginusername">&nbsp;${user.user_name}</span>&nbsp;&nbsp;<a class="hand" style="color: white;">退出</a>&nbsp;
 					<i class="icon-credit-card"></i>&nbsp;<a href="myAccount/mybank.action" style="color: white;">我的银行</a>&nbsp;
-					<a style="color: white;" href="msg/msgBox.action?state=noview"><i class="icon-envelope"></i>&nbsp;消息&nbsp;<span id="newmsg" style="display: none;" class="badge">New</span></a>
+					<a style="color: white;" href="msg/msgBox.action?state=noview&limit=5&offset=0"><i class="icon-envelope"></i>&nbsp;消息&nbsp;<span id="newmsg" style="display: none;" class="badge">New</span></a>
 				</h5>
 			</div>
 			<!-- /.container-fluid -->
 		</nav>
 		<div id="headmsgbox" class="msgboxclass">
-			<h5 class="msgcontent"><i class="icon-envelope"></i>&nbsp;&nbsp;<a id="headmsg" style="color: white;text-decoration: none;" href="msg/msgBox.action?state=noview"></a> </h5>
+			<h5 class="msgcontent"><i class="icon-envelope"></i>&nbsp;&nbsp;<a id="headmsg" style="color: white;text-decoration: none;" href="msg/msgBox.action?state=noview&limit=5&offset=0"></a> </h5>
 		</div>
 	<!-- 头部导航end -->
 

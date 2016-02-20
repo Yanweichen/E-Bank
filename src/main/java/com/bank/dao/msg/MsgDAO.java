@@ -9,8 +9,9 @@ import com.bank.model.msg.MsgModel;
 
 public interface MsgDAO extends BaseDAO<MsgModel> {
 
-	public List<MsgModel> selectMsgByState(@Param("state")String state,@Param("uid")int uid);
+	public List<MsgModel> selectMsgByState(@Param("state")String state,@Param("offset")int offset,@Param("limit")int limit,@Param("uid")int uid);
 	public int updateMsgState(int id);
 	public int selectNumByState(@Param("state")String state,@Param("uid")int uid);
 	public MsgModel selectNewMsg(int uid);
+	public int deleteByArray(@Param("ids") int [] ids);
 }

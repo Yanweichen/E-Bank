@@ -32,8 +32,8 @@ public class MsgService implements BaseService<MsgModel>{
 	 * @param state
 	 * @return
 	 */
-	public List<MsgModel> findMsgByState(String state,int uid){
-		return md.selectMsgByState(state,uid);
+	public List<MsgModel> findMsgByState(String state,int offset,int limit,int uid){
+		return md.selectMsgByState(state,offset,limit,uid);
 	}
 	
 	/**
@@ -60,6 +60,15 @@ public class MsgService implements BaseService<MsgModel>{
 	 */
 	public MsgModel findNewMsg(int uid){
 		return md.selectNewMsg(uid);
+	}
+	
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	public int removeByIdArray(int [] ids){
+		return md.deleteByArray(ids);
 	}
 	
 	@Override

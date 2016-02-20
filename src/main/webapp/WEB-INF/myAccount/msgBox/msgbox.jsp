@@ -56,15 +56,15 @@ color: #777777;
 		<div class="row">
 			<div class="col-sm-3">
 				<div id="setlist" class="list-group touming6">
-				  <a id="noviewa" href="msg/msgBox.action?state=noview" class="list-group-item">
+				  <a id="noviewa" href="msg/msgBox.action?state=noview&limit=5&offset=0" class="list-group-item">
 				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;未读消息
 				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
 				  </a>
-				  <a id="isviewa" href="msg/msgBox.action?state=isview" class="list-group-item">
+				  <a id="isviewa" href="msg/msgBox.action?state=isview&limit=5&offset=0" class="list-group-item">
 				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;已读消息
 				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>
-				   <a id="alla" href="msg/msgBox.action?" class="list-group-item">
+				   <a id="alla" href="msg/msgBox.action?limit=5&offset=0" class="list-group-item">
 				  	<i class="icon-folder-close alli"></i>&nbsp;&nbsp;全部消息
 				  	<i class="icon-angle-right alli" style="float: right;"></i>
 				  </a>
@@ -72,13 +72,17 @@ color: #777777;
 			</div>
 			<div class="col-sm-9">
 				<div class="panel panel-default touming6">
+					<div class="panel-heading">
+				  		<button id="selectallbtn" type="button" class="btn btn-default btncolor" style="margin-right: 10px;margin-left: 10px;">全选</button>
+				  		<button id="deletebtn" type="button" class="btn btn-default btncolor">删除</button>
+				  	</div>
 				  <div class="panel-body">
 				  <c:forEach var="msg" items="${msglist}">
 					  	<div class="panel panel-default touming6">
 					  		<div class="panel-body">
-								
 					  			<h5 class="hand <c:if test="${msg.msgState}">titleisview</c:if>
 					  			 <c:if test="${!msg.msgState}">titlenoview</c:if>" style="float: left;margin-right: 20px;">
+					  			<input type="checkbox" name="ckbox" class="ckbox" value="${msg.msgId}">&nbsp;&nbsp;
 					  			<i class="icon-envelope" style="font-size: 19px;color: #3f316d"></i>&nbsp;&nbsp;
 					  			<span id="${msg.msgContent}" accesskey="${msg.msgId}" class="msg">${msg.msgTitle}</span></h5>
 					  			<h5 class="hand" style="color: #999999;float: right;" >${msg.msgTime_fmt}</h5>
@@ -123,8 +127,9 @@ color: #777777;
 	<script src="page/assets/js/jquery.twbsPagination.js"></script>
 	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script type="text/javascript">
+	var state = "<% out.print(request.getParameter("state")==null?"":request.getParameter("state")); %>";
+	var offset = "<% out.print(request.getParameter("offset")==null?"":request.getParameter("offset")); %>";
 	function init(){
-		var state = "<% out.print(request.getParameter("state")==null?"":request.getParameter("state")); %>";
 		switch (state) {
 		case "isview":
 			$("#isviewa").attr("style","background-color: #3f316d;border-color: #3f316d;color: white;");
@@ -148,16 +153,21 @@ color: #777777;
 	}
 	$(document).ready(function() {
 		init()
-		$.getJSON("msg/getTotalByState.action",{state:"noview"},function(json){
+		$.getJSON("msg/getTotalByState.action",{"state":state},function(json){
 			 $('.sync-pagination').twbsPagination({
-			        totalPages: Math.ceil(json.msg/10),
+			        totalPages: Math.ceil(json.msg/5),
+			        initiateStartPageClick :false,//初始化不点击
+			        startPage:offset/5+1,
 			        visiblePages: 7,
 			        first:"首页",
 			        prev:"前一页",
 			 		next:"后一页",
 			 		last:"尾页",
 			        onPageClick: function (event, page) {
-			        	
+			        	var url = window.location.href;
+			        	var offset=(page-1)*5
+			        	var pageurl = url.substr(0,url.lastIndexOf("=")+1)+offset; 
+			        	window.location= pageurl;
 			        }
 			  });
 		});
@@ -179,7 +189,34 @@ color: #777777;
 			}
 		})
 	})
-	
+	//全选
+	var flag = true;
+	$('#selectallbtn').click(function(){
+		if (flag) {
+			$(".ckbox").attr("checked",true);
+			$('#selectallbtn').text("取消")
+			flag = false;
+		} else {
+			$(".ckbox").attr("checked",false);
+			$('#selectallbtn').text("全选")
+			flag = true;
+		}
+	})
+	$('#deletebtn').click(function(){
+		var ids=new Array()
+		var j = 0;
+  		$('input:checkbox[name=ckbox][checked]').each(function(){
+  		     ids[j] = $(this).val();
+             j++;
+        });
+  		$.post("msg/deleteMoreMsg.action",{ids:ids},function(result){
+  			if (result.error==200) {
+	  			window.location.reload() 
+			}else{
+				alert("删除失败")
+			}
+  		})
+	})
 	//模态框居中
 	function centerModals() {
 		$('.modal').each(
