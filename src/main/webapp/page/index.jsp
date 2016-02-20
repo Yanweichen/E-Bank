@@ -387,21 +387,6 @@ ul.news li p{float:right; color:#000000}
 			<div class="col-sm-1"></div>
 		</div>
 	</div>
-	<!-- foot -->
-	<div id="foot" class="container">
-		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3">
-				<p align="center">
-					<a id="E-Bank" href="<%=basePath%>page/index.jsp" target="_blank">E-Bank</a>
-					| <a href="#" target="_blank">Bank Online</a> | Complaint
-					Guidelines | 审核时间[2015]-070
-				</p>
-				<p align="center">Copyright &copy; 2015 - e-bank.All Rights
-					Reserved.
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yanweichen| 版权所有</p>
-			</div>
-		</div>
-	</div>
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel">
 		<div class="modal-dialog" role="document">
@@ -458,6 +443,7 @@ ul.news li p{float:right; color:#000000}
 	</div>
 	<div class="fakeloader"></div>
 	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
+	<jsp:include page="head_foot/foot.jsp"></jsp:include>
 	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/velocity.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/velocity.ui.min.js"></script>

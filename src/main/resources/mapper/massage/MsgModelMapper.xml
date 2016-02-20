@@ -71,7 +71,8 @@
   <update id="updateMsgState" parameterType="java.lang.Integer">
   		UPDATE bank_msgbox SET msg_state = TRUE WHERE msg_id = #{id};
   </update>
-  <select id="selectNewMsg" resultMap="BaseResultMap">
-  	SELECT *,MAX(msg_time) msgt FROM bank_msgbox WHERE msg_state = FALSE;
+  <!-- 查询新消息 -->
+  <select id="selectNewMsg" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	SELECT *,MAX(msg_time) FROM bank_msgbox WHERE msg_state = FALSE AND msg_user_id = #{uid};
   </select>
 </mapper>

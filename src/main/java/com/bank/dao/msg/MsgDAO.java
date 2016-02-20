@@ -12,5 +12,5 @@ public interface MsgDAO extends BaseDAO<MsgModel> {
 	public List<MsgModel> selectMsgByState(@Param("state")String state,@Param("uid")int uid);
 	public int updateMsgState(int id);
 	public int selectNumByState(@Param("state")String state,@Param("uid")int uid);
-	public MsgModel selectNewMsg();
+	public MsgModel selectNewMsg(int uid);
 }

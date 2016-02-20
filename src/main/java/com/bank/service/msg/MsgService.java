@@ -58,8 +58,8 @@ public class MsgService implements BaseService<MsgModel>{
 	 * 查询新消息
 	 * @return
 	 */
-	public MsgModel findNewMsg(){
-		return md.selectNewMsg();
+	public MsgModel findNewMsg(int uid){
+		return md.selectNewMsg(uid);
 	}
 	
 	@Override
