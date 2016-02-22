@@ -47,7 +47,7 @@
 						<div class="col-sm-3"><a href="#" rel="setting"><img src="page/assets/img/circle-locked.png" style="height: 20px;width: 20px;"></a></div>
 					</div>
 					<div class="row" style="margin: 10px 20px 0 20px;">
-						<div class="col-sm-6 bordera">
+						<div class="col-sm-6 bordera hand" onclick="window.location='myAccount/userCardList.action'">
 							<h5 class="colgb">银行卡</h5>
 							<h5 class="colgb">3</h5>
 						</div>

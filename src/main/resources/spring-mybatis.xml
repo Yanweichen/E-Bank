@@ -58,7 +58,10 @@
 	</bean>
 	
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
-	<tx:annotation-driven />
+	<!--  http://stackoverflow.com/questions/19624354/using-transaction-annotation-with-autowired-spring 
+		这个网址解释了为什么要添加proxy-target-class="true"虽然我目前看不懂....
+	-->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />

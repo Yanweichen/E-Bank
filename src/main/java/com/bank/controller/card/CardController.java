@@ -128,35 +128,7 @@ public class CardController {
 	@ResponseBody
 	@RequestMapping("/rejectOpenCard")
 	public JSONObject rejectOpenCard(int user_id,int card_id,String title,String content){
-		JSONObject jo = new JSONObject();
-		int suc = ccs.RemoveById(card_id);
-		if (suc==1) {
-			MsgModel mm = new MsgModel();
-			mm.setMsgState(false);//未阅读消息
-			mm.setMsgTitle(title);
-			mm.setMsgContent(content);
-			mm.setMsgType(3);//1 公告 2 活动 3 通知
-			mm.setMsgUserId(user_id);
-			mm.setMsgTime(new Date());
-			suc = ms.add(mm);
-			if (suc==1) {
-				suc = ucs.RemoveById(card_id);
-				if (suc==1) {
-					jo.put("error", "200");
-					jo.put("msg", "拒绝办卡成功");
-				}else{
-					jo.put("error", "200");
-					jo.put("msg", "删除卡片失败");
-				}
-			} else {
-				jo.put("error", "203");
-				jo.put("msg", "发送拒绝信息失败");
-			}
-			
-		} else {
-			jo.put("error", "203");
-			jo.put("msg", "删除审核失败！");
-		}
-		return jo;
+		return ucs.rejectOpenCard(user_id, card_id, title, content);
 	}
+	
 }

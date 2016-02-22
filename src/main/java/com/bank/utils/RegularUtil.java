@@ -46,6 +46,10 @@ public class RegularUtil {
 	 * 审核
 	 */
 	public static final int CHECK = 5;//审核
+	/**
+	 * 审核未通过
+	 */
+	public static final int NOCHECK = 6;//审核未通过
 	
 	public static final int STICK = 1;//挂失
 	public static final int STAR = 5;//挂失

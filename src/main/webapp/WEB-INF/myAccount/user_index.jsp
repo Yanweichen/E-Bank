@@ -87,14 +87,14 @@
 								<h5>手机缴费充值</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i> 
-								<h5>转账到银行卡</h5>
+								<a href="myAccount/userCardList.action" target="_blank"><i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i></a>
+								<h5>我的银行卡</h5>
 								<i class="icon-heart" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>爱心捐赠</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
 								<i class="icon-money" style="color: #3f316d;font-size: 50px;"></i> 
-								<h5>信用卡还款</h5>
+								<h5>转账到银行卡</h5>
 								<i class="icon-desktop" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>有线电视缴费</h5>
 							</div>

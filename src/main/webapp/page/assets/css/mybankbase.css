@@ -1,6 +1,9 @@
 .noborderradius{
 	border-radius: 0px 0px 0px 0px;
 }
+.yuanjiao15{
+	border-radius: 15px 15px 15px 15px;
+}
 .list-group-item{
 	border:0;
 	background-color: #3f314d;
@@ -33,6 +36,13 @@
 	border-radius: 10px 10px 10px 10px;
 	background-color:rgba(255,255,255,0.6);
 }
+
+.overstep{
+	text-overflow:ellipsis; 
+	white-space:nowrap;
+	overflow:hidden;
+}
+
 .bordera{border-right: 1px solid #aaaaaa;border-bottom: 1px solid #aaaaaa;} 
 .borderb{border-bottom: 1px solid #aaaaaa;} 
 .borderc{border-right: 1px solid #aaaaaa;} 

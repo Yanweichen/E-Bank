@@ -40,6 +40,13 @@
     where user_card_id = #{userCardId,jdbcType=INTEGER}
   </update>
   
+  <!-- 根据用户查询所有卡片 -->
+  <select id="selectAllByUser" resultType="com.bank.model.card.UserCardListModel" parameterType="java.lang.Integer">
+  	SELECT uu.`user_name`,uc.`user_card_num`,bc.`card_name`,bc.`card_face`,uc.`user_card_balance`,uc.`user_card_state` 
+	FROM user_card uc,bank_card bc,user_userinfo uu 
+	WHERE bc.`card_id`=uc.`user_card_type` AND uc.`user_card_user_id`=uu.`user_id` AND uc.`user_card_user_id`=#{uid}
+  </select>
+  
   <!-- 根据id修改卡状态 -->
   <update id="updateCardStateById">
   	UPDATE user_card SET user_card_state = #{1} WHERE user_card_id = #{0};
