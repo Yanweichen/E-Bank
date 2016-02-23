@@ -3,6 +3,8 @@ package com.bank.utils;
 import java.text.ParseException;
 import java.util.List;
 
+import org.apache.catalina.mbeans.UserMBean;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -12,6 +14,7 @@ import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
 import com.bank.model.msg.MsgModel;
+import com.bank.model.user.UserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -152,6 +155,11 @@ public class JsonUtil {
 		return jo;
 	}
 	
+	/**
+	 * 获得用户卡列表
+	 * @param list
+	 * @return
+	 */
 	public static JSONObject getUserCardList(List<UserCardListModel> list){
 			JSONObject jo = new JSONObject();
 			if (list!=null&&list.size()!=0) {
@@ -161,6 +169,18 @@ public class JsonUtil {
 				jo.put("error", 203);
 				jo.put("msg", "获取用户卡列表失败");
 			}
+		return jo;
+	}
+	
+	public static JSONObject getRecentlyTradeUser(List<UserModel> list){
+		JSONObject jo = new JSONObject();
+		if (list!=null&&list.size()!=0) {
+			jo.put("error", 200);
+			jo.put("msg", JSON.toJSON(list));
+		}else{
+			jo.put("error", 203);
+			jo.put("msg", "获取最近相关交易人员列表失败！");
+		}
 		return jo;
 	}
 }

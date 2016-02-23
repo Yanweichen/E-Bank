@@ -69,5 +69,14 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 				var winPos = $(window).scrollTop();
 				$("#headmsgbox").css("top",winPos+40);
 		    });
+			$("#titleout").click(function() {
+				$.post("user/logout.action", function(result) {
+					if (result.error == 200) {
+						window.location="page/index.jsp";//刷新当前页面.
+					} else {
+						alert(result.msg)
+					}
+				})
+			})
 		</script>
 	</c:if>

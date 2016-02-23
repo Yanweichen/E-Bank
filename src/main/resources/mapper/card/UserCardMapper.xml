@@ -56,7 +56,7 @@
   	UPDATE user_card SET user_card_balance = #{0} WHERE user_card_num = #{1};
   </update>
    <!-- 根据id查询卡余额 -->
-  <select id="selectCardBalanceById">
+  <select id="selectCardBalanceById" resultType="java.lang.Double">
   	SELECT user_card_balance FROM user_card WHERE user_card_num = #{cardnum};
   </select>
 </mapper>

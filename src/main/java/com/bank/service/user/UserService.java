@@ -96,6 +96,15 @@ public class UserService implements BaseService<UserModel> {
 		return ud.selectUserBalanceById(id);
 	}
 	
+	/**
+	 * 根据用户来查询最近交易的人
+	 * @param id
+	 * @return
+	 */
+	public List<UserModel> findRecentlyTradeUser(int id){
+		return ud.selectRecentlyTradeUser(id);
+	}
+	
 	@Override
 	public int add(UserModel model) {
 		return ud.insert(model);

@@ -28,11 +28,11 @@
 		<div class="row">
 		<div class="col-sm-3">
 				<div id="setlist" class="list-group touming6">
-				  <a id="noviewa" href="msg/msgBox.action?state=noview&limit=5&offset=0" class="list-group-item">
+				  <a id="noviewa" href="myAccount/trade.action" class="list-group-item">
 				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;转账
 				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
 				  </a>
-				  <a id="isviewa" href="msg/msgBox.action?state=isview&limit=5&offset=0" class="list-group-item">
+				  <a id="isviewa" href="myAccount/userCardList.action" class="list-group-item">
 				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;我的银行卡
 				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>

@@ -1,5 +1,7 @@
 package com.bank.dao.user;
 
+import java.util.List;
+
 import com.bank.base.BaseDAO;
 import com.bank.model.user.UserModel;
 
@@ -14,4 +16,5 @@ public interface UserDAO extends BaseDAO<UserModel>{
 	public double selectUserBalanceById(int id);
 	public int updateUserBalanceById(double money,int id);
 	public int updateUserMoneyById(double money,int id);
+	public List<UserModel> selectRecentlyTradeUser(int id);
 }

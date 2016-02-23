@@ -18,6 +18,7 @@
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/bootstrapValidator.min.css"/>
 <link rel="stylesheet" href="page/assets/css/bootstrap-switch.css"/>
+<link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <title>转账</title>
 <style type="text/css">
@@ -31,7 +32,6 @@
 }
 .zuijinlistbg{
 	border-radius: 10px 10px 10px 10px;
-	margin: 5px;
 	padding: 8px;
 	background-color: rgba(244,244,244,0.6);
 }
@@ -44,11 +44,11 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<div id="setlist" class="list-group touming6">
-				  <a id="noviewa" href="msg/msgBox.action?state=noview&limit=5&offset=0" class="list-group-item">
+				  <a id="noviewa" href="myAccount/trade.action" class="list-group-item">
 				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;转账
 				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
 				  </a>
-				  <a id="isviewa" href="msg/msgBox.action?state=isview&limit=5&offset=0" class="list-group-item">
+				  <a id="isviewa" href="myAccount/userCardList.action" class="list-group-item">
 				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;我的银行卡
 				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>
@@ -87,6 +87,7 @@
 									    <label class="gray6">请选择转账银行卡</label>
 										    <select id="usercardlist" class="form-control">
 											</select>
+											<label class="gray6 top5" id="tousernamediv" >此卡余额:&nbsp;&nbsp;<span style="color: #3f316d" id="cardblance" ></span> </label>
 									</div>
 									<div class="form-group">
 									    <label class="gray6">转账金额</label>
@@ -101,32 +102,24 @@
 									</div>
 								</form>
 				    		</div>
-				    		<div class="col-sm-4 col-sm-offset-1">
+				    		<div class="col-sm-4 col-sm-offset-1" id="aboutuserlist">
 				    		<h5 style="color: #999;margin-left: 10px;">最近有过来往的朋友..</h5>
-				    		<div class="zuijinlistbg">
-								<img alt="" class="img-circle" style="width: 40;height: 40px;" src="http://sourceimg-10021396.image.m
-								yqcloud.com/f86c151d-7a1e-4ba1-885f-e487ce6c6d8a">
-								<span style="color: #999;margin-left: 5px;">A同学</span>
-				    		</div>
-				    		<div class="zuijinlistbg">
-								<img alt="" class="img-circle" style="width: 40;height: 40px;" src="http://sourceimg-10021396.image.m
-								yqcloud.com/f86c151d-7a1e-4ba1-885f-e487ce6c6d8a">
-								<span style="color: #999;margin-left: 5px;">A同学</span>
-				    		</div>
-				    		<div class="zuijinlistbg">
-								<img alt="" class="img-circle" style="width: 40;height: 40px;" src="http://sourceimg-10021396.image.m
-								yqcloud.com/f86c151d-7a1e-4ba1-885f-e487ce6c6d8a">
-								<span style="color: #999;margin-left: 5px;">A同学</span>
-				    		</div>
-				    		<div class="zuijinlistbg">
-								<img alt="" class="img-circle" style="width: 40;height: 40px;" src="http://sourceimg-10021396.image.m
-								yqcloud.com/f86c151d-7a1e-4ba1-885f-e487ce6c6d8a">
-								<span style="color: #999;margin-left: 5px;">A同学</span>
-				    		</div>
-				    		<div class="zuijinlistbg">
-								<img alt="" class="img-circle" style="width: 40;height: 40px;" src="http://sourceimg-10021396.image.m
-								yqcloud.com/f86c151d-7a1e-4ba1-885f-e487ce6c6d8a">
-								<span style="color: #999;margin-left: 5px;">A同学</span>
+				    		<div class="row">
+				    			<div class="col-sm-6" id="aboutuserleftlist">
+<!-- 				    				<div class="zuijinlistbg top10"> -->
+<!-- 				    				<div class="row"> -->
+<!-- 				    					<div class="col-sm-4"> -->
+<!-- 				    					<img alt="" class="img-circle" style="width: 40;height: 40px;" src="http://sourceimg-10021396.image.m -->
+<!-- 										yqcloud.com/f86c151d-7a1e-4ba1-885f-e487ce6c6d8a"> -->
+<!-- 				    					</div> -->
+<!-- 				    					<div class="col-sm-8" style="padding-right: 4px"> -->
+<!-- 				    						<div class="overstep top10" style="color: #999;margin-left: 5px;">A同学A同学A同学A同学A同学A同学A同学</div> -->
+<!-- 				    					</div> -->
+<!-- 				    				</div> -->
+<!-- 				    				</div> -->
+				    			</div>
+				    			<div class="col-sm-6" id="aboutuserrightlist">
+				    			</div>
 				    		</div>
 				    		</div>
 				    	</div>
@@ -158,6 +151,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="fakeloader"></div>
 	<!-- foot -->
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<jsp:include page="../../../page/head_foot/foot.jsp"></jsp:include>
@@ -165,6 +159,7 @@
 	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script src="page/assets/js/bootstrapValidator.min.js"></script> 
 	<script src="page/assets/js/bootstrap-switch.min.js"></script> 
+	<script src="page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
 	var usermoney = "${user.user_account_money}";
 	$("[name='isuserebao']").bootstrapSwitch('handleWidth',50);
@@ -200,7 +195,7 @@
 		}
 	}
 	$(document).ready(function() {
-		init("isview")
+		init("noview")
 		 $('#tradetoefrom').bootstrapValidator({
 		        message: 'This value is not valid',
 		        submitButtons: 'button[type="submit"]',
@@ -235,11 +230,6 @@
 		                    notEmpty: {
 		                        message: '此项不能为空'
 		                    },
-		                    between: {
-		                        min: 0,
-		                        max: usermoney,
-		                        message: '你输入的金额不能小于0或者大于'+usermoney
-		                    }
 		                }
 		            },
 
@@ -253,8 +243,17 @@
 
 	            // Get the BootstrapValidator instance
 	            var bv = $form.data('bootstrapValidator');
-				if ($("[name='isuserebao']").bootstrapSwitch("state")) {
+	            var isuserEbao = $("[name='isuserebao']").bootstrapSwitch("state");
+	            $(".fakeloader").fakeLoader({
+	                spinner:"spinner2",
+	                show:true
+	            });
+				if (isuserEbao) {
 					$.post("trade/tradeEbaoByaccount.action", $form.serialize(), function(result) {
+						$(".fakeloader").fakeLoader({
+			                spinner:"spinner2",
+			                show:false
+			            });
 						if (result.error==200) {
 							 $("#msg").empty(); 
 							 $("#msg").append(result.msg)
@@ -267,7 +266,11 @@
 							
 		            });
 				} else {
-					$.post("trade/tradeByCard.action", {touser:$("#touser").val(),cardnum:$("#usercardlist").val(),trademoney:$("#trademoney").val(),tradeinfo:$("#tradeinfo").val(),}, function(result) {
+					$.post("trade/tradeByCard.action", {touser:$("#touser").val(),cardnum:$("#usercardlist option:selected").text(),trademoney:$("#trademoney").val(),tradeinfo:$("#tradeinfo").val(),}, function(result) {
+						$(".fakeloader").fakeLoader({
+			                spinner:"spinner2",
+			                show:false
+			            });
 						if (result.error==200) {
 							 $("#msg").empty(); 
 							 $("#msg").append(result.msg)
@@ -281,6 +284,7 @@
 		            });
 				}
 	        });
+			//获得卡列表
 			$.post("card/userCardListJSON.action",function(result){
 	            if (result.error==200) {
 	            	$.each(result.msg,function(i,card){
@@ -293,6 +297,50 @@
 	            	$("#usercardlist").append("<option>"+result.msg+"</option>");
 	            }
           	})
+          	//获得相关用户列表
+          	$.post("trade/getRecentlyTradeUser.action",function(result){
+	             if (result.error==200) {
+	            	 $.each(result.msg,function(i,user){
+	            		 var cl = 'top20'
+	            		 if (i==1) {
+							cl='top10'
+						 }
+	            		 if (i==4) {
+							cl='top40'
+						 }
+	            		 if (i%2==0) {
+							$("#aboutuserleftlist").append('<div class="zuijinlistbg '+cl+'">'+
+				    				'<div class="row">'+
+			    					'<div class="col-sm-4">'+
+			    					'<img alt="" class="img-circle" style="width: 40;height: 40px;" src='+user.user_face+'>'+
+			    					'</div>'+
+			    					'<div class="col-sm-8" style="padding-right: 4px">'+
+			    						'<div class="overstep top10" style="color: #999;margin-left: 5px;">'+user.user_name+'</div>'+
+			    					'</div>'+
+			    				'</div>'+
+			    				'</div>')
+						} else {
+							$("#aboutuserrightlist").append('<div class="zuijinlistbg '+cl+'">'+
+				    				'<div class="row">'+
+			    					'<div class="col-sm-4">'+
+			    					'<img alt="" class="img-circle" style="width: 40;height: 40px;" src='+user.user_face+'>'+
+			    					'</div>'+
+			    					'<div class="col-sm-8" style="padding-right: 4px">'+
+			    						'<div class="overstep top10" style="color: #999;margin-left: 5px;">'+user.user_name+'</div>'+
+			    					'</div>'+
+			    				'</div>'+
+			    				'</div>')
+						}
+		             })
+			     }else{
+			    	 $("#aboutuserlist").css("display","none");
+			     } 
+      		})
+          	$("#usercardlist").change(function(){
+          		var bla = $("#usercardlist option:selected").val();
+          		$("#cardblance").empty();
+          		$("#cardblance").append(bla);
+          	})
 		});
 	//查名字
 	$("#touser").blur(function(){
@@ -304,8 +352,9 @@
 		     }else{
 		    	 $("#tousernamediv").fadeOut();
 		     } 
-           })
+      })
 	})
+	
 	//模态框居中
 	function centerModals() {
 		$('.modal').each(

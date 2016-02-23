@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bank.base.BaseService;
 import com.bank.dao.trade.TradeDAO;
 import com.bank.model.msg.MsgModel;
@@ -37,9 +38,15 @@ public class TradeService implements BaseService<TradeModel>{
 	 * @return
 	 */
 	@Transactional
-	public boolean trade(UserModel user,String touser,String tradeinfo,double trademoney){
+	public JSONObject trade(UserModel user,String touser,String tradeinfo,double trademoney){
+		JSONObject jo = new JSONObject();
 		try {
 			UserModel um =  us.findUserByAccoutn(touser);
+			if (user.getUser_account_money()-trademoney<0) {
+				jo.put("error", 203);
+				jo.put("msg", "您的账户余额不足");
+				return jo;
+			}
 			us.alertUserMoneyById(user.getUser_account_money()-trademoney, Integer.valueOf(user.getUser_id()));//本方减钱
 			us.alertUserMoneyById(um.getUser_account_money()+trademoney, Integer.valueOf(um.getUser_id()));//对方加钱
 			TradeModel tm = new TradeModel();
@@ -52,6 +59,7 @@ public class TradeService implements BaseService<TradeModel>{
 			tm.setTradeExpendMoney(trademoney);
 			tm.setTradeIncomeMoney(0);
 			add(tm);//转账方添加交易记录
+			tm.setTradeNumber(""+System.currentTimeMillis());
 			tm.setTradeUserId(Integer.valueOf(um.getUser_id()));
 			tm.setTradeOtherUserId(Integer.valueOf(user.getUser_id()));
 			tm.setTradeExpendMoney(0);
@@ -71,9 +79,13 @@ public class TradeService implements BaseService<TradeModel>{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			jo.put("error", 200);
+			jo.put("msg", "转账失败！");
+			return jo;
 		}
-		return true;
+		jo.put("error", 200);
+		jo.put("msg", "转账成功！");
+		return jo;
 	}
 	
 	/**
@@ -86,10 +98,17 @@ public class TradeService implements BaseService<TradeModel>{
 	 * @return
 	 */
 	@Transactional
-	public boolean trade(UserModel user,String cardnum,String touser,String tradeinfo,double trademoney){
+	public JSONObject trade(UserModel user,String cardnum,String touser,String tradeinfo,double trademoney){
+		JSONObject jo = new JSONObject();
 		try {
 			UserModel um =  us.findUserByAccoutn(touser);
-			ucs.alertCardBalanceById(trademoney, cardnum);//本方卡减钱
+			double oldmoney  = ucs.selectCardBalanceById(cardnum);//查询该卡余额
+			if (oldmoney-trademoney<0) {
+				jo.put("error", 203);
+				jo.put("msg", "您的账户余额不足");
+				return jo;
+			}
+			ucs.alertCardBalanceById(oldmoney-trademoney, cardnum);//本方卡减钱
 			us.alertUserMoneyById(um.getUser_account_money()+trademoney, Integer.valueOf(um.getUser_id()));//对方加钱
 			TradeModel tm = new TradeModel();
 			tm.setTradeInfo(tradeinfo);
@@ -101,6 +120,7 @@ public class TradeService implements BaseService<TradeModel>{
 			tm.setTradeExpendMoney(trademoney);
 			tm.setTradeIncomeMoney(0);
 			add(tm);//转账方添加交易记录
+			tm.setTradeNumber(""+System.currentTimeMillis());
 			tm.setTradeUserId(Integer.valueOf(um.getUser_id()));
 			tm.setTradeOtherUserId(Integer.valueOf(user.getUser_id()));
 			tm.setTradeExpendMoney(0);
@@ -120,9 +140,13 @@ public class TradeService implements BaseService<TradeModel>{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			jo.put("error", 200);
+			jo.put("msg", "转账失败！");
+			return jo;
 		}
-		return true;
+		jo.put("error", 200);
+		jo.put("msg", "转账成功！");
+		return jo;
 	}
 	
 	@Override

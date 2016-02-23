@@ -58,4 +58,13 @@
   <select id="selectUserBalanceById" resultType="java.lang.Double">
  	SELECT user_account_balance FROM user_userinfo WHERE user_id=#{id};
   </select>
+  <!-- 根据用户查询最近有过交易的人 -->
+  <select id="selectRecentlyTradeUser" resultType="com.bank.model.user.UserModel">
+   SELECT uu.* FROM 
+   user_userinfo uu,user_trade ut 
+   WHERE uu.`user_id`=ut.`trade_user_id` 
+   AND user_id IN(SELECT trade_other_user_id FROM user_trade WHERE trade_user_id = #{id} GROUP BY trade_other_user_id) 
+   GROUP BY user_id ORDER BY ut.`trade_time` DESC 
+  </select>
+
 </mapper>
