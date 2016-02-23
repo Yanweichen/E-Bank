@@ -58,6 +58,44 @@ public class UserService implements BaseService<UserModel> {
 		return ud.updateUserStateByIdcard(state,idcard);
 	}
 	
+	/**
+	 * 根据用户修改余额
+	 * @param money
+	 * @param id
+	 * @return
+	 */
+	public int alertUserMoneyById(double money,int id){
+		return ud.updateUserMoneyById(money,id);
+	}
+	
+	/**
+	 * 根据用户修改余额宝余额
+	 * @param money
+	 * @param id
+	 * @return
+	 */
+	public int alertUserBalanceById(double money,int id){
+		return ud.updateUserBalanceById(money,id);
+	}
+	
+	/**
+	 * 根据ID查询用户余额
+	 * @param id
+	 * @return
+	 */
+	public double selectUserMoneyById(int id){
+		return ud.selectUserMoneyById(id);
+	}
+	
+	/**
+	 * 根据ID查询用户余额宝余额
+	 * @param id
+	 * @return
+	 */
+	public double selectUserBalanceById(int id){
+		return ud.selectUserBalanceById(id);
+	}
+	
 	@Override
 	public int add(UserModel model) {
 		return ud.insert(model);

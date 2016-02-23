@@ -51,4 +51,12 @@
   <update id="updateCardStateById">
   	UPDATE user_card SET user_card_state = #{1} WHERE user_card_id = #{0};
   </update>
+  <!-- 根据id修改卡余额 -->
+  <update id="updateCardBalanceById">
+  	UPDATE user_card SET user_card_balance = #{0} WHERE user_card_num = #{1};
+  </update>
+   <!-- 根据id查询卡余额 -->
+  <select id="selectCardBalanceById">
+  	SELECT user_card_balance FROM user_card WHERE user_card_num = #{cardnum};
+  </select>
 </mapper>

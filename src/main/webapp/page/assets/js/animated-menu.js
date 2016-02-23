@@ -8,7 +8,7 @@ $(document).ready(function(){
 	});
 	
 	//When mouse rolls over
-	$("li").mouseover(function(){
+	$("li.headui").mouseover(function(){
 		$(this).stop().animate({height:'300px'},{queue:false, duration:600, easing: 'easeOutBounce'})
 	});
 	$("#userinfo").mouseover(function(){
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	});
 	
 	//When mouse is removed
-	$("li").mouseout(function(){
+	$("li.headui").mouseout(function(){
 		$(this).stop().animate({height:'150px'},{queue:false, duration:600, easing: 'easeOutBounce'})
 	});
 	

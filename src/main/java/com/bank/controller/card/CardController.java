@@ -131,4 +131,15 @@ public class CardController {
 		return ucs.rejectOpenCard(user_id, card_id, title, content);
 	}
 	
+	/**
+	 * 获得卡列表
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/userCardListJSON")
+	public JSONObject userCardListJSON(HttpServletRequest req){
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
+		return JsonUtil.getUserCardList(ucs.findAllByUser(Integer.valueOf(user.getUser_id())));
+	}
 }

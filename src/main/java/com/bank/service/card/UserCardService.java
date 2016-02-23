@@ -93,6 +93,26 @@ public class UserCardService implements BaseService<UserCardModel> {
 		return ucd.selectAllByUser(uid);
 	}
 	
+	/**
+	 * 根据id修改卡余额
+	 * @param money
+	 * @param id
+	 * @return
+	 */
+	public int alertCardBalanceById(double money,String id){
+		return ucd.updateCardBalanceById(money, id);
+	}
+	
+	/**
+	 * 根据id查询卡余额
+	 * @param money
+	 * @param id
+	 * @return
+	 */
+	public double selectCardBalanceById(String cardnum){
+		return ucd.selectCardBalanceById(cardnum);
+	}
+	
 	@Override
 	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub

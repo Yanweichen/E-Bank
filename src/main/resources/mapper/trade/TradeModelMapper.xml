@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bank.dao.trade.TradeDAO" >
+  <resultMap id="BaseResultMap" type="com.bank.model.trade.TradeModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="trade_number" property="tradeNumber" jdbcType="VARCHAR" />
+    <result column="trade_type" property="tradeType" jdbcType="INTEGER" />
+    <result column="trade_user_id" property="tradeUserId" jdbcType="INTEGER" />
+    <result column="trade_other_user_id" property="tradeOtherUserId" jdbcType="INTEGER" />
+    <result column="trade_expend_money" property="tradeExpendMoney" jdbcType="DOUBLE" />
+    <result column="trade_income_money" property="tradeIncomeMoney" jdbcType="DOUBLE" />
+    <result column="trade_state" property="tradeState" jdbcType="INTEGER" />
+    <result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+    <result column="trade_info" property="tradeInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, trade_number, trade_type, trade_user_id, trade_other_user_id, trade_state, trade_time, 
+    trade_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_trade
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_trade
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bank.model.trade.TradeModel" >
+    insert into user_trade 
+    values (NULL, #{tradeNumber,jdbcType=VARCHAR}, #{tradeType,jdbcType=INTEGER}, 
+      #{tradeUserId,jdbcType=INTEGER}, #{tradeOtherUserId,jdbcType=INTEGER},#{tradeExpendMoney},#{tradeIncomeMoney}, #{tradeState,jdbcType=INTEGER}, 
+      NOW(), #{tradeInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.model.trade.TradeModel" >
+    insert into user_trade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tradeNumber != null" >
+        trade_number,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="tradeUserId != null" >
+        trade_user_id,
+      </if>
+      <if test="tradeOtherUserId != null" >
+        trade_other_user_id,
+      </if>
+      <if test="tradeState != null" >
+        trade_state,
+      </if>
+      <if test="tradeTime != null" >
+        trade_time,
+      </if>
+      <if test="tradeInfo != null" >
+        trade_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNumber != null" >
+        #{tradeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeUserId != null" >
+        #{tradeUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeOtherUserId != null" >
+        #{tradeOtherUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeState != null" >
+        #{tradeState,jdbcType=INTEGER},
+      </if>
+      <if test="tradeTime != null" >
+        #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeInfo != null" >
+        #{tradeInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bank.model.trade.TradeModel" >
+    update user_trade
+    <set >
+      <if test="tradeNumber != null" >
+        trade_number = #{tradeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeUserId != null" >
+        trade_user_id = #{tradeUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeOtherUserId != null" >
+        trade_other_user_id = #{tradeOtherUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeState != null" >
+        trade_state = #{tradeState,jdbcType=INTEGER},
+      </if>
+      <if test="tradeTime != null" >
+        trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeInfo != null" >
+        trade_info = #{tradeInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bank.model.trade.TradeModel" >
+    update user_trade
+    set trade_number = #{tradeNumber,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=INTEGER},
+      trade_user_id = #{tradeUserId,jdbcType=INTEGER},
+      trade_other_user_id = #{tradeOtherUserId,jdbcType=INTEGER},
+      trade_state = #{tradeState,jdbcType=INTEGER},
+      trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+      trade_info = #{tradeInfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

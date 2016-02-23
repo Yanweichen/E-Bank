@@ -47,12 +47,12 @@
 						<div class="row">
 							<div class="col-sm-4 top20" style="text-align: center;">
 								<h5 class="top20">账户余额</h5>
-								<h3 class="top20">0.00</h3>
+								<h3 class="top20">${user.user_account_money}</h3>
 								<button type="button" class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;充值&nbsp;&nbsp;&nbsp;&nbsp;</button>
 								<h5 class="top10">提现</h5>
 							</div>
 							<div class="col-sm-4 top20" style="text-align: center;">
-								<h5 class="top20">账户余额</h5>
+								<h5 class="top20">E宝余额</h5>
 								<h3 class="top20">0.00</h3>
 								<button type="button" class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;充值&nbsp;&nbsp;&nbsp;&nbsp;</button>
 								<h5 class="top10">提现</h5>
@@ -81,28 +81,28 @@
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
 						<div class="row">
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<a href="myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a>
-								<h5>办理银行卡</h5>
+								<a href="myAccount/trade.action" target="_blank"><i class="icon-github-alt" style="color: #3f316d;font-size: 50px;"></i></a> 
+								<h5>转账到E宝</h5>
 								<i class="icon-mobile-phone" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>手机缴费充值</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<a href="myAccount/userCardList.action" target="_blank"><i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i></a>
-								<h5>我的银行卡</h5>
+								<i class="icon-money" style="color: #3f316d;font-size: 50px;"></i> 
+								<h5>转账到银行卡</h5>	
 								<i class="icon-heart" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>爱心捐赠</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<i class="icon-money" style="color: #3f316d;font-size: 50px;"></i> 
-								<h5>转账到银行卡</h5>
+								<a href="myAccount/userCardList.action" target="_blank"><i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i></a>
+								<h5>我的银行卡</h5>
 								<i class="icon-desktop" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>有线电视缴费</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
+								<a href="myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a>
+								<h5>办理银行卡</h5>
 								<i class="icon-tint" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>水电煤缴费</h5>
-								<i class="icon-plus-sign-alt" style="color: #3f316d;font-size: 50px;"></i> 
-								<h5>医院挂号</h5>
 							</div>
 						</div>
 					</div>

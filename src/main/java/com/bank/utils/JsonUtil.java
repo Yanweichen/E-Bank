@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.card.CheckUserAndCardModel;
+import com.bank.model.card.UserCardListModel;
 import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
@@ -134,6 +135,11 @@ public class JsonUtil {
 		return jo;
 	}
 	
+	/**
+	 * 获得新信息
+	 * @param mm
+	 * @return
+	 */
 	public static JSONObject getNewMsgJSON(MsgModel mm){
 		JSONObject jo = new JSONObject();
 		if (mm==null) {
@@ -143,6 +149,18 @@ public class JsonUtil {
 			jo.put("msg", JSON.toJSON(mm));
 		}
 		
+		return jo;
+	}
+	
+	public static JSONObject getUserCardList(List<UserCardListModel> list){
+			JSONObject jo = new JSONObject();
+			if (list!=null&&list.size()!=0) {
+				jo.put("error", 200);
+				jo.put("msg", JSON.toJSON(list));
+			}else{
+				jo.put("error", 203);
+				jo.put("msg", "获取用户卡列表失败");
+			}
 		return jo;
 	}
 }

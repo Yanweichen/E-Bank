@@ -466,4 +466,19 @@ public class UserInfoController {
 		jo.put("msg", "修改成功！");
 		return jo;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getusername")
+	public JSONObject getUserBalance(String account){
+		JSONObject jo = new JSONObject();
+		UserModel um = us.findUserByAccoutn(account);
+		if (um==null) {
+			jo.put("valid", false);
+			jo.put("message", "您输入的账号不存在！");
+		} else {
+			jo.put("valid", true);
+			jo.put("message", um.getUser_name().substring(0,1)+"**");
+		}
+		return jo;
+	}
 }

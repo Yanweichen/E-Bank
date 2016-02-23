@@ -20,31 +20,6 @@
 <link rel="stylesheet" href="page/assets/css/bootstrapValidator.min.css"/>
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
-#setlist .list-group-item{
-	border:0;
-	background-color: rgba(255,255,255,0.3);
-	cursor:pointer;
-}
-#setlist .list-group-item:hover{
-	border:0;
-	background-color: rgba(255,255,255,0.9);
-	cursor:pointer;
-}
-.iconactive{
-font-size: 20px;
-color: white;
-}
-.iconnoactive{
-font-size: 19px;
-color: #3f316d
-}
-.titlenoview{
-font-weight: bold;
-color: black;
-}
-.titleisview{
-color: #777777;
-}
 </style>
 <title>我的消息</title>
 </head>

@@ -56,3 +56,41 @@ a:visited {color: #3f316d;text-decoration: none;}	/* 已访问的链接 */
 a:hover {color: #4C9ED9;text-decoration: none;}		/* 鼠标移动到链接上 */
 a:active {color: #4C9ED9;text-decoration: none;}    /* 选定的链接 */
 
+/*左侧导航*/
+#setlist .list-group-item{
+	border:0;
+	background-color: rgba(255,255,255,0.3);
+	cursor:pointer;
+}
+#setlist .list-group-item:hover{
+	border:0;
+	background-color: rgba(255,255,255,0.9);
+	cursor:pointer;
+}
+.iconactive{
+font-size: 20px;
+color: white;
+}
+.iconnoactive{
+font-size: 19px;
+color: #3f316d
+}
+.titlenoview{
+font-weight: bold;
+color: black;
+}
+.titleisview{
+color: #777777;
+}
+.gray9{
+	color: #999999
+}
+.gray8{
+	color: #888888
+}
+.gray7{
+	color: #777777
+}
+.gray6{
+	color: #666666
+}

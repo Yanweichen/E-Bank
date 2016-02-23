@@ -26,11 +26,24 @@
 	<jsp:include page="../../../page/head_foot/mybank_head.jsp"></jsp:include>
 	<div class="container top20">
 		<div class="row">
-			<div class="panel panel-default touming6 yuanjiao15" >
+		<div class="col-sm-3">
+				<div id="setlist" class="list-group touming6">
+				  <a id="noviewa" href="msg/msgBox.action?state=noview&limit=5&offset=0" class="list-group-item">
+				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;转账
+				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
+				  </a>
+				  <a id="isviewa" href="msg/msgBox.action?state=isview&limit=5&offset=0" class="list-group-item">
+				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;我的银行卡
+				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
+				  </a>
+				</div>
+		</div>
+		<div class="col-sm-9">
+				<div class="panel panel-default touming6 yuanjiao15" >
 			  <div class="panel-heading yuanjiao15" ><h4 style="color: #3f314d;"><i class="icon-credit-card"></i>&nbsp;&nbsp;我的银行卡</h4></div>
 			  <div class="panel-body">
 			  <c:forEach var="card" items="${usercardlist}">
-				    <div class="col-sm-4">
+				    <div class="col-sm-6">
 				    	<div class="panel panel-default touming6" >
 				    		<div class="panel-heading" style="background-color: #3f315d;color: white;">${card.card_name}</div>
 				  			<div class="panel-body" style="height: 150px;">
@@ -38,7 +51,7 @@
 				  				<img class="img-thumbnail" src="${card.card_face}" style="position:absolute;">
 				  			</div>
 				  				<h4 class="overstep" style="width: 150px;" onmouseover="$(this).removeClass('overstep')" onmouseout="$(this).addClass('overstep')">${card.user_name}</h4>
-				  				<h5 class="overstep" style="width: 150px;" onmouseover="$(this).removeClass('overstep')" onmouseout="$(this).addClass('overstep')">${card.user_card_num}</h5>
+				  				<h5 class="overstep" style="width: 170px;" onmouseover="$(this).removeClass('overstep')" onmouseout="$(this).addClass('overstep')">${card.user_card_num}</h5>
 				  				<button type="button" class="btn btn-primary btn-xs btncolor" data-container="body" data-toggle="popover" data-placement="top" data-content="${card.user_card_balance}">
 								  点我查看余额
 								</button>
@@ -66,6 +79,7 @@
 			  </div>
 			</div>
 		</div>
+		</div>
 	</div>
 	<!-- foot -->
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
@@ -76,6 +90,25 @@
 		$(function () {
 		  $('[data-toggle="popover"]').popover()
 		})
+		function init(state){
+		switch (state) {
+		case "isview":
+			$("#isviewa").attr("style","background-color: #3f316d;border-color: #3f316d;color: white;");
+			$("#isviewi").addClass("iconactive")
+			$("#noviewi").addClass("iconnoactive")
+			$("#alli").addClass("iconnoactive")
+			break;
+		case "noview":
+			$("#noviewa").attr("style","background-color: #3f316d;border-color: #3f316d;color: white;");
+			$("#isviewi").addClass("iconnoactive")
+			$("#noviewi").addClass("iconactive")
+			$("#alli").addClass("iconnoactive")
+			break;
+		}
+	}
+	$(document).ready(function() {
+		init("isview")
+	})
 	</script>
 </body>
 </html>

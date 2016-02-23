@@ -18,6 +18,22 @@ public class UserModel {
 	private Date user_last_login_time;
 	private Date user_regist_time;
 	
+	private double user_account_money;
+	private double user_account_balance;
+	
+	
+	public double getUser_account_money() {
+		return user_account_money;
+	}
+	public void setUser_account_money(double user_account_money) {
+		this.user_account_money = user_account_money;
+	}
+	public double getUser_account_balance() {
+		return user_account_balance;
+	}
+	public void setUser_account_balance(double user_account_balance) {
+		this.user_account_balance = user_account_balance;
+	}
 	public Date getUser_regist_time() {
 		return user_regist_time;
 	}

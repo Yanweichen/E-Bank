@@ -14,11 +14,13 @@
     <result column="user_email" property="user_email" jdbcType="VARCHAR" />
     <result column="user_last_login_time" property="user_last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     <result column="user_regist_time" property="user_regist_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    <result column="user_account_money" property="user_account_money" jdbcType="VARCHAR" />
+    <result column="user_account_balance" property="user_account_balance" jdbcType="VARCHAR" />
   </resultMap>
   <!-- 注册-->
   <insert id="insert" parameterType="com.bank.model.user.UserModel">
   	INSERT INTO user_userinfo VALUES(null,#{user_name},#{user_pass},null,#{user_city},
-  	#{user_obligate_info},null,#{user_idcard},#{user_phone},#{user_email},0,#{user_last_login_time},#{user_regist_time});
+  	#{user_obligate_info},null,#{user_idcard},#{user_phone},#{user_email},0,#{user_last_login_time},#{user_regist_time},#{user_account_money},#{user_account_balance});
   </insert>
   <!-- 更新用户状态 -->
   <update id="updateUserStateByIdcard">
@@ -40,4 +42,20 @@
   <delete id="deleteUserByIdcard" parameterType="String">
   	DELETE FROM user_userinfo WHERE user_idcard = #{account} OR user_phone = #{account} OR user_email = #{account};
   </delete>
+  <!-- 更新用户余额 -->
+  <update id="updateUserMoneyById">
+  	UPDATE user_userinfo SET user_account_money = #{0} WHERE user_id = #{1};
+  </update>
+  <!-- 更新用户余额宝余额 -->
+  <update id="updateUserBalanceById">
+  	UPDATE user_userinfo SET user_account_balance = #{0} WHERE user_id = #{1};
+  </update>
+  <!-- 查询用户余额 -->
+  <select id="selectUserMoneyById" resultType="java.lang.Double">
+ 	SELECT user_account_money FROM user_userinfo WHERE user_id=#{id};
+  </select>
+    <!-- 查询用户余额 -->
+  <select id="selectUserBalanceById" resultType="java.lang.Double">
+ 	SELECT user_account_balance FROM user_userinfo WHERE user_id=#{id};
+  </select>
 </mapper>

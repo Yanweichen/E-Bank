@@ -51,6 +51,16 @@ public class RegularUtil {
 	 */
 	public static final int NOCHECK = 6;//审核未通过
 	
+	/**
+	 * 用户交易
+	 */
+	public static final int USERTRADE = 1;//用户交易
+	
+	/**
+	 * 缴费
+	 */
+	public static final int USERPAYTRADE = 2;//缴费
+	
 	public static final int STICK = 1;//挂失
 	public static final int STAR = 5;//挂失
 	

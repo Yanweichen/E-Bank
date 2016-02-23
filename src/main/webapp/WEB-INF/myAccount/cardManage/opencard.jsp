@@ -17,7 +17,7 @@
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/mybankbase.css">
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
-
+<link rel="stylesheet" href="page/assets/css/bootstrap-switch.css"/>
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <title>办理银行卡</title>
 <style type="text/css">
@@ -48,30 +48,15 @@
 					</div>
 					<div class="form-group ">
 						<label for="user_name">自助设备转账开关</label>
-						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions1" id="inlineRadio1" checked="checked" value="1"> 开
-						</label>
-						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="0"> 关
-						</label>
+  						<input name="cbox" type="checkbox" checked />
 					</div>
 					<div class="form-group ">
 						<label for="user_name">自助设备取现开关</label>
-						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions2" id="inlineRadio1" checked="checked" value="1"> 开
-						</label>
-						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="0"> 关
-						</label>
+						<input name="cbox" type="checkbox" checked />
 					</div>
 					<div class="form-group ">
 						<label for="user_name">POS转账消费开关</label>
-						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions3" id="inlineRadio1" checked="checked" value="1"> 开
-						</label>
-						<label class="radio-inline">
-						  <input type="radio" name="inlineRadioOptions3" id="inlineRadio2" value="0"> 关
-						</label>
+						<input name="cbox" type="checkbox" checked />
 					</div>
 					<div class="col-sm-4 col-sm-offset-4" >
 						<form action="card/opencardcheck.action">
@@ -89,5 +74,12 @@
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/bootstrap-switch.min.js"></script> 
+	<script type="text/javascript">
+	$("[name='cbox']").bootstrapSwitch('handleWidth',40);
+	$("[name='cbox']").bootstrapSwitch('size',"small");
+	$("[name='cbox']").bootstrapSwitch('onColor',"default");
+	$("[name='cbox']").bootstrapSwitch('offColor',"primary");
+	</script>
 </body>
 </html>

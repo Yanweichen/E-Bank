@@ -56,4 +56,10 @@ public class MyAccountController {
 		mv.addObject("usercardlist",ucs.findAllByUser(Integer.valueOf(user.getUser_id())));
 		return mv;
 	}
+	
+	
+	@RequestMapping("/trade")
+	public String trade(){
+		return "myAccount/tradeManage/trade";
+	}
 }
