@@ -161,4 +161,20 @@ public class CardController {
 		}
 		return jo;
 	}
+	
+	/**
+	 * 查卡数量
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getcardcount")
+	public JSONObject selectCardCountByUser(HttpServletRequest req){
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
+		int id = Integer.valueOf(user.getUser_id());
+		JSONObject jo = new JSONObject();
+		jo.put("error", 200);
+		jo.put("msg", ucs.selectCardCountByUser(id));
+		return jo;
+	}
 }

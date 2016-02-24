@@ -381,7 +381,11 @@ ul.news li p{float:right; color:#000000}
 		<div class="row">
 			<div class="col-sm-11">
 				<div class="panel panel-default centerpanel">
-					<div class="panel-body">Basic panel example</div>
+					<div class="panel-body" style="text-align: center;padding-top: 50px;">
+						<div style="font-size: 50px">广告位招租</div>
+						<div style="font-size: 50px">测试账号:505717760@qq.com</div>
+						<div style="font-size: 50px">密码：111</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-1"></div>

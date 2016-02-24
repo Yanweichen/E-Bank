@@ -66,4 +66,11 @@
   	FROM user_card
   	WHERE user_card_num = #{cardnum};
   </select>
+   <!-- 根据卡号查询卡 -->
+  <select id="selectCardCountByUser" resultType="java.lang.Integer" >
+  	SELECT 
+  	COUNT(*)
+  	FROM user_card
+  	WHERE user_card_user_id = #{id};
+  </select>
 </mapper>

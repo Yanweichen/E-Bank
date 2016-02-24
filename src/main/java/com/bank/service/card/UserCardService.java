@@ -122,6 +122,15 @@ public class UserCardService implements BaseService<UserCardModel> {
 		return ucd.selectCardByCardNum(num);
 	}
 	
+	/**
+	 * 根据用户查询卡的数量
+	 * @param id
+	 * @return
+	 */
+	public int selectCardCountByUser(int id){
+		return ucd.selectCardCountByUser(id);
+	}
+	
 	@Override
 	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub
