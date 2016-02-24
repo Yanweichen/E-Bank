@@ -1,5 +1,7 @@
 package com.bank.controller.trade;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.other.TradePage;
 import com.bank.model.user.UserModel;
 import com.bank.service.trade.TradeService;
 import com.bank.service.user.UserService;
@@ -132,6 +135,22 @@ public class TradeController {
 			req.getSession().setAttribute("user", us.findUserByAccoutn(user.getUser_idcard()));//刷新用户信息
 		}
 		return jo;
+	}
+	
+	/**
+	 * 获取交易记录
+	 * @param tp
+	 * @param req
+	 * @return
+	 * @throws ParseException 
+	 * @throws NumberFormatException 
+	 */
+	@ResponseBody
+	@RequestMapping("/gettradelist")
+	public JSONObject getTradeList(TradePage tp,HttpServletRequest req) throws NumberFormatException, ParseException{
+		UserModel user = ((UserModel)req.getSession().getAttribute("user") );
+		tp.setUid(Integer.valueOf(user.getUser_id()));
+		return JsonUtil.getTradeList(ts.selectTradeCountByUser(Integer.valueOf(user.getUser_id())),ts.findTradeByPage(tp)) ;
 	}
 	
 	/**

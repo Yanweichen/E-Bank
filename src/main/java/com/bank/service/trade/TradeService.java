@@ -1,5 +1,6 @@
 package com.bank.service.trade;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bank.base.BaseService;
 import com.bank.dao.trade.TradeDAO;
 import com.bank.model.msg.MsgModel;
+import com.bank.model.other.TradePage;
 import com.bank.model.trade.TradeModel;
 import com.bank.model.user.UserModel;
 import com.bank.service.card.UserCardService;
@@ -55,7 +57,7 @@ public class TradeService implements BaseService<TradeModel>{
 			tm.setTradeUserId(Integer.valueOf(user.getUser_id()));
 			tm.setTradeOtherUserId(Integer.valueOf(um.getUser_id()));
 			tm.setTradeState(1);//1正常2失败
-			tm.setTradeType(RegularUtil.USERTRADE);//
+			tm.setTradeTypeId(RegularUtil.USERTRADE);//
 			tm.setTradeExpendMoney(trademoney);
 			tm.setTradeIncomeMoney(0);
 			add(tm);//转账方添加交易记录
@@ -116,7 +118,7 @@ public class TradeService implements BaseService<TradeModel>{
 			tm.setTradeUserId(Integer.valueOf(user.getUser_id()));
 			tm.setTradeOtherUserId(Integer.valueOf(um.getUser_id()));
 			tm.setTradeState(1);//1正常2失败
-			tm.setTradeType(RegularUtil.USERTRADE);//
+			tm.setTradeTypeId(RegularUtil.USERTRADE);//
 			tm.setTradeExpendMoney(trademoney);
 			tm.setTradeIncomeMoney(0);
 			tm.setTradeUserCard(cardnum);
@@ -179,7 +181,7 @@ public class TradeService implements BaseService<TradeModel>{
 			tm.setTradeUserId(Integer.valueOf(user.getUser_id()));
 			tm.setTradeOtherUserId(Integer.valueOf(um.getUser_id()));
 			tm.setTradeState(1);//1正常2失败
-			tm.setTradeType(RegularUtil.USERTRADE);//
+			tm.setTradeTypeId(RegularUtil.USERTRADE);//
 			tm.setTradeExpendMoney(trademoney);
 			tm.setTradeIncomeMoney(0);
 			tm.setTradeUserCard(usercardnum);
@@ -245,7 +247,7 @@ public class TradeService implements BaseService<TradeModel>{
 			tm.setTradeUserId(Integer.valueOf(user.getUser_id()));
 			tm.setTradeOtherUserId(Integer.valueOf(um.getUser_id()));
 			tm.setTradeState(1);//1正常2失败
-			tm.setTradeType(RegularUtil.USERTRADE);//
+			tm.setTradeTypeId(RegularUtil.USERTRADE);//
 			tm.setTradeExpendMoney(trademoney);
 			tm.setTradeIncomeMoney(0);
 			tm.setTradeOtherCard(tocardnum);
@@ -305,11 +307,16 @@ public class TradeService implements BaseService<TradeModel>{
 					us.alertUserBalanceById(user.getUser_account_balance()-trademoney, uid);
 					us.alertUserMoneyById(user.getUser_account_money()+trademoney, uid);
 					TradeModel tm = new TradeModel();
-					tm.setTradeExpendMoney(0);
-					tm.setTradeIncomeMoney(0);
+					tm.setTradeExpendMoney(trademoney);
+					tm.setTradeIncomeMoney(trademoney);
 					tm.setTradeInfo(tradeinfo);
 					tm.setTradeNumber(System.currentTimeMillis()+"");
-					
+					tm.setTradeUserId(uid);
+					tm.setTradeOtherUserId(uid);
+					tm.setTradeTime(new Date());
+					tm.setTradeState(1);
+					tm.setTradeTypeId(RegularUtil.TRADEIN);
+					add(tm);
 				}else{
 					//使用银行卡
 					double cardmoney = ucs.selectCardBalanceById(cardnum);
@@ -320,6 +327,17 @@ public class TradeService implements BaseService<TradeModel>{
 					}
 					ucs.alertCardBalanceById(cardmoney-trademoney, cardnum);
 					us.alertUserMoneyById(user.getUser_account_money()+trademoney, uid);
+					TradeModel tm = new TradeModel();
+					tm.setTradeExpendMoney(trademoney);
+					tm.setTradeIncomeMoney(trademoney);
+					tm.setTradeInfo(tradeinfo);
+					tm.setTradeNumber(System.currentTimeMillis()+"");
+					tm.setTradeUserId(uid);
+					tm.setTradeOtherUserId(uid);
+					tm.setTradeTime(new Date());
+					tm.setTradeState(1);
+					tm.setTradeTypeId(RegularUtil.TRADEIN);
+					add(tm);
 				}
 				
 			} else {
@@ -333,6 +351,17 @@ public class TradeService implements BaseService<TradeModel>{
 					}
 					us.alertUserBalanceById(user.getUser_account_balance()+trademoney, uid);
 					us.alertUserMoneyById(user.getUser_account_money()-trademoney, uid);
+					TradeModel tm = new TradeModel();
+					tm.setTradeExpendMoney(trademoney);
+					tm.setTradeIncomeMoney(trademoney);
+					tm.setTradeInfo(tradeinfo);
+					tm.setTradeNumber(System.currentTimeMillis()+"");
+					tm.setTradeUserId(uid);
+					tm.setTradeOtherUserId(uid);
+					tm.setTradeTime(new Date());
+					tm.setTradeState(1);
+					tm.setTradeTypeId(RegularUtil.TRADEIN);
+					add(tm);
 				}else{
 					
 					//使用银行卡
@@ -344,6 +373,17 @@ public class TradeService implements BaseService<TradeModel>{
 					}
 					us.alertUserBalanceById(user.getUser_account_balance()+trademoney, uid);
 					ucs.alertCardBalanceById(cardmoney-trademoney, cardnum);
+					TradeModel tm = new TradeModel();
+					tm.setTradeExpendMoney(trademoney);
+					tm.setTradeIncomeMoney(trademoney);
+					tm.setTradeInfo(tradeinfo);
+					tm.setTradeNumber(System.currentTimeMillis()+"");
+					tm.setTradeUserId(uid);
+					tm.setTradeOtherUserId(uid);
+					tm.setTradeTime(new Date());
+					tm.setTradeState(1);
+					tm.setTradeTypeId(RegularUtil.TRADEIN);
+					add(tm);
 				}
 			}
 		jo.put("error", 200);
@@ -373,6 +413,17 @@ public class TradeService implements BaseService<TradeModel>{
 			}
 			us.alertUserBalanceById(user.getUser_account_balance()-trademoney, uid);
 			ucs.alertCardBalanceById(ucs.selectCardBalanceById(cardnum)+trademoney, cardnum);
+			TradeModel tm = new TradeModel();
+			tm.setTradeExpendMoney(trademoney);
+			tm.setTradeIncomeMoney(trademoney);
+			tm.setTradeInfo(tradeinfo);
+			tm.setTradeNumber(System.currentTimeMillis()+"");
+			tm.setTradeUserId(uid);
+			tm.setTradeOtherUserId(uid);
+			tm.setTradeTime(new Date());
+			tm.setTradeState(1);
+			tm.setTradeTypeId(RegularUtil.TRADEOUT);
+			add(tm);
 		}else{
 			//从余额转到卡
 			if (user.getUser_account_money()-trademoney<0) {
@@ -382,13 +433,41 @@ public class TradeService implements BaseService<TradeModel>{
 			}
 			us.alertUserMoneyById(user.getUser_account_money()-trademoney, uid);
 			ucs.alertCardBalanceById(ucs.selectCardBalanceById(cardnum)+trademoney, cardnum);
-			
-			
+			TradeModel tm = new TradeModel();
+			tm.setTradeExpendMoney(trademoney);
+			tm.setTradeIncomeMoney(trademoney);
+			tm.setTradeInfo(tradeinfo);
+			tm.setTradeNumber(System.currentTimeMillis()+"");
+			tm.setTradeUserId(uid);
+			tm.setTradeOtherUserId(uid);
+			tm.setTradeTime(new Date());
+			tm.setTradeState(1);
+			tm.setTradeTypeId(RegularUtil.TRADEOUT);
+			add(tm);
 		}
 		jo.put("error", 200);
 		jo.put("msg", "转账成功");
 		return jo;
 	}
+	
+	/**
+	 * 根据条件查询交易记录
+	 * @param tp
+	 * @return
+	 */
+	public List<TradeModel> findTradeByPage(TradePage tp){
+		return td.selectTradeByPage(tp);
+	}
+	
+	/**
+	 * 根据id查询交易总数
+	 * @param id
+	 * @return
+	 */
+	public int selectTradeCountByUser(int id){
+		return td.selectTradeCountByUser(id);
+	}
+	
 	@Override
 	public int add(TradeModel model) {
 		// TODO Auto-generated method stub

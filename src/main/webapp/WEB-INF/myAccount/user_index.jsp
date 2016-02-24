@@ -125,11 +125,15 @@
 			       data-show-refresh="true">
 				    <thead>
 				        <tr>
-				            <th data-field="index_id" data-align="center" data-sortable="true">交易类型</th>
-				            <th data-field="index_type" data-align="right">交易时间</th>
-				            <th data-width="40%" data-field="index_title" data-align="center">交易详情</th>
-				            <th data-field="index_uptime_format" data-align="" data-sortable="true">交易金额</th>
-				            <th data-field="upfrom" data-align="">交易状态</th>
+				            <th data-field="tradeTypeImage" data-align="center" data-sortable="true">交易类型图片</th>
+				            <th data-field="tradeType" data-align="right">交易类型</th>
+				            <th data-field="tradeInfo" data-align="center">交易详情</th>
+				            <th data-field="tradeTimefmt" data-align="" data-sortable="true">时间</th>
+				            <th data-field="tradeOhterName" data-align="">对方姓名</th>
+				            <th data-field="tradeIncomeMoneystr" data-align="">收入</th>
+				            <th data-field="tradeExpendMoneystr" data-align="">支出</th>
+				            <th data-field="tradeUserCard" data-align="">本方使用的卡片</th>
+				            <th data-field="tradeOtherCard" data-align="">对方使用的卡片</th>
 				            <th data-field="action" data-align="" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
 				        </tr>
 				    </thead>
@@ -147,7 +151,7 @@
 	<script type="text/javascript">
 		$("#foot").removeClass("navbar-fixed-bottom");
 	    $('#transaction').bootstrapTable({
-	 	    url: "index/Allnotice.action?isView=view&order=asc&limit=10&offset=0",
+	 	    url: "trade/gettradelist.action?limit=10&offset=0",
 	 	})
 	 	function actionFormatter(value, row, index) {
 	    	 return [

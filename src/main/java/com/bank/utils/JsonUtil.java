@@ -14,6 +14,7 @@ import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
 import com.bank.model.msg.MsgModel;
+import com.bank.model.trade.TradeModel;
 import com.bank.model.user.UserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -181,6 +182,21 @@ public class JsonUtil {
 			jo.put("error", 203);
 			jo.put("msg", "获取最近相关交易人员列表失败！");
 		}
+		return jo;
+	}
+
+	public static JSONObject getTradeList(int total,List<TradeModel> findTradeByPage) throws ParseException {
+		JSONObject jo = new JSONObject();
+		jo.put("total", total);
+		JSONArray jarr = new JSONArray();
+		for (TradeModel tradeModel : findTradeByPage) {
+			tradeModel.setTradeTimefmt(TimeUtil.Date2String(tradeModel.getTradeTime(), "MM/dd HH:mm"));
+			tradeModel.setTradeIncomeMoneystr("<span style='color: green'>"+tradeModel.getTradeIncomeMoney()+"</span>");
+			tradeModel.setTradeExpendMoneystr("<span style='color: red'>"+tradeModel.getTradeExpendMoney()+"</span>");
+			tradeModel.setTradeTypeImage("<img src="+tradeModel.getTradeTypeImage()+" class='tradetypeimage img-circle'>");
+			jarr.add(JSON.toJSON(tradeModel));
+		}
+		jo.put("rows", jarr);
 		return jo;
 	}
 }

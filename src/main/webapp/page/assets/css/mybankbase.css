@@ -15,6 +15,10 @@
 .colgb{
 	color: #bbbbbb;
 }
+.tradetypeimage{
+	height: 30px;
+	width:  30px;
+}
 .nosingline{
 	display: inline;
 }

@@ -176,6 +176,7 @@
 			</div>
 		</div>
 	</div>
+	<img src="" class="tradetypeimage img-circle">
 	<div class="fakeloader"></div>
 	<!-- foot -->
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>

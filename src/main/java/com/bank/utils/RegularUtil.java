@@ -61,6 +61,21 @@ public class RegularUtil {
 	 */
 	public static final int USERPAYTRADE = 2;//缴费
 	
+	//交易类型
+	/**
+	 * 转入
+	 */
+	public static final int TRADEIN = 1;//缴费
+	/**
+	 * 转出
+	 */
+	public static final int TRADEOUT = 2;//缴费
+	/**
+	 * 缴费
+	 */
+	public static final int PAY = 3;//缴费
+	
+	
 	public static final int STICK = 1;//挂失
 	public static final int STAR = 5;//挂失
 	

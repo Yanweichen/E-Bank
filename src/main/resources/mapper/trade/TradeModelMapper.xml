@@ -3,8 +3,10 @@
 <mapper namespace="com.bank.dao.trade.TradeDAO" >
   <resultMap id="BaseResultMap" type="com.bank.model.trade.TradeModel" >
     <id column="id" property="id" jdbcType="INTEGER" />
+  	<result column="trade_type_img" property="tradeTypeImage" jdbcType="VARCHAR" />
+    <result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
     <result column="trade_number" property="tradeNumber" jdbcType="VARCHAR" />
-    <result column="trade_type" property="tradeType" jdbcType="INTEGER" />
+    <result column="trade_type_id" property="tradeTypeId" jdbcType="INTEGER" />
     <result column="trade_user_id" property="tradeUserId" jdbcType="INTEGER" />
     <result column="trade_other_user_id" property="tradeOtherUserId" jdbcType="INTEGER" />
     <result column="trade_user_card" property="tradeUserCard" jdbcType="VARCHAR" />
@@ -14,6 +16,7 @@
     <result column="trade_state" property="tradeState" jdbcType="INTEGER" />
     <result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
     <result column="trade_info" property="tradeInfo" jdbcType="VARCHAR" />
+    <result column="tradeOhterName" property="tradeOhterName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, trade_number, trade_type, trade_user_id, trade_other_user_id,trade_user_card ,trade_other_card ,trade_state, trade_time, 
@@ -31,7 +34,7 @@
   </delete>
   <insert id="insert" parameterType="com.bank.model.trade.TradeModel" >
     insert into user_trade 
-    values (NULL, #{tradeNumber,jdbcType=VARCHAR}, #{tradeType,jdbcType=INTEGER}, 
+    values (NULL, #{tradeNumber,jdbcType=VARCHAR}, #{tradeTypeId,jdbcType=INTEGER}, 
       #{tradeUserId,jdbcType=INTEGER}, #{tradeOtherUserId,jdbcType=INTEGER},#{tradeUserCard},#{tradeOtherCard},#{tradeExpendMoney},#{tradeIncomeMoney}, #{tradeState,jdbcType=INTEGER}, 
       NOW(), #{tradeInfo,jdbcType=VARCHAR})
   </insert>
@@ -128,4 +131,24 @@
       trade_info = #{tradeInfo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 根据用户ID查询用户交易记录 -->
+  <select id="selectTradeByPage" parameterType="com.bank.model.other.TradePage" resultMap="BaseResultMap">
+  SELECT tt.`trade_type_img`,tt.`trade_type`,ut.*,uu.`user_name` tradeOhterName
+  FROM user_trade ut,trade_type tt,user_userinfo uu
+  WHERE 1=1
+  <choose> 
+        <when test="starttime != null and endtime !=null"> 
+            AND ut.`trade_time` BETWEEN DATE_FORMAT(#{starttime}, '%Y%m%d') AND DATE_FORMAT(#{endtime}, '%Y%m%d%H%i%s')
+       </when>
+        <when test="info != null"> 
+        	AND ut.`trade_info` LIKE '%#{info}%'
+       </when>   
+       <otherwise> 
+       </otherwise> 
+   	</choose>
+    AND uu.`user_id`=ut.`trade_other_user_id` AND tt.`id`=ut.`trade_type_id` AND ut.`trade_user_id`=#{uid} ORDER BY ut.`trade_time` DESC;
+  </select>
+  <select id="selectTradeCountByUser" resultType="java.lang.Integer">
+  SELECT COUNT(*) FROM user_trade WHERE trade_user_id = #{id}
+  </select>
 </mapper>
