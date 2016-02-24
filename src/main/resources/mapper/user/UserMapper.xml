@@ -66,5 +66,10 @@
    AND user_id IN(SELECT trade_other_user_id FROM user_trade WHERE trade_user_id = #{id} GROUP BY trade_other_user_id) 
    GROUP BY user_id ORDER BY ut.`trade_time` DESC 
   </select>
-
+  <select id="selecUserByCardNum" resultType="com.bank.model.user.UserModel">
+  	SELECT uu.* 
+  	FROM user_userinfo uu,user_card uc 
+  	WHERE uu.`user_id`=uc.`user_card_user_id` AND uc.`user_card_num`=#{num}
+  	GROUP BY uu.`user_id`;
+  </select>
 </mapper>

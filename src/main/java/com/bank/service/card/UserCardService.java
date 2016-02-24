@@ -113,6 +113,15 @@ public class UserCardService implements BaseService<UserCardModel> {
 		return ucd.selectCardBalanceById(cardnum);
 	}
 	
+	/**
+	 * 根据卡号查询卡
+	 * @param num
+	 * @return
+	 */
+	public UserCardModel findCardByCardNum(String num){
+		return ucd.selectCardByCardNum(num);
+	}
+	
 	@Override
 	public int RemoveById(Integer id) {
 		// TODO Auto-generated method stub

@@ -1,5 +1,6 @@
 package com.bank.model.user;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class UserModel {
@@ -23,13 +24,17 @@ public class UserModel {
 	
 	
 	public double getUser_account_money() {
-		return user_account_money;
+		BigDecimal bg = new BigDecimal(user_account_money);
+		double f1 = bg.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+		return f1;
 	}
 	public void setUser_account_money(double user_account_money) {
 		this.user_account_money = user_account_money;
 	}
 	public double getUser_account_balance() {
-		return user_account_balance;
+		BigDecimal bg = new BigDecimal(user_account_balance);
+		double f1 = bg.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+		return f1;
 	}
 	public void setUser_account_balance(double user_account_balance) {
 		this.user_account_balance = user_account_balance;

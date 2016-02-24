@@ -7,6 +7,8 @@
     <result column="trade_type" property="tradeType" jdbcType="INTEGER" />
     <result column="trade_user_id" property="tradeUserId" jdbcType="INTEGER" />
     <result column="trade_other_user_id" property="tradeOtherUserId" jdbcType="INTEGER" />
+    <result column="trade_user_card" property="tradeUserCard" jdbcType="VARCHAR" />
+    <result column="trade_other_card" property="tradeOtherCard" jdbcType="VARCHAR" />
     <result column="trade_expend_money" property="tradeExpendMoney" jdbcType="DOUBLE" />
     <result column="trade_income_money" property="tradeIncomeMoney" jdbcType="DOUBLE" />
     <result column="trade_state" property="tradeState" jdbcType="INTEGER" />
@@ -14,7 +16,7 @@
     <result column="trade_info" property="tradeInfo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, trade_number, trade_type, trade_user_id, trade_other_user_id, trade_state, trade_time, 
+    id, trade_number, trade_type, trade_user_id, trade_other_user_id,trade_user_card ,trade_other_card ,trade_state, trade_time, 
     trade_info
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -30,7 +32,7 @@
   <insert id="insert" parameterType="com.bank.model.trade.TradeModel" >
     insert into user_trade 
     values (NULL, #{tradeNumber,jdbcType=VARCHAR}, #{tradeType,jdbcType=INTEGER}, 
-      #{tradeUserId,jdbcType=INTEGER}, #{tradeOtherUserId,jdbcType=INTEGER},#{tradeExpendMoney},#{tradeIncomeMoney}, #{tradeState,jdbcType=INTEGER}, 
+      #{tradeUserId,jdbcType=INTEGER}, #{tradeOtherUserId,jdbcType=INTEGER},#{tradeUserCard},#{tradeOtherCard},#{tradeExpendMoney},#{tradeIncomeMoney}, #{tradeState,jdbcType=INTEGER}, 
       NOW(), #{tradeInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bank.model.trade.TradeModel" >

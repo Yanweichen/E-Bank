@@ -22,7 +22,26 @@ public class TradeModel {
     private double tradeIncomeMoney;
     private double tradeExpendMoney;
 
-    public double getTradeIncomeMoney() {
+    private String tradeUserCard;
+    private String tradeOtherCard;
+    
+    public String getTradeUserCard() {
+		return tradeUserCard;
+	}
+
+	public void setTradeUserCard(String tradeUserCard) {
+		this.tradeUserCard = tradeUserCard;
+	}
+
+	public String getTradeOtherCard() {
+		return tradeOtherCard;
+	}
+
+	public void setTradeOtherCard(String tradeOtherCard) {
+		this.tradeOtherCard = tradeOtherCard;
+	}
+
+	public double getTradeIncomeMoney() {
 		return tradeIncomeMoney;
 	}
 

@@ -12,4 +12,5 @@ public interface UserCardDAO extends BaseDAO<UserCardModel> {
 	public List<UserCardListModel> selectAllByUser(int uid);
 	public double selectCardBalanceById(String cardnum);
 	public int updateCardBalanceById(double money,String cardnum);
+	public UserCardModel selectCardByCardNum(String num);
 }

@@ -59,4 +59,11 @@
   <select id="selectCardBalanceById" resultType="java.lang.Double">
   	SELECT user_card_balance FROM user_card WHERE user_card_num = #{cardnum};
   </select>
+  <!-- 根据卡号查询卡 -->
+  <select id="selectCardByCardNum" resultMap="BaseResultMap" >
+  	SELECT 
+  	<include refid="Base_Column_List"/>
+  	FROM user_card
+  	WHERE user_card_num = #{cardnum};
+  </select>
 </mapper>

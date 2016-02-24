@@ -88,6 +88,14 @@ color: black;
 .titleisview{
 color: #777777;
 }
+.tbcstyle{
+	padding: 10px;
+	background: white;
+	border-bottom: 1px solid #D3D3D3;
+	border-left: 1px solid #D3D3D3;
+	border-right: 1px solid #D3D3D3;
+	border-radius: 0px 0px 10px 10px;
+}
 .gray9{
 	color: #999999
 }

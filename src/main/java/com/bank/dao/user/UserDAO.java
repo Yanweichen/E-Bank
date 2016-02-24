@@ -17,4 +17,5 @@ public interface UserDAO extends BaseDAO<UserModel>{
 	public int updateUserBalanceById(double money,int id);
 	public int updateUserMoneyById(double money,int id);
 	public List<UserModel> selectRecentlyTradeUser(int id);
+	public UserModel selecUserByCardNum(String num);
 }

@@ -46,22 +46,22 @@
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
 						<div class="row">
 							<div class="col-sm-4 top20" style="text-align: center;">
-								<h5 class="top20">账户余额</h5>
+								<h5 class="top20">E宝</h5>
 								<h3 class="top20">${user.user_account_money}</h3>
-								<button type="button" class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;充值&nbsp;&nbsp;&nbsp;&nbsp;</button>
-								<h5 class="top10">提现</h5>
+								<button type="button" onclick="javascript:window.location='myAccount/outin.action'"  class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;充值&nbsp;&nbsp;&nbsp;&nbsp;</button>
+								<h5 class="top10"><a href="myAccount/outin.action?toOorI=toO">提现</a></h5>
 							</div>
 							<div class="col-sm-4 top20" style="text-align: center;">
-								<h5 class="top20">E宝余额</h5>
-								<h3 class="top20">0.00</h3>
-								<button type="button" class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;充值&nbsp;&nbsp;&nbsp;&nbsp;</button>
-								<h5 class="top10">提现</h5>
+								<h5 class="top20">余额宝</h5>
+								<h3 class="top20">${user.user_account_balance}</h3>
+								<button type="button" onclick="javascript:window.location='myAccount/outin.action'" class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;转入&nbsp;&nbsp;&nbsp;&nbsp;</button>
+								<h5 class="top10"><a href="myAccount/outin.action?toOorI=toO">提现</a></h5>
 							</div>
 							<div class="col-sm-4 top20" style="text-align: center;">
-								<h5 class="top20">账户余额</h5>
-								<h3 class="top20">0.00</h3>
-								<button type="button" class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;充值&nbsp;&nbsp;&nbsp;&nbsp;</button>
-								<h5 class="top10">提现</h5>
+								<h5 class="top20">昨日收益</h5>
+								<h3 class="top20">+1.84</h3>
+								<button type="button" onclick="javascript:window.location='myAccount/outin.action'"  class="btn btn-primary btncolor top10">&nbsp;&nbsp;&nbsp;&nbsp;提升&nbsp;&nbsp;&nbsp;&nbsp;</button>
+								<h5 class="top10">详情</h5>
 							</div>
 						</div>
 					</div>
@@ -81,13 +81,13 @@
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
 						<div class="row">
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<a href="myAccount/trade.action" target="_blank"><i class="icon-github-alt" style="color: #3f316d;font-size: 50px;"></i></a> 
+								<a href="myAccount/trade.action?toBorC=tob" target="_blank"><i class="icon-github-alt" style="color: #3f316d;font-size: 50px;"></i></a> 
 								<h5>转账到E宝</h5>
 								<i class="icon-mobile-phone" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>手机缴费充值</h5>
 							</div>
 							<div class="col-sm-3 top10" style="text-align: center;">
-								<i class="icon-money" style="color: #3f316d;font-size: 50px;"></i> 
+								<a href="myAccount/trade.action?toBorC=toc" target="_blank"><i class="icon-money" style="color: #3f316d;font-size: 50px;"></i></a> 
 								<h5>转账到银行卡</h5>	
 								<i class="icon-heart" style="color: #3f316d;font-size: 50px;"></i> 
 								<h5>爱心捐赠</h5>

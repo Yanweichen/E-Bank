@@ -105,6 +105,15 @@ public class UserService implements BaseService<UserModel> {
 		return ud.selectRecentlyTradeUser(id);
 	}
 	
+	/**
+	 * 根据卡号查询用户
+	 * @param num
+	 * @return
+	 */
+	public UserModel findUserByCardNum(String num){
+		return ud.selecUserByCardNum(num);
+	}
+	
 	@Override
 	public int add(UserModel model) {
 		return ud.insert(model);

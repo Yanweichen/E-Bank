@@ -19,7 +19,7 @@
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
 
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
-<title>账户设置</title>
+<title>我的银行卡</title>
 </head>
 <body style="background-image: url('page/assets/img/bg_grid.png');">
 	<!-- 头部导航 -->
@@ -31,6 +31,10 @@
 				  <a id="noviewa" href="myAccount/trade.action" class="list-group-item">
 				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;转账
 				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
+				  </a>
+				  <a id="outin" href="myAccount/outin.action" class="list-group-item">
+				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;转入/转出
+				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>
 				  <a id="isviewa" href="myAccount/userCardList.action" class="list-group-item">
 				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;我的银行卡

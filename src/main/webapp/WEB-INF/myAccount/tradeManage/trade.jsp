@@ -22,14 +22,6 @@
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <title>转账</title>
 <style type="text/css">
-.tbcstyle{
-	padding: 10px;
-	background: white;
-	border-bottom: 1px solid #D3D3D3;
-	border-left: 1px solid #D3D3D3;
-	border-right: 1px solid #D3D3D3;
-	border-radius: 0px 0px 10px 10px;
-}
 .zuijinlistbg{
 	border-radius: 10px 10px 10px 10px;
 	padding: 8px;
@@ -44,9 +36,13 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<div id="setlist" class="list-group touming6">
-				  <a id="noviewa" href="myAccount/trade.action" class="list-group-item">
+				  <a id="noviewa" href="myAccount/trade.action?toBorC=tob" class="list-group-item">
 				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;转账
 				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
+				  </a>
+				  <a id="outin" href="myAccount/outin.action" class="list-group-item">
+				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;转入/转出
+				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>
 				  <a id="isviewa" href="myAccount/userCardList.action" class="list-group-item">
 				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;我的银行卡
@@ -58,7 +54,7 @@
 			<div class="panel panel-default touming6">
 			  <div class="panel-body">
 				  <!-- Nav tabs -->
-				  <ul class="nav nav-tabs" role="tablist">
+				  <ul id="tradetab" class="nav nav-tabs" role="tablist">
 				    <li role="presentation" class="active">
 				    	<a href="#ebao" aria-controls="ebao" style="width: 200px;" role="tab" data-toggle="tab">转账到E宝</a>
 				    </li>
@@ -85,9 +81,9 @@
 									</div>
 									 <div class="form-group" id="userbankcardlistdiv" style="display: none;">
 									    <label class="gray6">请选择转账银行卡</label>
-										    <select id="usercardlist" class="form-control">
+										    <select id="ebaoselect"   class="form-control usercardlist">
 											</select>
-											<label class="gray6 top5" id="tousernamediv" >此卡余额:&nbsp;&nbsp;<span style="color: #3f316d" id="cardblance" ></span> </label>
+											<label class="gray6 top5"  >此卡余额:&nbsp;&nbsp;<span style="color: #3f316d" id="cardblance" ></span> </label>
 									</div>
 									<div class="form-group">
 									    <label class="gray6">转账金额</label>
@@ -126,7 +122,36 @@
 				    	
 				    </div>
 				    <div role="tabpanel" class="tab-pane" id="bankcard">
-				    B
+				    <form id="tradetocfrom">
+				    	<div class="form-group">
+						    <label class="gray6">转账卡号</label>
+						    <input type="text" class="form-control" id="tocardnum" name="tocardnum" placeholder="银行卡号">
+						    <label class="gray6 top5" id="tocardnumnamediv" style="display: none">收款人姓名:&nbsp;&nbsp;<span style="color: #3f316d" id="tocardnumnamespan" ></span> </label>
+						</div>
+						 <div class="form-group">
+						    <label class="gray6">使用E宝转账</label>
+						    <div >
+							    <input name="nouserebao" type="checkbox" checked />
+						    </div>
+						</div>
+						 <div class="form-group" id="carduserbankcardlistdiv" style="display: none;">
+						    <label class="gray6">请选择转账银行卡</label>
+							    <select id="cardselect"  class="form-control usercardlist">
+								</select>
+								<label class="gray6 top5" >此卡余额:&nbsp;&nbsp;<span style="color: #3f316d" id="noebaocardblance" ></span> </label>
+							</div>
+						<div class="form-group">
+						    <label class="gray6">转账金额</label>
+						     <input type="text" class="form-control" id="cardtrademoney" name="cardtrademoney" placeholder="0">
+						</div>
+						<div class="form-group">
+						    <label class="gray6">备注</label>
+						    <input type="text" class="form-control" id="cardtradeinfo" name="cardtradeinfo" placeholder="想说的话~">
+						</div>
+						<div class="form-group" style="margin-top: 40px;">
+						<button type="submit" class="btn btn-primary btn-lg btn-block btncolor">转账</button>
+						</div>
+					</form>
 				    </div>
 				  </div>
 			  </div>
@@ -161,6 +186,10 @@
 	<script src="page/assets/js/bootstrap-switch.min.js"></script> 
 	<script src="page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
+	var toBorC = "<% out.print(request.getParameter("toBorC")==null?"":request.getParameter("toBorC")); %>";
+	if (toBorC=="toc") {//根据URL切换TAB
+		$('#tradetab a:last').tab('show') 
+	} 
 	var usermoney = "${user.user_account_money}";
 	$("[name='isuserebao']").bootstrapSwitch('handleWidth',50);
 	$("[name='isuserebao']").bootstrapSwitch('onColor',"default");
@@ -170,6 +199,16 @@
 			$("#userbankcardlistdiv").fadeIn();
 		}else{
 			$("#userbankcardlistdiv").fadeOut();
+		}
+	});
+	$("[name='nouserebao']").bootstrapSwitch('handleWidth',50);
+	$("[name='nouserebao']").bootstrapSwitch('onColor',"default");
+	$("[name='nouserebao']").bootstrapSwitch('offColor',"primary");
+	$('input[name="nouserebao"]').on('switchChange.bootstrapSwitch', function(event, state) {
+		if (!state) {
+			$("#carduserbankcardlistdiv").fadeIn();
+		}else{
+			$("#carduserbankcardlistdiv").fadeOut();
 		}
 	});
 	function init(state){
@@ -237,7 +276,7 @@
 		    }).on('success.form.bv', function(e) {
 	            // Prevent form submission
 	            e.preventDefault();
-
+	            console.log('走E宝转账')
 	            // Get the form instance
 	            var $form = $(e.target);
 
@@ -249,7 +288,7 @@
 	                show:true
 	            });
 				if (isuserEbao) {
-					$.post("trade/tradeEbaoByaccount.action", $form.serialize(), function(result) {
+					$.post("trade/tradeBlancetoBlance.action", $form.serialize(), function(result) {
 						$(".fakeloader").fakeLoader({
 			                spinner:"spinner2",
 			                show:false
@@ -266,7 +305,96 @@
 							
 		            });
 				} else {
-					$.post("trade/tradeByCard.action", {touser:$("#touser").val(),cardnum:$("#usercardlist option:selected").text(),trademoney:$("#trademoney").val(),tradeinfo:$("#tradeinfo").val(),}, function(result) {
+					$.post("trade/tradeByCardtoBlance.action", {touser:$("#touser").val(),cardnum:$("#usercardlist option:selected").text(),trademoney:$("#trademoney").val(),tradeinfo:$("#tradeinfo").val(),}, function(result) {
+						$(".fakeloader").fakeLoader({
+			                spinner:"spinner2",
+			                show:false
+			            });
+						if (result.error==200) {
+							 $("#msg").empty(); 
+							 $("#msg").append(result.msg)
+			               	 $("#isSuc").modal(); 
+						}else{
+							 $("#msg").empty(); 
+							 $("#msg").append(result.msg)
+			               	 $("#isSuc").modal(); 
+						}
+							
+		            });
+				}
+	        });
+		//转账到银行卡表单验证
+		 $('#tradetocfrom').bootstrapValidator({
+		        message: 'This value is not valid',
+		        submitButtons: 'button[type="submit"]',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        fields: {
+		        	tocardnum: {
+		            	trigger:"blur",
+		                validators: {
+		                    notEmpty: {
+		                        message: '此项不能为空'
+		                    },
+		                    remote: {
+	                            url: 'card/ishavecard.action',
+	                            type: "post",
+	                            async: true,
+	                            data:
+	                            {
+	                            	cardnum: function(validator)
+	                                {
+	                                    return $('#tradetocfrom :input[name="tocardnum"]').val();
+	                                }
+	                            },
+	                        },
+		                }
+		            },
+		            cardtrademoney: {
+		                validators: {
+		                    notEmpty: {
+		                        message: '此项不能为空'
+		                    },
+		                }
+		            },
+
+		        }
+		    }).on('success.form.bv', function(e) {
+	            // Prevent form submission
+	            e.preventDefault();
+				console.log('走银行卡转账')
+	            // Get the form instance
+	            var $form = $(e.target);
+
+	            // Get the BootstrapValidator instance
+	            var bv = $form.data('bootstrapValidator');
+	            var isuserEbao = $("[name='nouserebao']").bootstrapSwitch("state");
+	            $(".fakeloader").fakeLoader({
+	                spinner:"spinner2",
+	                show:true
+	            });
+				if (isuserEbao) {
+					$.post("trade/tradeByBlancetoCard.action", $form.serialize(), function(result) {
+						$(".fakeloader").fakeLoader({
+			                spinner:"spinner2",
+			                show:false
+			            });
+						if (result.error==200) {
+							 $("#msg").empty(); 
+							 $("#msg").append(result.msg)
+			               	 $("#isSuc").modal(); 
+						}else{
+							 $("#msg").empty(); 
+							 $("#msg").append(result.msg)
+			               	 $("#isSuc").modal(); 
+						}
+							
+		            });
+				} else {
+					$.post("trade/tradeByCardtoCard.action", {tocardnum:$("#tocardnum").val(),usercardnum:$("#cardselect option:selected").text(),cardtrademoney:$("#cardtrademoney").val(),cardtradeinfo:$("#cardtradeinfo").val(),}, function(result) {
 						$(".fakeloader").fakeLoader({
 			                spinner:"spinner2",
 			                show:false
@@ -289,12 +417,12 @@
 	            if (result.error==200) {
 	            	$.each(result.msg,function(i,card){
 	            		if (i=0) {
-			            	$("#usercardlist").append("<option selected='selected' value="+card.user_card_balance+">"+card.user_card_num+"</option>");
+			            	$(".usercardlist").append("<option selected='selected' value="+card.user_card_balance+">"+card.user_card_num+"</option>");
 						}
-			            $("#usercardlist").append("<option value="+card.user_card_balance+">"+card.user_card_num+"</option>");
+			            $(".usercardlist").append("<option value="+card.user_card_balance+">"+card.user_card_num+"</option>");
 	            	})
 	            }else{
-	            	$("#usercardlist").append("<option>"+result.msg+"</option>");
+	            	$(".usercardlist").append("<option>"+result.msg+"</option>");
 	            }
           	})
           	//获得相关用户列表
@@ -303,10 +431,10 @@
 	            	 $.each(result.msg,function(i,user){
 	            		 var cl = 'top20'
 	            		 if (i==1) {
-							cl='top10'
+							cl='top40'
 						 }
 	            		 if (i==4) {
-							cl='top40'
+							cl='top10'
 						 }
 	            		 if (i%2==0) {
 							$("#aboutuserleftlist").append('<div class="zuijinlistbg '+cl+'">'+
@@ -314,7 +442,7 @@
 			    					'<div class="col-sm-4">'+
 			    					'<img alt="" class="img-circle" style="width: 40;height: 40px;" src='+user.user_face+'>'+
 			    					'</div>'+
-			    					'<div class="col-sm-8" style="padding-right: 4px">'+
+			    					'<div class="col-sm-8" style="padding-right: 5px">'+
 			    						'<div class="overstep top10" style="color: #999;margin-left: 5px;">'+user.user_name+'</div>'+
 			    					'</div>'+
 			    				'</div>'+
@@ -325,7 +453,7 @@
 			    					'<div class="col-sm-4">'+
 			    					'<img alt="" class="img-circle" style="width: 40;height: 40px;" src='+user.user_face+'>'+
 			    					'</div>'+
-			    					'<div class="col-sm-8" style="padding-right: 4px">'+
+			    					'<div class="col-sm-8" style="padding-right: 5px">'+
 			    						'<div class="overstep top10" style="color: #999;margin-left: 5px;">'+user.user_name+'</div>'+
 			    					'</div>'+
 			    				'</div>'+
@@ -336,13 +464,21 @@
 			    	 $("#aboutuserlist").css("display","none");
 			     } 
       		})
-          	$("#usercardlist").change(function(){
-          		var bla = $("#usercardlist option:selected").val();
+      		//E宝转账银行卡选择事件
+          	$("#ebaoselect").change(function(){
+          		var bla = $("#ebaoselect option:selected").val();
           		$("#cardblance").empty();
           		$("#cardblance").append(bla);
           	})
+          	//银行卡转账银行卡选择时间
+          	$("#cardselect").change(function(){
+          		var bla = $("#cardselect option:selected").val();
+          		console.log(bla)
+          		$("#noebaocardblance").empty();
+          		$("#noebaocardblance").append(bla);
+          	})
 		});
-	//查名字
+	//根据账号查名字
 	$("#touser").blur(function(){
 		$.post("user/getusername.action",{account:$('#tradetoefrom :input[name="touser"]').val()},function(result){
              if (result.valid) {
@@ -351,6 +487,18 @@
             	 $("#tousernamespan").append(result.message);
 		     }else{
 		    	 $("#tousernamediv").fadeOut();
+		     } 
+      })
+	})
+	//根据卡号查名字
+	$("#tocardnum").blur(function(){
+		$.post("card/ishavecard.action",{cardnum:$('#tradetocfrom :input[name="tocardnum"]').val()},function(result){
+             if (result.valid) {
+            	 $("#tocardnumnamediv").fadeIn();
+            	 $("#tocardnumnamespan").empty();
+            	 $("#tocardnumnamespan").append(result.message);
+		     }else{
+		    	 $("#tocardnumnamediv").fadeOut();
 		     } 
       })
 	})

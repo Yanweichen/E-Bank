@@ -22,6 +22,7 @@ import com.bank.service.card.CardCheckService;
 import com.bank.service.card.CardService;
 import com.bank.service.card.UserCardService;
 import com.bank.service.msg.MsgService;
+import com.bank.service.user.UserService;
 import com.bank.utils.JsonUtil;
 import com.bank.utils.RegularUtil;
 
@@ -37,6 +38,8 @@ public class CardController {
 	private UserCardService ucs;//用户所属卡的操作
 	@Autowired
 	private MsgService ms;//消息操作
+	@Autowired
+	private UserService us;
 	/**
 	 * 根据id获取卡片类型
 	 * @param id
@@ -141,5 +144,21 @@ public class CardController {
 	public JSONObject userCardListJSON(HttpServletRequest req){
 		UserModel user = (UserModel) req.getSession().getAttribute("user");
 		return JsonUtil.getUserCardList(ucs.findAllByUser(Integer.valueOf(user.getUser_id())));
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ishavecard")
+	public JSONObject isHaveCard(String cardnum){
+		JSONObject jo = new JSONObject();
+		UserCardModel ucm = ucs.findCardByCardNum(cardnum);
+		if (ucm==null) {
+			jo.put("valid",false);
+			jo.put("message","该卡不存在");
+		}else{
+			UserModel um = us.findUserByCardNum(cardnum);
+			jo.put("valid",true);
+			jo.put("message", um.getUser_name().substring(0,1)+"***"+um.getUser_name().substring(um.getUser_name().length()-1,um.getUser_name().length()-0));
+		}
+		return jo;
 	}
 }

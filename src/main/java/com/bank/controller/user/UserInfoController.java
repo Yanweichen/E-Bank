@@ -477,7 +477,7 @@ public class UserInfoController {
 			jo.put("message", "您输入的账号不存在！");
 		} else {
 			jo.put("valid", true);
-			jo.put("message", um.getUser_name().substring(0,1)+"**");
+			jo.put("message", um.getUser_name().substring(0,1)+"***"+um.getUser_name().substring(um.getUser_name().length()-1,um.getUser_name().length()));
 		}
 		return jo;
 	}
