@@ -113,7 +113,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div id="toolbar">
-					<h4 style="display: inline;">我的账单&nbsp;&nbsp;&nbsp;&nbsp;</h4><a class="hand">全部账单</a>
+					<h4 style="display: inline;">我的账单&nbsp;&nbsp;&nbsp;&nbsp;</h4><a href="myAccount/alltradeinfo.action" class="hand">全部账单</a>
 				</div>
 				<table id="transaction"
 				   style="border-bottom: 1px solid #c3c9cc;border-top: 1px solid #c3c9cc;"
@@ -122,6 +122,7 @@
 				   data-side-pagination="server"
 				   data-show-header="false"
 				   data-toolbar="#toolbar"
+				   data-sort-order="desc"
 			       data-show-refresh="true">
 				    <thead>
 				        <tr>
@@ -134,7 +135,7 @@
 				            <th data-field="tradeExpendMoneystr" data-align="">支出</th>
 				            <th data-field="tradeUserCard" data-align="">本方使用的卡片</th>
 				            <th data-field="tradeOtherCard" data-align="">对方使用的卡片</th>
-				            <th data-field="action" data-align="" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+<!-- 				            <th data-field="action" data-align="" data-formatter="actionFormatter" data-events="actionEvents">操作</th> -->
 				        </tr>
 				    </thead>
 				</table>			

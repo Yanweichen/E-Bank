@@ -57,13 +57,18 @@ public class MyAccountController {
 		return mv;
 	}
 	
-	
 	@RequestMapping("/trade")
 	public String trade(){
 		return "myAccount/tradeManage/trade";
 	}
+	
 	@RequestMapping("/outin")
 	public String outin(){
 		return "myAccount/tradeManage/outin";
+	}
+	
+	@RequestMapping("/alltradeinfo")
+	public String allTradeInfo(){
+		return "myAccount/tradeManage/alltradeinfo";
 	}
 }

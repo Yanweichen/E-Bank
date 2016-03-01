@@ -5,9 +5,30 @@ public class TradePage {
 	private int uid;
 	private int limit;
 	private int offset;
+	private String sort;
+	private String order;
+	private String search;
 	private String starttime;
 	private String endtime;
-	private String info;
+	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
+	}
 	public int getUid() {
 		return uid;
 	}
@@ -38,11 +59,4 @@ public class TradePage {
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
-	public String getInfo() {
-		return info;
-	}
-	public void setInfo(String info) {
-		this.info = info;
-	}
-	
 }

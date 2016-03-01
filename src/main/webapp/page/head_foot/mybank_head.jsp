@@ -9,7 +9,7 @@
 <script src="page/assets/js/pointbg.js"></script>
 	<jsp:include page="head.jsp"></jsp:include>
 	<hr width="100%" style="border:1px solid #3f315d;margin: 0;"/>
-	<div style="background-color: #3f314d;height: 150px;position: relative;z-index: 2" >
+	<div style="background-color: #3f314d;height: 150px;position: relative;z-index: 3" >
 		<ul class="headui">
 			<li class="headui blackpurple" id="wode">
 				<h4 class="daohang"><a style="color: white;" href="myAccount/mybank.action">我的E-Bank</a></h4>
@@ -84,7 +84,7 @@
 				<div class="subtext" >
 					<div class="list-group">
 						<a href="myAccount/accountSet.action" class="list-group-item" style="color: white;"> 账户设置 </a>
-						<a href="javascript:void(0)" class="list-group-item" style="color: white;"> 我的账单 </a>
+						<a href="myAccount/alltradeinfo.action" class="list-group-item" style="color: white;"> 我的账单 </a>
 						<a href="msg/msgBox.action?state=noview&limit=5&offset=0" class="list-group-item" style="color: white;"> 站内信 </a>
 					</div>
 				</div>

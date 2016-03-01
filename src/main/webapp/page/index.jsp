@@ -251,12 +251,12 @@ ul.news li p{float:right; color:#000000}
 								<dl>
 									<a class="indexicon" onmouseover="document.getElementById('icon_1').src='<%=basePath%>page/assets/img/e-bank_index_icon/e-pay-hover.gif';" 
 										 onmouseout="document.getElementById('icon_1').src='<%=basePath%>page/assets/img/e-bank_index_icon/e-pay.gif';" 
-										 href="www.baidu.com">
+										 href="<%=basePath%>myAccount/trade.action?toBorC=tob">
 									<dt>
 										<img id="icon_1" 
 										 src="<%=basePath%>page/assets/img/e-bank_index_icon/e-pay.gif" class="img-responsive" alt="Responsive image">
 									</dt>
-									<dd><h5>e支付</h5></dd>
+									<dd><h5>转账到E宝</h5></dd>
 									</a>
 								</dl>
 							</div>
@@ -264,12 +264,12 @@ ul.news li p{float:right; color:#000000}
 								<dl>
 									<a class="indexicon" onmouseover="document.getElementById('icon_2').src='<%=basePath%>page/assets/img/e-bank_index_icon/zhuanzhang-hover.gif';" 
 										 onmouseout="document.getElementById('icon_2').src='<%=basePath%>page/assets/img/e-bank_index_icon/zhuanzhang.gif';" 
-										 href="www.baidu.com">
+										 href="<%=basePath%>myAccount/trade.action?toBorC=toc">
 									<dt>
 										<img id="icon_2" 
 										 src="<%=basePath%>page/assets/img/e-bank_index_icon/zhuanzhang.gif" class="img-responsive" alt="Responsive image">
 									</dt>
-									<dd><h5>e转账</h5></dd>
+									<dd><h5>转账到银行卡</h5></dd>
 									</a>
 								</dl>
 							</div>
@@ -277,12 +277,12 @@ ul.news li p{float:right; color:#000000}
 								<dl>
 									<a class="indexicon" onmouseover="document.getElementById('icon_3').src='<%=basePath%>page/assets/img/e-bank_index_icon/open-card-hover.gif';" 
 										 onmouseout="document.getElementById('icon_3').src='<%=basePath%>page/assets/img/e-bank_index_icon/open-card.gif';" 
-										 href="www.baidu.com">
+										 href="<%=basePath%>myAccount/userCardList.action">
 									<dt>
 										<img id="icon_3" 
 										 src="<%=basePath%>page/assets/img/e-bank_index_icon/open-card.gif" class="img-responsive" alt="Responsive image">
 									</dt>
-									<dd><h5>e开卡</h5></dd>
+									<dd><h5>我的银行卡</h5></dd>
 									</a>
 								</dl>
 							</div>
@@ -290,12 +290,12 @@ ul.news li p{float:right; color:#000000}
 								<dl>
 									<a class="indexicon" onmouseover="document.getElementById('icon_4').src='<%=basePath%>page/assets/img/e-bank_index_icon/loan-hover.gif';" 
 										 onmouseout="document.getElementById('icon_4').src='<%=basePath%>page/assets/img/e-bank_index_icon/loan.gif';" 
-										 href="www.baidu.com">
+										 href="<%=basePath%>myAccount/viewCard.action">
 									<dt>
 										<img id="icon_4" 
 										 src="<%=basePath%>page/assets/img/e-bank_index_icon/loan.gif" class="img-responsive" alt="Responsive image">
 									</dt>
-									<dd><h5>e存款</h5></dd>
+									<dd><h5>办理银行卡</h5></dd>
 									</a>
 								</dl>
 							</div>
@@ -303,7 +303,7 @@ ul.news li p{float:right; color:#000000}
 								<dl>
 									<a class="indexicon" onmouseover="document.getElementById('icon_5').src='<%=basePath%>page/assets/img/e-bank_index_icon/deposit-hover.gif';" 
 										 onmouseout="document.getElementById('icon_5').src='<%=basePath%>page/assets/img/e-bank_index_icon/deposit.gif';" 
-										 href="www.baidu.com">
+										 href="javascript:void(0)">
 									<dt>
 										<img id="icon_5" 
 										 src="<%=basePath%>page/assets/img/e-bank_index_icon/deposit.gif" class="img-responsive" alt="Responsive image">
@@ -317,7 +317,7 @@ ul.news li p{float:right; color:#000000}
 									<a class="indexicon" 
 										 onmouseover="document.getElementById('icon_6').src='<%=basePath%>page/assets/img/e-bank_index_icon/jsq-hover.gif';" 
 										 onmouseout="document.getElementById('icon_6').src='<%=basePath%>page/assets/img/e-bank_index_icon/jsq.gif';" 
-										 href="www.baidu.com">
+										 href="javascript:void(0)">
 									<dt>
 										<img id="icon_6" 
 										 src="<%=basePath%>page/assets/img/e-bank_index_icon/jsq.gif" class="img-responsive" alt="Responsive image">
@@ -326,6 +326,30 @@ ul.news li p{float:right; color:#000000}
 									</a>
 								</dl>
 							</div>
+<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
+<%-- 								<a href="<%=basePath%>myAccount/trade.action?toBorC=tob" target="_blank"><i class="icon-github-alt" style="color: #3f316d;font-size: 50px;"></i></a>  --%>
+<!-- 								<h5>转账到E宝</h5> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
+<%-- 								<a href="<%=basePath%>myAccount/trade.action?toBorC=toc" target="_blank"><i class="icon-money" style="color: #3f316d;font-size: 50px;"></i></a>  --%>
+<!-- 								<h5>转账到银行卡</h5>	 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
+<%-- 								<a href="<%=basePath%>myAccount/userCardList.action" target="_blank"><i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i></a> --%>
+<!-- 								<h5>我的银行卡</h5> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
+<%-- 								<a href="<%=basePath%>myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a> --%>
+<!-- 								<h5>办理银行卡</h5> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
+<%-- 								<a href="<%=basePath%>myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a> --%>
+<!-- 								<h5>办理银行卡</h5> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
+<%-- 								<a href="<%=basePath%>myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a> --%>
+<!-- 								<h5>办理银行卡</h5> -->
+<!-- 							</div> -->
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane tabbg" id="profile">B</div>
