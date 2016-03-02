@@ -1,6 +1,7 @@
 package com.bank.controller.user;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -480,5 +481,11 @@ public class UserInfoController {
 			jo.put("message", um.getUser_name().substring(0,1)+"***"+um.getUser_name().substring(um.getUser_name().length()-1,um.getUser_name().length()));
 		}
 		return jo;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getOnLineUser")
+	public JSONObject getOnLineUser() throws ParseException, CloneNotSupportedException{
+		return JsonUtil.getOnLineUser();
 	}
 }

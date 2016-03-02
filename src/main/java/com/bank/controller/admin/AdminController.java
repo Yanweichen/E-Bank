@@ -183,4 +183,16 @@ public class AdminController {
 		}
 		return "admin/indexManage/updateArticle";
 	}
+	/**
+	 * 用户列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/userlist")
+	public String userlist(HttpServletRequest req){
+		if (req.getSession().getAttribute("admin")==null) {
+			return "";//非法操作界面
+		}
+		return "admin/userManage/userlist";
+	}
 }

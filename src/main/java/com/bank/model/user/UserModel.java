@@ -3,7 +3,7 @@ package com.bank.model.user;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class UserModel {
+public class UserModel implements Cloneable{
 	
 	private String user_id;
 	private String user_name;
@@ -18,11 +18,17 @@ public class UserModel {
 	private String user_state;
 	private Date user_last_login_time;
 	private Date user_regist_time;
+	private String user_regist_time_fmt;
 	
 	private double user_account_money;
 	private double user_account_balance;
 	
-	
+	public String getUser_regist_time_fmt() {
+		return user_regist_time_fmt;
+	}
+	public void setUser_regist_time_fmt(String user_regist_time_fmt) {
+		this.user_regist_time_fmt = user_regist_time_fmt;
+	}
 	public double getUser_account_money() {
 		BigDecimal bg = new BigDecimal(user_account_money);
 		double f1 = bg.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
@@ -123,6 +129,15 @@ public class UserModel {
 				+ ", user_paypass=" + user_paypass + ", user_city=" + user_city + ", user_obligate_info="
 				+ user_obligate_info + ", user_face=" + user_face + ", user_idcard=" + user_idcard + ", user_phone="
 				+ user_phone + ", user_email=" + user_email + "]";
+	}
+	
+	@Override
+	public UserModel clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		UserModel um = (UserModel)super.clone();
+		um.user_last_login_time = (Date) user_last_login_time.clone();
+		um.user_regist_time = (Date) user_regist_time.clone();
+		return (UserModel)super.clone();
 	}
 	
 }

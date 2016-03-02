@@ -104,6 +104,11 @@ public class TradeService implements BaseService<TradeModel>{
 		JSONObject jo = new JSONObject();
 		try {
 			double oldmoney  = ucs.selectCardBalanceById(cardnum);//查询该卡余额
+			if (ucs.findCardByCardNum(cardnum).getUserCardState()!=1) {
+				jo.put("error", 203);
+				jo.put("msg", "您的卡状态异常");
+				return jo;
+			}
 			if (oldmoney-trademoney<0) {
 				jo.put("error", 203);
 				jo.put("msg", "您的账户余额不足");
@@ -166,6 +171,16 @@ public class TradeService implements BaseService<TradeModel>{
 		JSONObject jo = new JSONObject();
 		try {
 			double usercardmoney  = ucs.selectCardBalanceById(usercardnum);//查询转账卡余额
+			if (ucs.findCardByCardNum(usercardnum).getUserCardState()!=1) {
+				jo.put("error", 203);
+				jo.put("msg", "您的卡状态异常");
+				return jo;
+			}
+			if (ucs.findCardByCardNum(tocardnum).getUserCardState()!=1) {
+				jo.put("error", 203);
+				jo.put("msg", "对方的卡状态异常");
+				return jo;
+			}
 			if (usercardmoney-trademoney<0) {
 				jo.put("error", 203);
 				jo.put("msg", "您的账户余额不足");
@@ -232,6 +247,11 @@ public class TradeService implements BaseService<TradeModel>{
 		JSONObject jo = new JSONObject();
 		try {
 			double usercardmoney  = user.getUser_account_money();//查询用户
+			if (ucs.findCardByCardNum(tocardnum).getUserCardState()!=1) {
+				jo.put("error", 203);
+				jo.put("msg", "对方的卡状态异常");
+				return jo;
+			}
 			if (usercardmoney-trademoney<0) {
 				jo.put("error", 203);
 				jo.put("msg", "您的账户余额不足");
@@ -320,6 +340,11 @@ public class TradeService implements BaseService<TradeModel>{
 				}else{
 					//使用银行卡
 					double cardmoney = ucs.selectCardBalanceById(cardnum);
+					if (ucs.findCardByCardNum(cardnum).getUserCardState()!=1) {
+						jo.put("error", 203);
+						jo.put("msg", "您的卡状态异常");
+						return jo;
+					}
 					if (cardmoney-trademoney<0) {
 						jo.put("error", 203);
 						jo.put("msg", "该银行卡余额不足");
@@ -366,6 +391,11 @@ public class TradeService implements BaseService<TradeModel>{
 					
 					//使用银行卡
 					double cardmoney = ucs.selectCardBalanceById(cardnum);
+					if (ucs.findCardByCardNum(cardnum).getUserCardState()!=1) {
+						jo.put("error", 203);
+						jo.put("msg", "您的卡状态异常");
+						return jo;
+					}
 					if (cardmoney-trademoney<0) {
 						jo.put("error", 203);
 						jo.put("msg", "该银行卡余额不足");
@@ -406,6 +436,11 @@ public class TradeService implements BaseService<TradeModel>{
 		JSONObject jo = new JSONObject();
 		if (ebaooryuebao) {
 			//从余额宝转到卡
+			if (ucs.findCardByCardNum(cardnum).getUserCardState()!=1) {
+				jo.put("error", 203);
+				jo.put("msg", "您的卡状态异常");
+				return jo;
+			}
 			if (user.getUser_account_balance()-trademoney<0) {
 				jo.put("error", 203);
 				jo.put("msg", "该余额宝余额不足");
@@ -426,6 +461,11 @@ public class TradeService implements BaseService<TradeModel>{
 			add(tm);
 		}else{
 			//从余额转到卡
+			if (ucs.findCardByCardNum(cardnum).getUserCardState()!=1) {
+				jo.put("error", 203);
+				jo.put("msg", "您的卡状态异常");
+				return jo;
+			}
 			if (user.getUser_account_money()-trademoney<0) {
 				jo.put("error", 203);
 				jo.put("msg", "您的E宝余额不足");

@@ -57,11 +57,11 @@
 				<li class="nav-item dl-selected">
 					<div class="nav-item-inner nav-order">审核管理</div>
 				<li class="nav-item dl-selected">
-					<div class="nav-item-inner nav-order">存款贷款</div>
-				<li class="nav-item dl-selected">
-					<div class="nav-item-inner nav-order">个人信息</div>
-				<li class="nav-item dl-selected">
-					<div class="nav-item-inner nav-order">关于本行</div>
+					<div class="nav-item-inner nav-order">用户管理</div>
+<!-- 				<li class="nav-item dl-selected"> -->
+<!-- 					<div class="nav-item-inner nav-order">个人信息</div> -->
+<!-- 				<li class="nav-item dl-selected"> -->
+<!-- 					<div class="nav-item-inner nav-order">关于本行</div> -->
 			</ul>
 		</div>
 		<ul id="J_NavContent" class="dl-tab-conten">
@@ -99,58 +99,63 @@
 						id : '9',
 						text : '用户申请办卡审核',
 						href : 'card/checkcard.action'
-					}, {
-						id : '9',
-						text : '用户申请信用卡审核',
-						href : 'page/enterprise/index.html'
-					}]
+					}
+// 					, {
+// 						id : '9',
+// 						text : '用户申请信用卡审核',
+// 						href : 'page/enterprise/index.html'
+// 					}
+					]
 				} ]
-			}, {
+			}
+			, {
 				id : '15',
 				homePage : '16',
 				menu : [ {
-					text : '存款贷款',
+					text : '用户管理',
 					items : [ {
 						id : '16',
-						text : '定期存款',
-						href : 'page/student/index.html'
+						text : '用户列表',
+						href : 'admin/userlist.action'
 					}, {
 						id : '16',
-						text : '贷款',
+						text : '发送站内信',
 						href : 'page/student/index.html'
 					} ]
 				} ]
-			}, {
-				id : '17',
-				homePage : '18',
-				menu : [ {
-					text : '个人信息',
-					items : [ {
-						id : '18',
-						text : '查看个人信息',
-						href : 'page/course/index.html'
-					}, {
-						id : '19',
-						text : '修改个人信息',
-						href : 'page/course/addCourse.html'
-					} ]
-				} ]
-			}, {
-				id : '20',
-				homePage : '21',
-				menu : [ {
-					text : '虚拟学生管理',
-					items : [ {
-						id : '21',
-						text : '学生管理',
-						href : 'page/virtualstudent/index.html'
-					}, {
-						id : '23',
-						text : '学生注册',
-						href : 'page/virtualstudent/studentRegister.html'
-					} ]
-				} ]
-			} ];
+			}, 
+// 			  {
+// 				id : '17',
+// 				homePage : '18',
+// 				menu : [ {
+// 					text : '个人信息',
+// 					items : [ {
+// 						id : '18',
+// 						text : '查看个人信息',
+// 						href : 'page/course/index.html'
+// 					}, {
+// 						id : '19',
+// 						text : '修改个人信息',
+// 						href : 'page/course/addCourse.html'
+// 					} ]
+// 				} ]
+// 			}, {
+// 				id : '20',
+// 				homePage : '21',
+// 				menu : [ {
+// 					text : '虚拟学生管理',
+// 					items : [ {
+// 						id : '21',
+// 						text : '学生管理',
+// 						href : 'page/virtualstudent/index.html'
+// 					}, {
+// 						id : '23',
+// 						text : '学生注册',
+// 						href : 'page/virtualstudent/studentRegister.html'
+// 					} ]
+// 				} ]
+// 			} 
+			];
 			new PageUtil.MainPage({
 				modulesConfig : config
 			});

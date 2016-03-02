@@ -2,6 +2,7 @@ package com.bank.utils;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.catalina.mbeans.UserMBean;
 
@@ -196,6 +197,44 @@ public class JsonUtil {
 			tradeModel.setTradeTypeImage("<img src="+tradeModel.getTradeTypeImage()+" class='tradetypeimage img-circle'>");
 			jarr.add(JSON.toJSON(tradeModel));
 		}
+		jo.put("rows", jarr);
+		return jo;
+	}
+	
+	/**
+	 * 获得在线用户列表
+	 * @return
+	 * @throws ParseException 
+	 * @throws CloneNotSupportedException 
+	 */
+	public static JSONObject getOnLineUser() throws ParseException, CloneNotSupportedException{
+		JSONObject jo = new JSONObject();
+		if (RegularUtil.UserLoginMap==null) {
+			jo.put("total", 0);
+			jo.put("rows", null);
+			return jo;
+		}
+		JSONArray jarr = new JSONArray();
+		for (Map.Entry<UserModel, String> entry : RegularUtil.UserLoginMap.entrySet()) {
+			UserModel um = entry.getKey().clone();
+			switch (um.getUser_state()) {
+			case "1":
+				um.setUser_state("正常");
+				break;
+			case "2":
+				um.setUser_state("禁封");		
+				break;
+			case "0":
+				um.setUser_state("未激活");
+				break;
+			default:
+				break;
+			}
+			um.setUser_regist_time_fmt(TimeUtil.Date2String(entry.getKey().getUser_regist_time(), "yyyy-MM-dd HH:mm:ss"));
+			um.setUser_face("<img class='userface' src="+entry.getKey().getUser_face()+">");
+			jarr.add(JSON.toJSON(um));
+		}
+		jo.put("total", RegularUtil.UserLoginMap.size());
 		jo.put("rows", jarr);
 		return jo;
 	}
