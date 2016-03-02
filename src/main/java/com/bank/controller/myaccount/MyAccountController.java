@@ -71,4 +71,8 @@ public class MyAccountController {
 	public String allTradeInfo(){
 		return "myAccount/tradeManage/alltradeinfo";
 	}
+	@RequestMapping("/payPhone")
+	public String payPhone(){
+		return "myAccount/payManage/payPhone";
+	}
 }
