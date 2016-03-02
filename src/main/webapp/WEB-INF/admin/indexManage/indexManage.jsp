@@ -448,6 +448,9 @@ cursor:pointer
 		        '</a>',
 		        '<a class="remove ml10" href="javascript:void(0)" title="删除">',
 		        '<i class="glyphicon glyphicon-remove"></i>',
+		        '</a>',
+		        '<a class="edit ml10" href="javascript:void(0)" title="编辑文章">',
+		        '<i class="glyphicon glyphicon-edit"></i>',
 		        '</a>'
 		    ].join('');
 	}
@@ -473,6 +476,16 @@ cursor:pointer
 					showMsg("删除失败")
 				}
     		})
+	    },
+		'click .edit': function (e, value, row, index) {
+	    	//编辑文章
+			if(top.topManager){
+					top.topManager.openPage({
+					    id : 'UpdateArticle',
+					    href : 'admin/UpdateArticle.action?id='+row.index_id,
+					    title : '编辑文章'
+				  });
+			}
 	    }
 	}
 	function detailFormatter(index, row) {

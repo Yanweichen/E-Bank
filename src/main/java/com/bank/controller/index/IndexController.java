@@ -122,6 +122,48 @@ public class IndexController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("updateart")
+	public JSONObject updateArt(IndexModel im,HttpServletRequest req) throws Exception{
+		HttpSession session = req.getSession();
+		AdminModel am = (AdminModel) session.getAttribute("admin");
+		JSONObject jo = new JSONObject();
+		if (im==null||am==null) {
+			jo.put("error", "403");
+			jo.put("msg", "非法操作");
+			return jo;
+		}
+		if (Base64.decodeBase64(im.getIndex_preview_image_url()).length>=307200) {
+			jo.put("error", "303");
+			jo.put("msg", "您上传的图片过大("+Base64.decodeBase64(im.getIndex_preview_image_url()).length/1024+"KB),请控制在300KB以内");
+			return jo;
+		}
+		UploadResult ret = QclodImageUtil.upload(im.getIndex_preview_image_url());//上传到腾讯云
+		if (ret==null) {
+			jo.put("error", "203");
+			jo.put("msg", "上传失败！");
+			return jo;
+		}
+		IndexModel oldim = is.findById(im.getIndex_id());
+		oldim.setIndex_preview_image_url(ret.downloadUrl);
+		oldim.setIndex_uptime(new Date());
+		oldim.setIndex_content(im.getIndex_content());
+		oldim.setIndex_href(im.getIndex_href());
+		oldim.setIndex_label(im.getIndex_label());
+		oldim.setIndex_title(im.getIndex_title());
+		oldim.setIndex_type(im.getIndex_type());
+		oldim.setIndex_from(im.getIndex_from());
+		int isSuC = is.alterById(oldim);
+		if (isSuC!=-1) {
+			jo.put("error", "200");
+			jo.put("msg", "上传成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "上传失败");
+		}
+		return jo;
+	}
+	
+	@ResponseBody
 	@RequestMapping("/updateNoticeState")
 	public JSONObject updateIndexState(String row,String state){
 		JSONObject jo = new JSONObject();//返回给页面的json

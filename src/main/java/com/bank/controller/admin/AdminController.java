@@ -170,4 +170,17 @@ public class AdminController {
 		}
 		return "admin/indexManage/addArticle";
 	}
+	
+	/**
+	 * 前往更新文章页面
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/UpdateArticle")
+	public String updateArticle(HttpServletRequest req){
+		if (req.getSession().getAttribute("admin")==null) {
+			return "";//非法操作界面
+		}
+		return "admin/indexManage/updateArticle";
+	}
 }

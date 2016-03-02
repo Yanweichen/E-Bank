@@ -16,8 +16,16 @@
 	href="<%=basePath%>page/assets//img/tubiao.ico" />
 <link href="<%=basePath%>page/assets/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="<%=basePath%>page/assets/css/fakeloader.css">
+<link rel="stylesheet" href="<%=basePath%>page/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="<%=basePath%>page/assets/css/owl.theme.css">
 <title>e-bank</title>
 <style type="text/css">
+.top20{
+	margin-top: 20px;
+}
+.top15{
+	margin-top: 15px;
+}
 .btnwindth {
 	margin-left: 10px;
 }
@@ -42,7 +50,6 @@ a:HOVER {
 
 .centerpanel {
 	margin-top: 10px;
-	height: 400px;
 	border-radius: 0px 15px 20px 25px;
 }
 
@@ -147,6 +154,13 @@ ul.news li p{float:right; color:#000000}
 }
 .hand{
 	cursor:pointer;
+}
+.wenzizhidi{
+	position:absolute;
+	margin:2px 0px 5px 5px
+}
+.top5{
+	margin-top: 5px;
 }
 </style>
 </head>
@@ -400,6 +414,21 @@ ul.news li p{float:right; color:#000000}
 			<div class="col-sm-1"></div>
 		</div>
 	</div>
+	<!-- 热门文章 -->
+	<div class="container top15" >
+		<div class="row">
+			<div class="col-sm-11">
+				<div class="panel panel-default" style="padding: 0;border-radius: 0px 15px 20px 25px;">
+					<div class="panel-body" style="text-align: center;padding-bottom: 5px;">
+						<h5 style="font-weight: bold; letter-spacing: 2px;float: left;margin-left: 20px;">热门文章</h5>
+						<div class="owl-carousel" id="hotlist">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 	<!-- 底部 -->
 	<div class="container" id="section-2">
 		<div class="row">
@@ -477,6 +506,7 @@ ul.news li p{float:right; color:#000000}
 	<script src="<%=basePath%>page/assets/js/velocity.ui.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/bootstrapValidator.min.js"></script>
 	<script src="<%=basePath%>page/assets/js/fakeloader.js"></script>
+	<script src="<%=basePath%>page/assets/js/owl.carousel.js"></script>
 	<script type="text/javascript">
 	function queryParams(type,tbname,pid){
 		return {
@@ -532,6 +562,32 @@ ul.news li p{float:right; color:#000000}
 					top : 125
 				}
 			});
+			//相关文章横向滚动
+			$('.owl-carousel').owlCarousel({
+			    margin:10,
+			    loop:true,
+			    autoWidth:true,
+			    items:6,
+			    jsonPath : 'http://localhost/index/Allnotice.action?search=&limit=30&offset=0&sort=index_hitsnum&order=',
+			    jsonSuccess : customDataSuccess,
+			})
+			//横向滚动请求回调
+			function customDataSuccess(json){
+			    var content = "";
+			    if (json.rows.length==0) {
+					$("#hotlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有热门文章哦~</h4></div></div>");
+				}
+				$.each(json.rows,function(i,jo){
+					var src;
+					if (jo.index_state=="01"||jo.index_state=="11") {
+						src = 'indexhoticon.png';
+					} else {
+						src = 'indexnomalicon.png';
+					}
+					content+="<div class='item' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>";
+				});
+			    $("#hotlist").html(content);
+			}
 		});
 		//启动轮播
 		$('#carousel-example-generic').carousel('cycle')

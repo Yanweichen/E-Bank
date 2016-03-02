@@ -145,9 +145,9 @@
   </update>
   <update id="updateById" parameterType="com.bank.model.index.IndexModel">
   	UPDATE index_entry 
-  	SET index_pid = (SELECT index_type_id FROM index_type WHERE index_type = #{index_type}),index_title = #{index_title},index_content = #{index_content}
-  	,index_uptime = #{index_uptime},index_state = #{index_state},index_aid = (SELECT admin_id FROM admin WHERE admin_name = #{upfrom})
-  	WHERE index_id = #{index_id};
+	SET index_pid = (SELECT index_type_id FROM index_type WHERE index_type = #{index_type}),index_title = #{index_title},index_content = #{index_content}
+	,index_uptime = #{index_uptime},index_state = #{index_state},index_state = #{index_state},index_isindex=#{index_isindex},index_hitsnum=#{index_hitsnum},index_label=#{index_label},index_from=#{index_from},index_href=#{index_href},index_preview_image_url=#{index_preview_image_url},index_aid = (SELECT admin_id FROM admin WHERE admin_name = #{upfrom})
+	WHERE index_id = #{index_id};
   </update>
   
   <select id="selectTopByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">

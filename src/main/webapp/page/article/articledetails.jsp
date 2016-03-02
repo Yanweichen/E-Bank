@@ -18,7 +18,9 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="page/assets//img/tubiao.ico" />
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="page/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="page/assets/css/owl.theme.css">
+<!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <title></title>
 <style type="text/css">
 .top20{
@@ -156,7 +158,8 @@ div.hotdiv:hover{
 							<h4 class="nosingline wenzizhidi" style="color: #666666">相关文章</h4>
 						</div>
 					</div>
-					<div class="row top10" id="aboutlist">
+					<div class="row top10 owl-carousel" id="aboutlist">
+<%-- 						<div class='item' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='<%=basePath%>page/assets/img/chrome-big.png'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/chrome-big.png'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>asdasdasdasdasd</a></div></div> --%>
 <!-- 								<div class="col-sm-3" style="text-align: center;"> -->
 <%-- 									<img class="img-rounded"  alt="" style="height: 100px;width: 100px" src="<%=basePath%>page/assets/img/indexnomalicon.png"> --%>
 <!-- 									<div class="overstep top5" > -->
@@ -384,6 +387,7 @@ div.hotdiv:hover{
 	<script src="page/assets/js/bootstrapValidator.min.js"></script>
 	<script src="page/assets/js/fakeloader.js"></script>
 	<script src="page/assets/js/jquery.twbsPagination.js"></script>
+	<script src="page/assets/js/owl.carousel.js"></script>
 	<script type="text/javascript">
 		var articletitle = "${article.index_title}";		
 		document.title = articletitle;
@@ -407,6 +411,7 @@ div.hotdiv:hover{
 			}
 		}
 		$(document).ready(function(){
+			
 			$.getJSON("index/getArticleByBorA.action", { id: articleid,ba:"before" }, function(json){
 				var isNull = typeof(json.index_title) == "undefined";
 				$("#beforearticle").empty();
@@ -436,22 +441,23 @@ div.hotdiv:hover{
 					$("#hotlist").append("<div class='row hotdiv top10'><div class='col-sm-10 overstep' style='z-index: 10'><img alt='' style='height: 25px; width: 25px' src='page/assets/img/"+src+"'><a target='_blank' href='index/articledetail.action?id="+jo.index_id+"' style='margin-left: 5px;font-size: 18px' class='hota hand textbottom'>"+jo.index_title+"</a> </div> <div class='col-sm-1 timestyle' style='padding-left: 0px;z-index: 9'><span class='badge'>"+jo.index_hitsnum+"</span></div></div>");
 				});
 			});
-			$.getJSON("index/aboutnotice.action", queryParams(articlelabel,4,null,null), function(json){
-				if (json.rows.length==0) {
-					$("#aboutlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有相关文章哦~</h4></div></div>");
-				}
-				$.each(json.rows,function(i,jo){
-					var src;
-					if (jo.index_state=="01"||jo.index_state=="11") {
-						src = 'indexhoticon.png';
-					} else {
-						src = 'indexnomalicon.png';
-					}
-					if (jo.index_id!=articleid) {
-						$("#aboutlist").append("<div class='col-sm-3' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>");
-					}
-				});
-			});
+			//替换为可滚动的
+// 			$.getJSON("index/aboutnotice.action", queryParams(articlelabel,4,null,null), function(json){
+// 				if (json.rows.length==0) {
+// 					$("#aboutlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有相关文章哦~</h4></div></div>");
+// 				}
+// 				$.each(json.rows,function(i,jo){
+// 					var src;
+// 					if (jo.index_state=="01"||jo.index_state=="11") {
+// 						src = 'indexhoticon.png';
+// 					} else {
+// 						src = 'indexnomalicon.png';
+// 					}
+// 					if (jo.index_id!=articleid) {
+// 						$("#aboutlist").append("<div class='item' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>");
+// 					}
+// 				});
+// 			});
 			$.getJSON("index/getHotLabel.action", {num:15}, function(json){
 				$.each(json,function(i,jo){
 					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
@@ -545,6 +551,34 @@ div.hotdiv:hover{
 			        }
 			  });
 			})
+			//相关文章横向滚动
+			$('.owl-carousel').owlCarousel({
+			    margin:10,
+			    loop:true,
+			    autoWidth:true,
+			    items:4,
+			    jsonPath : 'index/aboutnotice.action?search='+articlelabel+'&limit=30&offset=0&sort=&order=',
+			    jsonSuccess : customDataSuccess,
+			})
+			//横向滚动请求回调
+			function customDataSuccess(json){
+			    var content = "";
+			    if (json.rows.length==0) {
+					$("#aboutlist").append("<div class='col-sm-12'><div align='center'><h4 style='color: #444444'>暂时没有相关文章哦~</h4></div></div>");
+				}
+				$.each(json.rows,function(i,jo){
+					var src;
+					if (jo.index_state=="01"||jo.index_state=="11") {
+						src = 'indexhoticon.png';
+					} else {
+						src = 'indexnomalicon.png';
+					}
+					if (jo.index_id!=articleid) {
+						content+="<div class='item' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>";
+					}
+				});
+			    $("#aboutlist").html(content);
+			}
 		})
 		
 		//点击恢复显示回复框     
