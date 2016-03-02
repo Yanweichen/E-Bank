@@ -553,7 +553,9 @@ ul.news li p{float:right; color:#000000}
 				} else {
 					src = 'indexnomalicon.png';
 				}
-				$("#activity").append("<div class='row' > <div class='col-sm-11 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
+				if (i<4) {
+					$("#activity").append("<div class='row' > <div class='col-sm-11 overstep' style='padding-right: 0px;margin-top: 5px' > <img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'> <a target='_blank' href=<%=basePath%>index/articledetail.action?id="+jo.index_id+" id='topnoticeA'style='margin-left: 3px;' class='hand textbottom'>"+title+" </a> </div> <div class='col-sm-1 timestyle' style='padding: 6px 0px 0px 0px;'>"+jo.index_uptime_format+"</div> </div>")
+				}
 			});
 		});
 		$(document).ready(function() {
