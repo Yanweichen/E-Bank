@@ -570,7 +570,7 @@ ul.news li p{float:right; color:#000000}
 			    loop:true,
 			    autoWidth:true,
 			    items:6,
-			    jsonPath : 'http://localhost/index/Allnotice.action?search=&limit=30&offset=0&sort=index_hitsnum&order=',
+			    jsonPath : '<%=basePath%>/index/Allnotice.action?search=&limit=30&offset=0&sort=index_hitsnum&order=',
 			    jsonSuccess : customDataSuccess,
 			})
 			//横向滚动请求回调
