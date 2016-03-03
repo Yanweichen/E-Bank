@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bank.base.BaseService;
 import com.bank.dao.user.UserDAO;
+import com.bank.model.other.Page;
 import com.bank.model.user.UserModel;
 
 @Service
@@ -113,6 +114,14 @@ public class UserService implements BaseService<UserModel> {
 	public UserModel findUserByCardNum(String num){
 		return ud.selecUserByCardNum(num);
 	}
+
+	/**
+	 * 查询用户数量
+	 * @return
+	 */
+	public int findAllCount(Page p){
+		return ud.selectAllCount(p);
+	}
 	
 	@Override
 	public int add(UserModel model) {
@@ -131,7 +140,17 @@ public class UserService implements BaseService<UserModel> {
 	@Override
 	public List<UserModel> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return ud.selectAll();
+	}
+	
+	/**
+	 * 按条件查询用户
+	 * @param p
+	 * @return
+	 */
+	public List<UserModel> findAllByPage(Page p) {
+		// TODO Auto-generated method stub
+		return ud.selectUserByPage(p);
 	}
 	@Override
 	public int alterById(UserModel model) {

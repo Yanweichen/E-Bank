@@ -377,6 +377,24 @@ div.hotdiv:hover{
 			</div>
 		</div>
 	</div>
+	
+		<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button id="isSucCloseBtn" type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+					<p id = "msg"></p>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="fakeloader"></div>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
@@ -733,7 +751,14 @@ div.hotdiv:hover{
 					if (result.indexOf("<script")==-1?false:true) {
 						$('#loginModal').modal('show')
 					} else {
-						alert("回复失败！");
+						result = JSON.parse(result);
+						if (result.error==203) {
+							 $("#msg").empty(); 
+							 $("#msg").append(result.msg)
+			               	 $("#isSuc").modal(); 
+							 return;
+						}
+						alert("回复失败")
 					}
 				}
 			})

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.other.Page;
 import com.bank.model.user.UserModel;
 import com.bank.service.user.UserService;
 import com.bank.utils.JsonUtil;
@@ -372,7 +373,7 @@ public class UserInfoController {
 	}
 	
 	@RequestMapping("/activateUser")
-	public ModelAndView activateUser(String user_idcard) {
+	public ModelAndView activateUser(String user_idcard,HttpServletRequest req) {
 		//base64解密
 		try {
 			user_idcard = new String(Base64.decodeBase64(user_idcard),"UTF-8");
@@ -381,7 +382,7 @@ public class UserInfoController {
 			e.printStackTrace();
 		}
 		ModelAndView mv = new ModelAndView();
-		if (user_idcard != null && modifyUserState(RegularUtil.NORMAL,user_idcard)) {
+		if (user_idcard != null && modifyUserState(RegularUtil.NORMAL,user_idcard,req)) {
 			mv.addObject("isactivate", "激活成功！");
 		} else {
 			mv.addObject("isactivate", "激活失败！");
@@ -396,9 +397,14 @@ public class UserInfoController {
 	 * @param state
 	 * @return
 	 */
-	public boolean modifyUserState(int state,String idcard){
+	@ResponseBody
+	@RequestMapping("modifyUserState")
+	public boolean modifyUserState(int state,String idcard,HttpServletRequest req){
 		int issuc = us.alterUserStateByIdCadr(state,idcard);
+		UserModel user = (UserModel) req.getSession().getAttribute("user");
 		if (issuc==1) {
+			user.setUser_state(""+state);
+			req.getSession().setAttribute("user", user);//刷新用户信息
 			return true;
 		}else{
 			return false;
@@ -487,5 +493,11 @@ public class UserInfoController {
 	@RequestMapping("getOnLineUser")
 	public JSONObject getOnLineUser() throws ParseException, CloneNotSupportedException{
 		return JsonUtil.getOnLineUser();
+	}
+	
+	@ResponseBody
+	@RequestMapping("getALLUser")
+	public JSONObject getALLUser(Page p) throws ParseException{
+		return JsonUtil.getAllUser(us.findAllByPage(p),us.findAllCount(p));
 	}
 }

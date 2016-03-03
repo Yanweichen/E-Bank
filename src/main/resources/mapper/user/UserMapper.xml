@@ -72,4 +72,20 @@
   	WHERE uu.`user_id`=uc.`user_card_user_id` AND uc.`user_card_num`=#{num}
   	GROUP BY uu.`user_id`;
   </select>
+  <!-- 查询所有用户 -->
+  <select id="selectUserByPage" resultType="com.bank.model.user.UserModel" parameterType="com.bank.model.other.Page">
+  	SELECT * FROM user_userinfo 
+  	<if test="search != null and search!= ''">
+  	WHERE user_idcard = #{search} OR user_phone = #{search} OR user_email = #{search} OR user_name LIKE '%${search}%'
+  	</if>
+  	ORDER BY user_regist_time ${order} LIMIT #{offset},#{limit};
+  </select>
+   <!-- 查询所有用户数量 -->
+  <select id="selectAllCount" resultType="java.lang.Integer" parameterType="com.bank.model.other.Page">
+  	SELECT  COUNT(*)  FROM user_userinfo 
+  	<if test="search != null and search!= ''">
+  	WHERE user_idcard = #{search} OR user_phone = #{search} OR user_email = #{search} OR user_name LIKE '%${search}%'
+  	</if>
+  	ORDER BY user_regist_time DESC LIMIT #{offset},#{limit};
+  </select>
 </mapper>

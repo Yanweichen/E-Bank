@@ -3,6 +3,7 @@ package com.bank.dao.user;
 import java.util.List;
 
 import com.bank.base.BaseDAO;
+import com.bank.model.other.Page;
 import com.bank.model.user.UserModel;
 
 public interface UserDAO extends BaseDAO<UserModel>{
@@ -18,4 +19,6 @@ public interface UserDAO extends BaseDAO<UserModel>{
 	public int updateUserMoneyById(double money,int id);
 	public List<UserModel> selectRecentlyTradeUser(int id);
 	public UserModel selecUserByCardNum(String num);
+	public int selectAllCount(Page p);
+	public List<UserModel> selectUserByPage(Page p);
 }

@@ -1,5 +1,7 @@
 package com.bank.controller.msg;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bank.model.msg.MsgModel;
 import com.bank.model.user.UserModel;
 import com.bank.service.msg.MsgService;
 import com.bank.utils.JsonUtil;
@@ -41,6 +44,27 @@ public class MsgController {
 	public JSONObject alertMsgState(int id){
 		JSONObject jo = new JSONObject();
 		int suc = ms.alertStateById(id);
+		if (suc==1) {
+			jo.put("error", "200");
+			jo.put("msg", "修改成功");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "修改失败");
+		}
+		return jo;
+	}
+	
+	/**
+	 * 发送消息
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("sendMsg")
+	public JSONObject sendMsg(MsgModel model){
+		JSONObject jo = new JSONObject();
+		model.setMsgTime(new Date());
+		model.setMsgState(false);
+		int suc = ms.add(model);
 		if (suc==1) {
 			jo.put("error", "200");
 			jo.put("msg", "修改成功");

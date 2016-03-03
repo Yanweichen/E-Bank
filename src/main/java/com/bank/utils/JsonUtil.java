@@ -238,4 +238,35 @@ public class JsonUtil {
 		jo.put("rows", jarr);
 		return jo;
 	}
+	
+	/**
+	 * 获得用户列表
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static JSONObject getAllUser(List<UserModel> list,int total) throws ParseException{
+		JSONObject jo = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		for (UserModel um : list) {
+			switch (um.getUser_state()) {
+			case "1":
+				um.setUser_state("正常");
+				break;
+			case "2":
+				um.setUser_state("禁封");		
+				break;
+			case "0":
+				um.setUser_state("未激活");
+				break;
+			default:
+				break;
+			}
+			um.setUser_regist_time_fmt(TimeUtil.Date2String(um.getUser_regist_time(), "yyyy-MM-dd HH:mm:ss"));
+			um.setUser_face("<img class='userface' src="+um.getUser_face()+">");
+			jarr.add(JSON.toJSON(um));
+		}
+		jo.put("total", total);
+		jo.put("rows", jarr);
+		return jo;
+	}
 }
