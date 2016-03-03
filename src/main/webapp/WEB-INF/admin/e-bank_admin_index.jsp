@@ -119,9 +119,15 @@
 						href : 'admin/userlist.action'
 					}, {
 						id : '16',
-						text : '发送站内信',
-						href : 'page/student/index.html'
-					} ]
+						text : '解封IP',
+						href : 'admin/iplist.action'
+					}
+// 					, {
+// 						id : '16',
+// 						text : '发送站内信',
+// 						href : 'page/student/index.html'
+// 					} 
+					]
 				} ]
 			}, 
 // 			  {

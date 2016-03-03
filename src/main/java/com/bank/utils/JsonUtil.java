@@ -3,6 +3,7 @@ package com.bank.utils;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.catalina.mbeans.UserMBean;
 
@@ -266,6 +267,24 @@ public class JsonUtil {
 			jarr.add(JSON.toJSON(um));
 		}
 		jo.put("total", total);
+		jo.put("rows", jarr);
+		return jo;
+	}
+	
+	/**
+	 * 获取IP列表
+	 * @return
+	 */
+	public static JSONObject getIPList(){
+		JSONObject jo = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		for (Entry<String, String> entry : RegularUtil.IPMap.entrySet()) {
+			JSONObject jjo = new JSONObject();
+			jjo.put("ip", entry.getKey());
+			jjo.put("host", entry.getKey());
+			jarr.add(jjo);
+		}
+		jo.put("total", RegularUtil.IPMap.size());
 		jo.put("rows", jarr);
 		return jo;
 	}

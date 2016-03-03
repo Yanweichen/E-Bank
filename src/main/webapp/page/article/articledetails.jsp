@@ -378,7 +378,7 @@ div.hotdiv:hover{
 		</div>
 	</div>
 	
-		<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
 		aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">

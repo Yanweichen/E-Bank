@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.admin.AdminModel;
 import com.bank.service.admin.AdminService;
+import com.bank.utils.JsonUtil;
 import com.bank.utils.RegularUtil;
 
 @Controller
@@ -136,6 +137,24 @@ public class AdminController {
 	}
 	
 	/**
+	 * 获得ip列表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("getIPList")
+	public JSONObject getIPList(){
+		return JsonUtil.getIPList();
+	}
+	
+	@ResponseBody
+	@RequestMapping("unBanIP")
+	public boolean unBanIP(String ip){
+		RegularUtil.LoginCountMap.remove(ip);
+		RegularUtil.IPMap.remove(ip);
+		return true;
+	}
+	
+	/**
 	 * 前往首页
 	 * @return
 	 */
@@ -194,5 +213,17 @@ public class AdminController {
 			return "";//非法操作界面
 		}
 		return "admin/userManage/userlist";
+	}
+	/**
+	 * 用户列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/iplist")
+	public String iplist(HttpServletRequest req){
+		if (req.getSession().getAttribute("admin")==null) {
+			return "";//非法操作界面
+		}
+		return "admin/userManage/iplist";
 	}
 }
