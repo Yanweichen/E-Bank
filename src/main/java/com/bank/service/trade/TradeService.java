@@ -490,6 +490,40 @@ public class TradeService implements BaseService<TradeModel>{
 		return jo;
 	}
 	
+	@Transactional
+	public JSONObject pay(UserModel user,int type,double money,String info){
+		JSONObject jo = new JSONObject();
+		if (user.getUser_account_money()-money<0) {
+			jo.put("error", 203);
+			jo.put("msg", "您的E宝余额不足");
+			return jo;
+		}
+		TradeModel tm = new TradeModel();
+		tm.setTradeExpendMoney(money);
+		tm.setTradeIncomeMoney(0);
+		tm.setTradeInfo(info);
+		tm.setTradeNumber(System.currentTimeMillis()+"");
+		tm.setTradeUserId(Integer.valueOf(user.getUser_id()));
+		tm.setTradeOtherUserId(60);
+		tm.setTradeTime(new Date());
+		tm.setTradeState(1);
+		tm.setTradeTypeId(RegularUtil.PAY);
+		add(tm);
+		tm.setTradeExpendMoney(0);
+		tm.setTradeIncomeMoney(money);
+		tm.setTradeInfo("用户:"+user.getUser_name()+"缴费");
+		tm.setTradeNumber(System.currentTimeMillis()+"");
+		tm.setTradeUserId(60);
+		tm.setTradeOtherUserId(Integer.valueOf(user.getUser_id()));
+		tm.setTradeTime(new Date());
+		tm.setTradeState(1);
+		tm.setTradeTypeId(RegularUtil.TRADEIN);
+		add(tm);
+		jo.put("error", 200);
+		jo.put("msg", "缴费成功");
+		return jo;
+	}
+	
 	/**
 	 * 根据条件查询交易记录
 	 * @param tp
@@ -504,8 +538,8 @@ public class TradeService implements BaseService<TradeModel>{
 	 * @param id
 	 * @return
 	 */
-	public int selectTradeCountByUser(int id){
-		return td.selectTradeCountByUser(id);
+	public int selectTradeCountByUser(TradePage tp){
+		return td.selectTradeCountByUser(tp);
 	}
 	
 	@Override

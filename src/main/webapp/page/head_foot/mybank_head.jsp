@@ -72,7 +72,7 @@
 				<h4 class="daohang">生活服务</h4>
 				<div class="subtext">
 					<div class="list-group">
-						<a href="javascript:void(0)" class="list-group-item" style="color: white;"> 手机缴费充值</a>
+						<a href="myAccount/payPhone.action" class="list-group-item" style="color: white;"> 手机缴费充值</a>
 						<a href="javascript:void(0)" class="list-group-item" style="color: white;"> 爱心捐赠 </a>
 						<a href="javascript:void(0)" class="list-group-item" style="color: white;"> 有线电视缴费 </a>
 						<a href="javascript:void(0)" class="list-group-item" style="color: white;"> 水电煤缴费</a>

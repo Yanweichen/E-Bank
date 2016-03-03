@@ -161,6 +161,30 @@
     LIMIT #{offset},#{limit};
   </select>
   <select id="selectTradeCountByUser" resultType="java.lang.Integer">
-  SELECT COUNT(*) FROM user_trade WHERE trade_user_id = #{id}
+  SELECT COUNT(*)
+  FROM user_trade ut,trade_type tt,user_userinfo uu
+  WHERE uu.`user_id`=ut.`trade_other_user_id` AND tt.`id`=ut.`trade_type_id` AND ut.`trade_user_id`=#{uid}
+  	<choose> 
+        <when test="starttime != null and endtime !=null"> 
+            AND ut.`trade_time` BETWEEN DATE_FORMAT(#{starttime}, '%Y%m%d') AND DATE_FORMAT(#{endtime}, '%Y%m%d%H%i%s')
+       </when>
+        <when test="search != null and search != ''"> 
+        	AND ut.`trade_info` LIKE '%${search}%' OR ut.`trade_number`=#{search}
+       </when>   
+       <otherwise> 
+       </otherwise> 
+   	</choose>
+   ORDER BY ut.`trade_time`  
+    <choose>
+	    <when test="order == 'asc'">
+	    	ASC
+	    </when>
+	    <when test="order == 'desc'">
+	    	DESC
+	    </when>
+	    <otherwise> 
+	     DESC
+       </otherwise> 
+    </choose>
   </select>
 </mapper>

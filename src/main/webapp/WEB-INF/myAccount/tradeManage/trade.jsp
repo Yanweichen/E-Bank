@@ -37,15 +37,15 @@
 			<div class="col-sm-3">
 				<div id="setlist" class="list-group touming6">
 				  <a id="noviewa" href="myAccount/trade.action?toBorC=tob" class="list-group-item">
-				  	<i class="icon-envelope-alt noviewi"></i>&nbsp;&nbsp;转账
+				  	<i class="icon-share-alt noviewi"></i>&nbsp;&nbsp;转账
 				  	<i class="icon-angle-right noviewi" style="float: right;"></i>
 				  </a>
 				  <a id="outin" href="myAccount/outin.action" class="list-group-item">
-				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;转入/转出
+				  	<i class="icon-exchange isviewi" ></i>&nbsp;&nbsp;转入/转出
 				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>
 				  <a id="isviewa" href="myAccount/userCardList.action" class="list-group-item">
-				  	<i class="icon-envelope isviewi" ></i>&nbsp;&nbsp;我的银行卡
+				  	<i class="icon-credit-card isviewi" ></i>&nbsp;&nbsp;我的银行卡
 				  	<i class="icon-angle-right isviewi" style="float: right;"></i>
 				  </a>
 				</div>

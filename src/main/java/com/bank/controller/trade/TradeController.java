@@ -150,7 +150,7 @@ public class TradeController {
 	public JSONObject getTradeList(TradePage tp,HttpServletRequest req) throws NumberFormatException, ParseException{
 		UserModel user = ((UserModel)req.getSession().getAttribute("user") );
 		tp.setUid(Integer.valueOf(user.getUser_id()));
-		return JsonUtil.getTradeList(ts.selectTradeCountByUser(Integer.valueOf(user.getUser_id())),ts.findTradeByPage(tp)) ;
+		return JsonUtil.getTradeList(ts.selectTradeCountByUser(tp),ts.findTradeByPage(tp)) ;
 	}
 	
 	/**
@@ -163,5 +163,17 @@ public class TradeController {
 	public JSONObject getRecentlyTradeUser(HttpServletRequest req){
 		UserModel user = ((UserModel)req.getSession().getAttribute("user") );
 		return JsonUtil.getRecentlyTradeUser(us.findRecentlyTradeUser(Integer.valueOf(user.getUser_id())));
+	}
+	
+	@ResponseBody
+	@RequestMapping("payByType")
+	public JSONObject pay(double money,int type,HttpServletRequest req){
+		UserModel user = ((UserModel)req.getSession().getAttribute("user") );
+		JSONObject jo = ts.pay(user, 1, money, "手机缴费");
+		if (jo.getInteger("error")==200) {
+			user.setUser_account_money(user.getUser_account_money()-money);
+			req.setAttribute("user", user);
+		}
+		return jo;
 	}
 }

@@ -52,6 +52,9 @@
 						<i class="icon-mobile-phone " style="font-size: 34px;color: #3f316d;padding-top: 5px;"></i><h4 class="nosingline" style="color: #3f316d;position: absolute;">&nbsp;&nbsp;手机缴费充值</h4>
 				  	</div>
 				  <div class="panel-body">
+				  		<div class="alert alert-danger" role="alert">
+						  <a href="javascript:void(0)" class="alert-link">只支持E宝付款,并缴费至中国联通</a>
+						</div>
 				  		<form>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">手机号</label>
@@ -59,11 +62,28 @@
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputPassword1">缴费金额</label>
-						    <input type="text" class="form-control"  placeholder="金额">
+						    <input type="text" class="form-control" id="money" placeholder="金额">
 						  </div>
-						  <button type="submit" class="btn btn-default btncolor">缴费</button>
+						  <button type="button" id="pay" class="btn btn-default btncolor">缴费</button>
 						</form>
 				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button id="isSucCloseBtn" type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+					<p id = "msg"></p>
 				</div>
 			</div>
 		</div>
@@ -73,5 +93,35 @@
 	<jsp:include page="../../../page/head_foot/foot.jsp"></jsp:include>
 	<script src="page/assets/js/jquery.easing.1.3.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$("#pay").click(function(){
+			$.post("trade/payByType.action",{money:$("#money").val(),type:1},function(result){
+				if (result.error=200) {
+					 $("#msg").empty(); 
+					 $("#msg").append("缴费成功！")
+	               	 $("#isSuc").modal(); 
+				} else {
+					 $("#msg").empty(); 
+					 $("#msg").append("缴费失败！")
+	               	 $("#isSuc").modal(); 
+				}
+			})
+		})
+		//模态框居中
+		function centerModals() {
+			$('.modal').each(
+					function(i) {
+						var $clone = $(this).clone().css('display', 'block')
+								.appendTo('body');
+						var top = Math.round(($clone.height() - $clone.find(
+								'.modal-content').height()) / 3);
+						top = top > 0 ? top : 0;
+						$clone.remove();
+						$(this).find('.modal-content').css("margin-top", top);
+					});
+		}
+		$('.modal').on('show.bs.modal', centerModals);
+		$(window).on('resize', centerModals);
+	</script>
 </body>
 </html>

@@ -156,7 +156,7 @@ public class UserInfoController {
 			jo.put("error", "202");
 			jo.put("msg", "参数有误");
 		}else{
-			req.getSession().setAttribute("user", user);
+			req.getSession().setAttribute("reguser", user);
 			jo.put("error", "200");
 			jo.put("msg", "success");
 		}
@@ -174,7 +174,7 @@ public class UserInfoController {
 	@ResponseBody
 	public JSONObject regist_Second(UserModel user,@RequestParam("user_code")String user_code,HttpServletRequest req){
 		JSONObject jo = new JSONObject();
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user"));
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser"));
 		if (sessionuser==null) {
 			jo.put("error", "401");
 			jo.put("msg", "访问被拒绝，非法操作");
@@ -183,7 +183,7 @@ public class UserInfoController {
 		user.setUser_name(sessionuser.getUser_name());
 		user.setUser_idcard(sessionuser.getUser_idcard());
 		user.setUser_phone(sessionuser.getUser_phone());
-		req.getSession().setAttribute("user", user);
+		req.getSession().setAttribute("reguser", user);
 		jo.put("error", "200");
 		jo.put("msg", "success");
 		return jo;
@@ -198,7 +198,7 @@ public class UserInfoController {
 	@RequestMapping("/adduser")
 	public JSONObject addUser(HttpServletRequest req){
 		JSONObject jo = new JSONObject();
-		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
+		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("reguser") );
 		if (sessionuser==null) {
 			jo.put("error", "401");
 			jo.put("msg", "访问被拒绝，非法操作");
@@ -206,8 +206,10 @@ public class UserInfoController {
 		}
 		sessionuser.setUser_last_login_time(new Date());
 		sessionuser.setUser_regist_time(new Date());
+		sessionuser.setUser_account_money(50000);
 		send_email_activite(sessionuser);//发送激活邮件
 		us.add(sessionuser);
+		req.setAttribute("user", sessionuser);
 		jo.put("error", "200");
 		jo.put("msg", "success");
 		return jo;
@@ -287,9 +289,16 @@ public class UserInfoController {
 				jo.put("message", "邮箱格式不正确");
 				return jo;
 			}
-			if (us.findUserByAccoutn(account)!=null && !user.getUser_email().equals(account)) {
-				jo.put("valid",false);
-				jo.put("message","该邮箱已注册");
+			if (us.findUserByAccoutn(account)!=null) {
+				if (user!=null) {
+					if (!user.getUser_email().equals(account)) {
+						jo.put("valid",false);
+						jo.put("message","该邮箱已注册");
+					}
+				}else{
+					jo.put("valid",false);
+					jo.put("message","该邮箱已注册");
+				}
 			}else{
 				jo.put("valid", true);
 			}
@@ -301,9 +310,16 @@ public class UserInfoController {
 				jo.put("message", "手机号码格式不正确");
 				return jo;
 			}
-			if (us.findUserByAccoutn(account)!=null && !user.getUser_phone().equals(account)) {
-				jo.put("valid",false);
-				jo.put("message","该号码已注册");
+			if (us.findUserByAccoutn(account)!=null) {
+				if (user!=null) {
+					if (!user.getUser_phone().equals(account)) {
+						jo.put("valid",false);
+						jo.put("message","该号码已注册");
+					}
+				}else{
+					jo.put("valid",false);
+					jo.put("message","该号码已注册");
+				}
 			}else{
 				jo.put("valid", true);
 			}

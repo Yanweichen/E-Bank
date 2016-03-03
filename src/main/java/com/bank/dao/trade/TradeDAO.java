@@ -9,5 +9,5 @@ import com.bank.model.trade.TradeModel;
 public interface TradeDAO extends BaseDAO<TradeModel>{
 	
 	public List<TradeModel> selectTradeByPage(TradePage tp);
-	public int selectTradeCountByUser(int id);
+	public int selectTradeCountByUser(TradePage tp);
 }
