@@ -81,7 +81,7 @@
 					items : [ {
 						id : 'user_chart',
 						text : '资金流向',
-						href : 'myaccount/mychart.action'
+						href : 'myAccount/mychart.action'
 					}, {
 						id : '12',
 						text : '账户列表',

@@ -5,11 +5,11 @@ import java.text.ParseException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.model.other.TradePage;
 import com.bank.model.user.UserModel;
@@ -175,5 +175,17 @@ public class TradeController {
 			req.setAttribute("user", user);
 		}
 		return jo;
+	}
+	
+	/**
+	 * 获得交易类型权重
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("getTypeWeight")
+	public JSONArray getTypeWeight(HttpServletRequest req){
+		UserModel user = ((UserModel)req.getSession().getAttribute("user") );
+		return ts.getTypeWeight(Integer.valueOf(user.getUser_id()));
 	}
 }

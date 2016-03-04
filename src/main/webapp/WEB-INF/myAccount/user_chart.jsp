@@ -202,6 +202,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+			
 		var screenwidth = window.screen.height;
 		var piew,pieh,linw,linh;
 		if (screenwidth > 768) {
@@ -215,6 +216,9 @@
 			linw = 650;
 			linh = 300;
 		}
+		$.post("trade/getTypeWeight.action",function(json){
+			
+		
 			//饼图
 			var piechart = new AChart({
 				id : 'pie',
@@ -284,15 +288,17 @@
 							console.log(ev.point.xValue + ' unselected');
 						}
 					},
-					data : [ [ '收入', 55.0 ], [ '支出', 36.8 ], {
-						name : '理财',
-						y : 12.8,
-						sliced : true,
-						selected : true
-					}, [ '转账', 8.5 ], [ '缴费', 6.2 ], [ '贷款', 0.7 ] ]
+// 					data : [ [ '收入', 55.0 ], [ '支出', 36.8 ], {
+//						name : '理财',
+//						y : 12.8,
+//						sliced : true,
+//						selected : true
+//					}, [ '转账', 8.5 ], [ '缴费', 6.2 ], [ '贷款', 0.7 ] ]
+					data :json
 				} ]
 			});
 			piechart.render();
+		})
 			//折线图
 			var linechart = new AChart({
 				theme : AChart.Theme.SmoothBase,

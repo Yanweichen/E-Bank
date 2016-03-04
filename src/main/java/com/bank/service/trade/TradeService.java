@@ -1,5 +1,6 @@
 package com.bank.service.trade;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.base.BaseService;
 import com.bank.dao.trade.TradeDAO;
@@ -540,6 +542,33 @@ public class TradeService implements BaseService<TradeModel>{
 	 */
 	public int selectTradeCountByUser(TradePage tp){
 		return td.selectTradeCountByUser(tp);
+	}
+	
+	/**
+	 * 获得交易类型比例
+	 * @param id
+	 * @return
+	 */
+	public JSONArray getTypeWeight(int id){
+		JSONArray ja = new JSONArray();
+		JSONArray jarr = new JSONArray();
+		String [] strs = {"收入","支出","缴费"};
+		int all = 0;
+		int [] weight = new int[3];
+		for (int i = 0; i < 3 ; i++) {
+			weight [i] = td.selectTradeTypeCount(i+1, id);
+			all+=weight [i];
+		}
+		for (int j = 0; j < 3; j++) {
+			JSONArray jar = new JSONArray();
+			BigDecimal bg = new BigDecimal((weight [j]/(all*1.0))*100);
+			double f1 = bg.setScale(0, BigDecimal.ROUND_DOWN).doubleValue();
+			jar.add(strs[j]);
+			jar.add(f1);
+			jarr.add(jar);
+		}
+		ja.add(jarr);
+		return jarr;
 	}
 	
 	@Override

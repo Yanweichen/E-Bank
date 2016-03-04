@@ -75,4 +75,8 @@ public class MyAccountController {
 	public String payPhone(){
 		return "myAccount/payManage/payPhone";
 	}
+	@RequestMapping("/moenyView")
+	public String moenyview(){
+		return "myAccount/tradeManage/moenyview";
+	}
 }

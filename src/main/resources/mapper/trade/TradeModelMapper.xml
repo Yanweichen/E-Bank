@@ -187,4 +187,8 @@
        </otherwise> 
     </choose>
   </select>
+  <!-- 根据交易类型返回数量 -->
+  <select id="selectTradeTypeCount" resultType="java.lang.Integer">
+  	SELECT COUNT(*) FROM user_trade WHERE trade_type_id = #{0} AND trade_user_id = #{1}
+  </select>
 </mapper>

@@ -10,4 +10,5 @@ public interface TradeDAO extends BaseDAO<TradeModel>{
 	
 	public List<TradeModel> selectTradeByPage(TradePage tp);
 	public int selectTradeCountByUser(TradePage tp);
+	public int selectTradeTypeCount(int type,int id);
 }

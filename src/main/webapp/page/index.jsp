@@ -171,6 +171,7 @@ ul.news li p{float:right; color:#000000}
 	<script src="<%=basePath%>page/assets/js/pointbg.js"></script>
 	<jsp:include page="head_foot/head.jsp"></jsp:include>
 	<button id="adminlogin" type="button" class="btn btn-default btnwindth">管理员入口</button>
+	<a href="<%=basePath%>index/myBank.action">统计</a>
 	<!-- 头部 -->
 	<div class="container">
 		<div class="row">
@@ -586,7 +587,7 @@ ul.news li p{float:right; color:#000000}
 					} else {
 						src = 'indexnomalicon.png';
 					}
-					content+="<div class='item' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='page/assets/img/"+src+"'><a href='index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>";
+					content+="<div class='item' style='text-align: center;'><img class='img-rounded'  alt='' style='height: 100px;width: 100px' src='"+jo.index_preview_image_url+"'><div class='overstep top5' ><img  alt='' style='height: 20px;width: 20px' src='<%=basePath%>page/assets/img/"+src+"'><a href='<%=basePath%>index/articledetail.action?id="+jo.index_id+"' target='_blank' id='afterarticle'style='margin-left: 3px;' class='hand textbottom'>"+jo.index_title+"</a></div></div>";
 				});
 			    $("#hotlist").html(content);
 			}

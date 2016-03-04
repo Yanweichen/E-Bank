@@ -40,7 +40,7 @@
 								<h4>财富看板</h4>
 							</div>
 							<div class="col-sm-5 col-sm-offset-3">
-								<h5 style="float: left;margin-left: 80px;color: #999999">单位:元<a href="#"  style="margin-left: 10px;">财富总览</a></h5>
+								<h5 style="float: left;margin-left: 80px;color: #999999">单位:元<a href="myAccount/moenyView.action"  style="margin-left: 10px;">财富总览</a></h5>
 							</div>
 						</div>
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
@@ -75,7 +75,7 @@
 								<h4 >生活服务</h4>
 							</div>
 							<div class="col-sm-5 col-sm-offset-3">
-								<h5 style="float: left;margin-left: 80px;">管理&nbsp;&nbsp;&nbsp;|&nbsp;<a href="#"  style="margin-left: 5px;">我的服务</a></h5>
+								<h5 style="float: left;margin-left: 80px;">管理&nbsp;&nbsp;&nbsp;|&nbsp;<a href="javascript:void(0)"  style="margin-left: 5px;">我的服务</a></h5>
 							</div>
 						</div>
 						<hr width="100%" style="border-top:1px solid #cccccc;margin: 0px;"/>
