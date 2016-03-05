@@ -68,6 +68,7 @@ if (!(document.documentElement.clientHeight < document.documentElement.offsetHei
 			$(window).scroll(function(event){
 				var winPos = $(window).scrollTop();
 				$("#headmsgbox").css("top",winPos+40);
+				$("#foot").removeClass("navbar-fixed-bottom");
 		    });
 			$("#titleout").click(function() {
 				$.post("user/logout.action", function(result) {

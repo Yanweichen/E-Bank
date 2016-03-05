@@ -184,7 +184,7 @@ public class TradeController {
 	 */
 	@ResponseBody
 	@RequestMapping("getTypeWeight")
-	public JSONArray getTypeWeight(HttpServletRequest req){
+	public JSONObject getTypeWeight(HttpServletRequest req){
 		UserModel user = ((UserModel)req.getSession().getAttribute("user") );
 		return ts.getTypeWeight(Integer.valueOf(user.getUser_id()));
 	}

@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bank.base.BaseService;
 import com.bank.dao.trade.TradeDAO;
 import com.bank.model.msg.MsgModel;
+import com.bank.model.other.OutInModel;
 import com.bank.model.other.TradePage;
 import com.bank.model.trade.TradeModel;
 import com.bank.model.user.UserModel;
@@ -549,26 +550,38 @@ public class TradeService implements BaseService<TradeModel>{
 	 * @param id
 	 * @return
 	 */
-	public JSONArray getTypeWeight(int id){
-		JSONArray ja = new JSONArray();
+	@Transactional
+	public JSONObject getTypeWeight(int id){
+		JSONObject rt = new JSONObject();
+		OutInModel oi = td.selectALLinout(id);
+		JSONObject oijson = new JSONObject();
+		oijson.put("allout", new BigDecimal(oi.getAllout()).setScale(2, BigDecimal.ROUND_DOWN).doubleValue());
+		oijson.put("allin", new BigDecimal(oi.getAllin()).setScale(2, BigDecimal.ROUND_DOWN).doubleValue());
 		JSONArray jarr = new JSONArray();
-		String [] strs = {"收入","支出","缴费"};
+		String [] strs = {"收入","转出","缴费"};
 		int all = 0;
 		int [] weight = new int[3];
+		double [] moneys = new double[3];
 		for (int i = 0; i < 3 ; i++) {
-			weight [i] = td.selectTradeTypeCount(i+1, id);
+			OutInModel oim = td.selectTradeTypeCount(i+1, id);
+			weight [i] = (int) oim.getAllout();
+			moneys [i] = oim.getAllin();
 			all+=weight [i];
 		}
 		for (int j = 0; j < 3; j++) {
-			JSONArray jar = new JSONArray();
-			BigDecimal bg = new BigDecimal((weight [j]/(all*1.0))*100);
-			double f1 = bg.setScale(0, BigDecimal.ROUND_DOWN).doubleValue();
-			jar.add(strs[j]);
-			jar.add(f1);
-			jarr.add(jar);
+			JSONObject jo = new JSONObject();
+			BigDecimal bg1 = new BigDecimal((weight [j]/(all*1.0))*100);
+			double f1 = bg1.setScale(0, BigDecimal.ROUND_DOWN).doubleValue();
+			BigDecimal bg2 = new BigDecimal(moneys [j]*1.0);
+			double f2 = bg2.setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+			jo.put("typename", strs[j]);
+			jo.put("percent",f1);
+			jo.put("money", f2);
+			jarr.add(jo);
 		}
-		ja.add(jarr);
-		return jarr;
+		rt.put("tradeinfo", jarr);
+		rt.put("outin", oijson);
+		return rt;
 	}
 	
 	@Override

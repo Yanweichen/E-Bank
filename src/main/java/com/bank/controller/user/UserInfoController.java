@@ -283,13 +283,13 @@ public class UserInfoController {
 			}
 			break;
 		case 1:
-			if (account.matches(RegularUtil.EmailRegular)) {
+ 			if (account.matches(RegularUtil.EmailRegular)) {
 			} else {
 				jo.put("valid", false);
 				jo.put("message", "邮箱格式不正确");
 				return jo;
 			}
-			if (us.findUserByAccoutn(account)!=null) {
+ 			if (us.findUserByAccoutn(account)!=null) {
 				if (user!=null) {
 					if (!user.getUser_email().equals(account)) {
 						jo.put("valid",false);
@@ -483,10 +483,19 @@ public class UserInfoController {
 		JSONObject jo = new JSONObject();
 		UserModel sessionuser = ((UserModel)req.getSession().getAttribute("user") );
 		sessionuser.setUser_email(um.getUser_email());
+		//未激活重新发送邮件或者修改邮箱重新发送邮件
+		if ("0".equals(sessionuser.getUser_state()) || !sessionuser.getUser_email().equals(um.getUser_email())) {
+			send_email_activite(sessionuser);
+		}
 		sessionuser.setUser_phone(um.getUser_phone());
 		sessionuser.setUser_obligate_info(um.getUser_obligate_info());
-		jo.put("error", "200");
-		jo.put("msg", "修改成功！");
+		if (us.alterById(sessionuser)==1) {
+			jo.put("error", "200");
+			jo.put("msg", "修改成功！");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "修改失败！");
+		}
 		return jo;
 	}
 	

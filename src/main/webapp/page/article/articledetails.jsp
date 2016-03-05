@@ -629,7 +629,10 @@ div.hotdiv:hover{
 								if (result.indexOf("<script")==-1?false:true) {
 									$('#loginModal').modal('show')
 								} else {
-									alert("回复失败！");
+									result = JSON.parse(result)
+									$("#msg").empty(); 
+									 $("#msg").append(result.msg)
+					               	 $("#isSuc").modal(); 
 								}
 							}
 						})
@@ -647,7 +650,10 @@ div.hotdiv:hover{
 								if (result.indexOf("<script")==-1?false:true) {
 									$('#loginModal').modal('show')
 								} else {
-									alert("回复失败！");
+									result = JSON.parse(result)
+								     $("#msg").empty(); 
+									 $("#msg").append(result.msg)
+					               	 $("#isSuc").modal(); 
 								}
 							}
 						})

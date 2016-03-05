@@ -29,14 +29,14 @@
 	<script src="page/assets/js/pointbg.js"></script>
 	<!-- 头部导航 -->
 		<nav id="navhead" class="navbar navbar-divider noborderradius" style="background-color:#3f314d;min-height: 30px;border-radius: 0;">
-			<div class="container" style="padding-top: 5px;">
+			<div id="section-4" class="container" style="padding-top: 5px;">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<i class="icon-github-alt" style="font-size: 20px;color: white;"></i>&nbsp;&nbsp;
 				<a style="color: white;letter-spacing: 10px;" href="page/index.jsp">e-bank</a>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<!-- /.navbar-collapse -->
 				<h5 id="logintitle" style="float: right; color: white;margin: 0px;display: none;">
-					你好,<span id="headloginusername">&nbsp;${user.user_name}</span>&nbsp;&nbsp;<a class="hand" id="titleout" style="color: white;">退出</a>&nbsp;
+					你好,<a href="myAccount/accountSet.action" style="color: white;"> <span id="headloginusername">&nbsp;${user.user_name}</span></a>&nbsp;&nbsp;<a class="hand" id="titleout" style="color: white;">退出</a>&nbsp;
 					<i class="icon-credit-card"></i>&nbsp;<a href="myAccount/mybank.action" style="color: white;">我的银行</a>&nbsp;
 					<a style="color: white;" href="msg/msgBox.action?state=noview&limit=5&offset=0"><i class="icon-envelope"></i>&nbsp;消息&nbsp;<span id="newmsg" style="display: none;" class="badge">New</span></a>
 				</h5>

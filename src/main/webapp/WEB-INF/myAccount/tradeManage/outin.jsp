@@ -241,6 +241,7 @@
                 spinner:"spinner2",
                 show:false
             });
+  			result = JSON.parse(result)
 			if (result.error==200) {
 				 $("#msg").empty(); 
 				 $("#msg").append(result.msg)
@@ -266,6 +267,7 @@
                 spinner:"spinner2",
                 show:false
             });
+  			result = JSON.parse(result)
 			if (result.error==200) {
 				 $("#msg").empty(); 
 				 $("#msg").append(result.msg)

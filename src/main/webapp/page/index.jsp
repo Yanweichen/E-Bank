@@ -171,7 +171,6 @@ ul.news li p{float:right; color:#000000}
 	<script src="<%=basePath%>page/assets/js/pointbg.js"></script>
 	<jsp:include page="head_foot/head.jsp"></jsp:include>
 	<button id="adminlogin" type="button" class="btn btn-default btnwindth">管理员入口</button>
-	<a href="<%=basePath%>index/myBank.action">统计</a>
 	<!-- 头部 -->
 	<div class="container">
 		<div class="row">
@@ -238,8 +237,8 @@ ul.news li p{float:right; color:#000000}
 				<ul class="nav nav-tabss nav-stacked" id="myNav" data-spy="affix"
 					data-offset-top="125">
 					<li class="active"><a href="#section-1">快捷服务</a></li>
-					<li><a href="#section-2">今日热点</a></li>
-					<li><a href="#section-3">关于本行</a></li>
+					<li><a href="#section-2">活动公告</a></li>
+					<li><a href="#section-3">热门文章</a></li>
 					<li><a href="#section-4">回到顶部</a></li>
 				</ul>
 			</div>
@@ -259,7 +258,7 @@ ul.news li p{float:right; color:#000000}
 						data-toggle="tab" style="border-radius: 10px 10px 0px 0px;">金融信息</a></li>
 				</ul>
 				<!-- Tab panes -->
-				<div class="tab-content">
+				<div class="tab-content" id="section-1">
 					<div role="tabpanel" class="tab-pane active tabbg" id="home" style="padding-top: 5%;height: 170px">
 						<div class="row" align="center" >
 							<div class="col-sm-2">
@@ -341,30 +340,6 @@ ul.news li p{float:right; color:#000000}
 									</a>
 								</dl>
 							</div>
-<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
-<%-- 								<a href="<%=basePath%>myAccount/trade.action?toBorC=tob" target="_blank"><i class="icon-github-alt" style="color: #3f316d;font-size: 50px;"></i></a>  --%>
-<!-- 								<h5>转账到E宝</h5> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
-<%-- 								<a href="<%=basePath%>myAccount/trade.action?toBorC=toc" target="_blank"><i class="icon-money" style="color: #3f316d;font-size: 50px;"></i></a>  --%>
-<!-- 								<h5>转账到银行卡</h5>	 -->
-<!-- 							</div> -->
-<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
-<%-- 								<a href="<%=basePath%>myAccount/userCardList.action" target="_blank"><i class="icon-list-alt" style="color: #3f316d;font-size: 50px;"></i></a> --%>
-<!-- 								<h5>我的银行卡</h5> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
-<%-- 								<a href="<%=basePath%>myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a> --%>
-<!-- 								<h5>办理银行卡</h5> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
-<%-- 								<a href="<%=basePath%>myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a> --%>
-<!-- 								<h5>办理银行卡</h5> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-sm-2 top10" style="text-align: center;"> -->
-<%-- 								<a href="<%=basePath%>myAccount/viewCard.action" target="_blank"><i class="icon-credit-card" style="color: #3f316d;font-size: 50px;"></i></a> --%>
-<!-- 								<h5>办理银行卡</h5> -->
-<!-- 							</div> -->
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane tabbg" id="profile">B</div>
@@ -374,7 +349,7 @@ ul.news li p{float:right; color:#000000}
 		</div>
 	</div>
 	
-	<div class="container touxiang" id="section-3">
+	<div class="container touxiang" id="section-2">
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="panel panel-default tabbg">
@@ -416,7 +391,7 @@ ul.news li p{float:right; color:#000000}
 		</div>
 	</div>
 	<!-- 热门文章 -->
-	<div class="container top15" >
+	<div class="container top15" id="section-3">
 		<div class="row">
 			<div class="col-sm-11">
 				<div class="panel panel-default" style="padding: 0;border-radius: 0px 15px 20px 25px;">
@@ -431,13 +406,15 @@ ul.news li p{float:right; color:#000000}
 		</div>
 	</div>
 	<!-- 底部 -->
-	<div class="container" id="section-2">
+	<div class="container" >
 		<div class="row">
 			<div class="col-sm-11">
 				<div class="panel panel-default centerpanel">
 					<div class="panel-body" style="text-align: center;padding-top: 50px;">
 						<div style="font-size: 50px">广告位招租</div>
-						<div style="font-size: 50px">测试账号:505717760@qq.com</div>
+						<div style="font-size: 50px">测试账号0:505717760@qq.com</div>
+						<div style="font-size: 50px">密码：111</div>
+						<div style="font-size: 50px">测试账号1:2366320247@qq.com</div>
 						<div style="font-size: 50px">密码：111</div>
 					</div>
 				</div>

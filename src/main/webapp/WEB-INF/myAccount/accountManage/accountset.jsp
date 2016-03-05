@@ -80,7 +80,7 @@
 								<input class="form-control" name="user_email" type="text" value="<c:if test="${!empty user}">${user.user_email}</c:if>" >
 							</div>
 							<div class="col-sm-4 col-sm-offset-4" >
-							 	<button type="submit" class="btn btncolor btn-default btn-block">保存</button>
+							 	<button id="" type="submit" class="btn btncolor btn-default btn-block">保存</button>
 							</div>
 						</form>
 				  </div>
@@ -153,8 +153,40 @@
 	            },
 
 	        }
-	    })
+	    }).on('success.form.bv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+					$("#msg").empty(); 
+	                $("#msg").append(result.msg)
+	                $("#isSuc").modal(); 
+            }, 'json');
+	    });
 	});
+	
+	$(function(){
+		$("#sub").click(function(){
+			$("#sub").attr('disabled',true)
+				var i = 30
+			setInterval(function() {
+				$("#sub").text("等待下次保存("+i--+")")
+				if(i<=0){
+					$("#sub").attr('disabled',false)
+					$("#sub").text("保存 ")
+					return;
+				}
+			}, 1000)
+			
+		})
+	})
 	</script>
 </body>
 </html>
