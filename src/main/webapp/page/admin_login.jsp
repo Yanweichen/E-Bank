@@ -17,10 +17,10 @@
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <style>
-.ios7_b {
-				filter: blur(5px) contrast(0.4) brightness(1.4);
-				transition: all 0.5s ease-in-out;
-			}
+/* .ios7_b { */
+/* 				filter: blur(5px) contrast(0.4) brightness(1.4); */
+/* 				transition: all 0.5s ease-in-out; */
+/* 			} */
 .appleinputup{
 	border-radius: 15px 15px 0 0;
 	height: 50px;

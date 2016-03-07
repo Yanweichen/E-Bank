@@ -25,6 +25,7 @@ cursor:pointer
 </head>
 <body>
 	<div id="toolbar">
+	<h4 >首页文章</h4>
        <ul class="nav nav-pills">
  		 <li id="viewall" role="presentation" class="active hand"><a style="padding:0px 20px 0px 20px">全部</a></li>
   		 <li id="viewactivity" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">活动</a></li>
@@ -68,6 +69,7 @@ cursor:pointer
 		<div class="row">
 			<div class="col-sm-12">
 			<div id="toolbarAll">
+			<h4 >所有文章</h4>
 		       <ul class="nav nav-pills">
 		 		  <li id="allall" role="presentation" class="active hand"><a style="padding:0px 20px 0px 20px">全部</a></li>
   		 		  <li id="allactivity" class="hand" role="presentation" ><a  style="padding: 0px 20px 0px 20px">活动</a></li>

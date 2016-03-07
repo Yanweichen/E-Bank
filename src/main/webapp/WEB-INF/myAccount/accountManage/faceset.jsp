@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="page/assets/css/mybankbase.css">
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/cropper.css">
+<link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <style type="text/css">
 #setlist .list-group-item{
@@ -117,6 +118,24 @@
 			</div>
 		</div>
 	</div>
+	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button id="isSucCloseBtn" type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+						<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+					<p id = "msg"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="fakeloader"></div>
 	<!-- foot -->	
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<jsp:include page="../../../page/head_foot/foot.jsp"></jsp:include>
@@ -125,17 +144,24 @@
 	<script src="page/assets/js/cropper.js"></script>
 	<script src="page/assets/js/cropper_custom.js"></script>
 	<script src="page/assets/js/jquery.form.js"></script>
+	<script src="page/assets/js/fakeloader.js"></script>
 	<script type="text/javascript">
 	$("#foot").removeClass("navbar-fixed-bottom");
 		$("#saveimg").click(function(){
+			$(".fakeloader").fakeLoader({
+                spinner:"spinner2",
+                show:true
+            });
 			var imageresult = $('#headimageedit').cropper("getCroppedCanvas");
 			imageresult = imageresult.toDataURL();
 			$.post("user/upLoadFace.action",{url:imageresult},function(json){
-				if (json.error==200) {
-					alert(json.msg)
-				} else {
-					alert(json.msg)
-				}
+				$(".fakeloader").fakeLoader({
+	                spinner:"spinner2",
+	                show:false
+	            });
+				$("#msg").empty(); 
+				$("#msg").append(json.msg)
+               	$("#isSuc").modal(); 
 			})
 // 			$.getJSON("other/getImageSignature.action", { type: "upload", fileid: null }, function(json){
 // 				var sign = json.sign,
