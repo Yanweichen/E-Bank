@@ -36,9 +36,9 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<!-- /.navbar-collapse -->
 				<h5 id="logintitle" style="float: right; color: white;margin: 0px;display: none;">
-					你好,<a href="myAccount/accountSet.action" style="color: white;"> <span id="headloginusername">&nbsp;${user.user_name}</span></a>&nbsp;&nbsp;<a class="hand" id="titleout" style="color: white;">退出</a>&nbsp;
-					<i class="icon-credit-card"></i>&nbsp;<a href="myAccount/mybank.action" style="color: white;">我的银行</a>&nbsp;
-					<a style="color: white;" href="msg/msgBox.action?state=noview&limit=5&offset=0"><i class="icon-envelope"></i>&nbsp;消息&nbsp;<span id="newmsg" style="display: none;" class="badge">New</span></a>
+					你好,<a href="<%=basePath%>myAccount/accountSet.action" style="color: white;"> <span id="headloginusername">&nbsp;${user.user_name}</span></a>&nbsp;&nbsp;<a class="hand" id="titleout" style="color: white;">退出</a>&nbsp;
+					<i class="icon-credit-card"></i>&nbsp;<a href="<%=basePath%>myAccount/mybank.action" style="color: white;">我的银行</a>&nbsp;
+					<a style="color: white;" href="<%=basePath%>msg/msgBox.action?state=noview&limit=5&offset=0"><i class="icon-envelope"></i>&nbsp;消息&nbsp;<span id="newmsg" style="display: none;" class="badge">New</span></a>
 				</h5>
 			</div>
 			<!-- /.container-fluid -->
