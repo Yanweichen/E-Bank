@@ -20,6 +20,11 @@ public class MyAccountController {
 	@Autowired
 	private UserCardService ucs;
 	
+	@RequestMapping("setPassword")
+	public String setPassword(){
+		return "setPassword";
+	}
+	
 	@RequestMapping("/mychart")
 	public String openMoneyChart(){
 		return "myAccount/user_chart";

@@ -370,6 +370,25 @@ public class UserInfoController {
 		return jo;
 	}
 
+	@RequestMapping("sendVcode")
+	public JSONObject sendVcode(String account){
+		JSONObject jo = new JSONObject();
+		UserModel user = us.findUserByAccoutn(account);
+		List<String> email = new ArrayList<String>();
+		String user_email = user.getUser_email();
+		email.add(user_email);
+		boolean issuc = new Mail().send("505717760@qq.com",email , null,"e-bank账号激活", "<h1>您好,"+user.getUser_name()+"</h1> "
+				+ "您本次的验证码为");
+		if (issuc) {
+			jo.put("error", "200");
+			jo.put("msg", "发送成功！");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "发送失败！");
+		}
+		return jo;
+	}
+	
 	/**
 	 * 发送激活邮件
 	 * @param user
