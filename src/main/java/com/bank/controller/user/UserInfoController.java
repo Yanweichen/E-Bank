@@ -491,6 +491,7 @@ public class UserInfoController {
 			jo.put("msg", "修改密码成功,请重新登录！");
 			req.getSession().removeAttribute("setuser");
 			req.getSession().removeAttribute("user");
+			RegularUtil.UserLoginMap.remove(um);
 		}else{
 			jo.put("error", "203");
 			jo.put("msg", "修改密码失败");

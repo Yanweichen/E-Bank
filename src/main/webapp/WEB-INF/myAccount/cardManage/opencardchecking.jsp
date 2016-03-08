@@ -27,9 +27,13 @@
 	<!-- 头部导航 -->
 	<jsp:include page="../../../page/head_foot/mybank_head.jsp"></jsp:include>
 	<div class="container top20">
-		<div class="panel panel-default touming6">
+		<div class="panel panel-default touming6" style="height: 200px;">
 		  <div class="panel-body">
-		  		checking
+		  		<h3 style="color: #666666;margin-top: 50px;" align="center"><i class="icon-ok" style="color: green;font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;您的银行卡已提交审核,1-3个工作日内办理,请注意查看您的站内信</h3> 
+		  		<h4 align="center">
+		  			<i class="icon-reply" style="color: #3f316d;font-size: 20px;"></i>&nbsp;&nbsp;<a href="myAccount/mybank.action">回到我的E-Bank</a>&nbsp;&nbsp;
+			  		<i class="icon-credit-card" style="color: #3f316d;font-size: 20px;"></i>&nbsp;&nbsp;<a href="myAccount/userCardList.action">查看我的银行卡</a>
+		  		</h4>
 		  </div>
 		</div>
 	</div>
