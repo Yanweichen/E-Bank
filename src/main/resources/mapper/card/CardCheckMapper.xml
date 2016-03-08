@@ -56,7 +56,7 @@
   	SELECT uu.`user_id`,card_check_opencard_id,user_name,user_city,user_face,user_idcard,user_state,user_regist_time,card_name,card_face,state_name,card_check_time
 	FROM user_userinfo uu,bank_card bk,card_check cc,user_card_state ucs
 	WHERE cc.`card_check_cardtype`=bk.`card_id` AND cc.`card_check_user`=uu.`user_id` AND ucs.`state_id`=uu.`user_state`
-	ORDER BY card_check_time DESC ;
+	ORDER BY card_check_time DESC LIMIT #{offset},#{limit};
   </select>
   <!-- 查询数量 -->
   <select id="selectCheckUserAndCardNum" resultType="java.lang.Integer">
