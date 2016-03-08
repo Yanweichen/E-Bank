@@ -1,5 +1,7 @@
 package com.bank.controller.user;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -9,11 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -370,21 +376,124 @@ public class UserInfoController {
 		return jo;
 	}
 
-	@RequestMapping("sendVcode")
-	public JSONObject sendVcode(String account){
-		JSONObject jo = new JSONObject();
+	/**
+	 * 验证账号是否存在
+	 * @param account
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("verifyAccountIsNull")
+	public JSONObject verifyAccountIsNull(String account,HttpServletRequest req){
 		UserModel user = us.findUserByAccoutn(account);
+		JSONObject jo = new JSONObject();
+		if (user==null) {
+			jo.put("valid",false);
+			jo.put("message","该账号不存在");
+		}else{
+			req.getSession().setAttribute("setuser", user);
+			jo.put("valid",true);
+			jo.put("message","success");
+		}
+		return jo;
+	}
+	
+	/**
+	 * 根据账号发送邮件验证码
+	 * @param account
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("sendVcode")
+	public JSONObject sendVcode(@RequestParam(value = "account",required = false)String account,HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		UserModel user = (UserModel) req.getSession().getAttribute("setuser"); 
+		if (user==null) {//如果session没有则查询账户
+			user = us.findUserByAccoutn(account);
+		}
 		List<String> email = new ArrayList<String>();
 		String user_email = user.getUser_email();
 		email.add(user_email);
-		boolean issuc = new Mail().send("505717760@qq.com",email , null,"e-bank账号激活", "<h1>您好,"+user.getUser_name()+"</h1> "
-				+ "您本次的验证码为");
+		String rnum = RandomStringUtils.randomNumeric(5);
+		req.getSession().setAttribute("rnum", rnum);
+		boolean issuc = new Mail().send("505717760@qq.com",email , null,"e-bank修改密码", "<h1>您好,"+user.getUser_name()+"</h1> "
+				+ "您本次的验证码为："+rnum);
 		if (issuc) {
 			jo.put("error", "200");
 			jo.put("msg", "发送成功！");
 		}else{
 			jo.put("error", "203");
 			jo.put("msg", "发送失败！");
+		}
+		return jo;
+	}
+	
+	/**
+	 * 验证邮件发送的验证码
+	 * @param code
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("verifyEmailCode")
+	public JSONObject verifyEmailCode(String code,HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		String rnum = (String) req.getSession().getAttribute("rnum");
+		if (rnum !=null && rnum.equals(code)) {
+			jo.put("valid",true);
+			jo.put("message","验证成功");
+		}else{
+			jo.put("valid",false);
+			jo.put("message","验证失败");
+		}
+		return jo;
+	}
+	
+	/**
+	 * 去修改密码的页面
+	 * @return
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	@RequestMapping("goSetPass")
+	public void goSetPass(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
+		UserModel um = (UserModel) req.getSession().getAttribute("setuser");
+		resp.setContentType("text/html;charset=utf-8");
+		if (um==null) {
+			PrintWriter out = resp.getWriter();
+			out.print(" <script type='text/javascript'> "
+					+ " alert('非法操作'); "
+					+ " window.location='User/Login.jsp'; "
+					+ " </script> ");
+		}else{
+			req.getRequestDispatcher("/WEB-INF/setPassword.jsp").forward(req, resp);
+		}
+	}
+	
+	/**
+	 * 修改密码
+	 * @param pass
+	 * @param req
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("setPass")
+	public JSONObject setPass(String pass,HttpServletRequest req){
+		JSONObject jo = new JSONObject();
+		UserModel um = (UserModel) req.getSession().getAttribute("setuser");
+		if (um==null) {
+			um = (UserModel) req.getSession().getAttribute("user");
+		}
+		um.setUser_pass(pass);
+		int issuc = us.alterById(um);
+		if (issuc==1) {
+			jo.put("error", "200");
+			jo.put("msg", "修改密码成功,请重新登录！");
+			req.getSession().removeAttribute("setuser");
+			req.getSession().removeAttribute("user");
+		}else{
+			jo.put("error", "203");
+			jo.put("msg", "修改密码失败");
 		}
 		return jo;
 	}

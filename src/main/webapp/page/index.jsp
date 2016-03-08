@@ -468,7 +468,7 @@ ul.news li p{float:right; color:#000000}
 						</div>
 					</div>
 					<div class="modal-footer" style="z-index: -1">
-						<button type="button" class="btn btn-default" onclick="javascript:window.location='page/regist/findPassword.jsp'">忘记密码？</button>
+						<button type="button" class="btn btn-default" onclick="javascript:window.location='<%=basePath%>page/regist/findPassword.jsp'">忘记密码？</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						<button type="submit" id="btn_login"
 							class="btn btn-primary btncolor">登陆</button>

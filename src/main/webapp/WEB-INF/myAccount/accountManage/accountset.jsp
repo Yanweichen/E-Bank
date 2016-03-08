@@ -49,6 +49,10 @@
 				  	<i class="icon-github-alt" style="font-size: 19px;color: #3f316d"></i>&nbsp;&nbsp;修改头像
 				  	<i class="icon-angle-right" style="font-size: 20px;color: #3f316d;float: right;"></i>
 				  </a>
+				  <a href="myAccount/setPassword.action" class="list-group-item">
+				  	<i class="icon-key" style="font-size: 19px;color: #3f316d;"></i>&nbsp;&nbsp;修改密码
+				  	<i class="icon-angle-right" style="font-size: 20px;color: #3f316d;float: right;"></i>
+				  </a>
 				</div>
 			</div>
 			<div class="col-sm-9">

@@ -91,6 +91,8 @@
 					$(this).find('.modal-content').css("margin-top", top);
 				});
 	}
+	$('.modal').on('show.bs.modal', centerModals);
+	$(window).on('resize', centerModals);
 	
 	$(function(){
 		$("#send_email").click(function(){

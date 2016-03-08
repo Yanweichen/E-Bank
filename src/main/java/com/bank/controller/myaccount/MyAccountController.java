@@ -22,7 +22,7 @@ public class MyAccountController {
 	
 	@RequestMapping("setPassword")
 	public String setPassword(){
-		return "setPassword";
+		return "myAccount/accountManage/setPassword";
 	}
 	
 	@RequestMapping("/mychart")

@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="page/assets//img/tubiao.ico" /> 
+<link rel="stylesheet" href="page/assets/css/bootstrapValidator.min.css"/>
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
 <title>找回密码</title>
 <style type="text/css">
@@ -32,14 +33,14 @@
 						<div class="form-group">
 							<label for="user_name">找回的账号</label> 
 							<input type="text" class="form-control" id="exampleInputName2"
-								name = "user_name" placeholder="邮箱/身份证/手机">
+								name = "account" placeholder="邮箱/身份证/手机">
 						</div>
 						<div class="form-group">
 							<div class="row">
-								<div class="col-sm-7">
+								<div class="col-sm-7" style="padding-right: 0px;">
 									<label for="user_idcard">验证码</label>
 									<input type="text" class="form-control" id="exampleInputName2"
-										name = "user_idcard" placeholder="请输入您收到的验证码">
+										name = "code" placeholder="请输入您收到的验证码">
 								</div>
 								<div class="col-sm-5">
 									<button id="send_email" style="margin-top: 26px;" type="button" class="btncolor btn btn-primary btn-sm btncolor">点击发送验证码</button>
@@ -47,7 +48,7 @@
 							</div>
 						</div>
 						<div class="form-group" style="margin-top: 25px;">
-							<button type="reset" class="btn btn-block btncolor ">下一步</button>
+							<button type="submit" class="btn btn-block btncolor ">下一步</button>
 						</div>
 					</form>
 				</div>
@@ -71,29 +72,11 @@
 			</div>
 		</div>
 	</div>
-	
-	<div id="isSuc" class="modal fade bs-example-modal-sm" tabindex="-1"
-		role="dialog" aria-labelledby="mySmallModalLabel">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button id="isSucCloseBtn" type="button" class="close"
-						data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">提示</h4>
-				</div>
-				<div class="modal-body">
-					<p id="msg"></p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="<%=basePath%>page/assets/js/jquery-1.8.1.min.js"></script>
+	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<!-- foot -->
 	<jsp:include page="../head_foot/foot.jsp"></jsp:include>
-	
-	<script src="<%=basePath%>page/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="page/assets/js/bootstrapValidator.min.js"></script> 
+	<script src="page/assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	//模态框居中
 	function centerModals() {
@@ -108,10 +91,12 @@
 					$(this).find('.modal-content').css("margin-top", top);
 				});
 	}
+	$('.modal').on('show.bs.modal', centerModals);
+	$(window).on('resize', centerModals);
 	
 	$(function(){
 		$("#send_email").click(function(){
-			$.post("user/sendMail_Reg_Again.action",function(result){
+			$.post("user/sendVcode.action",function(result){
 					$("#msg").empty()
 					$("#msg").append(result.msg)
 					$("#isSuc").modal()
@@ -129,6 +114,68 @@
 			
 		})
 	})
+	$(document).ready(function() {
+		 $('#findform').bootstrapValidator({
+		        message: 'This value is not valid',
+		        submitButtons: 'button[type="submit"]',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        fields: {
+		        	account: {
+		            	trigger:"blur",
+		                validators: {
+		                    notEmpty: {
+		                        message: '此项不能为空'
+		                    },
+		                    remote: {
+	                            url: 'user/verifyAccountIsNull.action',
+	                            type: "post",
+	                            async: true,
+	                            data:
+	                            {
+	                            	account: function(validator)
+	                                {
+	                                    return $('#findform :input[name="account"]').val();
+	                                },
+	                            },
+	                        },
+		                }
+		            },
+		            code: {
+		            	threshold:5,
+		                validators: {
+		                    notEmpty: {
+		                        message: '验证码不能为空'
+		                    },
+		                    remote: {
+	                            url: 'user/verifyEmailCode.action',
+	                            type: "post",
+	                            async: true,
+	                            data:
+	                            {
+	                            	code: function(validator)
+	                                {
+	                                    return $('#findform :input[name="code"]').val();
+	                                },
+	                            },
+	                        },
+		                }
+		            },
+
+		        }
+		    }).on('success.form.bv', function(e) {
+	            // Prevent form submission
+	            e.preventDefault();
+	            // Get the form instance
+	            var $form = $(e.target);
+
+	            // Get the BootstrapValidator instance
+	            window.location="user/goSetPass.action"
+	        })
+	     });
 	</script>
 </body>
 </html>
