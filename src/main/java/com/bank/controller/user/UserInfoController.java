@@ -546,10 +546,21 @@ public class UserInfoController {
 	@RequestMapping("modifyUserState")
 	public boolean modifyUserState(int state,String idcard,HttpServletRequest req){
 		int issuc = us.alterUserStateByIdCadr(state,idcard);
-		UserModel user = (UserModel) req.getSession().getAttribute("user");
+		us.findUserByAccoutn(idcard);
 		if (issuc==1) {
-			user.setUser_state(""+state);
-			req.getSession().setAttribute("user", user);//刷新用户信息
+			//实时禁封账号
+			//找到当前改用户session并修改
+			for (Map.Entry<UserModel, String> entry : RegularUtil.UserLoginMap.entrySet()) {
+				if (entry.getKey().getUser_idcard().equals(idcard)) {
+					MySessionContext msc = MySessionContext.getInstance();
+					HttpSession session = msc.getSession(entry.getValue());
+					UserModel um =  (UserModel) session.getAttribute("user");//找到目标session
+					if (um!=null) {
+						um.setUser_state(state+"");
+						session.setAttribute("user", um);//重新刷新用户数据
+					}
+				}
+			}
 			return true;
 		}else{
 			return false;
