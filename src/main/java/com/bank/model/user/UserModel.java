@@ -19,10 +19,17 @@ public class UserModel implements Cloneable{
 	private Date user_last_login_time;
 	private Date user_regist_time;
 	private String user_regist_time_fmt;
+	private String user_last_login_time_fmt;
 	
 	private double user_account_money;
 	private double user_account_balance;
 	
+	public String getUser_last_login_time_fmt() {
+		return user_last_login_time_fmt;
+	}
+	public void setUser_last_login_time_fmt(String user_last_login_time_fmt) {
+		this.user_last_login_time_fmt = user_last_login_time_fmt;
+	}
 	public String getUser_regist_time_fmt() {
 		return user_regist_time_fmt;
 	}

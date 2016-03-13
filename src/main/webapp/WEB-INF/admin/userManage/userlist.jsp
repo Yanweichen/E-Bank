@@ -50,6 +50,7 @@
 				            <th data-field="user_city" data-align="center">开户城市</th>
 				            <th data-field="user_idcard" data-align="center" >身份证号</th>
 				            <th data-field="user_regist_time_fmt" data-align="center">注册时间</th>
+				            <th data-field="user_last_login_time_fmt" data-align="center">最后一次登录时间</th>
 				            <th data-field="user_state" data-align="center">用户状态</th>
 				            <th data-field="action" data-align="center"  data-formatter="actionFormatter" data-events="actionEvents">操作</th>
 				        </tr>
@@ -76,6 +77,7 @@
 				            <th data-field="user_name" data-align="center">用户姓名</th>
 				            <th data-field="user_city" data-align="center">开户城市</th>
 				            <th data-field="user_idcard" data-align="center" >身份证号</th>
+				            <th data-field="user_last_login_time_fmt" data-align="center">最后一次登录时间</th>
 				            <th data-field="user_regist_time_fmt" data-align="center" data-sortable="true">注册时间</th>
 				            <th data-field="user_state" data-align="center">用户状态</th>
 				            <th data-field="action" data-align="center"  data-formatter="AllactionFormatter" data-events="AllactionEvents">操作</th>

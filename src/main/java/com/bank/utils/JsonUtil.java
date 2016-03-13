@@ -231,6 +231,7 @@ public class JsonUtil {
 			default:
 				break;
 			}
+			um.setUser_last_login_time_fmt(TimeUtil.Date2String(um.getUser_last_login_time(), "yyyy-MM-dd HH:mm:ss"));
 			um.setUser_regist_time_fmt(TimeUtil.Date2String(entry.getKey().getUser_regist_time(), "yyyy-MM-dd HH:mm:ss"));
 			um.setUser_face("<img class='userface' src="+entry.getKey().getUser_face()+">");
 			jarr.add(JSON.toJSON(um));
@@ -262,6 +263,7 @@ public class JsonUtil {
 			default:
 				break;
 			}
+			um.setUser_last_login_time_fmt(TimeUtil.Date2String(um.getUser_last_login_time(), "yyyy-MM-dd HH:mm:ss"));
 			um.setUser_regist_time_fmt(TimeUtil.Date2String(um.getUser_regist_time(), "yyyy-MM-dd HH:mm:ss"));
 			um.setUser_face("<img class='userface' src="+um.getUser_face()+">");
 			jarr.add(JSON.toJSON(um));

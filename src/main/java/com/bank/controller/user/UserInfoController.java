@@ -83,6 +83,8 @@ public class UserInfoController {
 				RegularUtil.UserLoginMap.put(um, sessionid);
 				application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 				nowUser.setAttribute("user", um);
+				um.setUser_last_login_time(new Date());
+				us.alterById(um);
 				jo.put("error", "200");
 				jo.put("name", um.getUser_name());
 				jo.put("face", um.getUser_face());
@@ -101,6 +103,8 @@ public class UserInfoController {
 						RegularUtil.UserLoginMap.put(um, sessionid);
 						application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 						nowUser.setAttribute("user", um);
+						um.setUser_last_login_time(new Date());
+						us.alterById(um);
 						jo.put("error", "200");
 						jo.put("name", um.getUser_name());
 						jo.put("face", um.getUser_face());
@@ -116,6 +120,8 @@ public class UserInfoController {
 			RegularUtil.UserLoginMap.put(um, sessionid);
 			application.setAttribute("UserLoginMap", RegularUtil.UserLoginMap);
 			nowUser.setAttribute("user", um);
+			um.setUser_last_login_time(new Date());
+			us.alterById(um);
 			jo.put("error", "200");
 			jo.put("name", um.getUser_name());
 			jo.put("face", um.getUser_face());
