@@ -43,27 +43,27 @@
   					<div class="panel-body">
   					<div class="form-group has-error">
   						<label for="user_name">注册姓名</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${user.user_name}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_name}</c:if>" readonly>
 					</div>
 					<div class="form-group has-error">
   						<label for="user_name">开户城市</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${user.user_city}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_city}</c:if>" readonly>
 					</div>
 					<div class="form-group has-success">
   						<label for="user_name">预留信息</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${user.user_obligate_info}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_obligate_info}</c:if>" readonly>
 					</div>
 					<div class="form-group has-error">
   						<label for="user_name">身份证号码</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${user.user_idcard}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_idcard}</c:if>" readonly>
 					</div>
 					<div class="form-group has-success">
   						<label for="user_name">预留电话</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${user.user_phone}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_phone}</c:if>" readonly>
 					</div>
 					<div class="form-group has-success">
   						<label for="user_name">预留信箱</label>
-						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${user.user_email}</c:if>" readonly>
+						<input class="form-control" type="text" placeholder="<c:if test="${!empty reguser}">${reguser.user_email}</c:if>" readonly>
 					</div>
   					</div>
   					<div id="go" class="form-group" align="center">

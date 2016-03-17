@@ -1,4 +1,4 @@
 # E-Bank
 Online Bank
 
-Project preview ：http://115.159.66.149/
+Project preview ：http://182.254.246.163

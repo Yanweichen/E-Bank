@@ -32,7 +32,7 @@
 			<div id="section-4" class="container" style="padding-top: 5px;">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<i class="icon-github-alt" style="font-size: 20px;color: white;"></i>&nbsp;&nbsp;
-				<a style="color: white;letter-spacing: 10px;" href="page/index.jsp">e-bank</a>
+				<a style="color: white;letter-spacing: 10px;" href="<%=basePath%>page/index.jsp">e-bank</a>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<!-- /.navbar-collapse -->
 				<h5 id="logintitle" style="float: right; color: white;margin: 0px;display: none;">

@@ -80,7 +80,7 @@ public class RegularUtil {
 	public static final int STAR = 5;//挂失
 	
 	public static String getlocathost(){
-		String ip = "115.159.66.149";
+		String ip = "182.254.246.163";
 //		String ip = "localhost";
 //		try {
 //			 ip = InetAddress.getLocalHost().getHostAddress();
