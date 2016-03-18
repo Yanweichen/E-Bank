@@ -226,4 +226,17 @@ public class AdminController {
 		}
 		return "admin/userManage/iplist";
 	}
+	
+	@RequestMapping("/systemlog")
+	public String systemlog(){
+		return "admin/logManage/systemlog";
+	}
+	@RequestMapping("/userlog")
+	public String userlog(){
+		return "admin/logManage/userlog";
+	}
+	@RequestMapping("/logset")
+	public String logset(){
+		return "admin/logManage/logset";
+	}
 }

@@ -15,6 +15,7 @@ import com.bank.model.card.UserCardListModel;
 import com.bank.model.index.CommentModel;
 import com.bank.model.index.IndexModel;
 import com.bank.model.index.LabelModel;
+import com.bank.model.log.LogModel;
 import com.bank.model.msg.MsgModel;
 import com.bank.model.trade.TradeModel;
 import com.bank.model.user.UserModel;
@@ -287,6 +288,18 @@ public class JsonUtil {
 			jarr.add(jjo);
 		}
 		jo.put("total", RegularUtil.IPMap.size());
+		jo.put("rows", jarr);
+		return jo;
+	}
+	
+	public static JSONObject getLog(List<LogModel> list,int total) throws ParseException{
+		JSONObject jo = new JSONObject();
+		jo.put("total", total);
+		JSONArray jarr = new JSONArray();
+		for (LogModel logModel : list) {
+			logModel.setLog_time_fmt(TimeUtil.Date2String(logModel.getLog_time(), "yyyy-MM-dd HH:mm:ss"));
+			jarr.add(JSON.toJSON(logModel));
+		}
 		jo.put("rows", jarr);
 		return jo;
 	}

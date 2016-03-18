@@ -89,6 +89,9 @@ public class MsgController {
 	@RequestMapping("/getNewMsg")
 	public JSONObject getNewMsg(HttpServletRequest req){
 		UserModel user = (UserModel) req.getSession().getAttribute("user");
+		if (user==null) {
+			return null;
+		}
 		return JsonUtil.getNewMsgJSON(ms.findNewMsg(Integer.valueOf(user.getUser_id())));
 	}
 

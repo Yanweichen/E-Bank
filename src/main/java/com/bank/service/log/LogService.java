@@ -8,12 +8,21 @@ import org.springframework.stereotype.Service;
 import com.bank.base.BaseService;
 import com.bank.dao.log.LogDAO;
 import com.bank.model.log.LogModel;
+import com.bank.model.other.TradePage;
 
 @Service
 public class LogService implements BaseService<LogModel>{
 
 	@Autowired
 	private LogDAO ld;
+	
+	public List<LogModel> findAllByPage(TradePage tp){
+		return ld.selectAllByPage(tp);
+	}
+	
+	public int findAllCountByPage(TradePage tp){
+		return ld.selectAllCountByPage(tp);
+	}
 	
 	@Override
 	public int add(LogModel model) {

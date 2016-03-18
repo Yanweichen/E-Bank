@@ -21,11 +21,80 @@
     from card_check
     where card_check_id = #{cardCheckId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select *
-    from card_check
-    where card_check_id = #{cardCheckId,jdbcType=INTEGER}
+  <select id="selectAllByPage" resultMap="BaseResultMap" parameterType="com.bank.model.other.TradePage" >
+    SELECT *
+    FROM bank_log
+    WHERE 1=1
+     <choose> 
+        <when test="starttime != null and endtime !=null"> 
+            AND log_time BETWEEN DATE_FORMAT(#{starttime}, '%Y%m%d') AND DATE_FORMAT(#{endtime}, '%Y%m%d%H%i%s')
+       </when>
+        <when test="search != null and search != ''"> 
+        	AND log_msg LIKE '%${search}%' OR log_user_name =#{search}
+       </when>
+       <otherwise> 
+       </otherwise> 
+   	</choose>
+   	<choose>
+   		<when test="type == null ">
+   			AND log_type=0 
+   		</when>
+   		<otherwise>
+   			AND log_type=1
+   		</otherwise>
+   	</choose>
+   ORDER BY log_time
+    <choose>
+	    <when test="order == 'asc'">
+	    	ASC
+	    </when>
+	    <when test="order == 'desc'">
+	    	DESC
+	    </when>
+	    <otherwise> 
+	     DESC
+       </otherwise> 
+    </choose>
+    LIMIT #{offset},#{limit};
   </select>
+  
+   <select id="selectAllCountByPage" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    SELECT COUNT(*)
+    FROM bank_log
+    WHERE 1=1
+     <choose> 
+        <when test="starttime != null and endtime !=null"> 
+            AND log_time BETWEEN DATE_FORMAT(#{starttime}, '%Y%m%d') AND DATE_FORMAT(#{endtime}, '%Y%m%d%H%i%s')
+       </when>
+        <when test="search != null and search != ''"> 
+        	AND log_msg LIKE '%${search}%' OR log_user_name =#{search}
+       </when>
+       <otherwise> 
+       </otherwise> 
+   	</choose>
+   	<choose>
+   		<when test="type == null ">
+   			AND log_type=0 
+   		</when>
+   		<otherwise>
+   			AND log_type=1
+   		</otherwise>
+   	</choose>
+   ORDER BY log_time
+    <choose>
+	    <when test="order == 'asc'">
+	    	ASC
+	    </when>
+	    <when test="order == 'desc'">
+	    	DESC
+	    </when>
+	    <otherwise> 
+	     DESC
+       </otherwise> 
+    </choose>
+    LIMIT #{offset},#{limit};
+  </select>
+  
   <delete id="deleteById" parameterType="java.lang.Integer" >
     delete from card_check
     where card_check_id = #{cardCheckId,jdbcType=INTEGER}
@@ -34,5 +103,4 @@
     INSERT INTO bank_log 
     VALUES(NULL,#{log_user_id},#{log_user_name},#{log_class},#{log_method},#{log_exception_detail},#{log_params},#{log_time},#{log_leavel},#{log_msg},#{log_type},#{log_ip});
   </insert>
-  
 </mapper>

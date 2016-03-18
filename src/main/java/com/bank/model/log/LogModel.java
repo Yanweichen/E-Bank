@@ -12,11 +12,18 @@ public class LogModel {
 	private String log_exception_detail;
 	private String log_params;
 	private Date log_time;
+	private String log_time_fmt;
 	private String log_leavel;
 	private String log_msg;
 	private int log_type;
 	private String log_ip;
 	
+	public String getLog_time_fmt() {
+		return log_time_fmt;
+	}
+	public void setLog_time_fmt(String log_time_fmt) {
+		this.log_time_fmt = log_time_fmt;
+	}
 	public String getLog_params() {
 		return log_params;
 	}
