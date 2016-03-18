@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bank.annotation.SystemControllerBeforeLog;
 import com.bank.model.card.CardCheckModel;
 import com.bank.model.card.UserCardModel;
 import com.bank.model.msg.MsgModel;
@@ -52,7 +53,7 @@ public class CardController {
 		mv.addObject("cardtype",cs.findById(id));
 		return mv;
 	}
-	
+	@SystemControllerBeforeLog(description = "用户申请银行卡")
 	@RequestMapping("/opencardcheck")
 	public String goCheck(CardCheckModel ccm){
 		UserCardModel ucm = new UserCardModel();
@@ -85,6 +86,7 @@ public class CardController {
 	 * @param card_id
 	 * @return
 	 */
+	@SystemControllerBeforeLog(description = "用户申请银行卡成功")
 	@ResponseBody
 	@RequestMapping("/opencard")
 	public JSONObject opencard(int user_id,int card_id){

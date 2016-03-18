@@ -18,10 +18,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bank.annotation.SystemControllerAfterLog;
+import com.bank.annotation.SystemControllerBeforeLog;
 import com.bank.model.other.Page;
 import com.bank.model.user.UserModel;
 import com.bank.service.user.UserService;
@@ -38,7 +39,6 @@ import com.bank.utils.MySessionContext;
 import com.bank.utils.PortUtil;
 import com.bank.utils.QclodImageUtil;
 import com.bank.utils.RegularUtil;
-import com.google.gson.JsonObject;
 import com.qcloud.UploadResult;
 
 /**
@@ -60,6 +60,7 @@ public class UserInfoController {
 	 * 登陆
 	 * @return
 	 */
+	@SystemControllerAfterLog(description = "用户登录")
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/login")
@@ -137,6 +138,7 @@ public class UserInfoController {
 	 * @param req
 	 * @return
 	 */
+	@SystemControllerBeforeLog(description = "用户退出")
 	@ResponseBody
 	@RequestMapping("/logout")
 	public JSONObject Logout(HttpServletRequest req){
@@ -482,6 +484,7 @@ public class UserInfoController {
 	 * @param req
 	 * @return
 	 */
+	@SystemControllerBeforeLog(description = "用户修改密码")
 	@ResponseBody
 	@RequestMapping("setPass")
 	public JSONObject setPass(String pass,HttpServletRequest req){
@@ -623,6 +626,7 @@ public class UserInfoController {
 	 * @param req
 	 * @return
 	 */
+	@SystemControllerBeforeLog(description = "用户修改资料")
 	@ResponseBody
 	@RequestMapping("/updateuserinfo")
 	public JSONObject updateUserInfo(UserModel um,HttpServletRequest req){
