@@ -80,19 +80,6 @@
    			AND log_type=1
    		</otherwise>
    	</choose>
-   ORDER BY log_time
-    <choose>
-	    <when test="order == 'asc'">
-	    	ASC
-	    </when>
-	    <when test="order == 'desc'">
-	    	DESC
-	    </when>
-	    <otherwise> 
-	     DESC
-       </otherwise> 
-    </choose>
-    LIMIT #{offset},#{limit};
   </select>
   
   <delete id="deleteById" parameterType="java.lang.Integer" >
