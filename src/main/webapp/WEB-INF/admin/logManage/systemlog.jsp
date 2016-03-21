@@ -12,11 +12,49 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="page/assets/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="page/assets/css/bootstrap-table.css">
+
 <title>系统日志</title>
 </head>
 <body>
-	syso
+	<div class="container top20">
+		<div class="row">
+			<div id="userlogtoolbar"><h4 class="top20">系统日志列表</h4></div>
+			<table id="userlog" data-toggle="table"
+					   data-width="50px" 
+					   data-pagination="true" 
+					   data-side-pagination="server"
+				       data-show-refresh="true"
+				       data-page-list="[5, 10, 20, 50, 100, 200]"
+				       data-show-toggle="true"
+				       data-show-columns="true"
+				       data-sort-order="desc"
+				       data-toolbar="#userlogtoolbar"
+				       >
+				    <thead>
+				        <tr>
+				            <th data-field="log_user_name" data-align="center">类型</th>
+				            <th data-field="log_class" data-align="center">类名</th>
+				            <th data-field="log_method" data-align="center">方法名称</th>
+				            <th data-field="log_exception_detail" data-align="center">异常详情</th>
+				            <th data-field="log_params" data-align="center">请求参数</th>
+				            <th data-field="log_leavel" data-align="center">异常等级</th>
+				            <th data-field="log_msg" data-align="center" >信息</th>
+				            <th data-field="log_time_fmt" data-align="center">操作时间</th>
+				            <th data-field="log_ip" data-align="center">操作IP</th>
+				        </tr>
+				    </thead>
+			</table>
+		</div>
+	</div>
 	<script src="page/assets/js/jquery-1.8.1.min.js"></script>
 	<script src="page/assets/js/bootstrap.min.js"></script>
+	<script src="page/assets/js/bootstrap-table.js"></script>
+	<script src="page/assets/js/bootstrap-table-zh-CN.js"></script>
+	<script type="text/javascript">
+		$('#userlog').bootstrapTable({
+		    url: 'log/findAllLog.action',
+		});
+	</script>
 </body>
 </html>

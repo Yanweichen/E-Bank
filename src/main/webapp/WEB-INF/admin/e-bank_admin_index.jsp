@@ -146,10 +146,6 @@
 						id : '19',
 						text : '系统日志',
 						href : 'admin/systemlog.action'
-					} , {
-						id : '20',
-						text : '日志设置',
-						href : 'admin/logset.action'
 					}]
 				} ]
 			}
