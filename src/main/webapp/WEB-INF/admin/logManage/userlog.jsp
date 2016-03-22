@@ -29,6 +29,7 @@
 				       data-show-toggle="true"
 				       data-show-columns="true"
 				       data-sort-order="desc"
+				       data-search="true"
 				       data-toolbar="#userlogtoolbar"
 				       >
 				    <thead>

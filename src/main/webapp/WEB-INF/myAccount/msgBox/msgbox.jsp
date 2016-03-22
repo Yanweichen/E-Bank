@@ -59,7 +59,7 @@
 					  			 <c:if test="${!msg.msgState}">titlenoview</c:if>" style="float: left;margin-right: 20px;">
 					  			<input type="checkbox" name="ckbox" class="ckbox" value="${msg.msgId}">&nbsp;&nbsp;
 					  			<i class="icon-envelope" style="font-size: 19px;color: #3f316d"></i>&nbsp;&nbsp;
-					  			<span id="${msg.msgContent}" accesskey="${msg.msgId}" class="msg">${msg.msgTitle}</span></h5>
+					  			<span id="${msg.msgId}" class="msg">${msg.msgTitle}<span style="display: none;">${msg.msgContent}</span></span></h5>
 					  			<h5 class="hand" style="color: #999999;float: right;" >${msg.msgTime_fmt}</h5>
 					  		</div>
 					  	</div>
@@ -149,8 +149,8 @@
 	});
 	var msgid;
 	$(".msg").live('click',function() {
-		var content = $(this).attr("id");
-		msgid = $(this).attr("accesskey");
+		var content = $(this).find('span').html()
+		msgid = $(this).attr("id");
 		$("#msgcontent").empty();
 		$("#msgcontent").append(content);
 		$('#msgbox').modal('show');

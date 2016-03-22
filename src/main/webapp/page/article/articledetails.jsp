@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="page/assets/css/fakeloader.css">
 <link rel="stylesheet" href="page/assets/css/owl.carousel.css">
 <link rel="stylesheet" href="page/assets/css/owl.theme.css">
+<link rel="stylesheet" href="page/assets/css/jquery.mCustomScrollbar.min.css"/>
+<link rel="stylesheet" href="page/assets/css/jquery.emoji.css"/>
 <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <title></title>
 <style type="text/css">
@@ -196,12 +198,15 @@ div.hotdiv:hover{
 					</div>
 					<div class="row top10" >
 						<div class="col-sm-12" style="padding-left: 5px;">
-							<textarea id="fbtextarea" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea>
+							<div id="fbtextarea" contenteditable="true" style="border-radius: 10px 10px 10px 10px;min-height: 100px;overflow:auto;" class="form-control" rows="3" placeholder="说点什么~"></div>
 						</div>
 						
 					</div>
 					<div class="row top10">
-						<div class="col-sm-2 col-sm-offset-10" align="center">
+						<div class="col-sm-1">
+							<img id="emoji_btn_1" src="page/assets/img/face.png" style="cursor: pointer;"></img>
+						</div>
+						<div class="col-sm-2 col-sm-offset-9" align="center">
 							<button id="fbbtn" type="button" class="btn btn-block" style="color:white;background-color: #3f316d">发布</button>
 						</div>
 					</div>
@@ -274,7 +279,8 @@ div.hotdiv:hover{
 			<!--回复框 -->
 			<div id="hfdiv" class="row top10" style="display: none;margin-left: 10px;margin-bottom: 10px;">
 				<div class="col-sm-10" style="padding-left: 0px;padding-right: 0px">
-					<textarea id="hfconent" style="border-radius: 10px 10px 10px 10px;" class="form-control" rows="3" placeholder="说点什么~"></textarea>
+					<div id="hfconent" contenteditable="true" style="border-radius: 10px 10px 10px 10px;min-height: 100px;overflow:auto;" class="form-control" rows="3" placeholder="说点什么~"></div>
+					<img id="emoji_btn_2" src="page/assets/img/face.png" style="cursor: pointer;margin: 5px 0 0 5px;"></img>
 				</div>
 				<div class="col-sm-2">
 					<button id="canclehf"  type="button" class="btn btn-sm" style="color:white;background-color: #3f316d;margin-top: 10px">取消</button>
@@ -406,7 +412,258 @@ div.hotdiv:hover{
 	<script src="page/assets/js/fakeloader.js"></script>
 	<script src="page/assets/js/jquery.twbsPagination.js"></script>
 	<script src="page/assets/js/owl.carousel.js"></script>
+	<script src="page/assets/js/jquery.mousewheel-3.0.6.min.js"></script>
+	<script src="page/assets/js/jquery.mCustomScrollbar.min.js"></script>
+	<script src="page/assets/js/jquery.emoji.js"></script>
 	<script type="text/javascript">
+		 $("#emoji_btn_1").click(function () {
+			  $("#fbtextarea").emoji({
+			    	button:'#emoji_btn_1',
+			        showTab: true,
+			        animation: 'fade',
+			        icons: [{
+			            name: "贴吧表情",
+			            path: "page/assets/img/tieba/",
+			            maxNum: 50,
+			            file: ".png",
+			            placeholder: ":{alias}:",
+			            alias: {
+			                1: "hehe",
+			                2: "haha",
+			                3: "tushe",
+			                4: "a",
+			                5: "ku",
+			                6: "lu",
+			                7: "kaixin",
+			                8: "han",
+			                9: "lei",
+			                10: "heixian",
+			                11: "bishi",
+			                12: "bugaoxing",
+			                13: "zhenbang",
+			                14: "qian",
+			                15: "yiwen",
+			                16: "yinxian",
+			                17: "tu",
+			                18: "yi",
+			                19: "weiqu",
+			                20: "huaxin",
+			                21: "hu",
+			                22: "xiaonian",
+			                23: "neng",
+			                24: "taikaixin",
+			                25: "huaji",
+			                26: "mianqiang",
+			                27: "kuanghan",
+			                28: "guai",
+			                29: "shuijiao",
+			                30: "jinku",
+			                31: "shengqi",
+			                32: "jinya",
+			                33: "pen",
+			                34: "aixin",
+			                35: "xinsui",
+			                36: "meigui",
+			                37: "liwu",
+			                38: "caihong",
+			                39: "xxyl",
+			                40: "taiyang",
+			                41: "qianbi",
+			                42: "dnegpao",
+			                43: "chabei",
+			                44: "dangao",
+			                45: "yinyue",
+			                46: "haha2",
+			                47: "shenli",
+			                48: "damuzhi",
+			                49: "ruo",
+			                50: "OK"
+			            },
+			            title: {
+			                1: "呵呵",
+			                2: "哈哈",
+			                3: "吐舌",
+			                4: "啊",
+			                5: "酷",
+			                6: "怒",
+			                7: "开心",
+			                8: "汗",
+			                9: "泪",
+			                10: "黑线",
+			                11: "鄙视",
+			                12: "不高兴",
+			                13: "真棒",
+			                14: "钱",
+			                15: "疑问",
+			                16: "阴脸",
+			                17: "吐",
+			                18: "咦",
+			                19: "委屈",
+			                20: "花心",
+			                21: "呼~",
+			                22: "笑脸",
+			                23: "冷",
+			                24: "太开心",
+			                25: "滑稽",
+			                26: "勉强",
+			                27: "狂汗",
+			                28: "乖",
+			                29: "睡觉",
+			                30: "惊哭",
+			                31: "生气",
+			                32: "惊讶",
+			                33: "喷",
+			                34: "爱心",
+			                35: "心碎",
+			                36: "玫瑰",
+			                37: "礼物",
+			                38: "彩虹",
+			                39: "星星月亮",
+			                40: "太阳",
+			                41: "钱币",
+			                42: "灯泡",
+			                43: "茶杯",
+			                44: "蛋糕",
+			                45: "音乐",
+			                46: "haha",
+			                47: "胜利",
+			                48: "大拇指",
+			                49: "弱",
+			                50: "OK"
+			            }
+			        },{
+			            name: "QQ表情",
+			            path: "page/assets/img/qq/",
+			            maxNum: 91,
+			            excludeNums: [41, 45, 54],
+			            file: ".gif"
+			        }]
+			    });
+		 });
+		 $("#emoji_btn_2").click(function () {
+			  $("#hfconent").emoji({
+			    	button:'#emoji_btn_2',
+			        showTab: true,
+			        animation: 'fade',
+			        icons: [{
+			            name: "贴吧表情",
+			            path: "page/assets/img/tieba/",
+			            maxNum: 50,
+			            file: ".png",
+			            placeholder: ":{alias}:",
+			            alias: {
+			                1: "hehe",
+			                2: "haha",
+			                3: "tushe",
+			                4: "a",
+			                5: "ku",
+			                6: "lu",
+			                7: "kaixin",
+			                8: "han",
+			                9: "lei",
+			                10: "heixian",
+			                11: "bishi",
+			                12: "bugaoxing",
+			                13: "zhenbang",
+			                14: "qian",
+			                15: "yiwen",
+			                16: "yinxian",
+			                17: "tu",
+			                18: "yi",
+			                19: "weiqu",
+			                20: "huaxin",
+			                21: "hu",
+			                22: "xiaonian",
+			                23: "neng",
+			                24: "taikaixin",
+			                25: "huaji",
+			                26: "mianqiang",
+			                27: "kuanghan",
+			                28: "guai",
+			                29: "shuijiao",
+			                30: "jinku",
+			                31: "shengqi",
+			                32: "jinya",
+			                33: "pen",
+			                34: "aixin",
+			                35: "xinsui",
+			                36: "meigui",
+			                37: "liwu",
+			                38: "caihong",
+			                39: "xxyl",
+			                40: "taiyang",
+			                41: "qianbi",
+			                42: "dnegpao",
+			                43: "chabei",
+			                44: "dangao",
+			                45: "yinyue",
+			                46: "haha2",
+			                47: "shenli",
+			                48: "damuzhi",
+			                49: "ruo",
+			                50: "OK"
+			            },
+			            title: {
+			                1: "呵呵",
+			                2: "哈哈",
+			                3: "吐舌",
+			                4: "啊",
+			                5: "酷",
+			                6: "怒",
+			                7: "开心",
+			                8: "汗",
+			                9: "泪",
+			                10: "黑线",
+			                11: "鄙视",
+			                12: "不高兴",
+			                13: "真棒",
+			                14: "钱",
+			                15: "疑问",
+			                16: "阴脸",
+			                17: "吐",
+			                18: "咦",
+			                19: "委屈",
+			                20: "花心",
+			                21: "呼~",
+			                22: "笑脸",
+			                23: "冷",
+			                24: "太开心",
+			                25: "滑稽",
+			                26: "勉强",
+			                27: "狂汗",
+			                28: "乖",
+			                29: "睡觉",
+			                30: "惊哭",
+			                31: "生气",
+			                32: "惊讶",
+			                33: "喷",
+			                34: "爱心",
+			                35: "心碎",
+			                36: "玫瑰",
+			                37: "礼物",
+			                38: "彩虹",
+			                39: "星星月亮",
+			                40: "太阳",
+			                41: "钱币",
+			                42: "灯泡",
+			                43: "茶杯",
+			                44: "蛋糕",
+			                45: "音乐",
+			                46: "haha",
+			                47: "胜利",
+			                48: "大拇指",
+			                49: "弱",
+			                50: "OK"
+			            }
+			        },{
+			            name: "QQ表情",
+			            path: "page/assets/img/qq/",
+			            maxNum: 91,
+			            excludeNums: [41, 45, 54],
+			            file: ".gif"
+			        }]
+			    });
+		 });
 		var articletitle = "${article.index_title}";		
 		document.title = articletitle;
 		var articleid = ${article.index_id};
@@ -604,7 +861,7 @@ div.hotdiv:hover{
 //		 			$("#hfdiv").css({ "top": $(this).offset().top - 30, "display": "block" });
 // 					alert($("#hfdiv").css("display"))
 					if ($("#hfdiv").css("display")!="inline") {
-						$("#hfconent").val("")
+						$("#hfconent").html("")
 						$("#hfdiv").fadeIn()
 						$(this).parent().parent().parent().append($("#hfdiv"))
 					}
@@ -615,12 +872,12 @@ div.hotdiv:hover{
 					$("#hfdiv").fadeOut()
 				})
 				$("#submithfbtn").live('click',function() {
-					var conent = $("#hfconent").val();
+					var conent = $("#hfconent").html();
 					if (typeof($(this).parent().parent().parent().attr("id")) != "undefined") {//回复一级评论
 						var commentuserid = $(this).parent().parent().parent().find(".row > .col-sm-2 > h5").attr("id")
 						var colsm10 = $(this).parent().parent().parent()//放置id的元素
 						var pid = colsm10.attr("id")
-						$.post("comment/addcomment.action",commitParmer("&nbsp;回复说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
+						$.post("comment/addcomment.action",commitParmer("&nbsp;回复说&nbsp;&nbsp;:"+$("#hfconent").html(),userid,pid),function(result){
 							if (result.error==200) {
 								colsm10.find(".secondhflist").fadeIn();
 								colsm10.find(".secondhflist").append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+userface+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
@@ -642,7 +899,7 @@ div.hotdiv:hover{
 						var pid = colsm10.attr("id")
 						var secondlist = $(this).parent().parent().parent();
 						var hfname = secondlist.find(".col-sm-2 > h5").text()	;
-						$.post("comment/addcomment.action",commitParmer("&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+$("#hfconent").val(),userid,pid),function(result){
+						$.post("comment/addcomment.action",commitParmer("&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+$("#hfconent").html(),userid,pid),function(result){
 							if (result.error==200) {
 								secondlist.append("<div class='secondhfdiv' style='margin-bottom: 10px'><div class='row' style='padding-left: 0px;padding-right: 0px;margin-bottom: 00px'><div class='col-sm-1'><img class='img-circle' src='"+userface+"' alt='...' style='height: 30px;width: 30px' ></div><div class='col-sm-2' style='padding-right: 0px;padding-left: 10px' ><h5 class='nosingline' style='color: #2A6496'>"+username+"</h5></div><div class='col-sm-9' style='padding-left: 0px;padding-right:30px'><p style='color: #444444'>&nbsp;回复<a>"+hfname+"</a>说&nbsp;&nbsp;:"+conent+"</p></div></div><div class='row'><div class='col-sm-5 col-sm-offset-7' style='padding-left: 0px'><h5 class='nosingline' style='color: #666666'>"+formatDate(new Date())+"</h5><button type='button' class='btn btn-sm hfbtn' style='color:white;background-color: #3f316d;margin-left:8px;'>回复</button></div></div></div>");
 								$.post("comment/sendNotice.action",{"content":username+" 对你说:"+conent,user_id:commentuserid})//发送通知
@@ -747,7 +1004,7 @@ div.hotdiv:hover{
 		
 		
 		$("#fbbtn").click(function() {
-			var content = $("#fbtextarea").val();
+			var content = $("#fbtextarea").html();
 			var d = new Date(); 
 			$.post("comment/addcomment.action",commitParmer(content,userid,null),function(result){
 				if (result.error==200) {
