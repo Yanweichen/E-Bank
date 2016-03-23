@@ -41,10 +41,10 @@ public class CommentController {
 		int isSuc = cs.add(cm);
 		if (isSuc==1) {
 			jo.put("error", "200");
-			jo.put("msg", "添加成功");
+			jo.put("msg", "success");
 		} else {
 			jo.put("error", "203");
-			jo.put("msg", "添加失败");
+			jo.put("msg", "failed");
 		}
 		return jo;
 	}
@@ -63,19 +63,19 @@ public class CommentController {
 	public JSONObject sendNotice(String content,int user_id){
 		JSONObject jo = new JSONObject();
 		MsgModel mm = new MsgModel();
-		mm.setMsgState(false);//未阅读消息
-		mm.setMsgTitle("您收到了新的回复！");
+		mm.setMsgState(false);//no reade
+		mm.setMsgTitle("You Have A New Message！");
 		mm.setMsgContent(content);
-		mm.setMsgType(3);//1 公告 2 活动 3 通知
+		mm.setMsgType(3);//1 gonggao 2 huodon 3 tongzhi
 		mm.setMsgUserId(user_id);
 		mm.setMsgTime(new Date());
 		int suc = ms.add(mm);
 		if (suc==1) {
 			jo.put("error", "200");
-			jo.put("msg", "添加成功");
+			jo.put("msg", "success");
 		} else {
 			jo.put("error", "203");
-			jo.put("msg", "添加失败");
+			jo.put("msg", "faild");
 		}
 		return jo;
 	}
