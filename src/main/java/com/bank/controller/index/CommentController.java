@@ -64,7 +64,7 @@ public class CommentController {
 		JSONObject jo = new JSONObject();
 		MsgModel mm = new MsgModel();
 		mm.setMsgState(false);//未阅读消息
-		mm.setMsgTitle("您收到了新的回复!");
+		mm.setMsgTitle("您收到了新的回复！");
 		mm.setMsgContent(content);
 		mm.setMsgType(3);//1 公告 2 活动 3 通知
 		mm.setMsgUserId(user_id);
