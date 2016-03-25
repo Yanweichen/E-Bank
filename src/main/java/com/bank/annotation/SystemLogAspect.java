@@ -78,8 +78,7 @@ public class SystemLogAspect {
 //            System.out.println("=====前置通知结束=====");  
         }  catch (Exception e) {  
             //记录本地异常日志  
-            logger.error("==前置通知异常==");  
-            logger.error("异常信息:{}", e.getMessage());  
+            logger.error("异常信息:{}", e.getMessage()+" user:"+user+" joinPoint:"+joinPoint);  
         }  
     }  
      
