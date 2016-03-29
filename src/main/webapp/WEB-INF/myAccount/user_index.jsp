@@ -15,7 +15,7 @@
 <link href="page/assets/css/animated-menu.css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon"
 	href="page/assets//img/tubiao.ico" />
-<link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="page/assets/css/bootstrap-table.css">
 <link rel="stylesheet" href="page/assets/css/mybankbase.css">
 <style type="text/css">
