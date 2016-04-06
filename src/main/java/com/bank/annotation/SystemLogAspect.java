@@ -78,7 +78,7 @@ public class SystemLogAspect {
 //            System.out.println("=====前置通知结束=====");  
         }  catch (Exception e) {  
             //记录本地异常日志  
-            logger.error("异常信息:{}", e.getMessage()+" user:"+user+" joinPoint:"+joinPoint);  
+            logger.error("前置Controller通知异常信息:{}", e.getMessage()+" user:"+user+" joinPoint:"+joinPoint);  
         }  
     }  
      
@@ -118,8 +118,7 @@ public class SystemLogAspect {
 //             System.out.println("=====后置Controller通知结束=====");  
          }  catch (Exception e) {  
              //记录本地异常日志  
-             logger.error("==后置Controller通知异常==");  
-             logger.error("异常信息:{}", e.getMessage());  
+             logger.error("后置Controller通知异常信息:{}", e.getMessage());  
          }  
      }  
   
@@ -171,8 +170,7 @@ public class SystemLogAspect {
 //            System.out.println("=====异常通知结束=====");  
         }  catch (Exception ex) {  
             //记录本地异常日志  
-            logger.error("==异常通知异常==");  
-            logger.error("异常信息:{}", ex.getMessage());  
+            logger.error("后置Service通知异常信息:{}", ex.getMessage());  
         }  
          /*==========记录本地异常日志==========*/  
         logger.error("异常方法:{}异常代码:{}异常信息:{}参数:{}", joinPoint.getTarget().getClass().getName() + joinPoint.getSignature().getName(), e.getClass().getName(), e.getMessage(), params);  

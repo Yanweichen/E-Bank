@@ -24,7 +24,7 @@
 	color: white;
 }
 </style>
-<link href="http://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 	<canvas id="cas" style="position: absolute;z-index: -1"></canvas>
 	<script src="page/assets/js/pointbg.js"></script>
 	<!-- 头部导航 -->
