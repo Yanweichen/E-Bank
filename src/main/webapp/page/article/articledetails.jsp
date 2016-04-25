@@ -735,7 +735,11 @@ div.hotdiv:hover{
 // 			});
 			$.getJSON("index/getHotLabel.action", {num:15}, function(json){
 				$.each(json,function(i,jo){
-					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
+					if (i<=3) {
+						$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
+					}else{
+						return
+					}
 				});
 			});
 			$('#loginfrom').bootstrapValidator({
