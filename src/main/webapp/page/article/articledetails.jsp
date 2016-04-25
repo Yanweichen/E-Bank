@@ -143,14 +143,14 @@ div.hotdiv:hover{
 							<img  alt='' style='height: 30px;width: 30px;' src='page/assets/img/circle-shop.png'>
 							<h4 class="nosingline wenzizhidi" style="color: #666666">本文标签</h4>
 						</div>
-						<div class="col-sm-10" style="margin-top: 5px">
+						<div class="col-sm-10" >
 							<c:set value="${fn:split(article.index_label,',')}" var="labels" />
 							<c:forEach var="lb" items="${labels}">
 <!-- 								<div class="well well-sm hotdiv nosingline hand" style="margin-right: 5px"> -->
 <%-- 								<a class="hota" href='page/article/articlelist.jsp?search="+${lb}+"'>${lb}</a></div> --%>
 								<a href="page/article/articlelist.jsp?search=${lb}" 
-								style="padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;
-								white-space: nowrap;margin:5px;display:inline-block;" class="hotdiv hota">${lb}</a>
+								style="padding: 7px 14px 7px 14px;background-color:#f5f5f5;word-break: keep-all;border:1px solid #e3e3e3;
+								white-space: nowrap;margin:0px 5px 5px 5px;display:inline-block;" class="hotdiv hota">${lb}</a>
 							</c:forEach>
 						</div>
 					</div>

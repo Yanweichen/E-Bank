@@ -211,7 +211,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 	  					if (i>3) {
 							return
 						}
-	  					labels+='<a href="page/article/articlelist.jsp?search='+label+'" style="padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;" class="hotdiv hota">'+label+'</a>'
+	  					labels+='<a href="page/article/articlelist.jsp?search='+label+'" style="padding: 7px 14px 7px 14px;background-color:#f5f5f5;border:1px solid #e3e3e3;word-break: keep-all;white-space: nowrap;margin:0px 5px 5px 5px;display:inline-block;" class="hotdiv hota">'+label+'</a>'
 // 						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
 	  				})
 			  	}
@@ -233,7 +233,8 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			  	var labels="";
 			  	if(jo.index_label!=null){
 	  				$.each(jo.index_label.split(","),function(i,label){
-						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
+	  					labels+='<a href="page/article/articlelist.jsp?search='+label+'" style="padding: 7px 14px 7px 14px;background-color:#f5f5f5;border:1px solid #e3e3e3;word-break: keep-all;white-space: nowrap;margin:0px 5px 5px 5px;display:inline-block;" class="hotdiv hota">'+label+'</a>'
+// 						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
 	  				})
 			  	}
   				$("#list").append(begin+labels+after);
