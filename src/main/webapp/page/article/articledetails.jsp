@@ -146,8 +146,11 @@ div.hotdiv:hover{
 						<div class="col-sm-10" style="margin-top: 5px">
 							<c:set value="${fn:split(article.index_label,',')}" var="labels" />
 							<c:forEach var="lb" items="${labels}">
-								<div class="well well-sm hotdiv nosingline hand" style="margin-right: 5px">
-								<a class="hota" href='page/article/articlelist.jsp?search="+${lb}+"'>${lb}</a></div>
+<!-- 								<div class="well well-sm hotdiv nosingline hand" style="margin-right: 5px"> -->
+<%-- 								<a class="hota" href='page/article/articlelist.jsp?search="+${lb}+"'>${lb}</a></div> --%>
+								<a href="page/article/articlelist.jsp?search=${lb}" 
+								style="padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;
+								white-space: nowrap;margin:5px;display:inline-block;" class="hotdiv hota">${lb}</a>
 							</c:forEach>
 						</div>
 					</div>
