@@ -208,6 +208,9 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 			  	var labels = "";
 			  	if(top.index_label!=null){
 	  				$.each(top.index_label.split(","),function(i,label){
+	  					if (i>3) {
+							return
+						}
 						labels+="<div class='well well-sm hotdiv nosingline hand top5' style='margin-right: 5px'><a class='hota' href='page/article/articlelist.jsp?search="+label+"'>"+label+"</a></div>";
 	  				})
 			  	}
@@ -277,11 +280,7 @@ a.hota:active {color: #3f316d;text-decoration: none;}    /* 选定的链接 */
 		});
 		$.getJSON("index/getHotLabel.action", {num:15}, function(json){
 			$.each(json,function(i,jo){
-				if (i<=3) {
-					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota '>"+jo.value+"</a>");
-				}else{
-					return
-				}
+				$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota '>"+jo.value+"</a>");
 			});
 		});
 		$.getJSON("index/getAllLabel.action", function(json){

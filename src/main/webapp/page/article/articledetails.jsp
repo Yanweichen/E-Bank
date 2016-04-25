@@ -143,7 +143,7 @@ div.hotdiv:hover{
 							<img  alt='' style='height: 30px;width: 30px;' src='page/assets/img/circle-shop.png'>
 							<h4 class="nosingline wenzizhidi" style="color: #666666">本文标签</h4>
 						</div>
-						<div class="col-sm-7" style="margin-top: 5px">
+						<div class="col-sm-10" style="margin-top: 5px">
 							<c:set value="${fn:split(article.index_label,',')}" var="labels" />
 							<c:forEach var="lb" items="${labels}">
 								<div class="well well-sm hotdiv nosingline hand" style="margin-right: 5px">
@@ -735,11 +735,7 @@ div.hotdiv:hover{
 // 			});
 			$.getJSON("index/getHotLabel.action", {num:15}, function(json){
 				$.each(json,function(i,jo){
-					if (i<=3) {
-						$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
-					}else{
-						return
-					}
+					$("#hotlabels").append("<a href='page/article/articlelist.jsp?search="+jo.value+"' style='padding: 5px 10px 5px 10px;background-color:rgba(255,255,255,0.5);word-break: keep-all;white-space: nowrap;margin:5px;display:inline-block;' class='hotdiv hota'>"+jo.value+"</a>");
 				});
 			});
 			$('#loginfrom').bootstrapValidator({
