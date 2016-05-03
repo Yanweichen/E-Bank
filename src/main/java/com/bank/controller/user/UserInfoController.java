@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.annotation.SystemControllerAfterLog;
+import com.bank.annotation.SystemControllerAfterReturnLog;
 import com.bank.annotation.SystemControllerBeforeLog;
 import com.bank.model.other.Page;
 import com.bank.model.user.UserModel;
@@ -60,7 +61,8 @@ public class UserInfoController {
 	 * 登陆
 	 * @return
 	 */
-	@SystemControllerAfterLog(description = "用户登录")
+//	@SystemControllerAfterLog(description = "用户登录")
+	@SystemControllerAfterReturnLog(description = "用户登录")
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/login")
