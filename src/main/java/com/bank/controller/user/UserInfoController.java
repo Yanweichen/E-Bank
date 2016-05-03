@@ -64,9 +64,15 @@ public class UserInfoController {
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping("/login")
-	public JSONObject login(@RequestParam("user_account")String account,@RequestParam("user_password")String pass,HttpServletRequest req){
+	public JSONObject login(@RequestParam("user_account")String account,@RequestParam("user_password")String pass,@RequestParam("user_code")String code,HttpServletRequest req){
 		UserModel um = us.findUserByAccoutn(account);
 		JSONObject jo = new JSONObject();
+		String servicecode = (String)req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		if (code==null || !code.equals(servicecode)) {
+			jo.put("error", "203");
+			jo.put("msg", "验证码错误");
+			return jo;
+		}
 		if (um==null) {
 			jo.put("error", "203");
 			jo.put("msg", "该用户不存在");
