@@ -3,6 +3,7 @@ package com.bank.controller.index;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,15 @@ public class IndexController {
 	@ResponseBody
 	@RequestMapping("/Allnotice")
 	public JSONObject getNotice(IndexPage indexPage,HttpServletRequest req) throws ParseException{
+//		System.out.println(req.getRequestedSessionId());
+//		Enumeration en = req.getHeaderNames();
+//		StringBuffer sb = new StringBuffer();
+//		while (en.hasMoreElements()) {
+//			String name = (String) en.nextElement();
+//			String value = req.getHeader(name);
+//			sb.append(name + "=" + value + "\r\n");
+//		}
+//		System.out.println(sb);
 		if ("index_uptime_format".equals(indexPage.getSort())) {
 			indexPage.setSort("index_uptime");
 		}

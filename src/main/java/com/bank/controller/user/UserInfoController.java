@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.bcel.classfile.EnumElementValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.annotation.SystemControllerAfterLog;
@@ -69,6 +72,15 @@ public class UserInfoController {
 	public JSONObject login(@RequestParam("user_account")String account,@RequestParam("user_password")String pass,@RequestParam("user_code")String code,HttpServletRequest req){
 		UserModel um = us.findUserByAccoutn(account);
 		JSONObject jo = new JSONObject();
+//		System.out.println(req.getRequestedSessionId());
+//		StringBuffer sb = new StringBuffer();
+//		Enumeration en = req.getHeaderNames();
+//		while (en.hasMoreElements()) {
+//			String name = (String) en.nextElement();
+//			String value = req.getHeader(name);
+//			sb.append(name + "=" + value + "\r\n");
+//		}
+//		System.out.println(sb);
 		String servicecode = (String)req.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		if (code==null || !code.equals(servicecode)) {
 			jo.put("error", "203");
@@ -97,6 +109,7 @@ public class UserInfoController {
 				jo.put("error", "200");
 				jo.put("name", um.getUser_name());
 				jo.put("face", um.getUser_face());
+				jo.put("userinfo", JSON.toJSONString(um));
 				return jo;
 			}
 			//查询是否存在登陆
