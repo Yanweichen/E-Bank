@@ -130,6 +130,7 @@ public class UserInfoController {
 						jo.put("error", "200");
 						jo.put("name", um.getUser_name());
 						jo.put("face", um.getUser_face());
+						jo.put("userinfo", JSON.toJSONString(um));
 						return jo;
 					}
 					//已登陆(同一浏览器同时登陆)
@@ -147,6 +148,7 @@ public class UserInfoController {
 			jo.put("error", "200");
 			jo.put("name", um.getUser_name());
 			jo.put("face", um.getUser_face());
+			jo.put("userinfo", JSON.toJSONString(um));
 		}else{
 			jo.put("error", "203");
 			jo.put("msg", "密码错误");
