@@ -411,8 +411,7 @@ ul.news li p{float:right; color:#000000}
 			<div class="col-sm-11">
 				<div class="panel panel-default centerpanel">
 					<div class="panel-body" style="text-align: center;padding-top: 50px;">
-						<div style="font-size: 50px">测试构建</div>
-						<div style="font-size: 50px">广告位招租</div>
+						<div style="font-size: 50px">2016年6月15日00:49:30测试构建</div>
 						<div style="font-size: 50px">测试账号0:505717760@qq.com</div>
 						<div style="font-size: 50px">密码：111</div>
 						<div style="font-size: 50px">测试账号1:2366320247@qq.com</div>
